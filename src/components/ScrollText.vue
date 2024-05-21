@@ -47,6 +47,18 @@ export default {
         case 3:
           imageSrc.value = collageImg3;
           break;
+        case 4:
+          imageSrc.value = collageImg4;
+          break;
+        case 5:
+          imageSrc.value = collageImg5;
+          break;
+        case 6:
+          imageSrc.value = collageImg6;
+          break;
+        case 7:
+          imageSrc.value = collageImg7;
+          break;
         default:
           imageSrc.value = '';
           break;
@@ -120,5 +132,8 @@ export default {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #555555; 
 }
+
+
+
 
 </style>
