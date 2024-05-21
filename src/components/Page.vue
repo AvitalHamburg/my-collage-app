@@ -3,6 +3,7 @@
     <KnowCollage v-if="textNum === 1"></KnowCollage>
     <ActiveCollage v-if="textNum === 2" ></ActiveCollage>
     <OutsideCollage v-if="textNum === 3"></OutsideCollage>
+    <TrainingCollage v-if="textNum === 4"></TrainingCollage>
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import KnowCollage from './KnowCollage.vue';
 import ActiveCollage from './ActiveCollage.vue';
 import OutsideCollage  from './OutsideCollage.vue';
+import TrainingCollage from './TrainingCollage.vue';
 const props = defineProps({
   textNum: Number
 });

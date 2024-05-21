@@ -78,6 +78,7 @@ const moveToPage = (index) => {
   font-size: 1.5em;
   margin-top: 4vh;
   width: 60vw; /* רוחב קבוע לכל הכפתורים */
+  height: 3vh;
   text-align: center;
   padding: 3vh;
   background-color: navy; /* כחול כהה */
