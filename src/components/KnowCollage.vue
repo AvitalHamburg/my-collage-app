@@ -6,14 +6,15 @@
       <div id="play-button" @click="goToVideo">
               <div id="triangle"></div>
       </div>
+      <VideoPage v-if="state.showVideo === true"  @backToMenu="goBackToMenu"></VideoPage>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive, defineEmits } from 'vue';
 import ScrollText from './ScrollText.vue';
-
-const emergencyText = `המכללה לא רק מכשירה אלא גם מאמנת את הרשויות המקומיות לתרגול מצבי חירום כמו מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה וסייבר`;
+import VideoPage from './VideoPage.vue';
+const emergencyText = `המכללה לא רק מכשירהאלא גם מאמנת את הרשויות המקומיות לתרגול מצבי חירום כמו מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה וסייבר`;
 const emergencyText2 = `בשעת חירום, הרשות המקומית עוברות לעבוד בתצורה של מכלולים. כלומר, עוזבים את העבודה הרגילה שלהם ומתרכזים רק בנושאים רלוונטיים ומשמעותיים לטיפול באירוע`;
 
 const state = reactive({ 
@@ -22,7 +23,12 @@ showVideo: false,
 
 const goToVideo = () => {
 state.showVideo = true;
-console.log(state.showVideo);
+};
+
+const emits = defineEmits(['goToMenu']); // Define emits here
+
+const goBackToMenu = () => {
+  emits('goToMenu');
 };
 </script>
 

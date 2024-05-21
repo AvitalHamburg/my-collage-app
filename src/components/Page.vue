@@ -1,7 +1,7 @@
 <template>
   <div id="page">
-    <KnowCollage v-if="textNum === 1"></KnowCollage>
-    <ActiveCollage v-if="textNum === 2" ></ActiveCollage>
+    <KnowCollage v-if="textNum === 1" @goToMenu="goToMenu"></KnowCollage>
+    <ActiveCollage v-if="textNum === 2"></ActiveCollage>
     <OutsideCollage v-if="textNum === 3"></OutsideCollage>
     <TrainingCollage v-if="textNum === 4"></TrainingCollage>
     <LocationCollage v-if="textNum === 5"></LocationCollage>
@@ -10,40 +10,49 @@
 </template>
 
 <script setup>
+import { reactive, defineProps ,defineEmits } from 'vue'; // Import reactive and defineProps
+
 import KnowCollage from './KnowCollage.vue';
 import ActiveCollage from './ActiveCollage.vue';
-import OutsideCollage  from './OutsideCollage.vue';
+import OutsideCollage from './OutsideCollage.vue';
 import TrainingCollage from './TrainingCollage.vue';
 import LocationCollage from './LocationCollage.vue';
 import LibraryCollage from './LibraryCollage.vue';
+
+const emits = defineEmits('menuBack'); // Define emits here
+
 const props = defineProps({
   textNum: Number
 });
+
+const goToMenu = () => {
+  emits('menuBack');
+}
 </script>
 
 <style scoped>
-@font-face { 
-font-family: "Heebo";
-src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
-format("truetype");
-font-weight: bold;
-} 
+@font-face {
+  font-family: "Heebo";
+  src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"),
+    format("truetype");
+  font-weight: bold;
+}
 
 * {
-overflow: hidden;
-direction: rtl;
+  overflow: hidden;
+  direction: rtl;
 }
 
 #page {
-position: absolute;
-top: 0%;
-right: 50%;
-transform: translateX(50%);
-height: 100vh;
-width: 100vw;
-background-image: url("../assets/imgs/Bg2.png");
-background-size: cover;
-background-repeat: no-repeat;
-padding: 0%;
+  position: absolute;
+  top: 0%;
+  right: 50%;
+  transform: translateX(50%);
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../assets/imgs/Bg2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0%;
 }
 </style>
