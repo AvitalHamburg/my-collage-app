@@ -4,6 +4,8 @@
     <ActiveCollage v-if="textNum === 2" ></ActiveCollage>
     <OutsideCollage v-if="textNum === 3"></OutsideCollage>
     <TrainingCollage v-if="textNum === 4"></TrainingCollage>
+    <LocationCollage v-if="textNum === 5"></LocationCollage>
+    <LibraryCollage v-if="textNum === 6"></LibraryCollage>
   </div>
 </template>
 
@@ -12,6 +14,8 @@ import KnowCollage from './KnowCollage.vue';
 import ActiveCollage from './ActiveCollage.vue';
 import OutsideCollage  from './OutsideCollage.vue';
 import TrainingCollage from './TrainingCollage.vue';
+import LocationCollage from './LocationCollage.vue';
+import LibraryCollage from './LibraryCollage.vue';
 const props = defineProps({
   textNum: Number
 });
