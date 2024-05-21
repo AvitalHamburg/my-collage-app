@@ -6,7 +6,7 @@
         <div
           v-for="(subject, index) in subjects"
           :key="index"
-          @click="moveToPage(index)"
+          @click.once="moveToPage(index)"
           :class="{ 'btn-class': states[index] === 0, 'active-btn': states[index] === 1 }"
         >
           {{ subject }}
@@ -95,6 +95,7 @@ const showMenu = () => {
   font-size: 1.5em;
   margin-top: 4vh;
   width: 60vw; /* רוחב קבוע לכל הכפתורים */
+  height: 3vh;
   text-align: center;
   padding: 3vh;
   background-color: rgb(97, 97, 99); /* כחול כהה */
@@ -102,7 +103,7 @@ const showMenu = () => {
   border: none;
   cursor: pointer;
   border-radius: 15px;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 #main-title{
   color:navy;
