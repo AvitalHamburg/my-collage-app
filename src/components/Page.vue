@@ -2,12 +2,14 @@
   <div id="page">
     <KnowCollage v-if="textNum === 1"></KnowCollage>
     <ActiveCollage v-if="textNum === 2" ></ActiveCollage>
+    <OutsideCollage v-if="textNum === 3"></OutsideCollage>
   </div>
 </template>
 
 <script setup>
 import KnowCollage from './KnowCollage.vue';
 import ActiveCollage from './ActiveCollage.vue';
+import OutsideCollage  from './OutsideCollage.vue';
 const props = defineProps({
   textNum: Number
 });
