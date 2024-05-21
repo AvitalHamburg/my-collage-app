@@ -16,6 +16,7 @@ const emergencyText2 =`במכללה, אנחנו מכשירים את המנהל�
 </script>
 
 <style scoped>
+
 @font-face { 
   font-family: "Heebo";
   src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
@@ -44,7 +45,7 @@ const emergencyText2 =`במכללה, אנחנו מכשירים את המנהל�
     position: absolute;
     right: 50%;
     transform: translateX(50%);
-    top:20%; 
+    top:15%;
     text-align: right;
 }
 #page-header{

@@ -42,7 +42,7 @@ const emergencyText2 =` כבר יצא לנו להיפגש עם ראשת FEMA )ר
     position: absolute;
     right: 50%;
     transform: translateX(50%);
-    top:20%; 
+    top:15%;
     text-align: right;
 }
 #page-header{

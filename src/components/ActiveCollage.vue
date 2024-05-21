@@ -43,11 +43,11 @@ background-repeat: no-repeat;
 padding: 0%;
 }
 #scroll-text{
-  position: absolute;
-  right: 50%;
-  transform: translateX(50%);
-  top:20%; 
-  text-align: right;
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    top:15%;
+    text-align: right;
 }
 #page-header{
   position: absolute;
