@@ -1,11 +1,13 @@
 <template>
   <div id="page">
     <KnowCollage v-if="textNum === 1"></KnowCollage>
+    <ActiveCollage v-if="textNum === 2" ></ActiveCollage>
   </div>
 </template>
 
 <script setup>
 import KnowCollage from './KnowCollage.vue';
+import ActiveCollage from './ActiveCollage.vue';
 const props = defineProps({
   textNum: Number
 });

@@ -13,9 +13,10 @@ import { ref, watchEffect } from 'vue';
 import collageImg1 from '../assets/imgs/collageImg1.png';
 import collageImg2 from '../assets/imgs/collageImg2.png';
 import collageImg3 from '../assets/imgs/collageImg3.png';
-import collageImg4 from '../assets/imgs/collageImg3.png';
-import collageImg5 from '../assets/imgs/collageImg3.png';
-import collageImg6 from '../assets/imgs/collageImg3.png';
+import collageImg4 from '../assets/imgs/collageImg4.png';
+import collageImg5 from '../assets/imgs/collageImg5.png';
+import collageImg6 from '../assets/imgs/collageImg6.png';
+import collageImg7 from '../assets/imgs/collageImg7.png';
 export default {
   props: {
     innerText: String,
@@ -72,6 +73,7 @@ export default {
   font-size: 24px;
   border: solid;
   border-radius: 9px;
+
 }
 
 .content {
@@ -79,12 +81,16 @@ export default {
 }
 
 .main-text {
-  text-align:center ;
+  text-align:right ;
   margin-bottom: 5vh; /* Add margin of 20px below the main text */
+  direction: rtl ;
 }
 
 .image-description {
   margin-top: 5vh;
+  direction: rtl ;
+  text-align:right ;
+
    /* Add margin of 20px above the image description */
 }
 .image-content {
