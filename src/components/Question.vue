@@ -1,7 +1,12 @@
 <template>
     <div id="page">
       <h1 id="page-header"> מי זאת המכללה  </h1>
-      <p id="user-massage">לחצו כאן על התשובה הנכונה</p>   
+      <p id="user-massage">לחצו כאן על התשובה הנכונה</p> 
+      <div id="question">
+        <p id="text-q">ב2022 היו 503 מופעים במכללה</p>
+        <button class="bule-btn">נכון</button>
+        <button class="bule-btn">לא נכון </button>
+      </div>  
       <button id="next-btn" @click.once="nextSubject">לנושא הבא</button>
     </div>
   </template>
@@ -63,12 +68,34 @@
     width:80vw;
     right:50%;
     transform: translateX(50%);
-    bottom:10vh;
+    bottom:70vh;
 }
 #next-btn{
     position: absolute;
     right:50%;
     transform: translateX(50%);
     bottom:8vh;
+}
+
+#question{
+    position: absolute;
+    top:35%;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100vw;
+}   
+#text-q{
+    font-size: 1.5em;
+    color:rgb(31,56,100);
+    font-weight: bolder;
+    }
+.bule-btn {
+  width: 90vw;
+  padding-bottom: 1vh; 
+  height: 5vh;
+  margin-bottom: 1vh; 
+  font-size: 1.5em;
+  background-color:rgb(31,56,100);
+  color: aliceblue;
 }
 </style>
