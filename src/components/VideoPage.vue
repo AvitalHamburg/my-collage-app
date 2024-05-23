@@ -4,13 +4,14 @@
     <video id="video" src="../assets/media/videoCollage.mp4" controls ></video>
     <p id="user-massage">נגמר הסרטון? יופי לחצ/י כאן לבדוק את הזיכרון</p>
     <button id="next-btn" @click.once="nextSubject">המשך</button>
-    <Question v-if="state.showQuestion"></Question>
+    <Question v-if="state.showQuestion" @menuBack="goToMenu"></Question>
   </div>
 </template>
 
 <script setup>
 import { defineProps, defineEmits, reactive } from 'vue';
 import Question from './Question.vue';
+const emit = defineEmits(['backMenu']);
 
 
 const state = reactive({ 
@@ -20,6 +21,10 @@ const state = reactive({
 
 const nextSubject = () => {
   state.showQuestion=true;
+};
+const goToMenu = () =>{
+  emit('backMenu');
+
 };
 </script>
 <style scoped>

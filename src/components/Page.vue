@@ -1,6 +1,6 @@
 <template>
   <div id="page">
-    <KnowCollage v-if="textNum === 1"></KnowCollage>
+    <KnowCollage v-if="textNum === 1" @go-menu="backToMenu"></KnowCollage>
     <ActiveCollage v-if="textNum === 2"></ActiveCollage>
     <OutsideCollage v-if="textNum === 3"></OutsideCollage>
     <TrainingCollage v-if="textNum === 4"></TrainingCollage>
@@ -18,12 +18,15 @@ import OutsideCollage from './OutsideCollage.vue';
 import TrainingCollage from './TrainingCollage.vue';
 import LocationCollage from './LocationCollage.vue';
 import LibraryCollage from './LibraryCollage.vue';
+const emit = defineEmits(['menuShow']);
 
 
 const props = defineProps({
   textNum: Number
 });
-
+const backToMenu = () =>{
+  emit('menuShow');
+}
 
 </script>
 

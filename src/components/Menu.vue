@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <Page :textNum="state.numOfSub"  v-else ></Page>
+    <Page @menuShow="againMenu" :textNum="state.numOfSub"  v-else  ></Page>
   </div>
 </template>
 
@@ -30,7 +30,10 @@ const state = reactive({
 const moveToPage = (index) => {
   states[index] = 1;
   state.menuTrue = !state.menuTrue; 
-  state.numOfSub = index + 1; // הוספת 1 לאינדקס
+  state.numOfSub = index + 1; 
+};
+const againMenu = ()=>{
+  state.menuTrue = !state.menuTrue; 
 };
 
 </script>
@@ -82,7 +85,7 @@ const moveToPage = (index) => {
   height: 3vh;
   text-align: center;
   padding: 3vh;
-  background-color: navy; /* כחול כהה */
+  background-color: rgb(31,56,100); /* כחול כהה */
   color: white; /* צבע טקסט לבן */
   border: none;
   cursor: pointer;
@@ -103,8 +106,15 @@ const moveToPage = (index) => {
   border-radius: 15px;
   opacity: 0.6;
 }
-#main-title{
-  color:navy;
+#main-title {
+  position: absolute;
+  color: rgb(31, 56, 100);
+  font-size: 2.5em;
+  top: 3vh;
+  right: 50%;
+  transform: translate(50%);
+  width:100%;
 }
+
 
 </style>
