@@ -6,7 +6,7 @@
       <div id="play-button" @click="goToVideo">
               <div id="triangle"></div>
       </div>
-      <VideoPage v-if="state.showVideo === true"  @backToMenu="goBackToMenu"></VideoPage>
+      <VideoPage v-if="state.showVideo"></VideoPage>
   </div>
 </template>
 
@@ -25,11 +25,7 @@ const goToVideo = () => {
 state.showVideo = true;
 };
 
-const emits = defineEmits(['goToMenu']); // Define emits here
 
-const goBackToMenu = () => {
-  emits('goToMenu');
-};
 </script>
 
 

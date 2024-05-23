@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <Page :textNum="state.numOfSub"  v-else @menuBack="showMenu"></Page>
+    <Page :textNum="state.numOfSub"  v-else ></Page>
   </div>
 </template>
 
@@ -32,9 +32,7 @@ const moveToPage = (index) => {
   state.menuTrue = !state.menuTrue; 
   state.numOfSub = index + 1; // הוספת 1 לאינדקס
 };
-const showMenu = () => {
-  state.menuTrue = true;
-}
+
 </script>
 
 

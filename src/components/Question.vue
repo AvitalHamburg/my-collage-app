@@ -1,0 +1,74 @@
+<template>
+    <div id="page">
+      <h1 id="page-header"> מי זאת המכללה  </h1>
+      <p id="user-massage">לחצו כאן על התשובה הנכונה</p>   
+      <button id="next-btn" @click.once="nextSubject">לנושא הבא</button>
+    </div>
+  </template>
+  
+  <script setup>
+  import { defineProps, defineEmits, reactive } from 'vue';
+  
+ 
+  const state = reactive({ 
+    showQuestion: false,
+  });
+  
+  
+  const nextSubject = () => {
+    state.showQuestion=true;
+  };
+  </script>
+<style scoped>
+@font-face { 
+  font-family: "Heebo";
+  src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
+  format("truetype");
+  font-weight: bold;
+} 
+
+* {
+  overflow: hidden;
+  direction: rtl;
+}
+
+#page {
+  position: absolute;
+  top: 0%;
+  right: 50%;
+  transform: translateX(50%);
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../assets/imgs/Bg2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0%;
+}
+
+#page-header{
+    position: absolute;
+    top:5vh;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 2.5em;
+    width: 90vw;
+    text-overflow: none;
+    color:rgb(31,56,100);
+}
+
+#user-massage{
+    position: absolute;
+    color:rgb(31,56,100);
+    font-size: 1.5em;
+    width:80vw;
+    right:50%;
+    transform: translateX(50%);
+    bottom:10vh;
+}
+#next-btn{
+    position: absolute;
+    right:50%;
+    transform: translateX(50%);
+    bottom:8vh;
+}
+</style>
