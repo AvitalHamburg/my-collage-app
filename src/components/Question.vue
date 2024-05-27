@@ -8,14 +8,23 @@
       <button id="button2" :disabled="state.responseSubmitted" class="bule-btn" @click="handleButton('לא נכון')">לא נכון</button>
 
       <p id="message" v-if="state.showMessage" :style="{ color: state.messageColor }">{{ state.message }}</p>
-      <button v-if="state.showNextButton" style="color: black;" @click="nextQuestion">שאלה הבא </button>
-      <button v-if="state.showNextSub" @click="backToMenu">המשך לנושא הבא </button>
+      <div id="go-next" v-if="state.showNextButton"> 
+        <p id=next-t>שאלה הבאה</p>
+        <img :src="nextBtn" id="next-btn"  @click="nextQuestion">
+      </div>
+      <div id="go-next" v-if="state.showNextSub"> 
+        <p id=next-t>המשך לנושא הבא </p>
+        <img :src="nextBtn" id="next-btn"   @click="backToMenu">
+      </div>
+   
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, reactive, computed , defineEmits } from 'vue';
+import nextBtn from "../assets/imgs/nextBtn.png";
+
 const emit = defineEmits(['menuBack']);
 const question = ['ב2022 היו 503 מופעים במכללה', 'ב 2022 היו 155 הכשרות', 'בלה בלה'];
 const correctAns = ['נכון', 'לא נכון', 'נכון'];
@@ -32,25 +41,19 @@ const state = reactive({
   responseSubmitted: false 
 });
 
-// השאלה הנוכחית, שמתעדכנת באופן אוטומטי בעת שינוי המשתנה המקושר
 const currentQuestion = computed(() => question[state.currentQuestionIndex]);
 
 const handleButton = (answer) => {
   const correctAnswer = correctAns[state.currentQuestionIndex];
 
-  // תנאי שבודק אם התשובה היא לא התשובה הנכונה
   if (answer !== correctAnswer) {
-    // האפשרות ללחוץ שוב
     state.responseSubmitted = false;
-    // רושם את התשובה החדשה
     state.userAnswer = answer;
   } else {
-    // אם התשובה נכונה, חסום את האפשרות ללחוץ שוב
     state.responseSubmitted = true;
   }
 
   const buttonText = answer === correctAnswer ? 'נכון' : 'לא נכון';
-  // קביעת הכפתור הנלחץ
   const clickedButton = event.target;
   const otherButton = clickedButton.id === 'button1' ? document.getElementById('button2') : document.getElementById('button1');
 
@@ -58,13 +61,12 @@ const handleButton = (answer) => {
   clickedButton.classList.add(answer === correctAnswer ? 'greenButton' : 'redButton');
   otherButton.classList.remove('greenButton', 'redButton');
 
-  // עדכון מצב והודעה
   state.showMessage = true;
   state.message = answer === correctAnswer ? 'כל הכבוד לחץ כאן לשאלה הבאה' : 'טעית נס/י שוב';
   state.messageColor = answer === correctAnswer ? 'rgb(34, 106, 91)' : 'red';
   if (state.currentQuestionIndex < 2 && answer === correctAnswer) {
     state.showNextButton = true;
-  } else if (answer === correctAnswer === state.currentQuestionIndex >= 2) {
+  } else if (answer === correctAnswer && state.currentQuestionIndex >= 2) {
     state.showNextSub = true;
   }
 };
@@ -91,7 +93,11 @@ const backToMenu =()=>{
 
 }
 
+
 </script>
+
+
+
 <style scoped>
 @font-face { 
   font-family: "Heebo";
@@ -138,13 +144,28 @@ const backToMenu =()=>{
     transform: translateX(50%);
     bottom:70vh;
 }
-#next-btn{
-    position: absolute;
-    right:50%;
-    transform: translateX(50%);
-    bottom:8vh;
-}
 
+#go-next{
+  font-size: 1.3em;
+  color:rgb(31,56,100);
+  height:10vh;
+
+}
+#next-btn{
+  position: absolute;
+  right:50%;
+  transform: translateX(50%);
+  transform: rotate(50%);
+  bottom:0%;
+}
+#next-t{
+  position: absolute;
+  right:50%;
+  transform: translateX(50%);
+  bottom:8%;
+  font-weight: bold;
+
+}
 #question{
     position: absolute;
     top:35%;
