@@ -12,7 +12,7 @@ import Menu from './components/Menu.vue';
 import HelloWorld from './components/HelloWorld.vue';
 
   const state = reactive({
-    page: 1
+    page: 0
   });
 
   function nextPage() {
