@@ -1,7 +1,7 @@
 <template>
   <div id="page">
     <KnowCollage v-if="textNum === 1" @go-menu="backToMenu"></KnowCollage>
-    <ActiveCollage v-if="textNum === 2"></ActiveCollage>
+    <ActiveCollage v-if="textNum === 2" @go-menu="backToMenu"></ActiveCollage>
     <OutsideCollage v-if="textNum === 3"></OutsideCollage>
     <TrainingCollage v-if="textNum === 4"></TrainingCollage>
     <LocationCollage v-if="textNum === 5"></LocationCollage>

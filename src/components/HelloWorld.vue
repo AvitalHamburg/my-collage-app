@@ -45,11 +45,12 @@ onMounted(() => {
 
 
 <style scoped>
-/* @font-face {
+@font-face { 
   font-family: "Heebo";
-  src: url("/assets/fonts/Heebo-VariableFont_wght.ttf");
+  src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
+  format("truetype");
   font-weight: bold;
-} */
+} 
 
 *{
   overflow: hidden;

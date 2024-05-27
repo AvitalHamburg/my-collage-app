@@ -83,7 +83,6 @@ export default {
   border: 1px solid #ccc;
   direction: ltr; /* Set text direction to left-to-right */
   font-size: 24px;
-  border: solid;
   border-radius: 9px;
 
 }

@@ -9,8 +9,8 @@
     <img :src="nextBtn" id="next-btn" @click="GoQuestion">
   </div>
     <AmericanQ  v-if="state.showQuestion" :pageHeader="pageHead" :questions="questionArray" :answers1="firstAns" :answers2="seconedAns"
-    :answers3="thirdAns":correctAnswers="correctAnsArr"></AmericanQ>
-    <Payment v-if="state.showPayment"></Payment>
+    :answers3="thirdAns":correctAnswers="correctAnsArr" :explantions="explainArr" @go-next="goToPayment"></AmericanQ>
+    <Payment v-if="state.showPayment" @menu-back="backToMenu"></Payment>
   </div>
   </template>
 
@@ -18,7 +18,7 @@
 import ScrollText from './ScrollText.vue';
 import Payment from './Payment.vue';
 import AmericanQ from './AmericanQ.vue';
-import { reactive, onMounted, getCurrentInstance } from 'vue';
+import { reactive, onMounted, getCurrentInstance ,defineEmits} from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
 
 const emergencyText = `    פעילות המכללה מתחלקת בין ארבע מגמות: 
@@ -27,6 +27,7 @@ const emergencyText = `    פעילות המכללה מתחלקת בין ארב�
 const emergencyText2 =` למכללה יש מטה מקצועי - משרתי קבע ומילואים, בכירים מרח"ל ויועצים. 
 סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.`
 
+const emit = defineEmits(['go-menu']);
 
 const state = reactive({ 
 showPayment: false,
@@ -38,12 +39,22 @@ const questionArray=[' מה מבין הבאים קורס הדגל של המכל�
 const firstAns = ['ממונה חירום וביטחון','כוחות ביטחון'];
 const seconedAns = ['קורס ניהול מצבי חירום' ,'כל התשובות נכונות '];
 const thirdAns = ['תשבות א ו ב נכונות' ,' רשויות'];
-const correctAnsArr=['תשובות א וב נכונות','כל התשובות נכונות'];
-
+const correctAnsArr=['תשבות א ו ב נכונות','כל התשובות נכונות '];
+const explainArr = ['קורסי הדגל במכללה שלנו הם :  ואנו מלמדים אותם ','בלה בלה בלה '];
 
 const GoQuestion = () => {
 state.showQuestion=true;
 };
+const goToPayment = () =>{
+state.showPayment= true;
+state.showQuestion=false;
+
+
+};
+
+const backToMenu = () =>{
+    emit('go-menu');
+}
 
 </script>
 <style scoped>
