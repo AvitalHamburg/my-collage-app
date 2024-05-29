@@ -23,6 +23,7 @@ const nextSubject = () => {
   state.showQuestion=true;
 };
 const goToMenu = () =>{
+  console.log('backMenu in the video component');
   emit('backMenu');
 
 };

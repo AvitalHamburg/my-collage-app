@@ -89,6 +89,7 @@ const nextQuestion = () => {
 };
 
 const backToMenu =()=>{
+  console.log('backMenu in the question component');
   emit('menuBack');
 
 }

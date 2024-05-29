@@ -19,7 +19,7 @@ const emergencyText2 = `בשעת חירום, הרשות המקומית עובר�
 const emit = defineEmits(['go-menu']);
 
 const state = reactive({ 
-showVideo: false,
+showVideo: false
 });
 
 const goToVideo = () => {
@@ -29,6 +29,9 @@ state.showVideo = true;
 const goToMenu = () =>{
 emit('go-menu');
 }
+
+
+
 </script>
 
 
@@ -70,7 +73,7 @@ padding: 0%;
   top:5vh;
   right: 50%;
   transform: translateX(50%);
-  font-size: 2.5em;
+  font-size: 2em;
   width: 90vw;
   text-overflow: none;
   color:rgb(31,56,100);
@@ -109,6 +112,7 @@ transform: rotate(90deg);
 top:20%;
 right:10%;
 }
+
 
 
 </style>
