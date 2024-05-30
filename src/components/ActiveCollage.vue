@@ -1,5 +1,6 @@
 <template>
   <div id="page">
+  <img id="shape" :src="red">
   <div v-if="!state.showQuestion">
    <h1 id="page-header"> פעילות המכללה  </h1>
    <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :imageNumber="2"></ScrollText>
@@ -9,8 +10,7 @@
     <img :src="nextBtn" id="next-btn" @click="GoQuestion">
   </div>
     <AmericanQ  v-if="state.showQuestion" :pageHeader="pageHead" :questions="questionArray" :answers1="firstAns" :answers2="seconedAns"
-    :answers3="thirdAns":correctAnswers="correctAnsArr" :explantions="explainArr" @go-next="goToPayment"></AmericanQ>
-    <Payment v-if="state.showPayment" @menu-back="backToMenu"></Payment>
+    :answers3="thirdAns":correctAnswers="correctAnsArr" :explantions="explainArr" @go-next="backToMenu"></AmericanQ>
   </div>
   </template>
 
@@ -20,7 +20,7 @@ import Payment from './Payment.vue';
 import AmericanQ from './AmericanQ.vue';
 import { reactive, onMounted, getCurrentInstance ,defineEmits} from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
-
+import red from "../assets/imgs/red.png";
 const emergencyText = `    פעילות המכללה מתחלקת בין ארבע מגמות: 
 מגמת משרדי הממשלה, מגמת הכשרות אזרחיות, מגמת אימונים לרשויות מקומיות ומגמת מפקדות שגם מעבירים קורסים וגם מאמנים.
 `;
@@ -86,15 +86,15 @@ padding: 0%;
   position: absolute;
   right: 50%;
   transform: translateX(50%);
-  top:15%;
+  top:20%;
   text-align: right;
 }
 #page-header{
   position: absolute;
-  top:5vh;
+  top:8vh;
   right: 50%;
   transform: translateX(50%);
-  font-size: 2.5em;
+  font-size: 2em;
   width: 90vw;
   text-overflow: none;
   color:rgb(31,56,100);
@@ -103,7 +103,7 @@ padding: 0%;
 position: absolute;
 right: 50%;
 transform: translateX(50%);
-bottom:20vw;
+bottom:15vw;
 }
 
 #next-btn{
@@ -122,14 +122,19 @@ width:30vw;
 }
 @keyframes bounce2 {
   0% {
-      bottom: 8vh;
+      bottom: 6vh;
   }
   50%{
-    bottom: 6cqh;
+    bottom: 4vh;
   }
   100%{
-    bottom: 8vh;
+    bottom: 6vh;
   }
 }
-
+#shape{
+position: absolute;
+left:0%;
+top:0%;
+height: 18vh;
+}
 </style>

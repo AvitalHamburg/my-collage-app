@@ -1,6 +1,6 @@
 <template>
   <div id="page">
-    <h1>{{ pageHeader }}</h1>
+    <h1 id="page-header">{{ pageHeader }}</h1>
     <div class="container">
       <p id="question">{{ currentQuestion }}</p>
       <button 
@@ -34,6 +34,7 @@
 import { defineProps, ref, reactive , defineEmits } from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
 import closeBtn from "../assets/imgs/closeBtn.png";
+
 const props = defineProps({
   pageHeader: String,
   questions: Array,
@@ -125,7 +126,7 @@ const closePopUP = () => {
 } 
 .container {
   position: relative;
-  top: 10vh;
+  top: 15vh;
   z-index: 0;
 }
 
@@ -226,6 +227,7 @@ const closePopUP = () => {
   font-family: "Heebo";
   color:  rgb(31, 56, 100);
   font-weight: bold;
+  top:30vh;
 }
 @keyframes bounce2 {
     0% {
@@ -238,4 +240,16 @@ const closePopUP = () => {
       bottom: 15vh;
     }
 }
+
+#page-header{
+    position: absolute;
+    top:8vh;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 2em;
+    width: 90vw;
+    text-overflow: none;
+    color:rgb(31,56,100);
+}
+
 </style>

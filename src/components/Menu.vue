@@ -28,7 +28,7 @@ import { reactive, defineProps, defineEmits } from 'vue';
 const { visitedMenuPage } = defineProps(['visitedMenuPage']);
 const emit = defineEmits(['go-next']);
 
-const subjects = ['מי זאת המכללה', 'פעילות המכללה', 'קש"ח', 'אימוני הרשויות', 'המכללה', 'ספריה'];
+const subjects = ['מי זאת המכללה', 'פעילות המכללה', 'גמול השתלמות', 'קש"ח', 'אימוני הרשויות','המכללה', 'ספריה'];
 const states = reactive(subjects.map(() => 0));
 
 const moveToPage = (index) => {

@@ -1,7 +1,8 @@
 <template>
   <div id="page">
+    <img id="shape" :src="blue">
    <h1 id="page-header">מי זאת המכללה?</h1>
-   <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :imageNumber="1"></ScrollText>
+   <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :innerText3="emergencyText3" :imageNumber="1"></ScrollText>
       <p id="orderText">לחץ כאן לצפייה בסרטון נסה לזכור כמה שיותר פרטים יופיעו שאלות אחר כך </p>
       <div id="play-button" @click="goToVideo">
               <div id="triangle"></div>
@@ -14,8 +15,12 @@
 import { reactive, defineEmits } from 'vue';
 import ScrollText from './ScrollText.vue';
 import VideoPage from './VideoPage.vue';
+import blue from "../assets/imgs/blue.png";
+
 const emergencyText = `המכללה לא רק מכשירהאלא גם מאמנת את הרשויות המקומיות לתרגול מצבי חירום כמו מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה וסייבר`;
 const emergencyText2 = `בשעת חירום, הרשות המקומית עוברות לעבוד בתצורה של מכלולים. כלומר, עוזבים את העבודה הרגילה שלהם ומתרכזים רק בנושאים רלוונטיים ומשמעותיים לטיפול באירוע`;
+const emergencyText3 = ` אנחנו מייצרים פה שפה אחודה ומקדמים שיתופי פעולה המכללה מקיימת שיתופי פעולה עם מובילים מקצועיים ממשרדי הממשלה השונים, מרכז השלטון המקומי והאזורי, ארגוני חירום והצלה, מוסדות אקדמאים וארגונים מהחברה האזרחית.
+`;
 const emit = defineEmits(['go-menu']);
 
 const state = reactive({ 
@@ -70,7 +75,7 @@ padding: 0%;
 }
 #page-header{
   position: absolute;
-  top:5vh;
+  top:7vh;
   right: 50%;
   transform: translateX(50%);
   font-size: 2em;
@@ -111,6 +116,12 @@ border-right: 5vw solid rgba(255, 255, 255, 0); /* Using percentage-based value 
 transform: rotate(90deg);
 top:20%;
 right:10%;
+}
+#shape{
+position: absolute;
+left:0%;
+top:0%;
+height: 18vh;
 }
 
 

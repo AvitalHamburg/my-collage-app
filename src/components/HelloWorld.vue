@@ -51,6 +51,13 @@ onMounted(() => {
   format("truetype");
   font-weight: bold;
 } 
+@font-face { 
+  font-family: "Karantina";
+  src: url("@/assets/Karantina-Regular.ttf"), 
+  format("truetype");
+} 
+
+
 
 *{
   overflow: hidden;
@@ -90,7 +97,6 @@ onMounted(() => {
   top: 5%;
 }
 #welcome-text{
-    font-family:Arial;
     color: white;
     position:absolute;
     right: 50%;
@@ -100,6 +106,8 @@ onMounted(() => {
     top:30vh;
     z-index: 5;
     width:90vw;
+    font-family: "Heebo";
+
 }
 #introduction{
   position:absolute;

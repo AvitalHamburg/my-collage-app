@@ -1,5 +1,7 @@
 <template>
   <div id="page">
+    <img id="shape" :src="green">
+
    <h1 id="page-header">  גמול השתלמות </h1>
    <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :imageNumber="3"></ScrollText>
    <img :src="nextBtn" id="next-btn" @click="MenuBack">
@@ -11,6 +13,8 @@
 <script setup>
 import ScrollText from './ScrollText.vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
+import green from "../assets/imgs/green.png";
+
 import { defineEmits } from 'vue';
 const emergencyText = ` אנחנו לגמרי בינלאומיים!
 ומארחים משלחות בעלי תפקידים בממשלות וצבאות מרחבי העולם, שרוצים ללמוד על חוסנה של מדינת ישראל והתמודדות מיטבית בשעת חירום.`;
@@ -54,7 +58,7 @@ padding: 0%;
   position: absolute;
   right: 50%;
   transform: translateX(50%);
-  top:15%;
+  top:20%;
   text-align: right;
 }
 #page-header{
@@ -70,7 +74,7 @@ padding: 0%;
 
 #next-btn{
 position: absolute; /* Change to absolute positioning */
-bottom: 8vh; /* Initial position */
+bottom: 5vh; /* Initial position */
 right: 50%;
 transform: translateX(50%) rotate(2.5deg); /* Adjust the rotation */
 animation: bounce2 2s ease infinite; /* Add animation delay */
@@ -78,13 +82,19 @@ animation-delay: 15sec;
 }
 @keyframes bounce2 {
   0% {
-      bottom: 15vh;
+      bottom: 10vh;
   }
   50%{
-    bottom:13vh;
+    bottom:7vh;
   }
   100%{
-    bottom: 15vh;
+    bottom: 10vh;
   }
+}
+#shape{
+position: absolute;
+left:0%;
+top:0%;
+height: 18vh;
 }
 </style>

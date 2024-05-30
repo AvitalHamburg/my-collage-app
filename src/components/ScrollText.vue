@@ -4,6 +4,10 @@
       <p class="main-text">{{ innerText }}</p>
       <img class="image-content" :src="imageSrc" alt="Collage Image">
       <p class="image-description">{{ innerText2 }}</p>
+      <img class="image-content" :src="imageSrc1" alt="Collage Image">
+      <p class="image-description">{{ innerText3 }}</p>
+
+
     </div>
   </div>
 </template>
@@ -11,21 +15,33 @@
 <script>
 import { ref, watchEffect } from 'vue';
 import collageImg1 from '../assets/imgs/collageImg1.png';
-import collageImg2 from '../assets/imgs/collageImg2.png';
+import collageImg2 from '../assets/imgs/collageImg2.jpg';
 import collageImg3 from '../assets/imgs/collageImg3.png';
 import collageImg4 from '../assets/imgs/collageImg4.png';
-import collageImg5 from '../assets/imgs/collageImg5.png';
-import collageImg6 from '../assets/imgs/collageImg6.png';
+import collageImg5 from '../assets/imgs/collageImg5.jpg';
+import collageImg6 from '../assets/imgs/collageImg6.jpg';
 import collageImg7 from '../assets/imgs/collageImg7.png';
+
+
+import ImgCollage1 from '../assets/imgs/1ImgCollage.jpg'
+import ImgCollage2 from '../assets/imgs/2ImgCollage.jpg'
+import ImgCollage3 from '../assets/imgs/3ImgCollage.jpg'
+import ImgCollage4 from '../assets/imgs/4ImgCollage.jpg'
+import ImgCollage5 from '../assets/imgs/5ImgCollage.jpg'
+import ImgCollage6 from '../assets/imgs/6ImgCollage.jpg'
+import ImgCollage7 from '../assets/imgs/7ImgCollage.jpg'
+
 export default {
   props: {
     innerText: String,
     innerText2: String,
+    innerText3: String,
     imageNumber: Number
   },
   setup(props) {
     const content = ref(null);
     const imageSrc = ref('');
+    const imageSrc1=ref('');
 
     // Watch for changes in text content to adjust scroll
     watchEffect(() => {
@@ -40,24 +56,37 @@ export default {
       switch (props.imageNumber) {
         case 1:
           imageSrc.value = collageImg1;
+          imageSrc1.value = ImgCollage1;
           break;
         case 2:
           imageSrc.value = collageImg2;
+          imageSrc1.value = ImgCollage2;
+
           break;
         case 3:
           imageSrc.value = collageImg3;
+          imageSrc1.value = ImgCollage3;
+
           break;
         case 4:
           imageSrc.value = collageImg4;
+          imageSrc1.value = ImgCollage4;
+
           break;
         case 5:
           imageSrc.value = collageImg5;
+          imageSrc1.value = ImgCollage5;
+
           break;
         case 6:
           imageSrc.value = collageImg6;
+          imageSrc1.value = ImgCollage6;
+
           break;
         case 7:
           imageSrc.value = collageImg7;
+          imageSrc1.value = ImgCollage7;
+
           break;
         default:
           imageSrc.value = '';
@@ -70,7 +99,8 @@ export default {
 
     return {
       content,
-      imageSrc
+      imageSrc,
+      imageSrc1
     };
   }
 };
