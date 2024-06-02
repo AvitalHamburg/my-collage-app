@@ -48,6 +48,12 @@ src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"),
 format("truetype");
 font-weight: bold;
 } 
+@font-face { 
+font-family: "Karantina";
+src: url("@/assets/Karantina-Regular.ttf"), 
+format("truetype");
+} 
+
 
 * {
 overflow: hidden;
@@ -82,6 +88,8 @@ padding: 0%;
   width: 90vw;
   text-overflow: none;
   color:rgb(31,56,100);
+  font-family: "Heebo";
+  text-align: center;
 }
 #orderText{
   position: absolute;
@@ -91,6 +99,10 @@ padding: 0%;
   right: 50%;
   transform: translateX(50%);
   bottom:6.5vh;
+  font-family: "Heebo";
+  text-align: center;
+
+
 }
 
 #play-button{ 

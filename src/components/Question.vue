@@ -134,6 +134,8 @@ const backToMenu =()=>{
     width: 90vw;
     text-overflow: none;
     color:rgb(31,56,100);
+    font-family: "Heebo";
+    text-align: center;
 }
 
 #user-massage{
@@ -144,6 +146,8 @@ const backToMenu =()=>{
     right:50%;
     transform: translateX(50%);
     bottom:70vh;
+    font-family: "Heebo";
+    text-align: center;
 }
 
 #go-next{
@@ -176,6 +180,8 @@ const backToMenu =()=>{
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: "Heebo";
+    text-align: center;
 }   
 #text-q{
     font-size: 1.5em;

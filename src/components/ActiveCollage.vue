@@ -86,21 +86,14 @@ padding: 0%;
   top:20%;
   text-align: right;
 }
-#page-header{
-  position: absolute;
-  top:8vh;
-  right: 50%;
-  transform: translateX(50%);
-  font-size: 2em;
-  width: 90vw;
-  text-overflow: none;
-  color:rgb(31,56,100);
-}
+
 #go-next{
 position: absolute;
 right: 50%;
 transform: translateX(50%);
 bottom:15vw;
+
+
 }
 
 #next-btn{
@@ -115,7 +108,10 @@ animation-delay: 15sec;
 #next-text{
 color:rgb(31,56,100);
 font-size:1.2em ;
-width:30vw;
+width:40vw;
+font-family: "Heebo";
+text-overflow: none;
+text-align: center;
 }
 @keyframes bounce2 {
   0% {
@@ -133,5 +129,17 @@ position: absolute;
 left:0%;
 top:0%;
 height: 18vh;
+}
+#page-header{
+  position: absolute;
+  top:7vh;
+  right: 50%;
+  transform: translateX(50%);
+  font-size: 2em;
+  width: 90vw;
+  text-overflow: none;
+  color:rgb(31,56,100);
+  font-family: "Heebo";
+  text-align: center;
 }
 </style>

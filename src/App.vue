@@ -6,6 +6,7 @@
       <div class="bar"></div>
       <div class="bar"></div>
     </div>
+    <img v-if="state.page > 0 && !state.openHamburger" :src="collegeLogo" id="logo">
     <Menu v-if="state.showMenu" :visitedMenuPage="state.visitedPages" @go-next="movePage"></Menu>
     <KnowCollage v-if="state.textNum === 1" @go-menu="backToMenu"></KnowCollage>
     <ActiveCollage v-if="state.textNum === 2" @go-menu="backToMenu"></ActiveCollage>
@@ -14,6 +15,8 @@
     <TrainingCollage v-if="state.textNum === 5"></TrainingCollage>
     <LocationCollage v-if="state.textNum === 6"></LocationCollage>
     <LibraryCollage v-if="state.textNum === 7"></LibraryCollage>
+    <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
+    </div>
     <Hamburger 
       id="hamburger-page" 
       v-if="state.openHamburger" 
@@ -34,6 +37,8 @@ import OutsideCollage from './components/OutsideCollage.vue';
 import TrainingCollage from './components/TrainingCollage.vue';
 import LocationCollage from './components/LocationCollage.vue';
 import LibraryCollage from './components/LibraryCollage.vue';
+import collegeLogo from "./assets/imgs/collegeLogo.png";
+
 
 
 const state = reactive({
@@ -86,18 +91,30 @@ body {
     transform: translateX(0);
   }
 }
-
-#hamburger-page {
+.overlay {
   position: fixed;
   top: 0;
-  left: 0; /* שינוי ל-0 כדי שהתפריט יופיע במקום על ידי קריאה לאנימציה */
-  width: 100vw; 
-  height: 100vh; 
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: #252424; 
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  /* Adjust the transparency as needed */
+  z-index: 8998; /* Make sure the overlay is below the hamburger menu but above other content */
   transition: transform 0.5s; 
   animation: slideIn 0.5s forwards; 
 }
+#hamburger-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; 
+  height: 100vh; 
+  transition: transform 0.5s; 
+  animation: slideIn 0.5s forwards; 
+  margin-top: 10vh; /* Adjust the margin-top value as needed */
+  z-index: 9999;
+}
+
 
 #hamburger-icon {
   position: absolute;
@@ -126,9 +143,19 @@ body {
 }
 
 #hamburger-icon.open .bar:nth-child(3) {
-  transform: rotate(45deg) translate(-3vw, -2.8vw);
+  transform: rotate(45deg) translate(-3vw, -2.6vw);
   background-color: aliceblue;
 }
+#logo{
+  position: absolute;
+  z-index: 9999; 
+  height: 8vh;
+  width: auto;
+  right: 1%;
+  top: 2%;
+}
+
+
 
 </style>
 

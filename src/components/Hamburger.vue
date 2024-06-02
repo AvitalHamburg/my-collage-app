@@ -32,11 +32,13 @@
   </script>
   
   <style scoped>
-  .button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 20px; /* Adjust the margin-top value as needed */
+}
+
   
   .btn-class {
     font-size: 1.5em;

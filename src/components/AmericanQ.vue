@@ -128,6 +128,7 @@ const closePopUP = () => {
   position: relative;
   top: 15vh;
   z-index: 0;
+  right: 8vw;
 }
 
 .answer-button {
@@ -194,6 +195,7 @@ const closePopUP = () => {
   transform: translateX(50%);
   bottom: 18%;
   font-weight: bold;
+  font-family: "Heebo";
   
 }
 
@@ -228,6 +230,9 @@ const closePopUP = () => {
   color:  rgb(31, 56, 100);
   font-weight: bold;
   top:30vh;
+  text-align: center;
+  width: 80%;
+  
 }
 @keyframes bounce2 {
     0% {
@@ -250,6 +255,8 @@ const closePopUP = () => {
     width: 90vw;
     text-overflow: none;
     color:rgb(31,56,100);
+    font-family: "Heebo";
+    text-align: center;
 }
 
 </style>

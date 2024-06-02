@@ -55,10 +55,12 @@ padding: 0%;
   top:7vh;
   right: 50%;
   transform: translateX(50%);
-  font-size: 2.5em;
+  font-size: 2em;
   width: 90vw;
   text-overflow: none;
-  color:RGB(31,56,100);
+  color:rgb(31,56,100);
+  font-family: "Heebo";
+  text-align: center;
 }
 #shape{
 position: absolute;

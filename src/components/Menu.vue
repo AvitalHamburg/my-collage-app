@@ -46,6 +46,12 @@ const moveToPage = (index) => {
   format("truetype");
   font-weight: bold;
 } 
+@font-face { 
+  font-family: "Karantina";
+  src: url("@/assets/Karantina-Regular.ttf"), 
+  format("truetype");
+} 
+
 
 * {
   overflow: hidden;
@@ -105,14 +111,17 @@ const moveToPage = (index) => {
   opacity: 0.6;
 }
 
-#main-title {
+#main-title{
   position: absolute;
   color: rgb(31, 56, 100);
   font-size: 2.5em;
   top: 3vh;
-  right: 50%;
-  transform: translate(50%);
+  transform: translateX(50%);
+  right:50%;
   width:100%;
+  text-align: center;
+  font-family: "Heebo";
+
 }
 .selected-btn {
     background-color: grey;
