@@ -3,7 +3,7 @@
     <img id="shape" :src="green">
 
    <h1 id="page-header">  גמול השתלמות </h1>
-   <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :imageNumber="3"></ScrollText>
+   <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :innerText3="emergencyText3" :imageNumber="3"></ScrollText>
    <img :src="nextBtn" id="next-btn" @click="MenuBack">
 
   </div>
@@ -16,16 +16,14 @@ import nextBtn from "../assets/imgs/nextBtn.png";
 import green from "../assets/imgs/green.png";
 
 import { defineEmits } from 'vue';
-const emergencyText = ` אנחנו לגמרי בינלאומיים!
-ומארחים משלחות בעלי תפקידים בממשלות וצבאות מרחבי העולם, שרוצים ללמוד על חוסנה של מדינת ישראל והתמודדות מיטבית בשעת חירום.`;
-const emergencyText2 =` כבר יצא לנו להיפגש עם ראשת FEMA )רח"ל האמריקאית), מב"ל הספרדית, נציגים ממשטרת שבדיה, קהילות יהודיות מרחבי העולם וגורמים נוספים, שבאים מכל היבשות לשמוע על קידום המוכנות ברשויות המקומיות, ההכשרות והאימונים - מכיתה י' ועד משרדי הממשלה.`
+const emergencyText = `הבוגרים והבוגרות מקבלים תעודת הסמכה או השתתפות ובחלק מההכשרות, זכאים לגמול השתלמות. מה זה אומר?`;
+const emergencyText2 =`כדי לעודד מעסיקים לשלוח את עובדיהם להשתלמויות החשובות לחברה, לעובד ולמשק הישראלי גם יחד, נולד המונח “גמול השתלמות” - המשקף תשלום כספי קבוע, אשר משולם לאותו עובד שהשתתף בהשתלמות המקצועית בגין לימודיו, על ידי מעסיקו. : קיימים גמולי השתלמות לעובדי מדינה ויש לעמוד במספר קריטריונים שקבע המחוקק.`
+const emergencyText3 =` על מנת לקבל את גמול ההשתלמות יש להגיש בקשה מסודרת בצירוף המסמכים הנדרשים בחוק.גובה גמול ההשתלמות עשוי להיות בסך של כמה מאות שקלים בודדים מדי חודש, ויכול להגיע גם לאלפי שקלים, בהתאם לתחום, לוותק, לדרגה ולפרמטרים נוספים. בהחלט משתלם!`
 
 const emit = defineEmits(['menu-back']);
 
 const MenuBack = () =>{
 emit('menu-back');
-
-
 };
 </script>
 

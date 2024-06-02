@@ -10,12 +10,9 @@
 import ScrollText from './ScrollText.vue';
 import orange from "../assets/imgs/orange.png";
 
-const emergencyText = `במשחק הבא תצטרכו לגרור
-ולהתאים בין מקום על המפה לשם שלו 
-וכך תוכלו ללמוד איפה נמצא מה 
-לחצו על הכפתור למטה כדי להתחיל
+const emergencyText = `המכללה שלנו היא חלק ממערכת גדולה יותר , המפקדה של פיקוד העורף . היא כוללת הוצאה לאור לשכת אלוף פיקוד העורף . חדר אוכל של פיקוד העורף ובנוסף המאמ"פ שם ישנן מדריכות שליטה ובקרה שמדריכות על מערכת השועל שאחראית בין היתר על ההתראות לנפילת טילים. 
 `
-const emergencyText2 =``
+const emergencyText2 =` `
 </script>
 
 <style scoped>

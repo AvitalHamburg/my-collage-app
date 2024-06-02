@@ -3,7 +3,7 @@
     <img id="shape" :src="blue">
    <h1 id="page-header">מי זאת המכללה?</h1>
    <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :innerText3="emergencyText3" :imageNumber="1"></ScrollText>
-      <p id="orderText">לחץ כאן לצפייה בסרטון נסה לזכור כמה שיותר פרטים יופיעו שאלות אחר כך </p>
+      <p id="orderText"> לחצו כאן לצפיייה בסרטון נסו לזכור כמה שיותר פרטים </p>
       <div id="play-button" @click="goToVideo">
               <div id="triangle"></div>
       </div>
@@ -70,7 +70,7 @@ padding: 0%;
   position: absolute;
   right: 50%;
   transform: translateX(50%);
-  top:15%;
+  top:20%;
   text-align: right;
 }
 #page-header{
@@ -87,10 +87,10 @@ padding: 0%;
   position: absolute;
   width:80vw;
   color:rgb(31,56,100);
-  font-size: 1.5em;
+  font-size: 1.2em;
   right: 50%;
   transform: translateX(50%);
-  bottom:7vh;
+  bottom:6.5vh;
 }
 
 #play-button{ 

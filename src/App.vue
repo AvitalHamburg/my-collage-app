@@ -10,7 +10,7 @@
     <KnowCollage v-if="state.textNum === 1" @go-menu="backToMenu"></KnowCollage>
     <ActiveCollage v-if="state.textNum === 2" @go-menu="backToMenu"></ActiveCollage>
     <Payment v-if="state.textNum === 3"@menu-back="backToMenu"></Payment>
-    <OutsideCollage v-if="state.textNum === 4"></OutsideCollage>
+    <OutsideCollage v-if="state.textNum === 4" @menu-back="backToMenu"></OutsideCollage>
     <TrainingCollage v-if="state.textNum === 5"></TrainingCollage>
     <LocationCollage v-if="state.textNum === 6"></LocationCollage>
     <LibraryCollage v-if="state.textNum === 7"></LibraryCollage>

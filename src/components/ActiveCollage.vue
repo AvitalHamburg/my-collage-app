@@ -3,7 +3,7 @@
   <img id="shape" :src="red">
   <div v-if="!state.showQuestion">
    <h1 id="page-header"> פעילות המכללה  </h1>
-   <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :imageNumber="2"></ScrollText>
+   <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :innerText3="emergencyText3" :imageNumber="2"></ScrollText>
    <div id="go-next">
     <p id="next-text">לחצו כאן וענו על השאלה </p>
    </div>
@@ -21,12 +21,9 @@ import AmericanQ from './AmericanQ.vue';
 import { reactive, onMounted, getCurrentInstance ,defineEmits} from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
 import red from "../assets/imgs/red.png";
-const emergencyText = `    פעילות המכללה מתחלקת בין ארבע מגמות: 
-מגמת משרדי הממשלה, מגמת הכשרות אזרחיות, מגמת אימונים לרשויות מקומיות ומגמת מפקדות שגם מעבירים קורסים וגם מאמנים.
-`;
-const emergencyText2 =` למכללה יש מטה מקצועי - משרתי קבע ומילואים, בכירים מרח"ל ויועצים. 
-סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.`
-
+const emergencyText = `פעילות המכללה מתחלקת בין ארבע מגמות - מגמת משרדי הממשלה, מגמת הכשרות אזרחיות, מגמת אימונים לרשויות מקומיות ומגמת מפקדות שגם מעבירים קורסים וגם מאמנים.`
+const emergencyText2 =`למכללה יש מטה מקצועי - משרתי קבע ומילואים, בכירים מרח"ל ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.אורך ההכשרות נע בין שישה לעשרה מפגשים, פעם בשבוע. `
+const emergencyText3 =`שתי הכשרות הארוכות במכללה הן ממונה חירום וביטחון (הכשרה מחייבת) וקורס ניהול מצבי חירום, הקנמ"ח, קורס הדגל של מגמת משרדי ממשלה. שניהם עם 20 מפגשים לאורך חצי שנה`
 const emit = defineEmits(['go-menu']);
 
 const state = reactive({ 
