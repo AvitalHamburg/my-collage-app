@@ -1,119 +1,196 @@
 <template>
   <div id="page">
-    <div  v-if="!state.showQuestion" >
-    <img id="shape" :src="blueLight">
-   <h1 id="page-header">  קשרי חוץ  </h1>
-   <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :imageNumber="4"></ScrollText>
-   <img :src="nextBtn" id="next-btn" @click="GoQuestion">
-  </div>
-   <AmericanQ  v-if="state.showQuestion" :pageHeader="pageHead" :questions="questionArray" :answers1="firstAns" :answers2="seconedAns"
-    :answers3="thirdAns":correctAnswers="correctAnsArr" :explantions="explainArr" @go-next="MenuBack"></AmericanQ>
+    <div v-if="!state.showQuestion">
+      <h1 id="page-header">קשרי חוץ</h1>
+      <img :src="nextBtn" id="next-btn" @click="GoQuestion">
+      <div id="scroll-text">
+        <p class="main-text" ref="text1" :class="{ hidden: state.isText1Hidden }">{{ emergencyText }}</p>
+        <img class="image-content" :src="collageImg4" alt="Collage Image" ref="image1" :class="{ hidden: state.isImage1Hidden }">
+        <p class="image-description" ref="text2" :class="{ hidden: state.isText2Hidden }">{{ emergencyText2 }}</p>
+        <img class="image-content" :src="ImgCollage4" alt="Collage Image" ref="image2" :class="{ hidden: state.isImage2Hidden }">
+      </div>
+    </div>
+    <AmericanQ v-if="state.showQuestion" :pageHeader="pageHead" :questions="questionArray" :answers1="firstAns" :answers2="seconedAns"
+    :answers3="thirdAns" :correctAnswers="correctAnsArr" :explantions="explainArr" @go-next="MenuBack"></AmericanQ>
   </div>
 </template>
 
+
 <script setup>
-import ScrollText from './ScrollText.vue';
 import AmericanQ from './AmericanQ.vue';
 import blueLight from "../assets/imgs/blueLight.png";
 import nextBtn from "../assets/imgs/nextBtn.png";
-import { reactive, onMounted, getCurrentInstance ,defineEmits} from 'vue';
+import { reactive, defineEmits, ref, onMounted, onBeforeUnmount } from 'vue';
+import collageImg4 from '../assets/imgs/collageImg4.png';
+import ImgCollage4 from '../assets/imgs/4ImgCollage.jpg'
 
 const emergencyText = `אנחנו לגמרי בינלאומיים!
-ומארחים משלחות בעלי תפקידים בממשלות וצבאות מרחבי העולם, שרוצים ללמוד על חוסנה של מדינת ישראל והתמודדות מיטבית בשעת חירום.`;
-const emergencyText2 =` כבר יצא לנו להיפגש עם ראשת FEMA )רח"ל האמריקאית), מב"ל הספרדית, נציגים ממשטרת שבדיה, קהילות יהודיות מרחבי העולם וגורמים נוספים, שבאים מכל היבשות לשמוע על קידום המוכנות ברשויות המקומיות, ההכשרות והאימונים - מכיתה י' ועד משרדי הממשלה.`
-
+ומארחים משלחות בעלי תפקידים בממשלות וצבאות מרחבי העולם, שרוצים ללמוד על חוסנה של מדינת ישראל והתמודדות מיטבית בשעת חירום.`;
+const emergencyText2 = `כבר יצא לנו להיפגש עם ראשת FEMA )רח"ל האמריקאית), מב"ל הספרדית, נציגים ממשטרת שבדיה, קהילות יהודיות מרחבי העולם וגורמים נוספים, שבאים מכל היבשות לשמוע על קידום המוכנות ברשויות המקומיות, ההכשרות והאימונים - מכיתה י' ועד משרדי הממשלה.`;
+
 const emit = defineEmits(['menu-back']);
 
-const state = reactive({ 
-showPayment: false,
-showQuestion:false
+const state = reactive({
+  showPayment: false,
+  showQuestion: false,
 });
 
-const pageHead ="קשרי חוץ";
-const questionArray=['מי היה אצלנו?'];
+const pageHead = "קשרי חוץ";
+const questionArray = ['מי היה אצלנו?'];
 const firstAns = ['שוודיה , ארה"ב , ספרד'];
 const seconedAns = ['אנגליה , ארה"ב , יוון'];
 const thirdAns = ['איטליה , ארה"ב'];
-const correctAnsArr=['שוודיה , ארה"ב , ספרד'];;
+const correctAnsArr = ['שוודיה , ארה"ב , ספרד'];
 const explainArr = ['המדינות שביקרו אצלנו הן : ארה"ב ספרד ושוודיה'];
 
 const GoQuestion = () => {
-state.showQuestion=true;
+  state.showQuestion = true;
 };
 
-const MenuBack = () =>{
-emit('menu-back');
+const MenuBack = () => {
+  emit('menu-back');
 };
+
+const text1 = ref(null);
+const text2 = ref(null);
+const image1 = ref(null);
+const image2 = ref(null);
+
+const handleIntersect = (entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate');
+      observer.unobserve(entry.target);
+    }
+  });
+};
+
+onMounted(() => {
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5,
+  };
+  const observer = new IntersectionObserver(handleIntersect, options);
+  observer.observe(text1.value);
+  observer.observe(text2.value);
+  observer.observe(image1.value);
+  observer.observe(image2.value);
+});
+
 </script>
 
 <style scoped>
-@font-face { 
-font-family: "Heebo";
-src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
-format("truetype");
-font-weight: bold;
-} 
-
-* {
-overflow: hidden;
-direction: rtl;
+@font-face {
+  font-family: "Heebo";
+  src: url("../assets/fonts/Heebo-VariableFont_wght.ttf"),
+  format("truetype");
+  font-weight: bold;
 }
 
 #page {
-position: absolute;
-top: 0%;
-right: 50%;
-transform: translateX(50%);
-height: 100vh;
-width: 100vw;
-background-image: url("../assets/imgs/Bg2.png");
-background-size: cover;
-background-repeat: no-repeat;
-padding: 0%;
-}
-#scroll-text{
-  position: absolute;
-  right: 50%;
-  transform: translateX(50%);
-  top:20%;
-  text-align: right;
-}
-#page-header{
-  position: absolute;
-  top:7vh;
-  right: 50%;
-  transform: translateX(50%);
-  font-size: 2em;
-  width: 90vw;
-  text-overflow: none;
-  color:rgb(31,56,100);
-  font-family: "Heebo";
-  text-align: center;
-}
-#shape{
-position: absolute;
-left:0%;
-top:0%;
-height: 18vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../assets/imgs/Bg2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
 }
 
-#next-btn{
-position: absolute; /* Change to absolute positioning */
-bottom: 5vh; /* Initial position */
-right: 50%;
-transform: translateX(50%) rotate(2.5deg); /* Adjust the rotation */
-animation: bounce2 2s ease infinite; /* Add animation delay */
-animation-delay: 15sec;
+#shape {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 18vh;
 }
-@keyframes bounce2 {
-  0% {
-      bottom: 10vh;
+
+#scroll-text {
+  /* Adjust positioning and dimensions */
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+}
+
+#page-header {
+  font-size: 2em;
+  color: rgb(31, 56, 100);
+  font-family: "Heebo";
+  text-align: center;
+  margin-top: 10vh;
+}
+
+#next-btn {
+  position: absolute;
+  top: 130vh;
+  left: 50%;
+  transform: translateX(-50%) rotate(2.5deg);
+}
+
+.main-text {
+  font-size: 1.2em;
+  margin-bottom: 5vh;
+}
+
+.image-content {
+  width: 100%;
+  height: auto;
+  margin-bottom: 2vh;
+}
+
+.image-description {
+  font-size: 1.2em;
+  margin-bottom: 5vh;
+}
+
+#page::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+/* Track */
+#page::-webkit-scrollbar-track {
+  background: transparent; /* Track background color */
+}
+
+/* Thumb */
+#page::-webkit-scrollbar-thumb {
+  background-color:  rgb(31, 56, 100); /* Scrollbar thumb color */
+  border-radius: 4px; /* Scrollbar thumb border radius */
+  height: 6%; /* Adjust the height here */
+  position: absolute;
+}
+
+/* Start button */
+#page::-webkit-scrollbar-button:start {
+  display: block;
+  background-color: transparent; /* Change color as needed */
+  height:40px; /* Set the height of the button */
+}
+
+/* End button */
+#page::-webkit-scrollbar-button:end {
+  display: block;
+  background-color: transparent; /* Change color as needed */
+  height: 40px; /* Set the height of the button */
+}
+.animate {
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  50%{
-    bottom:7vh;
-  }
-  100%{
-    bottom: 10vh;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>

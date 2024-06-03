@@ -28,7 +28,7 @@ import { reactive, defineProps, defineEmits } from 'vue';
 const { visitedMenuPage } = defineProps(['visitedMenuPage']);
 const emit = defineEmits(['go-next']);
 
-const subjects = ['מי זאת המכללה', 'פעילות המכללה', 'גמול השתלמות', 'קש"ח', 'אימוני הרשויות','המכללה', 'ספריה'];
+const subjects = ['מי זאת המכללה', 'פעילות המכללה', 'אימוני רשויות ','הספרייה הלאומית לחירום' ,'קש"ח', 'גמול השתלמות ','נכסי המכללה', 'בסיס פיקוד העורף'];
 const states = reactive(subjects.map(() => 0));
 
 const moveToPage = (index) => {
@@ -53,10 +53,6 @@ const moveToPage = (index) => {
 } 
 
 
-* {
-  overflow: hidden;
-  direction: rtl;
-}
 
 #page {
   position: absolute;
@@ -69,6 +65,7 @@ const moveToPage = (index) => {
   background-size: cover;
   background-repeat: no-repeat;
   padding: 0%;
+ overflow-y: scroll;
 }
 
 
@@ -94,6 +91,9 @@ const moveToPage = (index) => {
   border: none;
   cursor: pointer;
   border-radius: 15px;
+  margin-bottom:2vh ;
+  font-family: "Heebo";
+
 }
 
 .active-btn {

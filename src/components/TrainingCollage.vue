@@ -1,67 +1,186 @@
 <template>
   <div id="page">
-    <img id="shape" :src="turquize">
-   <h1 id="page-header">  אימוני רשויות   </h1>
-   <ScrollText id="scroll-text" :innerText="emergencyText" :innerText2="emergencyText2" :innerText3="emergencyText3" :imageNumber="5"></ScrollText>
+  <img id="shape" :src="orange">
+  <div v-if="!state.showQuestion">
+   <h1 id="page-header"> אימוני הרשויות </h1>
+   <div id="scroll-text">
+    <p class="main-text" ref="text1">{{ emergencyText }}</p>
+    <img class="image-content" :src="collageImg5" alt="Collage Image" ref="image1">
+    <p class="image-description" ref="text2">{{ emergencyText2 }}</p>
+    <img class="image-content" :src="ImgCollage5" alt="Collage Image" ref="image2">
+    <p class="image-description" ref="text3">{{ emergencyText3 }}</p>
   </div>
-</template>
+  <div id="go-next">
+    <p id="next-text">לחצו כאן וענו על השאלה </p>
+   </div>
+    <img :src="nextBtn" id="next-btn" @click="GoQuestion">
+  </div>
+    <AmericanQ  v-if="state.showQuestion" :pageHeader="pageHead" :questions="questionArray" :answers1="firstAns" :answers2="seconedAns"
+    :answers3="thirdAns":correctAnswers="correctAnsArr" :explantions="explainArr" @go-next="backToMenu"></AmericanQ>
+  </div>
+  </template>
 
 <script setup>
-import ScrollText from './ScrollText.vue';
-import turquize from "../assets/imgs/turquize.png";
-const emergencyText =`המכללה לא רק מכשירה אלא גם מאמנת את הרשויות המקומיות לתרגול מצבי חירום כמו מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה וסייבר.בשעת חירום, הרשות המקומית עוברות לעבוד בתצורה של מכלולים. כלומר, עוזבים את העבודה הרגילה שלהם ומתרכזים רק  בנושאים רלוונטיים ומשמעותיים לטיפול באירוע` 
+import AmericanQ from './AmericanQ.vue';
+import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
+import nextBtn from "../assets/imgs/nextBtn.png";
+import collageImg5 from '../assets/imgs/collageImg5.jpg';
+import ImgCollage5 from '../assets/imgs/5ImgCollage.jpg'
+
+const emergencyText = `המכללה לא רק מכשירה אלא גם מאמנת את הרשויות המקומיות לתרגול מצבי חירום כמו מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה וסייבר.בשעת חירום, הרשות המקומית עוברות לעבוד בתצורה של מכלולים. כלומר, עוזבים את העבודה הרגילה שלהם ומתרכזים רק  בנושאים רלוונטיים ומשמעותיים לטיפול באירוע.`
 const emergencyText2 =`במכללה, אנחנו מכשירים את המנהלים והמנהלות וסגניהם, של 8 בעלי תפקידים ברשות:סגן או סגנית הרשות או מנכ"ל/מנכ"לית הרשות, ממונה חירום וביטחוןומכלולי אוכלוסייה, חינוך, מידע לציבור, לוגיסטיקה, הנדסה ומינהל כללי ומשא"ן. לאלה מתווספת גם הכשרה צבאית ליקל"ר, שהוא נציג פיקוד העורף ברשות.`
 const emergencyText3 =`אימון של רשות מקומית מתרגל את הסינכרון בין המכלולים והיכולת לגבש תמונת מצב והערכת מצב, תוך התמודדות עם תרחיש הייחוס והסימולציה למצב חירום. האימון יכול להתקיים ברשות עצמה, אז כל צוות מינהלת האימונים נוסע אליהם או במתקן הסימולטור, שהם באים אלינו לצד השני של הבסיס, כשעשרות אנשים עוזבים את הרשות, באים לתרגל במנותק מיום העבודה שלהם ומקבלים הערכה ומשוב על פעילותם.`
-</script>
+const emit = defineEmits(['go-menu']);
 
+const state = reactive({ 
+showPayment: false,
+showQuestion:false
+});
+
+const pageHead ="פעילות המכללה";
+const questionArray=[' מה מבין הבאים קורס הדגל של המכללה?','את מי מאמנת המכללה?'];
+const firstAns = ['ממונה חירום וביטחון','כוחות ביטחון'];
+const seconedAns = ['קורס ניהול מצבי חירום' ,'כל התשובות נכונות '];
+const thirdAns = ['תשבות א ו ב נכונות' ,' רשויות'];
+const correctAnsArr=['תשבות א ו ב נכונות','כל התשובות נכונות '];
+const explainArr = ['קורסי הדגל במכללה שלנו הם :  ואנו מלמדים אותם ','בלה בלה בלה '];
+
+const GoQuestion = () => {
+state.showQuestion=true;
+};
+const goToPayment = () =>{
+state.showPayment= true;
+state.showQuestion=false;
+
+
+};
+
+const backToMenu = () =>{
+    emit('go-menu');
+}
+
+const text1 = ref(null);
+const text2 = ref(null);
+const text3 = ref(null);
+const image1 = ref(null);
+const image2 = ref(null);
+
+const handleIntersect = (entries, observer) => {
+entries.forEach(entry => {
+  if (entry.isIntersecting) {
+    entry.target.classList.add('animate');
+    observer.unobserve(entry.target);
+  }
+});
+};
+
+onMounted(() => {
+const options = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.5,
+};
+const observer = new IntersectionObserver(handleIntersect, options);
+observer.observe(text1.value);
+observer.observe(text2.value);
+observer.observe(text3.value);
+observer.observe(image1.value);
+observer.observe(image2.value);
+});
+</script>
 <style scoped>
 @font-face { 
 font-family: "Heebo";
-src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
+src: url("../assets/fonts/Heebo-VariableFont_wght.ttf"), 
 format("truetype");
 font-weight: bold;
-} 
-
-* {
-overflow: hidden;
-direction: rtl;
 }
 
+
 #page {
-position: absolute;
-top: 0%;
-right: 50%;
-transform: translateX(50%);
+position: fixed;
+top: 0;
+left: 0;
+/* Adjust the height dynamically based on content */
 height: 100vh;
 width: 100vw;
 background-image: url("../assets/imgs/Bg2.png");
 background-size: cover;
 background-repeat: no-repeat;
-padding: 0%;
+padding: 0;
+margin: 0;
+overflow: auto; /* Add overflow to enable scrolling */
 }
-#scroll-text{
-  position: absolute;
-  right: 50%;
-  transform: translateX(50%);
-  top:20%;
-  text-align: right;
-}
-#page-header{
-  position: absolute;
-  top:7vh;
-  right: 50%;
-  transform: translateX(50%);
-  font-size: 2em;
-  width: 90vw;
-  text-overflow: none;
-  color:rgb(31,56,100);
-  font-family: "Heebo";
-  text-align: center;
-}
-#shape{
+
+#shape {
 position: absolute;
-left:0%;
-top:0%;
+left: 0;
+top: 0;
 height: 18vh;
+}
+
+#scroll-text {
+/* Adjust positioning and dimensions */
+position: absolute;
+top: 20%;
+left: 50%;
+transform: translateX(-50%);
+width: 90vw;
+}
+
+#page-header {
+font-size: 2em;
+color: rgb(31, 56, 100);
+font-family: "Heebo";
+text-align: center;
+margin-top: 10vh;
+}
+
+#next-btn {
+position: absolute;
+top:150vh;
+left: 50%;
+transform: translateX(-50%) rotate(2.5deg);
+}
+
+.main-text {
+font-size: 1.2em;
+margin-bottom: 2vh;
+}
+
+.image-content {
+width: 100%;
+height: auto;
+margin-bottom: 2vh;
+}
+
+.image-description {
+font-size: 1.2em;
+margin-bottom: 2vh;
+}
+
+.animate {
+animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+#next-text{
+position: absolute;
+font-size: 1.2em;
+right: 50%;
+transform: translateX(50%);
+text-overflow: none;
+width: 80vw;
+top:140vh;
+font-weight: bold;
 }
 </style>

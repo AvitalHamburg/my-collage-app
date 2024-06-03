@@ -1,20 +1,24 @@
 <template>
   <div>
     <HelloWorld v-if="state.page === 0" @move-next="nextPage"></HelloWorld>
-    <div v-if="state.page > 0" :class="{ 'open': state.openHamburger }" id="hamburger-icon" @click="showHamburger">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <img v-if="state.page > 0 && !state.openHamburger" :src="collegeLogo" id="logo">
+    <header id="header" v-if="state.page > 0">
+      <div :class="{ 'open': state.openHamburger }" id="hamburger-icon" @click="showHamburger">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <img v-if="!state.openHamburger" :src="collegeLogo" id="logo" @click="backToMenu">
+      <img v-if="!state.openHamburger" id="shape" :src="orange">
+    </header>
     <Menu v-if="state.showMenu" :visitedMenuPage="state.visitedPages" @go-next="movePage"></Menu>
     <KnowCollage v-if="state.textNum === 1" @go-menu="backToMenu"></KnowCollage>
     <ActiveCollage v-if="state.textNum === 2" @go-menu="backToMenu"></ActiveCollage>
-    <Payment v-if="state.textNum === 3"@menu-back="backToMenu"></Payment>
-    <OutsideCollage v-if="state.textNum === 4" @menu-back="backToMenu"></OutsideCollage>
-    <TrainingCollage v-if="state.textNum === 5"></TrainingCollage>
-    <LocationCollage v-if="state.textNum === 6"></LocationCollage>
-    <LibraryCollage v-if="state.textNum === 7"></LibraryCollage>
+    <TrainingCollage v-if="state.textNum === 3"></TrainingCollage>
+    <LibraryCollage v-if="state.textNum === 4"></LibraryCollage>
+    <OutsideCollage v-if="state.textNum === 5" @menu-back="backToMenu"></OutsideCollage>
+    <Payment v-if="state.textNum === 6"@menu-back="backToMenu"></Payment>
+    <SocityCollage v-if="state.textNum === 7"></SocityCollage>
+    <LocationCollage v-if="state.textNum === 8"></LocationCollage>
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
     </div>
     <Hamburger 
@@ -37,7 +41,9 @@ import OutsideCollage from './components/OutsideCollage.vue';
 import TrainingCollage from './components/TrainingCollage.vue';
 import LocationCollage from './components/LocationCollage.vue';
 import LibraryCollage from './components/LibraryCollage.vue';
+import SocityCollage from './components/SocityCollage.vue';
 import collegeLogo from "./assets/imgs/collegeLogo.png";
+import orange from "./assets/imgs/orange.png";
 
 
 
@@ -83,6 +89,20 @@ body {
 
 }
 
+
+header {
+  position: absolute;
+  height: 10vh;
+  top: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 9999;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(-100%);
@@ -118,8 +138,8 @@ body {
 
 #hamburger-icon {
   position: absolute;
-  top: 2vh; 
-  left: 3vw; 
+  top: 0.5vh; 
+  left: 2vw; 
   width: 10vw;
   height: 10vh; 
   z-index: 9999; 
@@ -127,7 +147,7 @@ body {
 
 .bar {
   width: 8vw;
-  height: 1vw;
+  height: 0.8vw;
   background-color: black;
   margin: 2vw 0;
   transition: 0.4s;
@@ -149,11 +169,20 @@ body {
 #logo{
   position: absolute;
   z-index: 9999; 
-  height: 8vh;
+  height: 7vh;
   width: auto;
-  right: 1%;
-  top: 2%;
+  right: 0%;
+  top: 0%;
 }
+#shape{
+  position: absolute;
+  left:0%;
+  top:0%;
+  height: 9vh;
+  z-index: 9997; 
+
+}
+
 
 
 

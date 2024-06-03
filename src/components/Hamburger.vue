@@ -22,7 +22,7 @@
   const { visitedMenuPage } = defineProps(['visitedMenuPage']);
   const emit = defineEmits(['next-page']);
   
-  const subjects = ['מי זאת המכללה', 'פעילות המכללה','גמול השתלמות', 'קש"ח', 'אימוני הרשויות', 'המכללה', 'ספריה'];
+  const subjects = ['מי זאת המכללה', 'פעילות המכללה', 'אימוני רשויות ','הספרייה הלאומית לחירום' ,'קש"ח', 'גמול השתלמות ','נכסי המכללה', 'בסיס פיקוד העורף'];
   const states = reactive(subjects.map(() => 0));
   
   const moveToPage = (index) => {
@@ -32,6 +32,12 @@
   </script>
   
   <style scoped>
+  @font-face { 
+  font-family: "Heebo";
+  src: url("../assets/fonts/Heebo-VariableFont_wght.ttf"), 
+  format("truetype");
+  font-weight: bold;
+}
 .button-container {
   display: flex;
   flex-direction: column;
@@ -50,6 +56,8 @@
     height: 10vh;
     border-radius: 0; /* סורק את רדיוס הכפתור */
     border-bottom: #ffffff solid;
+    font-family: "Heebo";
+
   }
   
   .btn-class:hover {
