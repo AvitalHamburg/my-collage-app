@@ -3,10 +3,11 @@
 <template>
   <div id="intro">
     <div id="shadow"></div>
-    <img :src="state.imagesrc" alt="White Logo" id="white-logo" :class="{ 'move-to-top-right': state.isLogoChanged }">
+    <img :src="state.imagesrc" alt="White Logo" id="white-logo" :class="{ 'move-to-center': state.isLogoChanged }">
     <div  v-if="state.showIntro">
       <h1 id="welcome-text">ברוכים וברוכות הבאים ללומדת היכרות עם המכללה</h1>
-      <p id="introduction">בלומדה זו תלמדו על המכללה תוכלו לקרוא בגלילה ולשחק במשחקונים מוכנים?</p>
+      <p id="introduction"> בדקות הבאות תכירו ותלמדו על המכללה, מה ההתמחות שלנו, מה אנחנו עושים פה, מי אנחנו ואיך כל זה קשור לשלטון העות'מאני.
+מוכנים?</p>
       <img src="../assets/imgs/nextWhiteBtn.png"  id="next-wBtn" @click="moveNextPage"> 
     </div>
   </div>
@@ -20,10 +21,14 @@ import inriLogoSvg from "../assets/imgs/inri-logo-white2.svg";
 
 const { emit } = getCurrentInstance();
 
+// משתנה בוליאני המציין האם המשתמש כבר היה בעמוד זה
+let visitedThisPage = false;
+
 const state = reactive({
   imagesrc: whiteLogoGif,
   isLogoChanged: false,
-  showIntro: false
+  showIntro: false,
+  visitedThisPage: visitedThisPage  // הוספת המשתנה בוליאני לסטייט
 });
 
 function changeImageSourceAfterTimeout() {
@@ -31,11 +36,12 @@ function changeImageSourceAfterTimeout() {
     state.imagesrc = inriLogoSvg;
     state.isLogoChanged = true;
     state.showIntro = true;
+    state.visitedThisPage = true; // מסמנים שהמשתמש ביקר בעמוד זה
   }, 4000);
 }
 
 function moveNextPage(){
-  emit("move-next");
+  emit("move-next", state.visitedThisPage); // שליחת הערך של visitedThisPage עם אירוע "move-next"
 }
 
 onMounted(() => {
@@ -152,24 +158,19 @@ onMounted(() => {
   color: #888;
 }
 
-.move-to-top-right {
-  animation: moveTopRight 2s ease forwards;
+.move-to-center {
+  position: absolute;
+  width: 50vw;
+  height: auto;
+  z-index: 5;
+  right: 50%;
+  transform: translateX(50%);
+  top: 5%;
 }
 
-@keyframes moveTopRight {
-  from {
-    top: 5%;
-    right: 50%;
-    transform: translateX(50%);
-    width: 50vw;
-    height: auto;
-  }
-  to {
-    width: 40vw;
-    height: auto;
-    right:30%;
-  }
-}
+
+
+
 </style>
 
 

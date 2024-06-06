@@ -145,7 +145,7 @@ const backToMenu =()=>{
     width:80vw;
     right:50%;
     transform: translateX(50%);
-    bottom:70vh;
+    top:15%;
     font-family: "Heebo";
     text-align: center;
 }
@@ -173,7 +173,7 @@ const backToMenu =()=>{
 }
 #question{
     position: absolute;
-    top:35%;
+    top:30%;
     right: 50%;
     transform: translateX(50%);
     width: 100vw;

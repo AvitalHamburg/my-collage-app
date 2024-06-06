@@ -25,8 +25,11 @@
     <div v-if="state.showCongratulations" class="congratulations">כל הכבוד!</div>
     <div v-if="state.showBeGood" class="beGood">לא נורא </div>
     <div v-if="state.showPopUp" id="explain">
-        <p>{{ explenation }}</p>
+        <p id="pop-text">{{ explanation }}</p>
         <img id="closeBtn" :src="closeBtn" @click.once="closePopUP">
+    </div>
+    <div v-else>
+        <p>No explanation available.</p>
     </div>
   </div>
 </template>
@@ -42,7 +45,7 @@ const props = defineProps({
   answers2: Array,
   answers3: Array,
   correctAnswers: Array,
-  explantions : Array
+  explanations : Array
 });
 
 const emit = defineEmits(['go-next']);
@@ -52,7 +55,7 @@ const state = reactive({
   showNextButton: false,
   showCongratulations: false,
   showBeGood:false,
-  showPopUp: false, // Define showPopUp as part of the state
+  showPopUp: false, 
   btnText: "שאלה הבאה",
 });
 
@@ -60,7 +63,7 @@ const currentIndex = ref(0);
 const correctAnswerIndex = ref(null);
 const incorrectAnswerIndex=ref(null);
 const currentQuestion = ref(props.questions[currentIndex.value]);
-const explenation = ref(props.explantions[currentIndex.value]);
+const explanation = ref(props.explanations[currentIndex.value]);
 const currentAnswers = ref([
   props.answers1[currentIndex.value],
   props.answers2[currentIndex.value],
@@ -80,8 +83,10 @@ const handleButtonClick = (answer, index) => {
     state.showCongratulations = false;
     state.showBeGood = true;
     setTimeout(()=>{
-        state.showPopUp = true; 
+      state.showPopUp = true; 
+
     },2000)
+  
   }
 };
 
@@ -116,7 +121,6 @@ const closePopUP = () => {
 }
 </script>
 
-
 <style scoped>
 @font-face { 
   font-family: "Heebo";
@@ -128,7 +132,6 @@ const closePopUP = () => {
   position: relative;
   top: 15vh;
   z-index: 0;
-  right: 8vw;
 }
 
 .answer-button {
@@ -141,6 +144,8 @@ const closePopUP = () => {
   border-radius: 7px;
   font-size: 1.3em;
   font-family: "Heebo";
+  z-index: 0;
+
 }
 
 .correct-answer {
@@ -153,7 +158,7 @@ const closePopUP = () => {
 
 .congratulations {
   position: absolute;
-  top: 65%;
+  top: 105%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 2em;
@@ -165,7 +170,7 @@ const closePopUP = () => {
 
 .beGood{
  position: absolute;
-  top: 65%;
+  top: 105%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 2em;
@@ -184,7 +189,7 @@ const closePopUP = () => {
   position: absolute;
   right: 45%;
   transform: rotate(2.5deg);
-  bottom: 15%;
+  top: 125%;
   animation: bounce2 2s ease infinite; /* Add animation delay */
   animation-delay: 15sec;
 }
@@ -193,30 +198,33 @@ const closePopUP = () => {
   position: absolute;
   right: 50%;
   transform: translateX(50%);
-  bottom: 18%;
+  top: 108%;
   font-weight: bold;
-  font-family: "Heebo";
   
 }
 
 #explain {
   background-color: rgb(116, 142, 172);
   position: absolute;
-  width: 82vw;
-  height: 25vh;
-  z-index: 5;
-  bottom: 40vh;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  padding: 20px;
-  font-family: "Heebo";
-  font-size: 1.2em;
-  color: rgb(15, 15, 15);
+  width: 92vw;
+  height: 27vh; 
+  z-index: 99999; 
+  right: 50%;
+  transform: translateX(50%);
+  top:70%;
+  text-align: center;
 }
+#pop-text{
+  position: absolute;
+  top: 20%;
+  width: 80%;
+  right: 50%;
+  transform: translateX(50%);
+  font-size: 1.2em;
+  font-weight: bold;
+
+}
+
 #closeBtn{
     position: absolute;
     height:3vh;
@@ -229,20 +237,21 @@ const closePopUP = () => {
   font-family: "Heebo";
   color:  rgb(31, 56, 100);
   font-weight: bold;
-  top:30vh;
-  text-align: center;
-  width: 80%;
-  
+  top:35vh;
+  direction: rtl;
 }
 @keyframes bounce2 {
     0% {
-        bottom: 15vh;
+      top: 125%;
+
     }
     50%{
-      bottom: 13vh;
+      top: 135%;
+
     }
     100%{
-      bottom: 15vh;
+      top: 125%;
+
     }
 }
 
@@ -255,8 +264,6 @@ const closePopUP = () => {
     width: 90vw;
     text-overflow: none;
     color:rgb(31,56,100);
-    font-family: "Heebo";
-    text-align: center;
 }
 
 </style>

@@ -5,7 +5,7 @@
     <p id="user-massage">נגמר הסרטון? יופי לחצ/י כאן לבדוק את הזיכרון</p>
 
     <img  :src="nextBtn" id="next-btn" @click.once="nextSubject">
-    <Question v-if="state.showQuestion" @menuBack="goToMenu"></Question>
+    <Question  v-if="state.showQuestion" @menuBack="goToMenu"></Question>
   </div>
 </template>
 

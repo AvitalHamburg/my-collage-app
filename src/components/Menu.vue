@@ -38,7 +38,6 @@ const moveToPage = (index) => {
 
 </script>
 
-
 <style scoped>
 @font-face { 
   font-family: "Heebo";
@@ -74,7 +73,7 @@ const moveToPage = (index) => {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 12vh;
+  top: 15vh;
   right: 50%;
   transform: translateX(50%);
 }
@@ -115,7 +114,7 @@ const moveToPage = (index) => {
   position: absolute;
   color: rgb(31, 56, 100);
   font-size: 2.5em;
-  top: 3vh;
+  top: 8vh;
   transform: translateX(50%);
   right:50%;
   width:100%;

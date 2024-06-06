@@ -1,5 +1,6 @@
 <template>
   <div id="page">
+    <div v-if="!state.showVideo">
    <h1 id="page-header">מי זאת המכללה?</h1>
    <div id="scroll-text">
     <p class="main-text" ref="text1">{{ emergencyText }}</p>
@@ -8,11 +9,14 @@
     <img class="image-content" :src="ImgCollage1" alt="Collage Image" ref="image2">
     <p class="image-description" ref="text3">{{ emergencyText3 }}</p>
   </div>
-  <p id="next-text"> לחצו כאן לצפיייה בסרטון נסו לזכור כמה שיותר פרטים </p>
+  <p ref="nextT" id="next-text"> לחצו כאן לצפיייה בסרטון נסו לזכור כמה שיותר פרטים </p>
+  <img ref="nextB" :src="nextBtn" id="next-btn" @click="goToVideo">
+
   <div id="play-button" @click="goToVideo">
           <div id="triangle"></div>
   </div>
-  <VideoPage v-if="state.showVideo" @backMenu="goToMenu"></VideoPage>
+</div>
+  <VideoPage id="video-page" v-if="state.showVideo" @backMenu="goToMenu"></VideoPage>
   </div>
 </template>
 
@@ -22,6 +26,7 @@ import VideoPage from './VideoPage.vue';
 import orange from "../assets/imgs/orange.png";
 import collageImg1 from '../assets/imgs/collageImg1.png';
 import ImgCollage1 from '../assets/imgs/1ImgCollage.jpg'
+import nextBtn from "../assets/imgs/nextBtn.png";
 
 const emergencyText = `המכללה לא רק מכשירהאלא גם מאמנת את הרשויות המקומיות לתרגול מצבי חירום כמו מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה וסייבר`;
 const emergencyText2 = `בשעת חירום, הרשות המקומית עוברות לעבוד בתצורה של מכלולים. כלומר, עוזבים את העבודה הרגילה שלהם ומתרכזים רק בנושאים רלוונטיים ומשמעותיים לטיפול באירוע`;
@@ -46,21 +51,24 @@ const text2 = ref(null);
 const text3 = ref(null);
 const image1 = ref(null);
 const image2 = ref(null);
+const nextT = ref(null);
+const nextB = ref(null);
+
 
 const handleIntersect = (entries, observer) => {
 entries.forEach(entry => {
-  if (entry.isIntersecting) {
-    entry.target.classList.add('animate');
-    observer.unobserve(entry.target);
-  }
+if (entry.isIntersecting) {
+  entry.target.classList.add('animate');
+  observer.unobserve(entry.target);
+}
 });
 };
 
 onMounted(() => {
 const options = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.5,
+root: null,
+rootMargin: '0px',
+threshold: 0.5,
 };
 const observer = new IntersectionObserver(handleIntersect, options);
 observer.observe(text1.value);
@@ -69,9 +77,6 @@ observer.observe(text3.value);
 observer.observe(image1.value);
 observer.observe(image2.value);
 });
-
-
-
 
 </script>
 
@@ -115,6 +120,8 @@ top: 20%;
 left: 50%;
 transform: translateX(-50%);
 width: 90vw;
+direction: rtl;
+text-align: right;
 }
 
 #page-header {
@@ -175,7 +182,11 @@ right: 50%;
 transform: translateX(50%);
 text-overflow: none;
 width: 80vw;
-top:140vh;
+top:155vh;
 font-weight: bold;
+}
+#next-btn{
+position: absolute;
+top:165vh;
 }
 </style>

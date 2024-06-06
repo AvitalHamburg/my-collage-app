@@ -14,8 +14,8 @@
    </div>
     <img :src="nextBtn" id="next-btn" @click="GoQuestion">
   </div>
-    <AmericanQ  v-if="state.showQuestion" :pageHeader="pageHead" :questions="questionArray" :answers1="firstAns" :answers2="seconedAns"
-    :answers3="thirdAns":correctAnswers="correctAnsArr" :explantions="explainArr" @go-next="backToMenu"></AmericanQ>
+    <AmericanQ id="question-page"  v-if="state.showQuestion" :pageHeader="pageHead" :questions="questionArray" :answers1="firstAns" :answers2="seconedAns"
+    :answers3="thirdAns":correctAnswers="correctAnsArr" :explanations="explainArr" @go-next="backToMenu"></AmericanQ>
   </div>
   </template>
 
@@ -125,6 +125,8 @@ top: 20%;
 left: 50%;
 transform: translateX(-50%);
 width: 90vw;
+direction: rtl;
+text-align: right;
 }
 
 #page-header {
@@ -187,5 +189,11 @@ text-overflow: none;
 width: 80vw;
 top:140vh;
 font-weight: bold;
+}
+#question-page{
+position: absolute;
+right: 50%;
+transform: translateX(50%);
+width: 100%;
 }
 </style>

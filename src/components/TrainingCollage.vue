@@ -1,7 +1,7 @@
 <template>
   <div id="page">
   <img id="shape" :src="orange">
-  <div v-if="!state.showQuestion">
+  <div>
    <h1 id="page-header"> אימוני הרשויות </h1>
    <div id="scroll-text">
     <p class="main-text" ref="text1">{{ emergencyText }}</p>
@@ -11,17 +11,14 @@
     <p class="image-description" ref="text3">{{ emergencyText3 }}</p>
   </div>
   <div id="go-next">
-    <p id="next-text">לחצו כאן וענו על השאלה </p>
+    <p id="next-text"> לחצו כאן להמשך</p>
    </div>
-    <img :src="nextBtn" id="next-btn" @click="GoQuestion">
+    <img :src="nextBtn" id="next-btn" @click="backToMenu">
   </div>
-    <AmericanQ  v-if="state.showQuestion" :pageHeader="pageHead" :questions="questionArray" :answers1="firstAns" :answers2="seconedAns"
-    :answers3="thirdAns":correctAnswers="correctAnsArr" :explantions="explainArr" @go-next="backToMenu"></AmericanQ>
   </div>
   </template>
 
 <script setup>
-import AmericanQ from './AmericanQ.vue';
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
 import collageImg5 from '../assets/imgs/collageImg5.jpg';
@@ -32,28 +29,7 @@ const emergencyText2 =`במכללה, אנחנו מכשירים את המנהלי
 const emergencyText3 =`אימון של רשות מקומית מתרגל את הסינכרון בין המכלולים והיכולת לגבש תמונת מצב והערכת מצב, תוך התמודדות עם תרחיש הייחוס והסימולציה למצב חירום. האימון יכול להתקיים ברשות עצמה, אז כל צוות מינהלת האימונים נוסע אליהם או במתקן הסימולטור, שהם באים אלינו לצד השני של הבסיס, כשעשרות אנשים עוזבים את הרשות, באים לתרגל במנותק מיום העבודה שלהם ומקבלים הערכה ומשוב על פעילותם.`
 const emit = defineEmits(['go-menu']);
 
-const state = reactive({ 
-showPayment: false,
-showQuestion:false
-});
 
-const pageHead ="פעילות המכללה";
-const questionArray=[' מה מבין הבאים קורס הדגל של המכללה?','את מי מאמנת המכללה?'];
-const firstAns = ['ממונה חירום וביטחון','כוחות ביטחון'];
-const seconedAns = ['קורס ניהול מצבי חירום' ,'כל התשובות נכונות '];
-const thirdAns = ['תשבות א ו ב נכונות' ,' רשויות'];
-const correctAnsArr=['תשבות א ו ב נכונות','כל התשובות נכונות '];
-const explainArr = ['קורסי הדגל במכללה שלנו הם :  ואנו מלמדים אותם ','בלה בלה בלה '];
-
-const GoQuestion = () => {
-state.showQuestion=true;
-};
-const goToPayment = () =>{
-state.showPayment= true;
-state.showQuestion=false;
-
-
-};
 
 const backToMenu = () =>{
     emit('go-menu');
@@ -126,6 +102,8 @@ top: 20%;
 left: 50%;
 transform: translateX(-50%);
 width: 90vw;
+direction: rtl;
+text-align: right;
 }
 
 #page-header {
@@ -137,11 +115,13 @@ margin-top: 10vh;
 }
 
 #next-btn {
-position: absolute;
-top:150vh;
-left: 50%;
-transform: translateX(-50%) rotate(2.5deg);
+  position: absolute;
+  top: 190vh; /* Adjust the top value to add padding */
+  left: 50%;
+  transform: translateX(-50%) rotate(2.5deg);
+  margin-bottom: 10vh;
 }
+
 
 .main-text {
 font-size: 1.2em;
@@ -180,7 +160,22 @@ right: 50%;
 transform: translateX(50%);
 text-overflow: none;
 width: 80vw;
-top:140vh;
+top:182vh;
 font-weight: bold;
 }
+
+@keyframes bounce2 {
+      0% {
+        top: 190%;
+
+      }
+      50%{
+        top: 195%;
+
+      }
+      100%{
+        top: 190%;
+
+      }
+  }
 </style>

@@ -97,6 +97,8 @@ onMounted(() => {
   left: 50%;
   transform: translateX(-50%);
   width: 90vw;
+  direction: rtl;
+  text-align: right;
 }
 
 #page-header {

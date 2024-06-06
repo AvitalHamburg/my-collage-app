@@ -1,19 +1,22 @@
 <template>
   <div>
     <HelloWorld v-if="state.page === 0" @move-next="nextPage"></HelloWorld>
-    <header id="header" v-if="state.page > 0">
-      <div :class="{ 'open': state.openHamburger }" id="hamburger-icon" @click="showHamburger">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
-      <img v-if="!state.openHamburger" :src="collegeLogo" id="logo" @click="backToMenu">
-      <img v-if="!state.openHamburger" id="shape" :src="orange">
-    </header>
+    
+    <div :class="{ 'open': state.openHamburger }" id="hamburger-icon" v-if="state.page > 0" @click="showHamburger">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+    <div class="trancperncy"></div>
+    <header id="header" v-if="state.page && !state.openHamburger">
+    <img v-if="!state.openHamburger" :src="collegeLogo" id="logo" @click="backToMenu">
+    <img v-if="!state.openHamburger" id="shape" :src="orange">
+   </header>
+
     <Menu v-if="state.showMenu" :visitedMenuPage="state.visitedPages" @go-next="movePage"></Menu>
     <KnowCollage v-if="state.textNum === 1" @go-menu="backToMenu"></KnowCollage>
     <ActiveCollage v-if="state.textNum === 2" @go-menu="backToMenu"></ActiveCollage>
-    <TrainingCollage v-if="state.textNum === 3"></TrainingCollage>
+    <TrainingCollage v-if="state.textNum === 3" @go-menu="backToMenu"></TrainingCollage>
     <LibraryCollage v-if="state.textNum === 4"></LibraryCollage>
     <OutsideCollage v-if="state.textNum === 5" @menu-back="backToMenu"></OutsideCollage>
     <Payment v-if="state.textNum === 6"@menu-back="backToMenu"></Payment>
@@ -89,10 +92,20 @@ body {
 
 }
 
+.trancperncy{
+  position: absolute;
+  height: 8vh;
+  top: 0;
+  width: 100vw;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 8899;
+  opacity: 0.8;
+}
 
 header {
   position: absolute;
-  height: 10vh;
+  height: 8vh;
   top: 0;
   width: 100vw;
   display: flex;
@@ -101,6 +114,8 @@ header {
   right: 50%;
   transform: translateX(50%);
   z-index: 9999;
+  background-image: url("./assets/imgs/header.png");
+  background-size: cover;
 }
 
 @keyframes slideIn {
@@ -142,7 +157,7 @@ header {
   left: 2vw; 
   width: 10vw;
   height: 10vh; 
-  z-index: 9999; 
+  z-index: 19999; 
 }
 
 .bar {
@@ -154,7 +169,7 @@ header {
 }
 
 #hamburger-icon.open .bar:nth-child(1) {
-  transform: rotate(-45deg) translate(-2vw, 1.1vw);
+  transform: rotate(-45deg) translate(-1.6vw, 1vw);
   background-color: aliceblue;
 }
 
@@ -178,7 +193,7 @@ header {
   position: absolute;
   left:0%;
   top:0%;
-  height: 9vh;
+  height: 11vh;
   z-index: 9997; 
 
 }

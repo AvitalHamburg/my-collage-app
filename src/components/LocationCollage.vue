@@ -1,6 +1,6 @@
 <template>
   <div id="page">
-  <div v-if="!state.showQuestion">
+  <div v-if="!state.showGame">
    <h1 id="page-header"> בסיס פיקוד העורף   </h1>
    <div id="scroll-text">
     <p class="main-text" ref="text1">{{ emergencyText }}</p>
@@ -11,6 +11,8 @@
    </div>
     <img :src="nextBtn" id="next-btn" @click="GoGame">
   </div>
+    <Game></Game>
+
   </div>
   </template>
 
@@ -18,7 +20,8 @@
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
 import collageImg6 from '../assets/imgs/collageImg6.jpg';
-import ImgCollage6 from '../assets/imgs/6ImgCollage.jpg'
+import ImgCollage6 from '../assets/imgs/6ImgCollage.jpg';
+import Game from './Game.vue';
 const emergencyText = `המכללה שלנו היא חלק ממערכת גדולה יותר , המפקדה של פיקוד העורף . היא כוללת הוצאה לאור לשכת אלוף פיקוד העורף . חדר אוכל של פיקוד העורף ובנוסף המאמ"פ שם ישנן מדריכות שליטה ובקרה שמדריכות על מערכת השועל שאחראית בין היתר על ההתראות לנפילת טילים. `
 const emit = defineEmits(['go-menu']);
 
@@ -28,14 +31,9 @@ showGame:false
 
 
 const GoGame = () => {
-state.showQuestion=true;
+state.showGame=true;
 };
-const goToPayment = () =>{
-state.showPayment= true;
-state.showQuestion=false;
 
-
-};
 
 const backToMenu = () =>{
     emit('go-menu');
@@ -102,6 +100,8 @@ observer.observe(image2.value);
   left: 50%;
   transform: translateX(-50%);
   width: 90vw;
+  direction: rtl;
+  text-align: right;
 }
 
 #page-header {
@@ -133,37 +133,6 @@ observer.observe(image2.value);
 .image-description {
   font-size: 1.2em;
   margin-bottom: 5vh;
-}
-
-#page::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
-}
-
-/* Track */
-#page::-webkit-scrollbar-track {
-  background: transparent; /* Track background color */
-}
-
-/* Thumb */
-#page::-webkit-scrollbar-thumb {
-  background-color:  rgb(31, 56, 100); /* Scrollbar thumb color */
-  border-radius: 4px; /* Scrollbar thumb border radius */
-  height: 6%; /* Adjust the height here */
-  position: absolute;
-}
-
-/* Start button */
-#page::-webkit-scrollbar-button:start {
-  display: block;
-  background-color: transparent; /* Change color as needed */
-  height:40px; /* Set the height of the button */
-}
-
-/* End button */
-#page::-webkit-scrollbar-button:end {
-  display: block;
-  background-color: transparent; /* Change color as needed */
-  height: 40px; /* Set the height of the button */
 }
 .animate {
   animation: fadeIn 1s ease;
