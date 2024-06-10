@@ -47,7 +47,7 @@ const moveToPage = (index) => {
 } 
 @font-face { 
   font-family: "Karantina";
-  src: url("@/assets/Karantina-Regular.ttf"), 
+  src: url("@/assets/fonts/Karantina-Regular.ttf"), 
   format("truetype");
 } 
 
@@ -119,7 +119,7 @@ const moveToPage = (index) => {
   right:50%;
   width:100%;
   text-align: center;
-  font-family: "Heebo";
+  font-family: "Karantina";
 
 }
 .selected-btn {
