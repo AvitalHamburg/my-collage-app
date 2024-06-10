@@ -11,6 +11,7 @@
     <header id="header" v-if="state.page && !state.openHamburger">
     <img v-if="!state.openHamburger" :src="collegeLogo" id="logo" @click="backToMenu">
     <img v-if="!state.openHamburger" id="shape" :src="orange">
+    <img v-if="!state.openHamburger" id="shape1" :src="blue">
    </header>
 
     <Menu v-if="state.showMenu" :visitedMenuPage="state.visitedPages" @go-next="movePage"></Menu>
@@ -47,6 +48,7 @@ import LibraryCollage from './components/LibraryCollage.vue';
 import SocityCollage from './components/SocityCollage.vue';
 import collegeLogo from "./assets/imgs/collegeLogo.png";
 import orange from "./assets/imgs/orange.png";
+import blue from "./assets/imgs/blue.png";
 
 
 
@@ -114,7 +116,9 @@ header {
   right: 50%;
   transform: translateX(50%);
   z-index: 9999;
-  background-image: url("./assets/imgs/header.png");
+  background-color: rgb(229, 232, 235);
+
+  /* background-image: url("./assets/imgs/header.png"); */
   background-size: cover;
 }
 
@@ -166,6 +170,7 @@ header {
   background-color: black;
   margin: 2vw 0;
   transition: 0.4s;
+  border-radius: 500px;
 }
 
 #hamburger-icon.open .bar:nth-child(1) {
@@ -186,18 +191,26 @@ header {
   z-index: 9999; 
   height: 7vh;
   width: auto;
-  right: 0%;
-  top: 0%;
+  right: 5%;
+  top: 8%;
 }
 #shape{
   position: absolute;
   left:0%;
   top:0%;
-  height: 11vh;
+  height: 20vh;
   z-index: 9997; 
 
 }
+#shape1{
+  position: absolute;
+  right: 0%;
+  height: 13vh;
+  bottom: -92vh; 
+  transform: rotate(180deg);
 
+
+}
 
 
 

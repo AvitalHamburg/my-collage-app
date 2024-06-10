@@ -6,7 +6,7 @@
     <p class="main-text" ref="text1">{{ emergencyText }}</p>
     <img class="image-content" :src="collageImg1" alt="Collage Image" ref="image1">
     <p class="image-description" ref="text2">{{ emergencyText2 }}</p>
-    <img class="image-content" :src="ImgCollage1" alt="Collage Image" ref="image2">
+    <!-- <img class="image-content" :src="ImgCollage1" alt="Collage Image" ref="image2"> -->
     <p class="image-description" ref="text3">{{ emergencyText3 }}</p>
   </div>
   <p ref="nextT" id="next-text"> לחצו כאן לצפיייה בסרטון נסו לזכור כמה שיותר פרטים </p>
@@ -25,7 +25,6 @@ import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import VideoPage from './VideoPage.vue';
 import orange from "../assets/imgs/orange.png";
 import collageImg1 from '../assets/imgs/collageImg1.png';
-import ImgCollage1 from '../assets/imgs/1ImgCollage.jpg'
 import nextBtn from "../assets/imgs/nextBtn.png";
 
 const emergencyText = `המכללה לא רק מכשירהאלא גם מאמנת את הרשויות המקומיות לתרגול מצבי חירום כמו מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה וסייבר`;
@@ -98,7 +97,8 @@ left: 0;
 /* Adjust the height dynamically based on content */
 height: 100vh;
 width: 100vw;
-background-image: url("../assets/imgs/Bg2.png");
+/* background-image: url("../assets/imgs/Bg2.png"); */
+background-color: rgb(229, 232, 235);
 background-size: cover;
 background-repeat: no-repeat;
 padding: 0;

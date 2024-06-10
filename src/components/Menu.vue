@@ -2,6 +2,9 @@
 <template>
   <div id="page">
     <h1 id="main-title">עמוד הבית</h1>
+    <p id="intro1">אנחנו ממליצים ללכת לפי הסדר, למרות שאפשר איך שרוצים.</p>
+    <p id="intro"> כל נושא מכיל הסבר קצר, אולי יהיה שם וידאו, בטוח יהיו תמונות ואפילו יש איזה משחק.
+תבלו :)</p>
     <div class="button-container">
       <button
         v-for="(subject, index) in subjects"
@@ -43,8 +46,8 @@ const moveToPage = (index) => {
   font-family: "Heebo";
   src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
   format("truetype");
-  font-weight: bold;
 } 
+
 @font-face { 
   font-family: "Karantina";
   src: url("@/assets/fonts/Karantina-Regular.ttf"), 
@@ -60,7 +63,8 @@ const moveToPage = (index) => {
   transform: translateX(50%);
   height: 100vh;
   width: 100vw;
-  background-image: url("../assets/imgs/Bg2.png");
+  /* background-image: url("../assets/imgs/Bg2.png"); */
+  background-color: rgb(229, 232, 235);
   background-size: cover;
   background-repeat: no-repeat;
   padding: 0%;
@@ -73,9 +77,10 @@ const moveToPage = (index) => {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 15vh;
+  top: 40vh;
   right: 50%;
   transform: translateX(50%);
+  z-index: 10000;
 }
 
 .btn-class {
@@ -85,11 +90,11 @@ const moveToPage = (index) => {
   height: auto; /* Allow height to adjust based on content */
   text-align: center;
   padding: 3vh 0; /* Adjusted padding */
-  background-color: rgb(31,56,100);
+  background-color: rgb(23,90,133);
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 15px;
+  border-radius: 50px;
   margin-bottom:2vh ;
   font-family: "Heebo";
 
@@ -112,15 +117,38 @@ const moveToPage = (index) => {
 
 #main-title{
   position: absolute;
-  color: rgb(31, 56, 100);
-  font-size: 2.5em;
-  top: 8vh;
+  color: rgb(89, 89, 89);
+  font-size: 5em;
+  top: 5vh;
   transform: translateX(50%);
   right:50%;
   width:100%;
   text-align: center;
   font-family: "Karantina";
 
+}
+#intro{
+  position: absolute;
+  top:27vh;
+  width:70vw;
+  right:50%;
+  transform: translateX(50%);
+  font-family: "Heebo";
+  font-size: 1.2em;
+  direction: rtl;
+  font-weight:-700;
+  
+}
+#intro1{
+  position: absolute;
+  top:20vh;
+  width:70vw;
+  right:50%;
+  transform: translateX(50%);
+  font-family: "Heebo";
+  font-size: 1.2em;
+  direction: rtl;
+  font-weight:700;
 }
 .selected-btn {
     background-color: grey;
