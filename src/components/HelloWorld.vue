@@ -54,7 +54,7 @@ onMounted(() => {
 @font-face { 
     font-family: "Heebo";
     font-weight: normal;
-    src: url("/src/assets/Heebo-VariableFont_wght.woff"), 
+    src: url("/src/assets/fonts/Heebo-VariableFont_wght.woff"), 
          format("woff");
 }
 
