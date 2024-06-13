@@ -5,9 +5,13 @@
     <div id="shadow"></div>
     <img :src="state.imagesrc" alt="White Logo" id="white-logo" :class="{ 'move-to-center': state.isLogoChanged }">
     <div  v-if="state.showIntro">
-      <h1 id="welcome-text">ברוכים וברוכות הבאים ללומדת היכרות עם המכללה</h1>
-      <p id="introduction"> בדקות הבאות תכירו ותלמדו על המכללה, מה ההתמחות שלנו, מה אנחנו עושים פה, מי אנחנו ואיך כל זה קשור לשלטון העות'מאני.
-מוכנים?</p>
+      <h1 id="welcome-text">ברוך הבא או הבאה למשפחת המכללה</h1>
+
+
+      <p id="introduction"> בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני.
+        וכן, בארור שיש בוחן בסוף :) 
+בהצלחה!</p>
+
       <img src="../assets/imgs/nextWhiteBtn.png"  id="next-wBtn" @click="moveNextPage"> 
     </div>
   </div>
@@ -51,13 +55,13 @@ onMounted(() => {
 
 
 <style scoped>
-/* @font-face { 
+@font-face { 
     font-family: "Heebo";
     font-weight: normal;
-    src: url("/src/assets/fonts/Heebo-VariableFont_wght.woff"), 
+    src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
          format("woff");
-} */
-/* 
+}
+
 @font-face { 
   font-family: "Karantina";
   font-weight: normal;
@@ -65,7 +69,6 @@ onMounted(() => {
   format("woff");
 } 
 
- */
 
 
 *{
@@ -110,12 +113,12 @@ onMounted(() => {
     position:absolute;
     right: 50%;
     transform: translateX(50%);
-    font-size: 1.7em;
+    font-size: 4em;
     text-align: center;
-    top:30vh;
+    top:15vh;
     z-index: 5;
     width:90vw;
-    font-family: "Heebo";
+    font-family: "Karantina";
 
 }
 #introduction{
@@ -126,8 +129,8 @@ onMounted(() => {
   width:80vw;
   height:auto;
   z-index: 5;
-  font-size: 1.5em;
-  bottom:30vh;
+  font-size: 1.7em;
+  bottom:20vh;
   font-family: "Heebo";
 
 }
@@ -148,13 +151,13 @@ onMounted(() => {
 }
 @keyframes bounce2 {
     0% {
-        bottom: 20vh;
+        bottom: 15vh;
     }
     50%{
-      bottom: 15vh;
+      bottom: 10vh;
     }
     100%{
-      bottom: 20vh;
+      bottom: 15vh;
     }
 }
 .read-the-docs {

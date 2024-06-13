@@ -69,12 +69,13 @@ observer.observe(image2.value);
 });
 </script>
 <style scoped>
-/* @font-face { 
-    font-family: "Heebo";
-    font-weight: normal;
-    src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
-         format("woff");
-} */
+@font-face {
+  font-family: "Heebo";
+  src: url("../assets/fonts/Heebo-VariableFont_wght.ttf"),
+  format("truetype");
+  font-weight: bold;
+}
+
 #page {
   position: fixed;
   top: 0;

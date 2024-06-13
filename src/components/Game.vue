@@ -1,23 +1,24 @@
 <template>
     <div id="page">
         <div id="map"></div>
-        <div id="first" >
-            <p class="white-circle" id="1">1</p>
+        <div v-for="i in indexs" :key="`orange${i}`" :id="'orange' + i" class="orange">
+            <div v-for="j in indexs" :key="`white${j}`" :id="'white' + j" class="white"></div>
         </div>
     </div>
 </template>
+
 <script setup>
-  
+const indexs=[1,2,3,4,5]
 </script>
-  
-  <style scoped>
- /* @font-face { 
+
+<style scoped>
+@font-face { 
     font-family: "Heebo";
-    font-weight: normal;
-    src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
-         format("woff");
-} */
-  #map {
+    src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
+    format("truetype");
+    font-weight: bold;
+} 
+#map {
     background-image: url("../assets/imgs/collageMap.png");
     width: 90vw;
     height: 60vh;
@@ -28,27 +29,20 @@
     transform: translateX(-50%); /* Adjusted transform to center horizontally */
     z-index: 0;
 }
-
-#first {
-    position: absolute;
-    background-color: rgb(244,176,129);
-    width: 10vw;
-    height: 5vh;
-    top: 11%; /* Adjusted top position */
-    left: 50%; /* Added left property */
-    transform: translateX(-50%); /* Adjusted transform to center horizontally */
-    z-index: 100;
-    border-radius: 5000000px;
+.orange {
+    background-color: orange; /* צבע רקע כתום */
+    border-radius: 50%; /* עיגול */
+    width: 100px; /* רוחב */
+    height: 100px; /* גובה */
+    margin: 5px; /* מרווח בין העיגולים */
+    display: inline-block; /* הצגה כבלוקים */
 }
-.white-circle{
-    background-color: rgb(255, 255, 255);
-    border-radius: 5000000px;
-    width: 10vw;
-    height: 5vh;
-    position: absolute;
-
-
+.white {
+    background-color: white; /* צבע רקע לבן */
+    border-radius: 50%; /* עיגול */
+    width: 90px; /* רוחב */
+    height: 90px; /* גובה */
+    margin: 5px; /* מרווח בין העיגולים */
+    display: inline-block; /* הצגה כבלוקים */
 }
-
-  
-  </style>
+</style>

@@ -18,7 +18,6 @@
 
 <script setup>
 import AmericanQ from './AmericanQ.vue';
-import blueLight from "../assets/imgs/blueLight.png";
 import nextBtn from "../assets/imgs/nextBtn.png";
 import { reactive, defineEmits, ref, onMounted, onBeforeUnmount } from 'vue';
 import collageImg4 from '../assets/imgs/collageImg4.png';
@@ -87,6 +86,7 @@ onMounted(() => {
     src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
          format("woff");
 } */
+
 
 #page {
 position: fixed;
