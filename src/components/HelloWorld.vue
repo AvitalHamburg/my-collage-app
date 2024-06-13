@@ -53,15 +53,18 @@ onMounted(() => {
 <style scoped>
 @font-face { 
   font-family: "Heebo";
-  src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
-  format("truetype");
-  font-weight: bold;
+  font-weight: normal;
+  src: url("@/assets/fonts/Heebo-VariableFont_wght.woff"), 
+  format("woff");
 } 
+
 @font-face { 
   font-family: "Karantina";
-  src: url("@/assets/Karantina-Regular.ttf"), 
-  format("truetype");
+  font-weight: normal;
+  src: url("@/assets/fonts/Karantina-Regular.woff"), 
+  format("woff");
 } 
+
 
 
 

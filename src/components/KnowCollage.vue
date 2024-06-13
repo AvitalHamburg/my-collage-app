@@ -83,11 +83,19 @@ observer.observe(image2.value);
 <style scoped>
 
 @font-face { 
-font-family: "Heebo";
-src: url("../assets/fonts/Heebo-VariableFont_wght.ttf"), 
-format("truetype");
-font-weight: bold;
-}
+  font-family: "Heebo";
+  font-weight: normal;
+  src: url("@/assets/fonts/Heebo-VariableFont_wght.woff"), 
+  format("woff");
+} 
+
+@font-face { 
+  font-family: "Karantina";
+  font-weight: normal;
+  src: url("@/assets/fonts/Karantina-Regular.woff"), 
+  format("woff");
+} 
+
 
 
 #page {
