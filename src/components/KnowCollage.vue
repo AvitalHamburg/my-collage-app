@@ -88,12 +88,12 @@ observer.observe(image2.value);
     src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
          format("woff");
 } */
-@font-face { 
+/* @font-face { 
   font-family: "Karantina";
   font-weight: normal;
   src: url("@/assets/fonts/Karantina-Regular.woff"), 
   format("woff");
-} 
+}  */
 
 
 

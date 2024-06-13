@@ -57,7 +57,7 @@ onMounted(() => {
     src: url("/src/assets/fonts/Heebo-VariableFont_wght.woff"), 
          format("woff");
 } */
-
+/* 
 @font-face { 
   font-family: "Karantina";
   font-weight: normal;
@@ -65,7 +65,7 @@ onMounted(() => {
   format("woff");
 } 
 
-
+ */
 
 
 *{
