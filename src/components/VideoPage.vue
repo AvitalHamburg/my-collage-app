@@ -1,28 +1,39 @@
 <template>
   <div id="page">
-    <h1 id="page-header"> סרטון </h1>
+    <div id="scroll-text" v-if="!state.showSubj">
+    <img class="image-content" :src="infoCollage1">
+    <p class="simple-text">אנחנו גם מכשירים צוותי סע"ר (סיוע עצמי ראשוני) של הרשות המקומית ותלמידי כיתות י' לחילוץ קל - בכדי שיוכלו לסייע באירוע חילוץ בסביבה שלהם, כמו במקרה של רעידת אדמה. </p>
+    <img class="image-content" :src="firefighters">
+    <p class="simple-text">כיתות נבחרות מכל בתי הספר עוברות הכשרה של יומיים, בעוד צוותי הסע"ר לאחר ההכשרה, עוברים אימונים באתרי הרס בשיתוף ארגוני החירום הנוספים של הרשות. </p> 
+      <p class="blue-text">מעניין, לא?</p>
+      <p class="simple-text">את כל זה יש לנו גם בסרטון קצר ומגניב, אז בואו נראה קצת מספרים.
+כדאי לנסות לזכור כמה שיותר פרטים, כי באיזשהו שלב תגיע שאלה..</p>
     <video id="video" src="../assets/media/videoCollage.mp4" controls ></video>
-    <p id="user-massage">נגמר הסרטון? יופי לחצ/י כאן לבדוק את הזיכרון</p>
 
-    <img  :src="nextBtn" id="next-btn" @click.once="nextSubject">
-    <Question  v-if="state.showQuestion" @menuBack="goToMenu"></Question>
+    <img :src="nextBtn" id="next-wBtn" @click.once="nextSubject">
+    </div>
+    <div id="scroll-text2" v-if="state.showSubj"> 
+      <p class="grey-big">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.</p>
+      <img  :src="nextBtn" id="next-wBtn2" @click="goToMenu">
+    </div>
   </div>
 </template>
 
 <script setup>
 import { defineProps, defineEmits, reactive } from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
-import Question from './Question.vue';
+import infoCollage1 from "../assets/imgs/infoCollage1.jpg";
+import firefighters from "../assets/imgs/firefighters.jpg";
 const emit = defineEmits(['backMenu']);
 
 
 const state = reactive({ 
-  showQuestion: false,
+  showSubj: false,
 });
 
 
 const nextSubject = () => {
-  state.showQuestion=true;
+  state.showSubj=true;
 };
 const goToMenu = () =>{
   console.log('backMenu in the video component');
@@ -31,12 +42,6 @@ const goToMenu = () =>{
 };
 </script>
 <style scoped>
-/* @font-face { 
-    font-family: "Heebo";
-    font-weight: normal;
-    src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
-         format("woff");
-} */
 
 * {
 overflow: hidden;
@@ -55,6 +60,28 @@ background-size: cover;
 background-repeat: no-repeat;
 padding: 0%;
 }
+#scroll-text {
+/* Adjust positioning and dimensions */
+position: absolute;
+top: 16%;
+left: 50%;
+transform: translateX(-50%);
+width: 90vw;
+direction: rtl;
+height:160vh ;
+
+}
+#scroll-text2 {
+/* Adjust positioning and dimensions */
+position: absolute;
+top: 16%;
+left: 50%;
+transform: translateX(-50%);
+width: 90vw;
+direction: rtl;
+height:100vh ;
+
+}
 
 #page-header{
   position: absolute;
@@ -67,6 +94,7 @@ padding: 0%;
   color:rgb(31,56,100);
   font-family: "Heebo";
   text-align: center;
+ 
 }
 
 #user-massage{
@@ -80,27 +108,121 @@ padding: 0%;
   font-family: "Heebo";
   text-align: center;
 }
-#next-btn{
-  position: absolute;
-  right:50%;
-  transform: translateX(50%);
-  bottom:15vh;
-}
+
 #video{
-position: absolute;
 width:90vw;
 height: auto;
-right:50%;
-transform: translateX(50%);
-top:30%;
 }
-#next-btn {
-position: absolute;
-right: 45%;
-transform: rotate(2.5deg);
-bottom: 15%;
-animation: bounce2 2s ease infinite; /* Add animation delay */
-animation-delay: 15sec;
+@keyframes bounce2 {
+  0% {
+      top: 140vh; /* Adjusted initial position */
+  }
+  50%{
+    top: 145vh; /* Adjusted midpoint position */
+  }
+  100%{
+    top: 140vh; /* Adjusted final position */
+  }
 }
 
+#next-wBtn{
+position:absolute;
+z-index: 5;
+right:50%;
+transform: translateX(50%);
+bottom:-10vh; /* Adjusted position */
+animation: bounce2 2s ease infinite; 
+}
+#next-wBtn2{
+position:absolute;
+z-index: 5;
+right:50%;
+transform: translateX(50%);
+top:40vh; /* Adjusted position */
+animation: bounce 2s ease infinite; 
+}
+
+@keyframes bounce {
+  0% {
+      top: 40vh; /* Adjusted initial position */
+  }
+  50%{
+    top: 45vh; /* Adjusted midpoint position */
+  }
+  100%{
+    top: 40vh; /* Adjusted final position */
+  }
+}
+.image-content {
+width: 100%;
+height: auto;
+margin-bottom: 2vh;
+}
+
+.titles-gray {
+font-size: 2.5em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Karantina";
+color: rgb(89,89,89);
+text-align: right;
+
+}
+
+.simple-text {
+width: 100%;
+height: auto;
+margin-bottom: 2vh;
+font-family: "Heebo";
+font-size: 1.2em;
+text-align: right;
+
+
+}
+
+.blue-text {
+font-size: 1.4em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo Black";
+color:rgb(28, 180, 227);
+width: 95vw;
+text-align: right;
+}
+.grey-bold {
+font-size: 1.3em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo Black";
+color: rgb(89,89,89);
+text-align: right;
+
+}
+.grey-big {
+font-size: 1.5em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo Black";
+color: rgb(89,89,89);
+text-align: right;
+
+}
+.animate {
+animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
 </style>
