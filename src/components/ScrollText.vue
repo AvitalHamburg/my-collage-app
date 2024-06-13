@@ -106,12 +106,12 @@ export default {
 };
 </script>
 <style scoped>
-@font-face { 
+/* @font-face { 
   font-family: "Heebo";
   src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
   format("truetype");
   font-weight: bold;
-} 
+}  */
 .scrollable-text-box {
   width: 90vw;
   height: 60vh;
