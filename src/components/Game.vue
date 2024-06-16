@@ -13,11 +13,12 @@ const indexs=[1,2,3,4,5]
 
 <style scoped>
 @font-face { 
-    font-family: "Heebo";
-    src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
-    format("truetype");
-    font-weight: bold;
-} 
+  font-family: "Heebo";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
+       format("woff");
+}
+
 #map {
     background-image: url("../assets/imgs/collageMap.png");
     width: 90vw;

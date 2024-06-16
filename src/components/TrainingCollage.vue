@@ -68,7 +68,7 @@ observer.observe(image2.value);
 @font-face { 
     font-family: "Heebo";
     font-weight: normal;
-    src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
+    src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
          format("woff");
 }
 
