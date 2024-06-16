@@ -1,6 +1,6 @@
 :root {
-  --font-family-heebo: 'Heebo'; /* Heebo without fallback */
-  --font-family-karantina: 'Karantina'; /* Karantina without fallback */
+  --font-family-heebo: 'Heebo', sans-serif;
+  --font-family-karantina: 'Karantina', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
