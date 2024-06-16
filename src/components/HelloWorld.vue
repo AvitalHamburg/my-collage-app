@@ -56,18 +56,18 @@ onMounted(() => {
 
 <style scoped>
 @font-face { 
-    font-family: "Heebo";
-    font-weight: normal;
-    src: url("public/fonts/Heebo-VariableFont_wght.woff"), 
-         format("woff");
+  font-family: "Heebo";
+  font-weight: normal;
+  src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
+       format("woff");
 }
 
-/* @font-face { 
+@font-face { 
   font-family: "Karantina";
   font-weight: normal;
-  src: url("@/assets/fonts/Karantina-Regular.woff"), 
+  src: url("/assets/fonts/Karantina-Regular.woff"), 
   format("woff");
-}  */
+} 
 
 
 
@@ -118,7 +118,7 @@ onMounted(() => {
     top:15vh;
     z-index: 5;
     width:90vw;
-    font-family: var(--font-family-karantina);
+    font-family: "karantina";
 
 }
 #introduction{
@@ -131,7 +131,7 @@ onMounted(() => {
   z-index: 5;
   font-size: 1.7em;
   bottom:20vh;
-  font-family: var(--font-family-heebo);
+  font-family: "Heebo"
 }
 @keyframes bounce2 {
 	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
