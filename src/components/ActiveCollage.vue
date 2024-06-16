@@ -1,93 +1,111 @@
 <template>
   <div id="page">
-  <div v-if="!state.showQuestion">
-   <h1 id="page-header"> פעילות המכללה  </h1>
+    <div v-if="!state.showInfo">
    <div id="scroll-text">
-    <p class="main-text" ref="text1">{{ emergencyText }}</p>
-    <img class="image-content" :src="collageImg2" alt="Collage Image" ref="image1">
-    <p class="image-description" ref="text2">{{ emergencyText2 }}</p>
-    <img class="image-content" :src="ImgCollage2" alt="Collage Image" ref="image2">
-    <p class="image-description" ref="text3">{{ emergencyText3 }}</p>
+    <p class="titles-red" ref="text1">המכללה בחרבות ברזל </p>
+    <p class="red-text" ref="text2">7 באוקטובר</p>
+    <p class="red-bold" ref="text3">המכללה מכשירה מנהלים ומנהלות שיש להם תפקיד בשעת חירום ממשרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות ובמפקדות צבאיות, לתפקוד מיטבי וניהול מצבי חירום כמו במצב מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה ועוד.
+    </p>
+    <img class="image-content" :src="ImgCollage" alt="Collage Image" ref="image1">
+    <p class="simple-text" ref="text4">המכללה הוקמה בכדי להוות בית להכשרות בתחום ניהול מצבי החירום. בניין אחד המרכז את כל מחלקות פקע"ר בשיתוף פעולה עם רשות החירום הלאומית (רח"ל).</p>
+    <p class='blue-text'  ref="text5">למכללה ארבע מגמות:</p>
+    <p class="grey-bold"  ref="text6">1. מגמת הכשרות</p>
+    <p class="simple-text"  ref="text7">אחראית להכשיר מנהלים ומנהלות של המכלולים ברשויות המקומיות. </p>
+    <p class="grey-bold" ref="text8">2. מגמת משרדי ממשלה</p>
+    <p class="simple-text" ref="text9">מגמה בהובלת רח"ל, האחראית על הכשרת מנהלים ומנהלות במשרדים לחירום. </p>
+    <p class="grey-bold" ref="text10">3. מגמת אימוני מפקדות</p>
+    <p class="simple-text" ref="text11">הרגל הצבאית שלנו, מכשירה, מאמנת וחונכת את כל בעלי התפקידים במפקדה צבאית של פיקוד העורף. </p>
+    <p class="grey-bold" ref="text12">4. מגמת אימוני רשויות</p>
+    <p class="simple-text" ref="text13">אחראית לממש את מה שנלמד בהכשרה - באימון לפי תרחיש ועל-פי תוכנית מותאמת. </p>
+    <!-- <img class="image-content" :src="ImgCollage1" alt="Collage Image" ref="image2"> -->
+
   </div>
-  <div id="go-next">
-    <p id="next-text">לחצו כאן וענו על השאלה </p>
-   </div>
-    <img :src="nextBtn" id="next-btn" @click="GoQuestion">
+  <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToInfo">
+</div>
+  <knowInfo v-if="state.showInfo" @go-menu="goToMenu"></knowInfo>
   </div>
-    <AmericanQ id="question-page"  v-if="state.showQuestion" :pageHeader="pageHead" :questions="questionArray" :answers1="firstAns" :answers2="seconedAns"
-    :answers3="thirdAns":correctAnswers="correctAnsArr" :explanations="explainArr" @go-next="backToMenu"></AmericanQ>
-  </div>
-  </template>
+</template>
 
 <script setup>
-import AmericanQ from './AmericanQ.vue';
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
+import VideoPage from './VideoPage.vue';
+import knowInfo from './knowInfo.vue';
+import orange from "../assets/imgs/orange.png";
+import ImgCollage from '../assets/imgs/11ImgCollage.jpg';
 import nextBtn from "../assets/imgs/nextBtn.png";
-import collageImg2 from '../assets/imgs/collageImg2.jpg';
-import ImgCollage2 from '../assets/imgs/2ImgCollage.jpg'
 
-const emergencyText = `פעילות המכללה מתחלקת בין ארבע מגמות - מגמת משרדי הממשלה, מגמת הכשרות אזרחיות, מגמת אימונים לרשויות מקומיות ומגמת מפקדות שגם מעבירים קורסים וגם מאמנים.`
-const emergencyText2 =`למכללה יש מטה מקצועי - משרתי קבע ומילואים, בכירים מרח"ל ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.אורך ההכשרות נע בין שישה לעשרה מפגשים, פעם בשבוע. `
-const emergencyText3 =`שתי הכשרות הארוכות במכללה הן ממונה חירום וביטחון (הכשרה מחייבת) וקורס ניהול מצבי חירום, הקנמ"ח, קורס הדגל של מגמת משרדי ממשלה. שניהם עם 20 מפגשים לאורך חצי שנה`
+
 const emit = defineEmits(['go-menu']);
 
 const state = reactive({ 
-showPayment: false,
-showQuestion:false
+showInfo: false
 });
 
-const pageHead ="פעילות המכללה";
-const questionArray=[' מה מבין הבאים קורס הדגל של המכללה?','את מי מאמנת המכללה?'];
-const firstAns = ['ממונה חירום וביטחון','כוחות ביטחון'];
-const seconedAns = ['קורס ניהול מצבי חירום' ,'כל התשובות נכונות '];
-const thirdAns = ['תשבות א ו ב נכונות' ,' רשויות'];
-const correctAnsArr=['תשבות א ו ב נכונות','כל התשובות נכונות '];
-const explainArr = ['קורסי הדגל במכללה שלנו הם :  ואנו מלמדים אותם ','בלה בלה בלה '];
-
-const GoQuestion = () => {
-state.showQuestion=true;
-};
-const goToPayment = () =>{
-state.showPayment= true;
-state.showQuestion=false;
-
-
+const goToInfo = () => {
+console.log(state.showInfo);
+state.showInfo = true;
 };
 
-const backToMenu = () =>{
-    emit('go-menu');
+const goToMenu = () =>{
+emit('go-menu');
 }
 
 const text1 = ref(null);
 const text2 = ref(null);
 const text3 = ref(null);
+const text4 = ref(null);
+const text5 = ref(null);
+const text6 = ref(null);
+const text7 = ref(null);
+const text8 = ref(null);
+const text9 = ref(null);
+const text10 = ref(null);
+const text11= ref(null);
+const text12= ref(null);
+const text13= ref(null);
 const image1 = ref(null);
-const image2 = ref(null);
+// const image2 = ref(null);
+// const nextT = ref(null);
+const nextB = ref(null);
+
 
 const handleIntersect = (entries, observer) => {
 entries.forEach(entry => {
-  if (entry.isIntersecting) {
-    entry.target.classList.add('animate');
-    observer.unobserve(entry.target);
-  }
+if (entry.isIntersecting) {
+  entry.target.classList.add('animate');
+  observer.unobserve(entry.target);
+}
 });
 };
 
 onMounted(() => {
 const options = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.5,
+root: null,
+rootMargin: '0px',
+threshold: 0.5,
 };
 const observer = new IntersectionObserver(handleIntersect, options);
 observer.observe(text1.value);
 observer.observe(text2.value);
 observer.observe(text3.value);
+observer.observe(text4.value);
+observer.observe(text5.value);
+observer.observe(text6.value);
+observer.observe(text7.value);
+observer.observe(text8.value);
+observer.observe(text9.value);
+observer.observe(text10.value);
+observer.observe(text11.value);
+observer.observe(text12.value);
+observer.observe(text13.value);
 observer.observe(image1.value);
-observer.observe(image2.value);
 });
+
 </script>
+
+
 <style scoped>
+
 @font-face { 
   font-family: "Heebo";
   font-weight: normal;
@@ -95,6 +113,12 @@ observer.observe(image2.value);
        format("woff");
 }
 
+@font-face { 
+  font-family: "Heebo-Black";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-Black.woff"), 
+       format("woff");
+}
 
 
 #page {
@@ -104,7 +128,8 @@ left: 0;
 /* Adjust the height dynamically based on content */
 height: 100vh;
 width: 100vw;
-background-image: url("../assets/imgs/Bg2.png");
+/* background-image: url("../assets/imgs/Bg2.png"); */
+background-color: rgb(229, 232, 235);
 background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
@@ -122,12 +147,13 @@ height: 18vh;
 #scroll-text {
 /* Adjust positioning and dimensions */
 position: absolute;
-top: 20%;
+top: 15%;
 left: 50%;
 transform: translateX(-50%);
 width: 90vw;
 direction: rtl;
 text-align: right;
+height: 190vh;
 }
 
 #page-header {
@@ -139,34 +165,76 @@ margin-top: 10vh;
 direction: rtl;
 }
 
-#next-btn {
-position: absolute;
-top:150vh;
-left: 50%;
-transform: translateX(-50%) rotate(2.5deg);
-}
 
-.main-text {
-font-size: 1.2em;
+
+.titles-red {
+font-size: 2.5em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
-
+font-family: "karantina";
+color:#e06666;
 }
 
-.image-content {
+.simple-text {
 width: 100%;
 height: auto;
 margin-bottom: 2vh;
+font-family: "Heebo";
+font-size: 1.2em;
+
 }
 
-.image-description {
-font-size: 1.2em;
+.red-text {
+font-size: 1.4em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
+font-family: "Heebo-Black";
+color:#e06666;
+width: 95vw;
+}
+.red-bold {
+font-size: 1.3em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:#e06666;
+}
+.red-big {
+font-size: 2em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:#e06666;
+}
+.animate {
+animation: fadeIn 1s ease;
 }
 
+
+@keyframes bounce2 {
+  0% {
+      top: 180vh; /* Adjusted initial position */
+  }
+  50%{
+    top: 185vh; /* Adjusted midpoint position */
+  }
+  100%{
+    top: 180vh; /* Adjusted final position */
+  }
+}
+
+#next-wBtn{
+position:absolute;
+z-index: 5;
+right:50%;
+transform: translateX(50%);
+top:150vh; /* Adjusted position */
+animation: bounce2 2s ease infinite; 
+}
 .animate {
 animation: fadeIn 1s ease;
 }
@@ -181,20 +249,10 @@ to {
   transform: translateY(0);
 }
 }
-#next-text{
-position: absolute;
-font-size: 1.2em;
-right: 50%;
-transform: translateX(50%);
-text-overflow: none;
-width: 80vw;
-top:140vh;
-font-weight: bold;
-}
-#question-page{
-position: absolute;
-right: 50%;
-transform: translateX(50%);
+
+.image-content {
 width: 100%;
+height: auto;
+margin-bottom: 2vh;
 }
 </style>
