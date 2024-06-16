@@ -12,12 +12,12 @@ const indexs=[1,2,3,4,5]
 </script>
 
 <style scoped>
-/* @font-face { 
+@font-face { 
     font-family: "Heebo";
     src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
     format("truetype");
     font-weight: bold;
-}  */
+} 
 #map {
     background-image: url("../assets/imgs/collageMap.png");
     width: 90vw;
