@@ -116,7 +116,7 @@ observer.observe(image1.value);
 
 @font-face { 
   font-family: "Heebo-Black";
-  font-weight: normal;
+  font-weight: 400;
   src: url("../assets/fonts/Heebo-Black.woff"), 
        format("woff");
 }
