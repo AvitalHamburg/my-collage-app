@@ -131,8 +131,7 @@ onMounted(() => {
   z-index: 5;
   font-size: 1.7em;
   bottom:20vh;
-  font-family: "Heebo";
-
+  font-family: var(--font-family-heebo);
 }
 @keyframes bounce2 {
 	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}

@@ -167,7 +167,7 @@ font-size: 2.5em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
-font-family: "Karantina";
+font-family: var(--font-family-karantina);
 color: rgb(89,89,89);
 }
 
