@@ -55,7 +55,12 @@ const moveToPage = (index) => {
   src: url("../assets/fonts/Karantina-Regular.woff"), 
   format("woff");
 } 
-
+@font-face { 
+  font-family: "Heebo-Black";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-Black.woff"), 
+       format("woff");
+}
 
 
 #page {
@@ -147,7 +152,7 @@ const moveToPage = (index) => {
   width:70vw;
   right:50%;
   transform: translateX(50%);
-  font-family: "Heebo";
+  font-family: "Heebo-Black";
   font-size: 1.2em;
   direction: rtl;
   font-weight:700;

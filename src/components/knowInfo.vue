@@ -77,6 +77,13 @@ observer.observe(image1.value);
        format("woff");
 }
 
+@font-face { 
+  font-family: "Heebo-Black";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-Black.woff"), 
+       format("woff");
+}
+
 
 #page {
   position: fixed;
@@ -154,7 +161,7 @@ observer.observe(image1.value);
   margin-bottom: 2vh;
   direction: rtl;
   text-align: right;
-  font-family: "Heebo Black";
+  font-family: "Heebo-Black";
   color:rgb(28, 180, 227);
   width: 95vw;
 }
@@ -163,7 +170,7 @@ observer.observe(image1.value);
   margin-bottom: 2vh;
   direction: rtl;
   text-align: right;
-  font-family: "Heebo Black";
+  font-family:"Heebo-Black";
   color: rgb(89,89,89);
 }
 
@@ -172,7 +179,7 @@ observer.observe(image1.value);
   margin-bottom: 2vh;
   direction: rtl;
   text-align: right;
-  font-family: "Heebo Black";
+  font-family: "Heebo-Black";
   color: rgb(89,89,89);
 }
 .grey-big {
@@ -180,7 +187,7 @@ observer.observe(image1.value);
   margin-bottom: 2vh;
   direction: rtl;
   text-align: right;
-  font-family: "Heebo Black";
+  font-family: "Heebo-Black";
   color: rgb(89,89,89);
 }
 .animate {

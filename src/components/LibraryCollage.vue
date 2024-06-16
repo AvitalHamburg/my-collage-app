@@ -75,6 +75,13 @@ observer.observe(image2.value);
   src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
        format("woff");
 }
+@font-face { 
+  font-family: "Heebo-Black";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-Black.woff"), 
+       format("woff");
+}
+
 #page {
   position: fixed;
   top: 0;
