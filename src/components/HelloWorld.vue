@@ -58,14 +58,14 @@ onMounted(() => {
 @font-face { 
   font-family: "Heebo";
   font-weight: normal;
-  src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
+  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
        format("woff");
 }
 
 @font-face { 
   font-family: "Karantina";
   font-weight: normal;
-  src: url("/assets/fonts/Karantina-Regular.woff"), 
+  src: url("../assets/fonts/Karantina-Regular.woff"), 
   format("woff");
 } 
 
