@@ -55,7 +55,7 @@ onMounted(() => {
 
 
 <style scoped>
-@font-face { 
+/* @font-face { 
     font-family: "Heebo";
     font-weight: normal;
     src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
@@ -68,7 +68,7 @@ onMounted(() => {
   src: url("@/assets/fonts/Karantina-Regular.woff"), 
   format("woff");
 } 
-
+ */
 
 
 *{
@@ -118,7 +118,7 @@ onMounted(() => {
     top:15vh;
     z-index: 5;
     width:90vw;
-    font-family: "Karantina";
+    font-family: var(--font-family-karantina);
 
 }
 #introduction{
