@@ -1,5 +1,6 @@
 :root {
-  font-family: 'Heebo', 'Karantina', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;  line-height: 1.5;
+  --font-family-heebo: 'Heebo', sans-serif;
+  --font-family-karantina: 'Karantina', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 

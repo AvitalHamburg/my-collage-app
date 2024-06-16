@@ -122,12 +122,12 @@ const closePopUP = () => {
 </script>
 
 <style scoped>
-@font-face { 
+/* @font-face { 
   font-family: "Heebo";
   src: url("@/assets/fonts/Heebo-VariableFont_wght.ttf"), 
   format("truetype");
   font-weight: bold;
-} 
+}  */
 .container {
   position: relative;
   top: 15vh;

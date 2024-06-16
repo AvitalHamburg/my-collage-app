@@ -32,12 +32,12 @@
   </script>
   
   <style scoped>
-@font-face { 
+/* @font-face { 
     font-family: "Heebo";
     font-weight: normal;
     src: url("/assets/fonts/Heebo-VariableFont_wght.woff"), 
          format("woff");
-}
+} */
 .button-container {
   display: flex;
   flex-direction: column;
@@ -56,7 +56,8 @@
     height: 10vh;
     border-radius: 0; /* סורק את רדיוס הכפתור */
     border-bottom: #ffffff solid;
-    font-family: "Heebo";
+    font-family: var(--font-family-heebo); /* Example of applying Heebo font */
+    font-weight: var(--font-weight-normal); /* Example of applying font weight */
 
   }
   
