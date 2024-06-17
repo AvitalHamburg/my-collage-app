@@ -10,19 +10,20 @@
     <div class="trancperncy"></div>
     <header id="header" v-if="state.page && !state.openHamburger">
     <img v-if="!state.openHamburger" :src="collegeLogo" id="logo" @click="backToMenu">
-    <img v-if="!state.openHamburger" id="shape" :src="orange">
-    <img v-if="!state.openHamburger" id="shape1" :src="blue">
+    <img v-if="!state.openHamburger && state.textNum !== 2 " id="shape" :src="orange">
+    <img v-if="!state.openHamburger && state.textNum !== 2 "  id="shape1" :src="blue">
+    <img v-if=" state.textNum === 2 " id="shape" :src="red">
+    <img v-if=" state.textNum === 2 " id="shape1" :src="red">
+
    </header>
 
     <Menu v-if="state.showMenu" :visitedMenuPage="state.visitedPages" @go-next="movePage"></Menu>
     <KnowCollage v-if="state.textNum === 1" @go-menu="backToMenu"></KnowCollage>
     <ActiveCollage v-if="state.textNum === 2" @go-menu="backToMenu"></ActiveCollage>
-    <TrainingCollage v-if="state.textNum === 3" @go-menu="backToMenu"></TrainingCollage>
+    <SocityCollage v-if="state.textNum === 3" @go-menu="backToMenu"></SocityCollage>
     <LibraryCollage v-if="state.textNum === 4"></LibraryCollage>
     <OutsideCollage v-if="state.textNum === 5" @menu-back="backToMenu"></OutsideCollage>
-    <Payment v-if="state.textNum === 6"@menu-back="backToMenu"></Payment>
-    <SocityCollage v-if="state.textNum === 7"></SocityCollage>
-    <LocationCollage v-if="state.textNum === 8"></LocationCollage>
+    <LocationCollage v-if="state.textNum === 6"></LocationCollage>
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
     </div>
     <Hamburger 
@@ -36,20 +37,20 @@
 <script setup>
 import { reactive } from 'vue';
 import Menu from './components/Menu.vue';
-import Payment from './components/Payment.vue';
+import Payment from './components/Warnext.vue';
 import Hamburger from './components/Hamburger.vue';
 import HelloWorld from './components/HelloWorld.vue';
 import KnowCollage from './components/KnowCollage.vue';
 import ActiveCollage from './components/ActiveCollage.vue';
 import OutsideCollage from './components/OutsideCollage.vue';
-import TrainingCollage from './components/TrainingCollage.vue';
+import TrainingCollage from './components/Warnext.vue';
 import LocationCollage from './components/LocationCollage.vue';
 import LibraryCollage from './components/LibraryCollage.vue';
 import SocityCollage from './components/SocityCollage.vue';
 import collegeLogo from "./assets/imgs/collegeLogo.png";
 import orange from "./assets/imgs/orange.png";
 import blue from "./assets/imgs/blue.png";
-
+import red from "./assets/imgs/red.png";
 
 
 const state = reactive({
@@ -136,16 +137,16 @@ header {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #252424; 
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  /* Adjust the transparency as needed */
+  background-color: #175a85; 
+  box-shadow: 0 0 20px rgba(23, 90, 133, 0.2);  /* Adjust the transparency as needed */
   z-index: 8998; /* Make sure the overlay is below the hamburger menu but above other content */
   transition: transform 0.5s; 
   animation: slideIn 0.5s forwards; 
 }
 #hamburger-page {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 10vh;
+  right: 0;
   width: 100vw; 
   height: 100vh; 
   transition: transform 0.5s; 

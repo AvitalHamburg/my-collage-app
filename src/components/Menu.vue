@@ -31,7 +31,15 @@ import { reactive, defineProps, defineEmits } from 'vue';
 const { visitedMenuPage } = defineProps(['visitedMenuPage']);
 const emit = defineEmits(['go-next']);
 
-const subjects = ['מי זאת המכללה', 'פעילות המכללה', 'אימוני רשויות ','הספרייה הלאומית לחירום' ,'קש"ח', 'גמול השתלמות ','נכסי המכללה', 'בסיס פיקוד העורף'];
+
+const subjects = [
+  'מי זאת המכללה',
+  'המכללה בחרבות ברזל',
+  'נכסים דיגיטליים',
+  'הספרייה הלאומית לחירום',
+  'קש"ח',
+  ' מה נמצא איפה?'];
+  
 const states = reactive(subjects.map(() => 0));
 
 const moveToPage = (index) => {
@@ -71,7 +79,7 @@ const moveToPage = (index) => {
   height: 100vh;
   width: 100vw;
   /* background-image: url("../assets/imgs/Bg2.png"); */
-  background-color: rgb(229, 232, 235);
+  background-color: aliceblue;
   background-size: cover;
   background-repeat: no-repeat;
   padding: 0%;
@@ -88,6 +96,8 @@ const moveToPage = (index) => {
   right: 50%;
   transform: translateX(50%);
   z-index: 10000;
+  font-family: "Heebo";
+
 }
 
 .btn-class {
@@ -120,6 +130,8 @@ const moveToPage = (index) => {
   cursor: pointer;
   border-radius: 15px;
   opacity: 0.6;
+  font-family: "Heebo";
+
 }
 
 #main-title{

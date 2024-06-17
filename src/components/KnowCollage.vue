@@ -1,7 +1,6 @@
 <template>
   <div id="page">
     <div v-if="!state.showInfo">
-   <h1 id="page-header">מי זאת המכללה?</h1>
    <div id="scroll-text">
     <p class="titles-gray" ref="text1">פעילות המכללה</p>
     <p class="blue-text" ref="text2">ברוכים הבאים וברוכות הבאות למכללה הלאומית לאיתנות ישראלית</p>
@@ -173,7 +172,7 @@ font-size: 2.5em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
-font-family: var(--font-family-karantina);
+font-family: "karantina";
 color: rgb(89,89,89);
 }
 

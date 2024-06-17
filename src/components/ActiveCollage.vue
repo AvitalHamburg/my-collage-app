@@ -3,37 +3,41 @@
     <div v-if="!state.showInfo">
    <div id="scroll-text">
     <p class="titles-red" ref="text1">המכללה בחרבות ברזל </p>
-    <p class="red-text" ref="text2">7 באוקטובר</p>
-    <p class="red-bold" ref="text3">המכללה מכשירה מנהלים ומנהלות שיש להם תפקיד בשעת חירום ממשרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות ובמפקדות צבאיות, לתפקוד מיטבי וניהול מצבי חירום כמו במצב מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה ועוד.
+    <p class="red-bold" ref="text2">7 באוקטובר</p>
+    <p class="red-text" ref="text3">המכללה מכשירה מנהלים ומנהלות שיש להם תפקיד בשעת חירום ממשרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות ובמפקדות צבאיות, לתפקוד מיטבי וניהול מצבי חירום כמו במצב מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה ועוד.
     </p>
-    <img class="image-content" :src="ImgCollage" alt="Collage Image" ref="image1">
-    <p class="simple-text" ref="text4">המכללה הוקמה בכדי להוות בית להכשרות בתחום ניהול מצבי החירום. בניין אחד המרכז את כל מחלקות פקע"ר בשיתוף פעולה עם רשות החירום הלאומית (רח"ל).</p>
-    <p class='blue-text'  ref="text5">למכללה ארבע מגמות:</p>
-    <p class="grey-bold"  ref="text6">1. מגמת הכשרות</p>
-    <p class="simple-text"  ref="text7">אחראית להכשיר מנהלים ומנהלות של המכלולים ברשויות המקומיות. </p>
-    <p class="grey-bold" ref="text8">2. מגמת משרדי ממשלה</p>
-    <p class="simple-text" ref="text9">מגמה בהובלת רח"ל, האחראית על הכשרת מנהלים ומנהלות במשרדים לחירום. </p>
-    <p class="grey-bold" ref="text10">3. מגמת אימוני מפקדות</p>
-    <p class="simple-text" ref="text11">הרגל הצבאית שלנו, מכשירה, מאמנת וחונכת את כל בעלי התפקידים במפקדה צבאית של פיקוד העורף. </p>
-    <p class="grey-bold" ref="text12">4. מגמת אימוני רשויות</p>
-    <p class="simple-text" ref="text13">אחראית לממש את מה שנלמד בהכשרה - באימון לפי תרחיש ועל-פי תוכנית מותאמת. </p>
-    <!-- <img class="image-content" :src="ImgCollage1" alt="Collage Image" ref="image2"> -->
+    <p class="simple-text" ref="text4">נתחיל עם סרטון שיעשה רעש ויעלה את הדופק, ומשם נפרט קצת מה עשינו כדי שתהיו בעניינים - </p>
+    <video id="video" src="../assets/media/war.mp4" controls ></video>
+
+    
+    <p class='simple-text'  ref="text5"> במסגרת מאמצי הפיקוד, הובילה המכללה שני מוקדי סיוע לאומיים - המרס"ל (מרכז סיוע לאזרח) שמקדם תהליך של מיצוי יכולות בתוך פקע"ר בהתאם להכוונת הסיוע לרשויות המקומיות, והשני, משל"ט ינאי, שריכז את משימת המפונים והמתפנים בבתי המלון וסיפק תמונת מצב לאומית.
+    </p>
+    <img class="image-content" ref="image1" :src="warImage1">
+    <p class="red-bold" ref="text1">מרס"ל
+    </p>
+    <p class="simple-text" ref="text2"> המרס"ל (מרכז סיוע לאזרח) מרכז במרחב משותף את מחוזות פקע"ר, ארגוני ההתנדבות ונציגים מהמגזר העסקי, המייצג כ-2,000,000 עובדים במשק. מנגנון הפעולה מאפשר למחוזות פיקוד העורף להעלות בקשות לסיוע ובמקרה ולא נמצא להן מענה אחר במרחבן, עולה הבקשה לרמה הפיקודית, לטיפול במשאבים לאומיים.
+</p>
+    <p class="simple-text" ref="text3">במהלך הפעלת המרס"ל מאוקטובר 2023 עד פברואר 2024, טיפלו במרס"ל בלמעלה מ-700 פניות שעלו מהמחוזות בתחומים שונים כמו אספקת מנות מזון, חיתולים, מטרנה, מתנדבים, שינוע תרופות ועוד משימות ייחודיות וערכיות, שלא ניתן להן כל מענה ממקורות אחרים.
+    </p>
+    <img class="image-content" ref="image2" :src="warImage2">
 
   </div>
   <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToInfo">
+
 </div>
-  <knowInfo v-if="state.showInfo" @go-menu="goToMenu"></knowInfo>
+  <Warnext v-if="state.showInfo" @go-menu="goToMenu"></Warnext>
   </div>
 </template>
 
 <script setup>
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import VideoPage from './VideoPage.vue';
-import knowInfo from './knowInfo.vue';
+import Warnext from './Warnext.vue';
 import orange from "../assets/imgs/orange.png";
 import ImgCollage from '../assets/imgs/11ImgCollage.jpg';
 import nextBtn from "../assets/imgs/nextBtn.png";
-
+import warImage1 from "../assets/imgs/warImage1.jpg";
+import warImage2 from "../assets/imgs/warImage2.jpg";
 
 const emit = defineEmits(['go-menu']);
 
@@ -55,16 +59,8 @@ const text2 = ref(null);
 const text3 = ref(null);
 const text4 = ref(null);
 const text5 = ref(null);
-const text6 = ref(null);
-const text7 = ref(null);
-const text8 = ref(null);
-const text9 = ref(null);
-const text10 = ref(null);
-const text11= ref(null);
-const text12= ref(null);
-const text13= ref(null);
 const image1 = ref(null);
-// const image2 = ref(null);
+const image2 = ref(null);
 // const nextT = ref(null);
 const nextB = ref(null);
 
@@ -90,15 +86,9 @@ observer.observe(text2.value);
 observer.observe(text3.value);
 observer.observe(text4.value);
 observer.observe(text5.value);
-observer.observe(text6.value);
-observer.observe(text7.value);
-observer.observe(text8.value);
-observer.observe(text9.value);
-observer.observe(text10.value);
-observer.observe(text11.value);
-observer.observe(text12.value);
-observer.observe(text13.value);
 observer.observe(image1.value);
+observer.observe(image2.value);
+
 });
 
 </script>
@@ -186,16 +176,17 @@ font-size: 1.2em;
 }
 
 .red-text {
-font-size: 1.4em;
+font-size: 1.2em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
 font-family: "Heebo-Black";
 color:#e06666;
 width: 95vw;
+font-weight: 200;
 }
 .red-bold {
-font-size: 1.3em;
+font-size: 1.4em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
@@ -217,13 +208,13 @@ animation: fadeIn 1s ease;
 
 @keyframes bounce2 {
   0% {
-      top: 180vh; /* Adjusted initial position */
+      top: 240vh; /* Adjusted initial position */
   }
   50%{
-    top: 185vh; /* Adjusted midpoint position */
+    top: 245vh; /* Adjusted midpoint position */
   }
   100%{
-    top: 180vh; /* Adjusted final position */
+    top: 240vh; /* Adjusted final position */
   }
 }
 
@@ -232,8 +223,8 @@ position:absolute;
 z-index: 5;
 right:50%;
 transform: translateX(50%);
-top:150vh; /* Adjusted position */
-animation: bounce2 2s ease infinite; 
+top:220vh; /* Adjusted position */
+/* animation: bounce2 2s ease infinite;  */
 }
 .animate {
 animation: fadeIn 1s ease;
@@ -254,5 +245,9 @@ to {
 width: 100%;
 height: auto;
 margin-bottom: 2vh;
+}
+#video{
+width:90vw;
+height: auto;
 }
 </style>

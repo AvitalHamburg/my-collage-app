@@ -1,9 +1,17 @@
 <template>
   <div id="page">
-   <h1 id="page-header"> נכסי המכללה</h1>
    <div id="scroll-text">
-    <p class="main-text" ref="text1">{{ emergencyText }}</p>
-    <span>
+    <p class="titles-gray" ref="text1">נכסים דיגיטליים של המכללה    </p>
+    <p class="grey-bold" ref="text2">המכללה עברה בשנתיים האחרונות טרנספורמציה דיגיטלית, עם הנגשה משמעותית של ידע בשעת חירום לצד שיפור תהליכים בשגרה, שהפכו קלים, קצרים ומהירים יותר.
+    </p>
+    <img class="image-content" :src="comp">
+    <p class="blue-text">ידע ומידע - הכל באתר המכללה</p>
+    <p class="simple-text">באתר המכללה ניתן להירשם ולקבל מידע על כל ההכשרות שלנו לבעלי תפקידים במשרדי הממשלה, הרשויות המקומיות ובמפקדות צבאיות.</p>
+    <a id="site-link" href="https://inri.orc.org.il/">קישור</a>
+    <p class="simple-text">בואו לעשות לנו לייק ולעקוב אחרינו ברשתות החברתיות, אתם גם ככה שם :)     </p>
+
+
+    <span class="brands">
     <a href="https://www.facebook.com/ilResilience" target="_blank"><img class="brand" :src="faceBook" >
     </a>
     <a href="https://x.com/ILresilience" target="_blank"><img class="brand" :src="twitter" >
@@ -13,8 +21,30 @@
     <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="linkedin" >
     </a>
   </span>
-    <a id="site-link" href="https://inri.orc.org.il/">לחצו כאן לאתר המכללה</a>
-    <img :src="nextBtn" id="next-btn">
+    <p class="green-text">מידע על הכשרות צבאיות, נתונים היסטוריים ותוכן מקצועי</p>
+    <p class="simple-text">עבור המידע הצבאי, מרחב המכללה מכיל XXX ויכול לעזור בכל מקרה שלZZZ. 
+ניתן להיכנס דרך XX באמצעות חיפוש בXX</p>
+<img class="image-content" :src="neve">
+<p class="orange-text">יש לנו אפילו רשות מקומית דיגיטלית!</p>
+    <p  class="simple-text">הכירו את נווה איתנים - הרשות הכי מוכנה במדינה :) 
+בתוך מערכות השליטה והבקרה הזמינות לבעלי תפקידים בשעת חירום, הקמנו רשות מקוונת שניתן להתאמן עליה במגוון תרחישים. 
+</p>
+  <img class="image-content" :src="carry">
+  <p class="grey-bold">אז לסיכום, לייק ועוברים הלאה :)
+קדימה, אנחנו מחכים..
+</p>
+  <span class="brands">
+    <a href="https://www.facebook.com/ilResilience" target="_blank"><img class="brand" :src="faceBook" >
+    </a>
+    <a href="https://x.com/ILresilience" target="_blank"><img class="brand" :src="twitter" >
+    </a>
+    <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="instagram" >
+    </a>
+    <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="linkedin" >
+    </a>
+  </span>
+
+    <img :src="nextBtn" id="next-btn" @click="backToMenu" >
 
   </div>
   </div>
@@ -27,9 +57,9 @@ import faceBook from "../assets/imgs/facebook.png";
 import twitter from "../assets/imgs/twitter.png";
 import instagram from "../assets/imgs/instagram.png";
 import linkedin from "../assets/imgs/linkedin.png";
-const emergencyText = `הכירו את אתר המכללה, באמצעותו נרשמים להכשרות האזרחיות שלנו ממשרדי הממשלה והרשויות המקומיות. אפשר ללמוד שם עוד על פעילויות המכללה ולחפש תוכן מקצועי בספרייה. 
-ובגלל שאתם גם ככה שם :) בואו לעשות לנו לייק ולעקוב אחרינו ברשתות החברתיות 
-`
+import comp from "../assets/imgs/collage-comp.png";
+import neve from "../assets/imgs/neve.png";
+import carry from "../assets/imgs/carry.gif";
 const emit = defineEmits(['go-menu']);
 
 const state = reactive({ 
@@ -39,21 +69,14 @@ showGame:false
 const openFacebook = () => {
 window.open("https://www.facebook.com/ilResilience", "_blank");
 };
-const GoGame = () => {
-state.showQuestion=true;
-};
-const goToPayment = () =>{
-state.showPayment= true;
-state.showQuestion=false;
 
-
-};
 
 const backToMenu = () =>{
     emit('go-menu');
 }
 
 const text1 = ref(null);
+const text2 = ref(null);
 
 const handleIntersect = (entries, observer) => {
 entries.forEach(entry => {
@@ -72,16 +95,26 @@ const options = {
 };
 const observer = new IntersectionObserver(handleIntersect, options);
 observer.observe(text1.value);
+observer.observe(text2.value);
 
 });
 </script>
 <style scoped>
+
 @font-face { 
-    font-family: "Heebo";
-    font-weight: normal;
-    src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
-         format("woff");
+  font-family: "Heebo";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
+       format("woff");
 }
+
+@font-face { 
+  font-family: "Heebo-Black";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-Black.woff"), 
+       format("woff");
+}
+
 
 #page {
 position: fixed;
@@ -90,7 +123,8 @@ left: 0;
 /* Adjust the height dynamically based on content */
 height: 100vh;
 width: 100vw;
-background-image: url("../assets/imgs/Bg2.png");
+/* background-image: url("../assets/imgs/Bg2.png"); */
+background-color: rgb(229, 232, 235);
 background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
@@ -108,12 +142,13 @@ height: 18vh;
 #scroll-text {
 /* Adjust positioning and dimensions */
 position: absolute;
-top: 20%;
+top: 15%;
 left: 50%;
 transform: translateX(-50%);
 width: 90vw;
 direction: rtl;
-text-align: right;
+
+height: 190vh;
 }
 
 #page-header {
@@ -122,18 +157,114 @@ color: rgb(31, 56, 100);
 font-family: "Heebo";
 text-align: center;
 margin-top: 10vh;
+direction: rtl;
+
 }
 
-#next-btn {
-position: absolute;
-top:150vh;
-left: 50%;
-transform: translateX(-50%) rotate(2.5deg);
+
+
+.titles-gray {
+font-size: 2.8em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "karantina";
+color: rgb(89,89,89);
+text-align: right;
 }
 
-.main-text {
+.simple-text {
+width: 100%;
+height: auto;
+margin-bottom: 2vh;
+font-family: "Heebo";
+font-size: 1.2em;
+text-align: right;
+
+
+}
+
+.blue-text {
+font-size: 1.4em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:rgb(28, 180, 227);
+width: 95vw;
+}
+.green-text {
+font-size: 1.4em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:rgb(59, 180, 140);
+width: 95vw;
+}
+.orange-text {
+font-size: 1.4em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:rgb(255,140,0);
+width: 95vw;
+}
+.grey-bold {
 font-size: 1.2em;
 margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color: rgb(89,89,89);
+}
+.grey-big {
+font-size: 2em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color: rgb(89,89,89);
+}
+.animate {
+animation: fadeIn 1s ease;
+}
+
+
+@keyframes bounce2 {
+  0% {
+      top: 350vh; /* Adjusted initial position */
+  }
+  50%{
+    top: 355vh; /* Adjusted midpoint position */
+  }
+  100%{
+    top: 350vh; /* Adjusted final position */
+  }
+}
+
+#next-btn{
+position:absolute;
+z-index: 5;
+right:50%;
+transform: translateX(50%);
+top:350vh; /* Adjusted position */
+animation: bounce2 2s ease infinite; 
+}
+.animate {
+animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
 }
 
 .image-content {
@@ -141,58 +272,16 @@ width: 100%;
 height: auto;
 margin-bottom: 2vh;
 }
-
-.image-description {
-font-size: 1.2em;
-margin-bottom: 2vh;
-}
-
-.animate {
-animation: fadeIn 1s ease;
-}
-
-
-
-#next-text{
-position: absolute;
-font-size: 1.2em;
-right: 50%;
-transform: translateX(50%);
-text-overflow: none;
-width: 80vw;
-top:140vh;
-font-weight: bold;
-}
-.animate {
-  animation: fadeIn 1s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 .brand{
-  width:10vw;
-  height: auto;
-}
-span a {
-  margin-right: 5vw; /* רווח מימין */
-}
-
-.brand {
-  width: 10vw;
-  height: auto;
+  height:auto;
+  width:15vw
 }
 #site-link{
-  position: absolute;
-  top:80vw;
-  right: 50%;
-  transform: translateX(50%);
+  font-size:1.3em; ;
+  font-family: "Heebo";
+  color:rgb(28, 180, 227);
+  text-decoration: underline; /* Add underline */
 }
+
+
 </style>

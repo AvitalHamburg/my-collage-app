@@ -80,11 +80,19 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
 @font-face { 
-    font-family: "Heebo";
-    font-weight: normal;
-    src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
-         format("woff");
+  font-family: "Heebo";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
+       format("woff");
+}
+
+@font-face { 
+  font-family: "Heebo-Black";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-Black.woff"), 
+       format("woff");
 }
 
 
@@ -95,7 +103,8 @@ left: 0;
 /* Adjust the height dynamically based on content */
 height: 100vh;
 width: 100vw;
-background-image: url("../assets/imgs/Bg2.png");
+/* background-image: url("../assets/imgs/Bg2.png"); */
+background-color: rgb(229, 232, 235);
 background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
@@ -113,12 +122,13 @@ height: 18vh;
 #scroll-text {
 /* Adjust positioning and dimensions */
 position: absolute;
-top: 20%;
+top: 15%;
 left: 50%;
 transform: translateX(-50%);
 width: 90vw;
 direction: rtl;
 text-align: right;
+height: 190vh;
 }
 
 #page-header {
@@ -127,31 +137,79 @@ color: rgb(31, 56, 100);
 font-family: "Heebo";
 text-align: center;
 margin-top: 10vh;
+direction: rtl;
 }
 
-#next-btn {
-position: absolute;
-top:150vh;
-left: 50%;
-transform: translateX(-50%) rotate(2.5deg);
-}
 
-.main-text {
-font-size: 1.2em;
+
+.titles-gray {
+font-size: 2.5em;
 margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "karantina";
+color: rgb(89,89,89);
 }
 
-.image-content {
+.simple-text {
 width: 100%;
 height: auto;
 margin-bottom: 2vh;
-}
-
-.image-description {
+font-family: "Heebo";
 font-size: 1.2em;
-margin-bottom: 2vh;
+
 }
 
+.blue-text {
+font-size: 1.4em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:rgb(28, 180, 227);
+width: 95vw;
+}
+.grey-bold {
+font-size: 1.3em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color: rgb(89,89,89);
+}
+.grey-big {
+font-size: 2em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color: rgb(89,89,89);
+}
+.animate {
+animation: fadeIn 1s ease;
+}
+
+
+@keyframes bounce2 {
+  0% {
+      top: 180vh; /* Adjusted initial position */
+  }
+  50%{
+    top: 185vh; /* Adjusted midpoint position */
+  }
+  100%{
+    top: 180vh; /* Adjusted final position */
+  }
+}
+
+#next-wBtn{
+position:absolute;
+z-index: 5;
+right:50%;
+transform: translateX(50%);
+top:150vh; /* Adjusted position */
+animation: bounce2 2s ease infinite; 
+}
 .animate {
 animation: fadeIn 1s ease;
 }
@@ -166,14 +224,10 @@ to {
   transform: translateY(0);
 }
 }
-#next-text{
-position: absolute;
-font-size: 1.2em;
-right: 50%;
-transform: translateX(50%);
-text-overflow: none;
-width: 80vw;
-top:140vh;
-font-weight: bold;
+
+.image-content {
+width: 100%;
+height: auto;
+margin-bottom: 2vh;
 }
 </style>
