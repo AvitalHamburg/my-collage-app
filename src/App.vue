@@ -21,7 +21,7 @@
     <KnowCollage v-if="state.textNum === 1" @go-menu="backToMenu"></KnowCollage>
     <ActiveCollage v-if="state.textNum === 2" @go-menu="backToMenu"></ActiveCollage>
     <SocityCollage v-if="state.textNum === 3" @go-menu="backToMenu"></SocityCollage>
-    <LibraryCollage v-if="state.textNum === 4"></LibraryCollage>
+    <LibraryCollage v-if="state.textNum === 4" @go-menu="backToMenu"></LibraryCollage>
     <OutsideCollage v-if="state.textNum === 5" @menu-back="backToMenu"></OutsideCollage>
     <LocationCollage v-if="state.textNum === 6"></LocationCollage>
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
@@ -37,13 +37,13 @@
 <script setup>
 import { reactive } from 'vue';
 import Menu from './components/Menu.vue';
-import Payment from './components/Warnext.vue';
+import Payment from './components/SocityNext.vue';
 import Hamburger from './components/Hamburger.vue';
 import HelloWorld from './components/HelloWorld.vue';
 import KnowCollage from './components/KnowCollage.vue';
 import ActiveCollage from './components/ActiveCollage.vue';
 import OutsideCollage from './components/OutsideCollage.vue';
-import TrainingCollage from './components/Warnext.vue';
+import TrainingCollage from './components/SocityNext.vue';
 import LocationCollage from './components/LocationCollage.vue';
 import LibraryCollage from './components/LibraryCollage.vue';
 import SocityCollage from './components/SocityCollage.vue';
@@ -74,8 +74,7 @@ const movePage = (number) => {
 }
 
 const backToMenu = () => {
-  state.showMenu = true;
-  state.textNum = 0;
+  state.textNum++;
 }
 const showHamburger = () =>{
       state.openHamburger = !state.openHamburger;
@@ -117,7 +116,7 @@ header {
   right: 50%;
   transform: translateX(50%);
   z-index: 9999;
-  background-color: rgb(229, 232, 235);
+  background-color: aliceblue;
 
   /* background-image: url("./assets/imgs/header.png"); */
   background-size: cover;

@@ -1,6 +1,6 @@
 <template>
   <div id="page">
-   <div id="scroll-text">
+   <div v-if="!state.showGif" id="scroll-text">
     <p class="titles-gray" ref="text1">נכסים דיגיטליים של המכללה    </p>
     <p class="grey-bold" ref="text2">המכללה עברה בשנתיים האחרונות טרנספורמציה דיגיטלית, עם הנגשה משמעותית של ידע בשעת חירום לצד שיפור תהליכים בשגרה, שהפכו קלים, קצרים ומהירים יותר.
     </p>
@@ -29,24 +29,10 @@
     <p  class="simple-text">הכירו את נווה איתנים - הרשות הכי מוכנה במדינה :) 
 בתוך מערכות השליטה והבקרה הזמינות לבעלי תפקידים בשעת חירום, הקמנו רשות מקוונת שניתן להתאמן עליה במגוון תרחישים. 
 </p>
-  <img class="image-content" :src="carry">
-  <p class="grey-bold">אז לסיכום, לייק ועוברים הלאה :)
-קדימה, אנחנו מחכים..
-</p>
-  <span class="brands">
-    <a href="https://www.facebook.com/ilResilience" target="_blank"><img class="brand" :src="faceBook" >
-    </a>
-    <a href="https://x.com/ILresilience" target="_blank"><img class="brand" :src="twitter" >
-    </a>
-    <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="instagram" >
-    </a>
-    <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="linkedin" >
-    </a>
-  </span>
-
-    <img :src="nextBtn" id="next-btn" @click="backToMenu" >
-
+    <img :src="nextBtn" id="next-btn" @click="goToGif" >
   </div>
+  <SocityNext v-if="state.showGif" @go-menu="backToMenu"></SocityNext>
+
   </div>
   </template>
 
@@ -59,17 +45,23 @@ import instagram from "../assets/imgs/instagram.png";
 import linkedin from "../assets/imgs/linkedin.png";
 import comp from "../assets/imgs/collage-comp.png";
 import neve from "../assets/imgs/neve.png";
-import carry from "../assets/imgs/carry.gif";
+import SocityNext from './SocityNext.vue';
+
 const emit = defineEmits(['go-menu']);
 
 const state = reactive({ 
-showGame:false
+showGif:false
 });
 
 const openFacebook = () => {
 window.open("https://www.facebook.com/ilResilience", "_blank");
 };
 
+
+const goToGif = () =>{
+  state.showGif=true;
+  
+}
 
 const backToMenu = () =>{
     emit('go-menu');
@@ -124,7 +116,7 @@ left: 0;
 height: 100vh;
 width: 100vw;
 /* background-image: url("../assets/imgs/Bg2.png"); */
-background-color: rgb(229, 232, 235);
+background-color: aliceblue;
 background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
@@ -232,26 +224,9 @@ animation: fadeIn 1s ease;
 }
 
 
-@keyframes bounce2 {
-  0% {
-      top: 350vh; /* Adjusted initial position */
-  }
-  50%{
-    top: 355vh; /* Adjusted midpoint position */
-  }
-  100%{
-    top: 350vh; /* Adjusted final position */
-  }
-}
 
-#next-btn{
-position:absolute;
-z-index: 5;
-right:50%;
-transform: translateX(50%);
-top:350vh; /* Adjusted position */
-animation: bounce2 2s ease infinite; 
-}
+
+
 .animate {
 animation: fadeIn 1s ease;
 }

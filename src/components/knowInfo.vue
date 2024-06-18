@@ -93,7 +93,7 @@ left: 0;
 height: 250vh;
 width: 100vw;
 /* background-image: url("../assets/imgs/Bg2.png"); */
-background-color: rgb(229, 232, 235);
+background-color: aliceblue;
 background-size: cover;
 background-repeat: no-repeat;
 padding: 0;

@@ -5,7 +5,7 @@
     </p>
     <p class="blue-text">מאגר ידע לאומי לחירום
 לחיזוק האיתנות של מדינת ישראל</p>
-    <p class="simple-text">אתר המכללה מרכז בתוכו גם את הספרייה הלאומית לחירום - מאגר ידע להיערכות, התערבות ושיקום.
+    <p class="simple-text" ref="text2">אתר המכללה מרכז בתוכו גם את הספרייה הלאומית לחירום - מאגר ידע להיערכות, התערבות ושיקום.
     </p>
     <img class="image-content" :src="libraryImage">
     <p class="simple-text">הספרייה היא מאגר ידע דיגיטלי מעודכן וכולל כ-1,500 פרטי מידע, חוקים ותקנות, נהלים ותדריכים, תוכניות מענה, מאמרים ומחקרים, סרטים, קישורים ופודקאסטים.
@@ -14,8 +14,16 @@
     </p>
     <p class="simple-text">הנגשת הידע ללא מגבלות מתגשם בזכות שיתוף פעולה פורה עם למעלה מ-75 ארגונים מהמגזר הציבורי כמו משרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות, ארגוני חירום והצלה, אקדמיה ומכוני מחקר ופעילות המגזר השלישי. 
     </p>
-
-
+    <img class="image-content" :src="libraryComp">
+    <p class="simple-text">בהתאם לצורך, ניתן לחפש קבצים בספרייה, לצפות, להוריד או לשתף
+    צפו בסרטון הממש מגניב שלנו שמסביר בקצרה על הספרייה
+    </p>
+    <video id="video" src="../assets/media/library.mp4" controls ></video>
+    <p class="blue-text">כדאי לשמור את הקישור
+    </p>
+    <p class="simple-text">תמצאו בספרייה הרבה חומרים מקצועיים שבטוח תצטרכו בשגרה ובחירום. 
+    </p>
+    <button class="button"> <a id="link" href="https://inri.orc.org.il/%D7%94%D7%A1%D7%A4%D7%A8%D7%99%D7%99%D7%94-%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA-%D7%9C%D7%97%D7%99%D7%A8%D7%95%D7%9D/"> מעבר לספרייה</a></button> 
 
 
     <img :src="nextBtn" id="next-btn" @click="backToMenu" >
@@ -28,15 +36,8 @@
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
 import libraryImage from "../assets/imgs/7ImgCollage.jpg";
+import libraryComp from "../assets/imgs/libraryComp.png";
 const emit = defineEmits(['go-menu']);
-
-const state = reactive({ 
-showGame:false
-});
-
-const openFacebook = () => {
-window.open("https://www.facebook.com/ilResilience", "_blank");
-};
 
 
 const backToMenu = () =>{
@@ -92,7 +93,7 @@ left: 0;
 height: 100vh;
 width: 100vw;
 /* background-image: url("../assets/imgs/Bg2.png"); */
-background-color: rgb(229, 232, 235);
+background-color: aliceblue;
 background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
@@ -115,7 +116,6 @@ left: 50%;
 transform: translateX(-50%);
 width: 90vw;
 direction: rtl;
-
 height: 190vh;
 }
 
@@ -183,26 +183,9 @@ animation: fadeIn 1s ease;
 }
 
 
-@keyframes bounce2 {
-  0% {
-      top: 350vh; /* Adjusted initial position */
-  }
-  50%{
-    top: 355vh; /* Adjusted midpoint position */
-  }
-  100%{
-    top: 350vh; /* Adjusted final position */
-  }
-}
 
-#next-btn{
-position:absolute;
-z-index: 5;
-right:50%;
-transform: translateX(50%);
-top:350vh; /* Adjusted position */
-animation: bounce2 2s ease infinite; 
-}
+
+
 .animate {
 animation: fadeIn 1s ease;
 }
@@ -233,6 +216,21 @@ margin-bottom: 2vh;
   color:rgb(28, 180, 227);
   text-decoration: underline; /* Add underline */
 }
+#video{
+width:90vw;
+height: auto;
+}
 
+.button{
+  background-color: rgb(28, 180, 227);
+  border-radius: 50px;
+  width:60vw;
+  height:7vh;
+  font-size: 1.5em;
+  font-family: "Heebo-black";
+}
+#link{
+  color:white
+}
 
 </style>

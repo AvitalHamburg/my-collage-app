@@ -1,6 +1,6 @@
 <template>
   <div id="page">
-    <div v-if="!state.showInfo">
+    <div>
    <div id="scroll-text">
     <p class="titles-red" ref="text1">המכללה בחרבות ברזל </p>
     <p class="red-bold" ref="text2">7 באוקטובר</p>
@@ -20,35 +20,36 @@
     <p class="simple-text" ref="text3">במהלך הפעלת המרס"ל מאוקטובר 2023 עד פברואר 2024, טיפלו במרס"ל בלמעלה מ-700 פניות שעלו מהמחוזות בתחומים שונים כמו אספקת מנות מזון, חיתולים, מטרנה, מתנדבים, שינוע תרופות ועוד משימות ייחודיות וערכיות, שלא ניתן להן כל מענה ממקורות אחרים.
     </p>
     <img class="image-content" ref="image2" :src="warImage2">
+    <p class="red-bold" ref="text1">משלט ינאי
+    </p>
+    <p class="simple-text" ref="text2">אפשר לומר שחוץ מראש הממשלה כולם הגיעו לבקר - מהנשיא ורעייתו, הרמטכ"ל, שרים, מנכ"לי משרדי ממשלה, אלופי המטכ"ל ועוד. 
+המשל"ט ניהל, ריכז ותכלל את תמונת המצב של המפונים בבתי המלון עם למעלה מרבע מיליון ישראלים שיצאו מביתם, 97 יישובים מתפנים ו-456 מלונות בשיא. 
+</p>
+<img class="image-content" ref="image1" :src="ImgCollage4">
+<p class="red-bold" ref="text3"> המכללה בחירום
+</p>
+    <p class="simple-text" ref="text4"> לצד שתי המשימות הלאומיות, המכללה המשיכה להכשיר בחירום קורסים לבעלי תפקידים שהיו נחוצים בשטח, הנגשנו תוכן מקצועי ומתוקף לבעלי התפקידים ברשויות, ביצענו 'זמן יקר' במפקדות, הפצנו תוכן דיגיטלי לצוותי הצח"י ומנהלי המכלולים, ערכנו אבחון לקריית שמונה לסיוע בהתמודדות הרשות עם אתגרי הפינוי ופיצול הרשות ועוד פעולות רבות כחלק מהמאמץ המלחמתי בעורף.
+    </p>
 
   </div>
-  <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToInfo">
+  <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToMenu">
 
 </div>
-  <Warnext v-if="state.showInfo" @go-menu="goToMenu"></Warnext>
   </div>
 </template>
 
 <script setup>
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
-import VideoPage from './VideoPage.vue';
-import Warnext from './Warnext.vue';
-import orange from "../assets/imgs/orange.png";
-import ImgCollage from '../assets/imgs/11ImgCollage.jpg';
 import nextBtn from "../assets/imgs/nextBtn.png";
 import warImage1 from "../assets/imgs/warImage1.jpg";
 import warImage2 from "../assets/imgs/warImage2.jpg";
+import ImgCollage4 from "../assets/imgs/4ImgCollage.jpg";
 
 const emit = defineEmits(['go-menu']);
 
-const state = reactive({ 
-showInfo: false
-});
 
-const goToInfo = () => {
-console.log(state.showInfo);
-state.showInfo = true;
-};
+
+
 
 const goToMenu = () =>{
 emit('go-menu');
@@ -119,7 +120,7 @@ left: 0;
 height: 100vh;
 width: 100vw;
 /* background-image: url("../assets/imgs/Bg2.png"); */
-background-color: rgb(229, 232, 235);
+background-color: aliceblue;
 background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
@@ -206,26 +207,25 @@ animation: fadeIn 1s ease;
 }
 
 
-@keyframes bounce2 {
-  0% {
-      top: 240vh; /* Adjusted initial position */
+@keyframes bounceUpDown {
+  0%, 100% {
+    top: 320vh; /* Start and end position */
   }
-  50%{
-    top: 245vh; /* Adjusted midpoint position */
-  }
-  100%{
-    top: 240vh; /* Adjusted final position */
+  50% {
+    top: 325vh; /* Peak position */
   }
 }
 
-#next-wBtn{
-position:absolute;
-z-index: 5;
-right:50%;
-transform: translateX(50%);
-top:220vh; /* Adjusted position */
-/* animation: bounce2 2s ease infinite;  */
+
+#next-wBtn {
+  position: absolute;
+  z-index: 5;
+  right: 50%;
+  transform: translateX(50%);
+  top: 320vh; /* Initial position */
+  animation: bounceUpDown 3s ease-in-out infinite; /* Adjust duration and timing */
 }
+
 .animate {
 animation: fadeIn 1s ease;
 }
