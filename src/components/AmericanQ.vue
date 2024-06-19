@@ -149,7 +149,6 @@ const showScore = () => {
   state.showResults = true;
 };
 
-
 const captureAndShare = () => {
   const targetElement = document.getElementById('page'); // Replace with the ID of the element you want to capture
   if (!targetElement) {
@@ -161,53 +160,35 @@ const captureAndShare = () => {
   const captureTime = new Date().toLocaleTimeString('he-IL'); // Get current time in Israeli format
 
   html2canvas(targetElement).then(canvas => {
-    canvas.toBlob(blob => {
-      const file = new File([blob], "screenshot.png", { type: "image/png" });
+    // Convert canvas to base64 data URL
+    const dataUrl = canvas.toDataURL('image/png');
 
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        const dataUrl = reader.result;
-
-        // Prepare the content to share
-        const message = `נקודות שהרוויחת: ${points.value}
+    // Prepare the content to share
+    const message = `נקודות שהרוויחת: ${points.value}
 תאריך: ${currentDate}
 שעה: ${captureTime}`;
 
-        // Create an HTML template with the screenshot embedded
-        const htmlContent = `
-          <div>
-            <p>${message}</p>
-            <img src="${dataUrl}" alt="Screenshot" style="max-width: 100%; height: auto;">
-          </div>
-        `;
-
-        // Convert the HTML content to a blob
-        const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
-
-        // Share the blob using navigator.share or another method
-        const shareData = {
-          title: 'שיתוף צילום מסך ופרטים',
-          text: 'צילום מסך ופרטים',
-          files: [new File([htmlBlob], 'screenshot_details.html', { type: 'text/html' })]
-        };
-
-        // Share using navigator.share API if supported
-        if (navigator.share) {
-          navigator.share(shareData)
-            .then(() => console.log('הודעה שותפה בהצלחה'))
-            .catch((error) => console.error('שגיאה בשיתוף:', error));
-        } else {
-          // Fallback for browsers that do not support navigator.share
-          // You can implement another sharing mechanism here
-          console.error('navigator.share is not supported');
-        }
-      };
-    }, 'image/png');
+    // Share using navigator.share API if supported
+    if (navigator.share) {
+      navigator.share({
+        title: 'שיתוף צילום מסך ופרטים',
+        text: message,
+        files: [new File([dataUrl], 'screenshot.png', { type: 'image/png' })]
+      }).then(() => {
+        console.log('הודעה שותפה בהצלחה');
+      }).catch((error) => {
+        console.error('שגיאה בשיתוף:', error);
+      });
+    } else {
+      // Fallback for browsers that do not support navigator.share
+      console.error('navigator.share is not supported');
+      // Implement another sharing mechanism here (e.g., download link)
+    }
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
   });
 };
+
 
 const retryQuiz = () => {
   currentIndex.value = 0;
