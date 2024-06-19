@@ -164,31 +164,45 @@ const captureAndShare = () => {
     canvas.toBlob(blob => {
       const file = new File([blob], "screenshot.png", { type: "image/png" });
 
-      // Create a data URL to use in an <img> tag or for sharing
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         const dataUrl = reader.result;
 
-        // Open a new window with the image for sharing
-        const shareWindow = window.open('', '_blank');
-        if (shareWindow) {
-          shareWindow.document.write('<img src="' + dataUrl + '" width="100%" /><br/>');
-          shareWindow.document.write('<p>שם: ' + firstName.value + ' ' + lastName.value + '</p>');
-          shareWindow.document.write('<p>ציון: ' + points.value + '</p>');
-          shareWindow.document.write('<p>תאריך: ' + currentDate + '</p>');
-          shareWindow.document.write('<p>שעה: ' + captureTime + '</p>');
-        } else {
-          console.error('Failed to open share window');
-        }
+        // Prepare the content to share
+        const message = `צילום מסך וחותמת זמן:
+שם: ${firstName.value} ${lastName.value}
+ציון: ${points.value}
+תאריך: ${currentDate}
+שעה: ${captureTime}
+מסמך: ${dataUrl}`; // Include the data URL of the screenshot
 
-        // Inform the user that the screenshot is copied to clipboard
-        alert('צילום מסך הועתק ללוח');
+        // In a real application, you would now implement sharing functionality,
+        // such as displaying in a UI or integrating with a sharing API.
+
+        // Example: Display the message in a UI component
+        displayShareMessage(message);
       };
     }, 'image/png');
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
   });
+};
+
+// Example function to display the share message (replace with your actual implementation)
+const displayShareMessage = (message) => {
+  // Example: Create a modal or UI component to display the message
+  const shareModal = document.getElementById('shareModal');
+  if (shareModal) {
+    // Assuming you have a modal with ID 'shareModal'
+    const sharedContent = document.getElementById('sharedContent');
+    if (sharedContent) {
+      sharedContent.innerText = message; // Update content in the modal
+    }
+    $(shareModal).modal('show'); // Show the modal using jQuery or similar
+  } else {
+    console.log(message); // Fallback to logging message to console if no modal
+  }
 };
 
 
