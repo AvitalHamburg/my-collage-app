@@ -173,7 +173,7 @@ const captureAndShare = () => {
       navigator.share({
         title: 'שיתוף צילום מסך ופרטים',
         text: message,
-        files: [new File([dataUrl], 'screenshot.png', { type: 'image/png' })]
+        url: dataUrl // Include the base64 data URL as the URL
       }).then(() => {
         console.log('הודעה שותפה בהצלחה');
       }).catch((error) => {
@@ -182,7 +182,7 @@ const captureAndShare = () => {
     } else {
       // Fallback for browsers that do not support navigator.share
       console.error('navigator.share is not supported');
-      // Implement another sharing mechanism here (e.g., download link)
+      // Implement another sharing mechanism here (e.g., providing a link to download the image)
     }
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
