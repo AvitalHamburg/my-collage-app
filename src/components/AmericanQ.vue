@@ -64,9 +64,9 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { defineProps, ref, reactive, onMounted, watch } from 'vue';
+import html2canvas from 'html2canvas';
 
 const props = defineProps({
   pageHeader: String,
@@ -149,14 +149,30 @@ const showScore = () => {
   state.showResults = true;
 };
 
-
 const captureAndShare = () => {
-  const message = `נקודות שהרוויחת: ${points.value}`;
-  navigator.share({
-    text: message,
-  })
-    .then(() => console.log('הודעה שותפה בהצלחה'))
-    .catch((error) => console.error('שגיאה בשיתוף:', error));
+  const targetElement = document.getElementById('page'); // Replace with the ID of the element you want to capture
+  if (!targetElement) {
+    console.error('Element not found');
+    return;
+  }
+
+  html2canvas(targetElement).then(canvas => {
+    canvas.toBlob(blob => {
+      const file = new File([blob], "screenshot.png", { type: "image/png" });
+      const items = [
+        new ClipboardItem({ "image/png": file })
+      ];
+
+      navigator.clipboard.write(items).then(() => {
+        console.log('Screenshot copied to clipboard');
+        alert('צילום מסך הועתק ללוח');
+      }).catch(err => {
+        console.error('Failed to copy screenshot: ', err);
+      });
+    }, 'image/png');
+  }).catch(error => {
+    console.error('Failed to capture screenshot: ', error);
+  });
 };
 
 const retryQuiz = () => {
@@ -178,6 +194,8 @@ watch(currentIndex, () => {
 });
 
 </script>
+
+
 
 <style scoped>
 @font-face {
