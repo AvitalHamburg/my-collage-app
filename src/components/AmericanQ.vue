@@ -157,45 +157,33 @@ const captureAndShare = () => {
     return;
   }
 
-  const currentDate = new Date().toLocaleDateString('en-US'); // Get current date
-  const captureTime = new Date().toLocaleTimeString('en-US'); // Get current time
-
   html2canvas(targetElement).then(canvas => {
+    const currentDate = new Date().toLocaleDateString('he-IL'); // Get current date in Israeli format
+    const captureTime = new Date().toLocaleTimeString('he-IL'); // Get current time in Israeli format
+
+    // Convert canvas to Blob
     canvas.toBlob(blob => {
       const file = new File([blob], "screenshot.png", { type: "image/png" });
 
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        const dataUrl = reader.result;
+      // Create URL for the screenshot image
+      const screenshotUrl = URL.createObjectURL(file);
 
-        // Prepare the content to share
-        const message = `Points earned: ${points.value}
-Date: ${currentDate}
-Time: ${captureTime}`;
+      // Prepare the content to share
+      const message = `נקודות שהרוויחת: ${points.value}
+תאריך: ${currentDate}
+שעה: ${captureTime}\n\nצילום מסך:\n${screenshotUrl}`;
 
-        // Combine message with screenshot data URL
-        const combinedMessage = `${message}\n\nScreenshot:\n${dataUrl}`;
-
-        // Share using navigator.share API if available
-        if (navigator.share) {
-          navigator.share({
-            text: combinedMessage,
-          })
-          .then(() => console.log('Message shared successfully'))
-          .catch((error) => console.error('Error sharing message:', error));
-        } else {
-          console.warn('navigator.share API not supported');
-          // Fallback: Display message for user to manually share
-          alert('To share, copy the below message and screenshot and share it with others:\n\n' + combinedMessage);
-        }
-      };
-    }, 'image/png');
+      // Share using navigator.share API
+      navigator.share({
+        text: message,
+      })
+      .then(() => console.log('הודעה שותפה בהצלחה'))
+      .catch((error) => console.error('שגיאה בשיתוף:', error));
+    });
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
   });
 };
-
 const retryQuiz = () => {
   currentIndex.value = 0;
   points.value = 0;
