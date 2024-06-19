@@ -170,39 +170,24 @@ const captureAndShare = () => {
         const dataUrl = reader.result;
 
         // Prepare the content to share
-        const message = `צילום מסך וחותמת זמן:
-שם: ${firstName.value} ${lastName.value}
-ציון: ${points.value}
+        const message = `נקודות שהרוויחת: ${points.value}
 תאריך: ${currentDate}
-שעה: ${captureTime}
-מסמך: ${dataUrl}`; // Include the data URL of the screenshot
+שעה: ${captureTime}`;
 
-        // In a real application, you would now implement sharing functionality,
-        // such as displaying in a UI or integrating with a sharing API.
+        // Combine message with screenshot data URL
+        const combinedMessage = `${message}\n\nצילום מסך:\n${dataUrl}`;
 
-        // Example: Display the message in a UI component
-        displayShareMessage(message);
+        // Share using navigator.share API
+        navigator.share({
+          text: combinedMessage,
+        })
+        .then(() => console.log('הודעה שותפה בהצלחה'))
+        .catch((error) => console.error('שגיאה בשיתוף:', error));
       };
     }, 'image/png');
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
   });
-};
-
-// Example function to display the share message (replace with your actual implementation)
-const displayShareMessage = (message) => {
-  // Example: Create a modal or UI component to display the message
-  const shareModal = document.getElementById('shareModal');
-  if (shareModal) {
-    // Assuming you have a modal with ID 'shareModal'
-    const sharedContent = document.getElementById('sharedContent');
-    if (sharedContent) {
-      sharedContent.innerText = message; // Update content in the modal
-    }
-    $(shareModal).modal('show'); // Show the modal using jQuery or similar
-  } else {
-    console.log(message); // Fallback to logging message to console if no modal
-  }
 };
 
 
