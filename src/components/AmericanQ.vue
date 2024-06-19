@@ -165,20 +165,36 @@ const captureAndShare = () => {
     canvas.toBlob(blob => {
       const file = new File([blob], "screenshot.png", { type: "image/png" });
 
-      // Create URL for the screenshot image
-      const screenshotUrl = URL.createObjectURL(file);
+      // Upload the image to Imgur
+      const formData = new FormData();
+      formData.append('image', file);
 
-      // Prepare the content to share
-      const message = `נקודות שהרוויחת: ${points.value}
-תאריך: ${currentDate}
-שעה: ${captureTime}\n\nצילום מסך:\n${screenshotUrl}`;
-
-      // Share using navigator.share API
-      navigator.share({
-        text: message,
+      fetch('https://api.imgur.com/3/image', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Client-ID your-imgur-client-id',
+        },
+        body: formData,
       })
-      .then(() => console.log('הודעה שותפה בהצלחה'))
-      .catch((error) => console.error('שגיאה בשיתוף:', error));
+     .then(response => response.json())
+     .then(data => {
+        const imageUrl = data.data.link;
+
+        // Prepare the content to share
+        const message = `נקודות שהרוויחת: ${points.value}
+תאריך: ${currentDate}
+שעה: ${captureTime}\n\nצילום מסך:\n${imageUrl}`;
+
+        // Share using navigator.share API
+        navigator.share({
+          text: message,
+        })
+       .then(() => console.log('הודעה שותפה בהצלחה'))
+       .catch((error) => console.error('שגיאה בשיתוף:', error));
+      })
+     .catch(error => {
+        console.error('Failed to upload image:', error);
+      });
     });
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
