@@ -174,22 +174,40 @@ const captureAndShare = () => {
 תאריך: ${currentDate}
 שעה: ${captureTime}`;
 
-        // Combine message with screenshot data URL
-        const combinedMessage = `${message}\n\nצילום מסך:\n${dataUrl}`;
+        // Create an HTML template with the screenshot embedded
+        const htmlContent = `
+          <div>
+            <p>${message}</p>
+            <img src="${dataUrl}" alt="Screenshot" style="max-width: 100%; height: auto;">
+          </div>
+        `;
 
-        // Share using navigator.share API
-        navigator.share({
-          text: combinedMessage,
-        })
-        .then(() => console.log('הודעה שותפה בהצלחה'))
-        .catch((error) => console.error('שגיאה בשיתוף:', error));
+        // Convert the HTML content to a blob
+        const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
+
+        // Share the blob using navigator.share or another method
+        const shareData = {
+          title: 'שיתוף צילום מסך ופרטים',
+          text: 'צילום מסך ופרטים',
+          files: [new File([htmlBlob], 'screenshot_details.html', { type: 'text/html' })]
+        };
+
+        // Share using navigator.share API if supported
+        if (navigator.share) {
+          navigator.share(shareData)
+            .then(() => console.log('הודעה שותפה בהצלחה'))
+            .catch((error) => console.error('שגיאה בשיתוף:', error));
+        } else {
+          // Fallback for browsers that do not support navigator.share
+          // You can implement another sharing mechanism here
+          console.error('navigator.share is not supported');
+        }
       };
     }, 'image/png');
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
   });
 };
-
 
 const retryQuiz = () => {
   currentIndex.value = 0;
