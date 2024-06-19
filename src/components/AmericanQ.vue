@@ -65,10 +65,19 @@
     </div>
   </div>
 </template>
-
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue';
+import { defineProps, ref, reactive, onMounted, watch } from 'vue';
 import html2canvas from 'html2canvas';
+
+const props = defineProps({
+  pageHeader: String,
+  questions: Array,
+  answers1: Array,
+  answers2: Array,
+  answers3: Array,
+  answers4: Array,
+  correctAnswers: Array,
+});
 
 const state = reactive({
   showResults: false,
@@ -77,30 +86,67 @@ const state = reactive({
 
 const currentIndex = ref(0);
 const points = ref(0);
-const currentQuestion = ref("Sample Question"); // Replace with your actual question data
-const currentAnswers = ref(["Answer 1", "Answer 2", "Answer 3", "Answer 4"]); // Replace with your actual answer data
+const maxPoints = props.questions.length * 10;
+const currentQuestion = ref(props.questions[currentIndex.value]);
+const currentAnswers = ref([
+  props.answers1[currentIndex.value],
+  props.answers2[currentIndex.value],
+  props.answers3[currentIndex.value],
+  props.answers4[currentIndex.value]
+]);
+
 const selectedAnswerIndex = ref(null);
+const feedbackMessage = ref("");
 const firstName = ref("");
 const lastName = ref("");
 const congratsMessage = ref("");
 
 const handleButtonClick = (answer, index) => {
   selectedAnswerIndex.value = index;
-  // Simulating correct answer for demonstration
-  const correctAnswer = "Answer 1"; // Replace with your actual correct answer logic
+  const correctAnswer = props.correctAnswers[currentIndex.value];
 
   if (answer === correctAnswer) {
     points.value += 10;
   }
 };
 
+const updateQuestionData = () => {
+  currentQuestion.value = props.questions[currentIndex.value];
+  currentAnswers.value = [
+    props.answers1[currentIndex.value],
+    props.answers2[currentIndex.value],
+    props.answers3[currentIndex.value],
+    props.answers4[currentIndex.value]
+  ];
+  selectedAnswerIndex.value = null;
+};
+
 const nextQuestion = () => {
-  // Simulating next question functionality
-  currentIndex.value++;
+  if (currentIndex.value < props.questions.length - 1) {
+    currentIndex.value++;
+    updateQuestionData();
+  } else if (currentIndex.value === props.questions.length - 1) {
+    state.showFinalScreen = true;
+  }
+};
+
+const prevQuestion = () => {
+  if (currentIndex.value > 0) {
+    currentIndex.value--;
+    updateQuestionData();
+  }
+};
+
+const pointsVisible = ref(false);
+const progressBarWidth = ref('0%');
+
+const updateProgressBar = () => {
+  const progress = ((currentIndex.value + 1) / props.questions.length) * 100;
+  progressBarWidth.value = `${progress}%`;
 };
 
 const showScore = () => {
-  congratsMessage.value = points.value >= 70 ? `Congratulations, ${firstName.value}! You passed the quiz!` : `Not bad, ${firstName.value}. You can try again!`;
+  congratsMessage.value = points.value >= 70 ? `כל הכבוד! ${firstName.value} עברת את השאלון!` : `לא נורא ${firstName.value}, אפשר לנסות שוב`;
   state.showResults = true;
 };
 
@@ -150,7 +196,27 @@ Time: ${captureTime}`;
   });
 };
 
+const retryQuiz = () => {
+  currentIndex.value = 0;
+  points.value = 0;
+  firstName.value = "";
+  lastName.value = "";
+  congratsMessage.value = "";
+  state.showResults = false;
+  state.showFinalScreen = false;
+};
+
+onMounted(() => {
+  updateProgressBar();
+});
+
+watch(currentIndex, () => {
+  updateProgressBar();
+});
+
 </script>
+
+
 
 <style scoped>
 @font-face {
