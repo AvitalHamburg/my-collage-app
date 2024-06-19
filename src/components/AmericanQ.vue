@@ -65,19 +65,10 @@
     </div>
   </div>
 </template>
-<script setup>
-import { defineProps, ref, reactive, onMounted, watch } from 'vue';
-import html2canvas from 'html2canvas';
 
-const props = defineProps({
-  pageHeader: String,
-  questions: Array,
-  answers1: Array,
-  answers2: Array,
-  answers3: Array,
-  answers4: Array,
-  correctAnswers: Array,
-});
+<script setup>
+import { ref, reactive, onMounted, watch } from 'vue';
+import html2canvas from 'html2canvas';
 
 const state = reactive({
   showResults: false,
@@ -86,67 +77,30 @@ const state = reactive({
 
 const currentIndex = ref(0);
 const points = ref(0);
-const maxPoints = props.questions.length * 10;
-const currentQuestion = ref(props.questions[currentIndex.value]);
-const currentAnswers = ref([
-  props.answers1[currentIndex.value],
-  props.answers2[currentIndex.value],
-  props.answers3[currentIndex.value],
-  props.answers4[currentIndex.value]
-]);
-
+const currentQuestion = ref("Sample Question"); // Replace with your actual question data
+const currentAnswers = ref(["Answer 1", "Answer 2", "Answer 3", "Answer 4"]); // Replace with your actual answer data
 const selectedAnswerIndex = ref(null);
-const feedbackMessage = ref("");
 const firstName = ref("");
 const lastName = ref("");
 const congratsMessage = ref("");
 
 const handleButtonClick = (answer, index) => {
   selectedAnswerIndex.value = index;
-  const correctAnswer = props.correctAnswers[currentIndex.value];
+  // Simulating correct answer for demonstration
+  const correctAnswer = "Answer 1"; // Replace with your actual correct answer logic
 
   if (answer === correctAnswer) {
     points.value += 10;
   }
 };
 
-const updateQuestionData = () => {
-  currentQuestion.value = props.questions[currentIndex.value];
-  currentAnswers.value = [
-    props.answers1[currentIndex.value],
-    props.answers2[currentIndex.value],
-    props.answers3[currentIndex.value],
-    props.answers4[currentIndex.value]
-  ];
-  selectedAnswerIndex.value = null;
-};
-
 const nextQuestion = () => {
-  if (currentIndex.value < props.questions.length - 1) {
-    currentIndex.value++;
-    updateQuestionData();
-  } else if (currentIndex.value === props.questions.length - 1) {
-    state.showFinalScreen = true;
-  }
-};
-
-const prevQuestion = () => {
-  if (currentIndex.value > 0) {
-    currentIndex.value--;
-    updateQuestionData();
-  }
-};
-
-const pointsVisible = ref(false);
-const progressBarWidth = ref('0%');
-
-const updateProgressBar = () => {
-  const progress = ((currentIndex.value + 1) / props.questions.length) * 100;
-  progressBarWidth.value = `${progress}%`;
+  // Simulating next question functionality
+  currentIndex.value++;
 };
 
 const showScore = () => {
-  congratsMessage.value = points.value >= 70 ? `כל הכבוד! ${firstName.value} עברת את השאלון!` : `לא נורא ${firstName.value}, אפשר לנסות שוב`;
+  congratsMessage.value = points.value >= 70 ? `Congratulations, ${firstName.value}! You passed the quiz!` : `Not bad, ${firstName.value}. You can try again!`;
   state.showResults = true;
 };
 
@@ -157,8 +111,8 @@ const captureAndShare = () => {
     return;
   }
 
-  const currentDate = new Date().toLocaleDateString('he-IL'); // Get current date in Israeli format
-  const captureTime = new Date().toLocaleTimeString('he-IL'); // Get current time in Israeli format
+  const currentDate = new Date().toLocaleDateString('en-US'); // Get current date
+  const captureTime = new Date().toLocaleTimeString('en-US'); // Get current time
 
   html2canvas(targetElement).then(canvas => {
     canvas.toBlob(blob => {
@@ -170,19 +124,25 @@ const captureAndShare = () => {
         const dataUrl = reader.result;
 
         // Prepare the content to share
-        const message = `נקודות שהרוויחת: ${points.value}
-תאריך: ${currentDate}
-שעה: ${captureTime}`;
+        const message = `Points earned: ${points.value}
+Date: ${currentDate}
+Time: ${captureTime}`;
 
         // Combine message with screenshot data URL
-        const combinedMessage = `${message}\n\nצילום מסך:\n${dataUrl}`;
+        const combinedMessage = `${message}\n\nScreenshot:\n${dataUrl}`;
 
-        // Share using navigator.share API
-        navigator.share({
-          text: combinedMessage,
-        })
-        .then(() => console.log('הודעה שותפה בהצלחה'))
-        .catch((error) => console.error('שגיאה בשיתוף:', error));
+        // Share using navigator.share API if available
+        if (navigator.share) {
+          navigator.share({
+            text: combinedMessage,
+          })
+          .then(() => console.log('Message shared successfully'))
+          .catch((error) => console.error('Error sharing message:', error));
+        } else {
+          console.warn('navigator.share API not supported');
+          // Fallback: Display message for user to manually share
+          alert('To share, copy the below message and screenshot and share it with others:\n\n' + combinedMessage);
+        }
       };
     }, 'image/png');
   }).catch(error => {
@@ -190,28 +150,7 @@ const captureAndShare = () => {
   });
 };
 
-
-const retryQuiz = () => {
-  currentIndex.value = 0;
-  points.value = 0;
-  firstName.value = "";
-  lastName.value = "";
-  congratsMessage.value = "";
-  state.showResults = false;
-  state.showFinalScreen = false;
-};
-
-onMounted(() => {
-  updateProgressBar();
-});
-
-watch(currentIndex, () => {
-  updateProgressBar();
-});
-
 </script>
-
-
 
 <style scoped>
 @font-face {
