@@ -150,44 +150,44 @@ const showScore = () => {
 };
 
 const captureAndShare = () => {
-  const targetElement = document.getElementById('page'); // Replace with the ID of the element you want to capture
+  const targetElement = document.getElementById('page');
+
   if (!targetElement) {
     console.error('Element not found');
     return;
   }
 
-  const currentDate = new Date().toLocaleDateString('he-IL'); // Get current date in Israeli format
-  const captureTime = new Date().toLocaleTimeString('he-IL'); // Get current time in Israeli format
+  const currentDate = new Date().toLocaleDateString('he-IL');
+  const captureTime = new Date().toLocaleTimeString('he-IL');
 
   html2canvas(targetElement).then(canvas => {
-    // Convert canvas to base64 data URL
-    const dataUrl = canvas.toDataURL('image/png');
+    const dataUrl = canvas.toDataURL('image/png'); // Get base64-encoded PNG image data
 
-    // Prepare the content to share
     const message = `נקודות שהרוויחת: ${points.value}
-תאריך: ${currentDate}
-שעה: ${captureTime}`;
+    תאריך: ${currentDate}
+    שעה: ${captureTime}`;
 
-    // Share using navigator.share API if supported
     if (navigator.share) {
+      // Share using navigator.share API
       navigator.share({
         title: 'שיתוף צילום מסך ופרטים',
         text: message,
-        url: dataUrl // Include the base64 data URL as the URL
+        url: dataUrl
       }).then(() => {
         console.log('הודעה שותפה בהצלחה');
       }).catch((error) => {
         console.error('שגיאה בשיתוף:', error);
       });
     } else {
-      // Fallback for browsers that do not support navigator.share
+      // Fallback mechanism for browsers that do not support navigator.share
       console.error('navigator.share is not supported');
-      // Implement another sharing mechanism here (e.g., providing a link to download the image)
+      // Implement another sharing mechanism (e.g., provide a link to download the image)
     }
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
   });
 };
+
 
 
 const retryQuiz = () => {
