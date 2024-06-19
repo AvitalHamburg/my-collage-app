@@ -165,36 +165,21 @@ const captureAndShare = () => {
     canvas.toBlob(blob => {
       const file = new File([blob], "screenshot.png", { type: "image/png" });
 
-      // Upload the image to Imgur
-      const formData = new FormData();
-      formData.append('image', file);
+      // Create URL for the screenshot image
+      const screenshotUrl = URL.createObjectURL(file);
 
-      fetch('https://api.imgur.com/3/image', {
-        method: 'POST',
-        headers: {
-          Authorization: 'Client-ID your-imgur-client-id',
-        },
-        body: formData,
-      })
-     .then(response => response.json())
-     .then(data => {
-        const imageUrl = data.data.link;
-
-        // Prepare the content to share
-        const message = `נקודות שהרוויחת: ${points.value}
+      // Prepare the content to share
+      const message = `נקודות שהרוויחת: ${points.value}
 תאריך: ${currentDate}
-שעה: ${captureTime}\n\nצילום מסך:\n${imageUrl}`;
+שעה: ${captureTime}\n\nצילום מסך:\n${screenshotUrl} 
+שם:${firstName.value}' '${lastName.value}`;
 
-        // Share using navigator.share API
-        navigator.share({
-          text: message,
-        })
-       .then(() => console.log('הודעה שותפה בהצלחה'))
-       .catch((error) => console.error('שגיאה בשיתוף:', error));
+      // Share using navigator.share API
+      navigator.share({
+        text: message,
       })
-     .catch(error => {
-        console.error('Failed to upload image:', error);
-      });
+      .then(() => console.log('הודעה שותפה בהצלחה'))
+      .catch((error) => console.error('שגיאה בשיתוף:', error));
     });
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
@@ -279,10 +264,9 @@ watch(currentIndex, () => {
 #navigation-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 10vh;
+  margin-top: 20vh;
   margin-bottom: 10px;
   position: absolute;
-  bottom: 0vh;
   width: 90%;
   left: 50%;
   transform: translateX(-50%);
@@ -392,12 +376,15 @@ watch(currentIndex, () => {
 .name-input input {
   padding: 10px;
   margin: 5px 0;
-  font-size: 1em;
+  font-size: 1.5em;
   border-radius: 50px;
   width: 60vw;
   height: 6vh;
   border: 1px solid #ccc;
   background-color: rgb(71, 71, 71);
+  color:white;
+  font-family: "heebo";
+  text-align: center;
 }
 
 .name-input input:focus {
@@ -443,5 +430,10 @@ watch(currentIndex, () => {
   font-size: 3.7em;
   margin-bottom: 0%;
 }
-
+.question-number{
+  font-family: "karantina";
+  color:rgb(89,89,89);
+  font-size:4.5em;
+  margin-bottom:0%;
+}
 </style>
