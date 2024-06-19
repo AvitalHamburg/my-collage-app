@@ -26,7 +26,7 @@
           'answer-button',
           { 'selected-answer': index === selectedAnswerIndex }
         ]"
-        :disabled="showResults"
+        :disabled="state.showResults"
         :id="`answer-button-${index}`"
       >
         {{ answer }}
@@ -65,7 +65,6 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { defineProps, ref, reactive, onMounted, watch } from 'vue';
 import html2canvas from 'html2canvas';
