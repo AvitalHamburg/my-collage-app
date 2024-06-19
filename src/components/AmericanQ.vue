@@ -1,3 +1,4 @@
+
 <template>
   <div id="page">
     <div v-if="state.showResults" class="results-container">
@@ -64,6 +65,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { defineProps, ref, reactive, onMounted, watch } from 'vue';
 import html2canvas from 'html2canvas';
@@ -188,9 +190,6 @@ const captureAndShare = () => {
     console.error('Failed to capture screenshot: ', error);
   });
 };
-
-
-
 
 const retryQuiz = () => {
   currentIndex.value = 0;
