@@ -190,6 +190,7 @@ const captureAndShare = () => {
   });
 };
 
+
 const retryQuiz = () => {
   currentIndex.value = 0;
   points.value = 0;
