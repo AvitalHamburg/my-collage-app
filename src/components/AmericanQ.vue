@@ -149,6 +149,7 @@ const showScore = () => {
   state.showResults = true;
 };
 
+
 const captureAndShare = () => {
   const targetElement = document.getElementById('page'); // Replace with the ID of the element you want to capture
   if (!targetElement) {
@@ -156,24 +157,40 @@ const captureAndShare = () => {
     return;
   }
 
+  const currentDate = new Date().toLocaleDateString('he-IL'); // Get current date in Israeli format
+  const captureTime = new Date().toLocaleTimeString('he-IL'); // Get current time in Israeli format
+
   html2canvas(targetElement).then(canvas => {
     canvas.toBlob(blob => {
       const file = new File([blob], "screenshot.png", { type: "image/png" });
-      const items = [
-        new ClipboardItem({ "image/png": file })
-      ];
 
-      navigator.clipboard.write(items).then(() => {
-        console.log('Screenshot copied to clipboard');
+      // Create a data URL to use in an <img> tag or for sharing
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        const dataUrl = reader.result;
+
+        // Open a new window with the image for sharing
+        const shareWindow = window.open('', '_blank');
+        if (shareWindow) {
+          shareWindow.document.write('<img src="' + dataUrl + '" width="100%" /><br/>');
+          shareWindow.document.write('<p>שם: ' + firstName.value + ' ' + lastName.value + '</p>');
+          shareWindow.document.write('<p>ציון: ' + points.value + '</p>');
+          shareWindow.document.write('<p>תאריך: ' + currentDate + '</p>');
+          shareWindow.document.write('<p>שעה: ' + captureTime + '</p>');
+        } else {
+          console.error('Failed to open share window');
+        }
+
+        // Inform the user that the screenshot is copied to clipboard
         alert('צילום מסך הועתק ללוח');
-      }).catch(err => {
-        console.error('Failed to copy screenshot: ', err);
-      });
+      };
     }, 'image/png');
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
   });
 };
+
 
 const retryQuiz = () => {
   currentIndex.value = 0;
