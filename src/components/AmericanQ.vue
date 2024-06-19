@@ -150,43 +150,45 @@ const showScore = () => {
 };
 
 const captureAndShare = () => {
-  const targetElement = document.getElementById('page');
-
+  const targetElement = document.getElementById('page'); // Replace with the ID of the element you want to capture
   if (!targetElement) {
     console.error('Element not found');
     return;
   }
 
-  const currentDate = new Date().toLocaleDateString('he-IL');
-  const captureTime = new Date().toLocaleTimeString('he-IL');
+  const currentDate = new Date().toLocaleDateString('he-IL'); // Get current date in Israeli format
+  const captureTime = new Date().toLocaleTimeString('he-IL'); // Get current time in Israeli format
 
   html2canvas(targetElement).then(canvas => {
-    const dataUrl = canvas.toDataURL('image/png'); // Get base64-encoded PNG image data
+    canvas.toBlob(blob => {
+      const file = new File([blob], "screenshot.png", { type: "image/png" });
 
-    const message = `נקודות שהרוויחת: ${points.value}
-    תאריך: ${currentDate}
-    שעה: ${captureTime}`;
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        const dataUrl = reader.result;
 
-    if (navigator.share) {
-      // Share using navigator.share API
-      navigator.share({
-        title: 'שיתוף צילום מסך ופרטים',
-        text: message,
-        url: dataUrl
-      }).then(() => {
-        console.log('הודעה שותפה בהצלחה');
-      }).catch((error) => {
-        console.error('שגיאה בשיתוף:', error);
-      });
-    } else {
-      // Fallback mechanism for browsers that do not support navigator.share
-      console.error('navigator.share is not supported');
-      // Implement another sharing mechanism (e.g., provide a link to download the image)
-    }
+        // Prepare the content to share
+        const message = `נקודות שהרוויחת: ${points.value}
+תאריך: ${currentDate}
+שעה: ${captureTime}`;
+
+        // Combine message with screenshot data URL
+        const combinedMessage = `${message}\n\nצילום מסך:\n${dataUrl}`;
+
+        // Share using navigator.share API
+        navigator.share({
+          text: combinedMessage,
+        })
+        .then(() => console.log('הודעה שותפה בהצלחה'))
+        .catch((error) => console.error('שגיאה בשיתוף:', error));
+      };
+    }, 'image/png');
   }).catch(error => {
     console.error('Failed to capture screenshot: ', error);
   });
 };
+
 
 
 
