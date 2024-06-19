@@ -11,15 +11,16 @@
       <p id="introduction"> בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני.
         וכן, בארור שיש בוחן בסוף :) 
 בהצלחה!</p>
+    <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="moveNextPage">
 
-      <img src="../assets/imgs/nextWhiteBtn.png"  id="next-wBtn" @click="moveNextPage"> 
+
     </div>
   </div>
 </template>
 
 <script setup>
 import { reactive, onMounted, getCurrentInstance } from 'vue'
-
+import nextBtn from "../assets/imgs/nextBtn.png";
 import whiteLogoGif from "../assets/imgs/whiteLogo.gif";
 import inriLogoSvg from "../assets/imgs/inri-logo-white2.svg";
 
@@ -129,8 +130,9 @@ onMounted(() => {
   width:80vw;
   height:auto;
   z-index: 5;
-  font-size: 1.7em;
-  bottom:20vh;
+  font-size: 1.4em;
+  top:45vh;
+
   font-family: "Heebo"
 }
 @keyframes bounce2 {
@@ -177,5 +179,3 @@ onMounted(() => {
 
 
 </style>
-
-

@@ -1,42 +1,72 @@
 <template>
   <div id="page">
-    <h1 id="page-header">{{ pageHeader }}</h1>
-    <div class="container">
-      <p id="question">{{ currentQuestion }}</p>
-      <button 
-    v-for="(answer, index) in currentAnswers" 
-    :key="index" 
-    @click="handleButtonClick(answer, index)" 
-    :class="{ 
-        'correct-answer': index === correctAnswerIndex, 
-        'incorrect-answer': index === incorrectAnswerIndex 
-    }" 
-    class="answer-button"
-    :disabled="state.showNextButton"
-    >
-    {{ answer }}
-</button>
+    <div v-if="state.showResults" class="results-container">
+      <p class="blue-title">{{ points }}</p>
+      <p class="grey-big">{{ congratsMessage }}</p>
+      <div class="share-buttons" v-if="points >= 70">
+        <button id="next-button" @click="captureAndShare()">צילום מסך ושיתוף</button>
+      </div>
+      <div class="retry-button" v-if="points < 70">
+        <button id="next-button" @click="retryQuiz()">נסה שוב</button>
+      </div>
+    </div>
 
+    <div v-if="!state.showFinalScreen" class="container">
+      <p class="question-number">{{ currentIndex + 1 }}/10</p>
+      <div class="progress-bar">
+        <div class="progress-bar-inner" :style="{ width: progressBarWidth }"></div>
+      </div>
+      <p class="grey-big" id="question">{{ currentQuestion }}</p>
+      <button
+        v-for="(answer, index) in currentAnswers"
+        :key="index"
+        @click="handleButtonClick(answer, index)"
+        :class="[
+          'answer-button',
+          { 'selected-answer': index === selectedAnswerIndex }
+        ]"
+        :disabled="showResults"
+        :id="`answer-button-${index}`"
+      >
+        {{ answer }}
+      </button>
     </div>
-    <div id="go-next" v-if="state.showNextButton"> 
-      <p id="next-t">{{ state.btnText }}</p>
-      <img :src="nextBtn" id="next-btn" @click="nextQuestion">
+
+    <div id="navigation-buttons" v-if="!state.showFinalScreen">
+      <button
+        id="next-button"
+        @click="nextQuestion"
+        :disabled="selectedAnswerIndex === null"
+      >
+        שאלה הבאה
+      </button>
+      <button
+        id="prev-button"
+        @click="prevQuestion"
+        :disabled="currentIndex === 0"
+      >
+        שאלה קודמת
+      </button>
     </div>
-    <div v-if="state.showCongratulations" class="congratulations">כל הכבוד!</div>
-    <div v-if="state.showBeGood" class="beGood">לא נורא </div>
-    <div v-if="state.showPopUp" id="explain">
-        <p id="pop-text">{{ explanation }}</p>
-        <img id="closeBtn" :src="closeBtn" @click.once="closePopUP">
+
+    <div v-if="pointsVisible">
+      <p>נקודות: {{ points }}</p>
     </div>
-    <div v-else>
-        <p>No explanation available.</p>
+
+    <!-- מסך סיום עם קלט של השם וכפתור להצגת הציון -->
+    <div v-if="state.showFinalScreen && !state.showResults" class="final-screen">
+      <p class="grey-bold">כדי לקבל ציון ותיעוד לסיום, יש להזין את השם הפרטי ושם המשפחה</p>
+      <div class="name-input">
+        <input type="text" v-model="firstName" placeholder="שם פרטי">
+        <input type="text" v-model="lastName" placeholder="שם משפחה">
+      </div>
+      <button @click="showScore()" v-if="firstName && lastName">הצג ציון</button>
     </div>
   </div>
 </template>
+
 <script setup>
-import { defineProps, ref, reactive , defineEmits } from 'vue';
-import nextBtn from "../assets/imgs/nextBtn.png";
-import closeBtn from "../assets/imgs/closeBtn.png";
+import { defineProps, ref, reactive, onMounted, watch } from 'vue';
 
 const props = defineProps({
   pageHeader: String,
@@ -44,226 +74,332 @@ const props = defineProps({
   answers1: Array,
   answers2: Array,
   answers3: Array,
+  answers4: Array,
   correctAnswers: Array,
-  explanations : Array
 });
 
-const emit = defineEmits(['go-next']);
-
-
 const state = reactive({
-  showNextButton: false,
-  showCongratulations: false,
-  showBeGood:false,
-  showPopUp: false, 
-  btnText: "שאלה הבאה",
+  showResults: false,
+  showFinalScreen: false,
 });
 
 const currentIndex = ref(0);
-const correctAnswerIndex = ref(null);
-const incorrectAnswerIndex=ref(null);
+const points = ref(0);
+const maxPoints = props.questions.length * 10;
 const currentQuestion = ref(props.questions[currentIndex.value]);
-const explanation = ref(props.explanations[currentIndex.value]);
 const currentAnswers = ref([
   props.answers1[currentIndex.value],
   props.answers2[currentIndex.value],
-  props.answers3[currentIndex.value]
+  props.answers3[currentIndex.value],
+  props.answers4[currentIndex.value]
 ]);
 
+const selectedAnswerIndex = ref(null);
+const feedbackMessage = ref("");
+const firstName = ref("");
+const lastName = ref("");
+const congratsMessage = ref("");
 
 const handleButtonClick = (answer, index) => {
+  selectedAnswerIndex.value = index;
   const correctAnswer = props.correctAnswers[currentIndex.value];
-  if (answer === correctAnswer) {
-    correctAnswerIndex.value = index;
-    state.showNextButton = true;
-    state.showCongratulations = true;
-    state.showBeGood = false;
-  } else {
-    incorrectAnswerIndex.value = index;
-    state.showCongratulations = false;
-    state.showBeGood = true;
-    setTimeout(()=>{
-      state.showPopUp = true; 
 
-    },2000)
-  
+  if (answer === correctAnswer) {
+    points.value += 10;
   }
+};
+
+const updateQuestionData = () => {
+  currentQuestion.value = props.questions[currentIndex.value];
+  currentAnswers.value = [
+    props.answers1[currentIndex.value],
+    props.answers2[currentIndex.value],
+    props.answers3[currentIndex.value],
+    props.answers4[currentIndex.value]
+  ];
+  selectedAnswerIndex.value = null;
 };
 
 const nextQuestion = () => {
   if (currentIndex.value < props.questions.length - 1) {
-    // השאלה אינה האחרונה
     currentIndex.value++;
-    correctAnswerIndex.value = null;
-    incorrectAnswerIndex.value = null;
-    state.showNextButton = false;
-    state.showCongratulations = false;
-    state.showBeGood = false;
-    currentQuestion.value = props.questions[currentIndex.value];
-    currentAnswers.value = [
-      props.answers1[currentIndex.value],
-      props.answers2[currentIndex.value],
-      props.answers3[currentIndex.value]
-    ];
-    state.btnText = "המשך"; 
-  } else {
-    emit('go-next');
+    updateQuestionData();
+  } else if (currentIndex.value === props.questions.length - 1) {
+    state.showFinalScreen = true;
   }
 };
 
+const prevQuestion = () => {
+  if (currentIndex.value > 0) {
+    currentIndex.value--;
+    updateQuestionData();
+  }
+};
+
+const pointsVisible = ref(false);
+const progressBarWidth = ref('0%');
+
+const updateProgressBar = () => {
+  const progress = ((currentIndex.value + 1) / props.questions.length) * 100;
+  progressBarWidth.value = `${progress}%`;
+};
+
+const showScore = () => {
+  congratsMessage.value = points.value >= 70 ? `כל הכבוד! ${firstName.value} עברת את השאלון!` : `לא נורא ${firstName.value}, אפשר לנסות שוב`;
+  state.showResults = true;
+};
 
 
-const closePopUP = () => {
-    state.showPopUp = false;
-    setTimeout(()=>{
-        state.showNextButton = true;
-    },500)
-}
+const captureAndShare = () => {
+  const message = `נקודות שהרוויחת: ${points.value}`;
+  navigator.share({
+    text: message,
+  })
+    .then(() => console.log('הודעה שותפה בהצלחה'))
+    .catch((error) => console.error('שגיאה בשיתוף:', error));
+
+};
+
+const retryQuiz = () => {
+  currentIndex.value = 0;
+  points.value = 0;
+  firstName.value = "";
+  lastName.value = "";
+  congratsMessage.value = "";
+  state.showResults = false;
+  state.showFinalScreen = false;
+};
+
+onMounted(() => {
+  updateProgressBar();
+});
+
+watch(currentIndex, () => {
+  updateProgressBar();
+});
+
 </script>
 
 <style scoped>
-@font-face { 
+@font-face {
   font-family: "Heebo";
-  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
-  format("woff");
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"),
+       format("woff");
+}
 
-} 
+@font-face {
+  font-family: "Heebo-Black";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-Black.woff"),
+       format("woff");
+}
+@font-face {
+  font-family: "Karantina";
+  font-weight: normal;
+  src: url("../assets/fonts/Karantina-Regular.woff"),
+  format("woff");
+}
+
 .container {
   position: relative;
   top: 15vh;
   z-index: 0;
 }
 
+.results-container {
+  position: relative;
+  top: 15vh;
+  text-align: center;
+  font-size: 1.5em;
+  color: rgb(31, 56, 100);
+  font-family: "Heebo";
+}
+
 .answer-button {
-  width: 90%;
+  width: 80%;
   padding: 10px;
-  margin-top: 3vh;
-  background-color: rgb(31, 56, 100);
-  color: white;
-  border: none;
-  border-radius: 7px;
-  font-size: 1.3em;
+  margin-top: 2vh;
+  background-color: rgb(255, 253, 253);
+  color: rgb(89, 89, 89);
+  border: solid black;
+  border-radius: 50px;
+  font-size: 1.2em;
   font-family: "Heebo";
   z-index: 0;
-
 }
 
-.correct-answer {
-  background-color: rgb(34, 106, 91);
-}
-
-.incorrect-answer {
-  background-color: rgb(220, 53, 69);
-}
-
-.congratulations {
-  position: absolute;
-  top: 105%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2em;
-  font-weight: bold;
-  color: rgb(34, 106, 91);
-  font-family: "Heebo";
-
-}
-
-.beGood{
- position: absolute;
-  top: 105%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2em;
-  font-weight: bold;
-  color: rgb(220, 53, 69);
-  font-family: "Heebo";
-}
-
-#go-next {
-  font-size: 1.3em;
-  color: rgb(31, 56, 100);
-  height: 10vh;
-}
-
-#next-btn {
-  position: absolute;
-  right: 45%;
-  transform: rotate(2.5deg);
-  top: 125%;
-  animation: bounce2 2s ease infinite; /* Add animation delay */
-  animation-delay: 15sec;
-}
-
-#next-t {
-  position: absolute;
-  right: 50%;
-  transform: translateX(50%);
-  top: 108%;
-  font-weight: bold;
-  
-}
-
-#explain {
+.selected-answer {
   background-color: rgb(116, 142, 172);
-  position: absolute;
-  width: 92vw;
-  height: 27vh; 
-  z-index: 99999; 
-  right: 50%;
-  transform: translateX(50%);
-  top:70%;
-  text-align: center;
+  color: white;
 }
-#pop-text{
+
+#navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10vh;
+  margin-bottom: 10px;
   position: absolute;
-  top: 20%;
-  width: 80%;
-  right: 50%;
-  transform: translateX(50%);
+  bottom: 0vh;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#prev-button {
+  background-color: rgb(255, 140, 0);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
   font-size: 1.2em;
-  font-weight: bold;
-
-}
-
-#closeBtn{
-    position: absolute;
-    height:3vh;
-    width: auto;
-    right:8%;
-    top:10%
-}
-#question {
-  font-size: 1.4em; 
   font-family: "Heebo";
-  color:  rgb(31, 56, 100);
+}
+
+#next-button {
+  background-color: rgb(28, 180, 227);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-family: "Heebo";
+}
+
+#prev-button:disabled,
+#next-button:disabled {
+  background-color: grey;
+}
+
+#question {
+  font-size: 1.4em;
+  font-family: "Heebo";
+  color: rgb(31, 56, 100);
   font-weight: bold;
-  top:35vh;
+  top: 35vh;
   direction: rtl;
 }
-@keyframes bounce2 {
-    0% {
-      top: 125%;
 
-    }
-    50%{
-      top: 135%;
-
-    }
-    100%{
-      top: 125%;
-
-    }
+#page-header {
+  position: absolute;
+  top: 8vh;
+  right: 50%;
+  transform: translateX(50%);
+  font-size: 2em;
+  width: 90vw;
+  text-overflow: none;
+  color: rgb(31, 56, 100);
 }
 
-#page-header{
-    position: absolute;
-    top:8vh;
-    right: 50%;
-    transform: translateX(50%);
-    font-size: 2em;
-    width: 90vw;
-    text-overflow: none;
-    color:rgb(31,56,100);
+.grey-big {
+  font-size: 1.5em;
+  margin-bottom: 2vh;
+  direction: rtl;
+  font-family: "Heebo";
+  color: rgb(89, 89, 89);
+}
+
+.progress-bar {
+  position: relative;
+  margin-top: 1.5rem;
+  background-color: #c0c0c0;
+  height: 0.5rem;
+  width: 90%;
+  left: 5%;
+  border-radius: 1.5rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.progress-bar-inner {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  background-color: rgb(28, 180, 227);
+  border-radius: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  transition: width 0.3s ease;
+}
+
+.quetion-number {
+  font-family: "Karantina";
+  font-size: 3.5em;
+  margin-bottom: 0%;
+}
+
+.final-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.name-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.name-input input {
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 1em;
+  border-radius: 50px;
+  width: 60vw;
+  height: 6vh;
+  border: 1px solid #ccc;
+  background-color: rgb(71, 71, 71);
+}
+
+.name-input input:focus {
+  outline: none;
+  background-color: rgb(28, 180, 227);
+}
+
+.final-screen button {
+  padding: 10px 20px;
+  background-color: rgb(28, 180, 227);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+.name-input input::placeholder {
+  text-align: center;
+  font-size: 1.3em;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "heebo";
+}
+
+.final-screen button:hover {
+  background-color: rgb(20, 140, 180);
+}
+
+.grey-bold {
+  font-size: 1.5em;
+  margin-bottom: 2vh;
+  direction: rtl;
+  text-align: center;
+  width: 80vw;
+  font-family: "Heebo-Black";
+  color: rgb(89, 89, 89);
+}
+
+.blue-title {
+  font-family: "karantina";
+  color: rgb(20, 140, 180);
+  font-size: 3.7em;
+  margin-bottom: 0%;
 }
 
 </style>
