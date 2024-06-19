@@ -157,7 +157,6 @@ const captureAndShare = () => {
   })
     .then(() => console.log('הודעה שותפה בהצלחה'))
     .catch((error) => console.error('שגיאה בשיתוף:', error));
-
 };
 
 const retryQuiz = () => {
