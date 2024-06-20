@@ -1,4 +1,3 @@
-
 <template>
   <div id="page">
     <div v-if="state.showResults" class="results-container">
@@ -11,7 +10,6 @@
         <button id="next-button" @click="retryQuiz()">נסה שוב</button>
       </div>
     </div>
-
     <div v-if="!state.showFinalScreen" class="container">
       <p class="question-number">{{ currentIndex + 1 }}/10</p>
       <div class="progress-bar">
@@ -32,7 +30,6 @@
         {{ answer }}
       </button>
     </div>
-
     <div id="navigation-buttons" v-if="!state.showFinalScreen">
       <button
         id="next-button"
@@ -49,13 +46,11 @@
         שאלה קודמת
       </button>
     </div>
-
     <div v-if="pointsVisible">
       <p>נקודות: {{ points }}</p>
     </div>
-
     <!-- מסך סיום עם קלט של השם וכפתור להצגת הציון -->
-    <div v-if="state.showFinalScreen && !state.showResults" class="final-screen" id="final-screen">
+    <div v-if="state.showFinalScreen && !state.showResults" class="final-screen">
       <p class="grey-bold">כדי לקבל ציון ותיעוד לסיום, יש להזין את השם הפרטי ושם המשפחה</p>
       <div class="name-input">
         <input type="text" v-model="firstName" placeholder="שם פרטי">
@@ -67,17 +62,17 @@
 </template>
 
 <script setup>
-import { defineProps, ref, reactive, onMounted, watch, nextTick } from 'vue';
+import { defineProps, ref, reactive, onMounted, watch } from 'vue';
 import html2canvas from 'html2canvas';
-import { saveAs } from 'file-saver';
 
 const props = defineProps({
+  pageHeader: String,
   questions: Array,
   answers1: Array,
   answers2: Array,
   answers3: Array,
   answers4: Array,
-  correctAnswers: Array
+  correctAnswers: Array,
 });
 
 const state = reactive({
@@ -87,7 +82,7 @@ const state = reactive({
 
 const currentIndex = ref(0);
 const points = ref(0);
-const maxPoints = ref(props.questions.length * 10); // Ensure props are reactive
+const maxPoints = props.questions.length * 10;
 const currentQuestion = ref(props.questions[currentIndex.value]);
 const currentAnswers = ref([
   props.answers1[currentIndex.value],
@@ -95,7 +90,6 @@ const currentAnswers = ref([
   props.answers3[currentIndex.value],
   props.answers4[currentIndex.value]
 ]);
-
 const selectedAnswerIndex = ref(null);
 const feedbackMessage = ref("");
 const firstName = ref("");
@@ -105,7 +99,6 @@ const congratsMessage = ref("");
 const handleButtonClick = (answer, index) => {
   selectedAnswerIndex.value = index;
   const correctAnswer = props.correctAnswers[currentIndex.value];
-
   if (answer === correctAnswer) {
     points.value += 10;
   }
@@ -150,59 +143,57 @@ const showScore = () => {
   congratsMessage.value = points.value >= 70 ? `כל הכבוד! ${firstName.value} עברת את השאלון!` : `לא נורא ${firstName.value}, אפשר לנסות שוב`;
   state.showResults = true;
 };
-const captureAndShare = async () => {
-  try {
-    // Capture the current screen using html2canvas
-    const capture = await html2canvas(document.querySelector("#page"));
 
-    // Convert captured screen to blob
-    capture.toBlob(function(blob) {
-      // Save blob as a file using file-saver library
-      saveAs(blob, 'quiz_screenshot.png');
-
-      // Prepare data to share
-      const currentDate = new Date().toLocaleDateString();
-      const currentTime = new Date().toLocaleTimeString();
-      const fullName = `${firstName.value} ${lastName.value}`;
-      const message = `Full Name: ${fullName}\nDate: ${currentDate}\nTime: ${currentTime}\nPoints: ${points.value}`;
-
-      // Example: Upload the blob to a server and get a URL back
-      // Replace this with your actual server endpoint for uploading
-      uploadToServer(blob).then((imageUrl) => {
-        // Check if navigator.share is supported
-        if (navigator.share) {
-          navigator.share({
-            title: "My Quiz Result",
-            text: message 
-          }).then(() => {
-            console.log('Successfully shared');
-          }).catch((error) => {
-            console.error('Error sharing:', error);
-          });
-        } else {
-          throw new Error('Web Share API is not supported in this browser.');
-        }
-      }).catch((uploadError) => {
-        console.error('Error uploading screenshot:', uploadError);
+const captureAndShare = () => {
+  const targetElement = document.getElementById('page'); // Replace with the ID of the element you want to capture
+  if (!targetElement) {
+    console.error('Element not found');
+    return;
+  }
+  
+  html2canvas(targetElement).then(canvas => {
+    const currentDate = new Date().toLocaleDateString('he-IL'); // Get current date in Israeli format
+    const captureTime = new Date().toLocaleTimeString('he-IL'); // Get current time in Israeli format
+    
+    // Convert canvas to Blob
+    canvas.toBlob(blob => {
+      const file = new File([blob], "screenshot.png", { type: "image/png" });
+      
+      // Upload the image to Imgur
+      const formData = new FormData();
+      formData.append('image', file);
+      
+      fetch('https://api.imgur.com/3/image', {
+        method: 'POST',
+        headers: {
+          Authorization: 'Client-ID your-imgur-client-id', // Replace with your Imgur client ID
+        },
+        body: formData,
+      })
+      .then(response => response.json())
+      .then(data => {
+        const imageUrl = data.data.link;
+        
+        // Prepare the content to share
+        const message = `נקודות שהרוויחת: ${points.value}\nתאריך: ${currentDate}\nשעה: ${captureTime}\n\nצילום מסך:\n${imageUrl}`;
+        
+        // Share using navigator.share API
+        navigator.share({
+          text: message,
+        })
+        .then(() => console.log('הודעה שותפה בהצלחה'))
+        .catch((error) => console.error('שגיאה בשיתוף:', error));
+      })
+      .catch(error => {
+        console.error('Failed to upload image:', error);
       });
     });
-
-  } catch (error) {
-    console.error("Error capturing or sharing screenshot:", error);
-    // Handle errors as needed
-  }
+  })
+  .catch(error => {
+    console.error('Failed to capture screenshot: ', error);
+  });
 };
 
-// Example function to upload blob to server
-function uploadToServer(blob) {
-  return new Promise((resolve, reject) => {
-    // Simulated server upload; replace with actual implementation
-    setTimeout(() => {
-      const imageUrl = 'https://example.com/uploads/quiz_screenshot.png'; // I dont have  URL
-      resolve(imageUrl);
-    }, 1000); // Simulating upload delay
-  });
-}
 const retryQuiz = () => {
   currentIndex.value = 0;
   points.value = 0;
@@ -223,7 +214,6 @@ watch(currentIndex, () => {
 
 </script>
 
-
 <style scoped>
 @font-face {
   font-family: "Heebo";
@@ -231,7 +221,6 @@ watch(currentIndex, () => {
   src: url("../assets/fonts/Heebo-VariableFont_wght.woff"),
        format("woff");
 }
-
 @font-face {
   font-family: "Heebo-Black";
   font-weight: normal;
@@ -244,13 +233,11 @@ watch(currentIndex, () => {
   src: url("../assets/fonts/Karantina-Regular.woff"),
   format("woff");
 }
-
 .container {
   position: relative;
   top: 15vh;
   z-index: 0;
 }
-
 .results-container {
   position: relative;
   top: 15vh;
@@ -259,7 +246,6 @@ watch(currentIndex, () => {
   color: rgb(31, 56, 100);
   font-family: "Heebo";
 }
-
 .answer-button {
   width: 80%;
   padding: 10px;
@@ -272,23 +258,22 @@ watch(currentIndex, () => {
   font-family: "Heebo";
   z-index: 0;
 }
-
 .selected-answer {
   background-color: rgb(116, 142, 172);
   color: white;
 }
-
 #navigation-buttons {
   display: flex;
   justify-content: space-between;
+  margin-top: 10vh;
   margin-top: 20vh;
   margin-bottom: 10px;
   position: absolute;
+  bottom: 0vh;
   width: 90%;
   left: 50%;
   transform: translateX(-50%);
 }
-
 #prev-button {
   background-color: rgb(255, 140, 0);
   color: white;
@@ -298,7 +283,6 @@ watch(currentIndex, () => {
   font-size: 1.2em;
   font-family: "Heebo";
 }
-
 #next-button {
   background-color: rgb(28, 180, 227);
   color: white;
@@ -308,12 +292,10 @@ watch(currentIndex, () => {
   font-size: 1.2em;
   font-family: "Heebo";
 }
-
 #prev-button:disabled,
 #next-button:disabled {
   background-color: grey;
 }
-
 #question {
   font-size: 1.4em;
   font-family: "Heebo";
@@ -322,7 +304,6 @@ watch(currentIndex, () => {
   top: 35vh;
   direction: rtl;
 }
-
 #page-header {
   position: absolute;
   top: 8vh;
@@ -333,7 +314,6 @@ watch(currentIndex, () => {
   text-overflow: none;
   color: rgb(31, 56, 100);
 }
-
 .grey-big {
   font-size: 1.5em;
   margin-bottom: 2vh;
@@ -341,7 +321,6 @@ watch(currentIndex, () => {
   font-family: "Heebo";
   color: rgb(89, 89, 89);
 }
-
 .progress-bar {
   position: relative;
   margin-top: 1.5rem;
@@ -352,7 +331,6 @@ watch(currentIndex, () => {
   border-radius: 1.5rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-
 .progress-bar-inner {
   position: absolute;
   z-index: 1;
@@ -362,13 +340,11 @@ watch(currentIndex, () => {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   transition: width 0.3s ease;
 }
-
 .quetion-number {
   font-family: "Karantina";
   font-size: 3.5em;
   margin-bottom: 0%;
 }
-
 .final-screen {
   position: fixed;
   top: 0;
@@ -381,7 +357,6 @@ watch(currentIndex, () => {
   align-items: center;
   z-index: 9999;
 }
-
 .name-input {
   display: flex;
   flex-direction: column;
@@ -389,10 +364,10 @@ watch(currentIndex, () => {
   align-items: center;
   margin-bottom: 20px;
 }
-
 .name-input input {
   padding: 10px;
   margin: 5px 0;
+  font-size: 1em;
   font-size: 1.5em;
   border-radius: 50px;
   width: 60vw;
@@ -403,12 +378,10 @@ watch(currentIndex, () => {
   font-family: "heebo";
   text-align: center;
 }
-
 .name-input input:focus {
   outline: none;
   background-color: rgb(28, 180, 227);
 }
-
 .final-screen button {
   padding: 10px 20px;
   background-color: rgb(28, 180, 227);
@@ -419,18 +392,15 @@ watch(currentIndex, () => {
   font-size: 1em;
   margin-top: 10px;
 }
-
 .name-input input::placeholder {
   text-align: center;
   font-size: 1.3em;
   color: rgba(255, 255, 255, 0.5);
   font-family: "heebo";
 }
-
 .final-screen button:hover {
   background-color: rgb(20, 140, 180);
 }
-
 .grey-bold {
   font-size: 1.5em;
   margin-bottom: 2vh;
@@ -440,7 +410,6 @@ watch(currentIndex, () => {
   font-family: "Heebo-Black";
   color: rgb(89, 89, 89);
 }
-
 .blue-title {
   font-family: "karantina";
   color: rgb(20, 140, 180);
