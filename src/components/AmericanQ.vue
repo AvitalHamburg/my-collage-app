@@ -164,26 +164,27 @@ const captureAndShare = async () => {
       const currentDate = new Date().toLocaleDateString();
       const currentTime = new Date().toLocaleTimeString();
       const fullName = `${firstName.value} ${lastName.value}`;
-      const message = `שם מלא: ${fullName}\nתאריך: ${currentDate}\nשעה: ${currentTime}\nציון: ${points.value}`;
+      const message = `Full Name: ${fullName}\nDate: ${currentDate}\nTime: ${currentTime}\nPoints: ${points.value}`;
 
-      // Optionally, you can share text message using navigator.share
-      const shareData = {
-        title: "תוצאת השאלון שלי",
-        text: message
-      };
-
-      // Check if navigator.share is supported
-      if (navigator.share) {
-        navigator.share(shareData)
-          .then(() => {
-            console.log("Successfully shared");
-          })
-          .catch((error) => {
-            console.error("Error sharing:", error);
+      // Example: Upload the blob to a server and get a URL back
+      // Replace this with your actual server endpoint for uploading
+      uploadToServer(blob).then((imageUrl) => {
+        // Check if navigator.share is supported
+        if (navigator.share) {
+          navigator.share({
+            title: "My Quiz Result",
+            text: message + "\nScreenshot: " + imageUrl,
+          }).then(() => {
+            console.log('Successfully shared');
+          }).catch((error) => {
+            console.error('Error sharing:', error);
           });
-      } else {
-        throw new Error('Web Share API is not supported in this browser.');
-      }
+        } else {
+          throw new Error('Web Share API is not supported in this browser.');
+        }
+      }).catch((uploadError) => {
+        console.error('Error uploading screenshot:', uploadError);
+      });
     });
 
   } catch (error) {
@@ -191,6 +192,17 @@ const captureAndShare = async () => {
     // Handle errors as needed
   }
 };
+
+// Example function to upload blob to server
+function uploadToServer(blob) {
+  return new Promise((resolve, reject) => {
+    // Simulated server upload; replace with actual implementation
+    setTimeout(() => {
+      const imageUrl = 'https://example.com/uploads/quiz_screenshot.png'; // Replace with actual URL
+      resolve(imageUrl);
+    }, 1000); // Simulating upload delay
+  });
+}
 const retryQuiz = () => {
   currentIndex.value = 0;
   points.value = 0;
