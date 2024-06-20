@@ -55,7 +55,7 @@
     </div>
 
     <!-- מסך סיום עם קלט של השם וכפתור להצגת הציון -->
-    <div v-if="state.showFinalScreen && !state.showResults" class="final-screen">
+    <div v-if="state.showFinalScreen && !state.showResults" class="final-screen" id="final-screen">
       <p class="grey-bold">כדי לקבל ציון ותיעוד לסיום, יש להזין את השם הפרטי ושם המשפחה</p>
       <div class="name-input">
         <input type="text" v-model="firstName" placeholder="שם פרטי">
@@ -65,18 +65,19 @@
     </div>
   </div>
 </template>
+
 <script setup>
-import { defineProps, ref, reactive, onMounted, watch } from 'vue';
+import { defineProps, ref, reactive, onMounted, watch, nextTick } from 'vue';
 import html2canvas from 'html2canvas';
+import { saveAs } from 'file-saver';
 
 const props = defineProps({
-  pageHeader: String,
   questions: Array,
   answers1: Array,
   answers2: Array,
   answers3: Array,
   answers4: Array,
-  correctAnswers: Array,
+  correctAnswers: Array
 });
 
 const state = reactive({
@@ -86,7 +87,7 @@ const state = reactive({
 
 const currentIndex = ref(0);
 const points = ref(0);
-const maxPoints = props.questions.length * 10;
+const maxPoints = ref(props.questions.length * 10); // Ensure props are reactive
 const currentQuestion = ref(props.questions[currentIndex.value]);
 const currentAnswers = ref([
   props.answers1[currentIndex.value],
@@ -149,41 +150,46 @@ const showScore = () => {
   congratsMessage.value = points.value >= 70 ? `כל הכבוד! ${firstName.value} עברת את השאלון!` : `לא נורא ${firstName.value}, אפשר לנסות שוב`;
   state.showResults = true;
 };
+const captureAndShare = async () => {
+  try {
+    // Capture the current screen using html2canvas
+    const capture = await html2canvas(document.querySelector("#page"));
 
-const captureAndShare = () => {
-  const targetElement = document.getElementById('page'); // Replace with the ID of the element you want to capture
-  if (!targetElement) {
-    console.error('Element not found');
-    return;
-  }
+    // Convert captured screen to blob
+    capture.toBlob(function(blob) {
+      // Save blob as a file using file-saver library
+      saveAs(blob, 'quiz_screenshot.png');
 
-  html2canvas(targetElement).then(canvas => {
-    const currentDate = new Date().toLocaleDateString('he-IL'); // Get current date in Israeli format
-    const captureTime = new Date().toLocaleTimeString('he-IL'); // Get current time in Israeli format
+      // Prepare data to share
+      const currentDate = new Date().toLocaleDateString();
+      const currentTime = new Date().toLocaleTimeString();
+      const fullName = `${firstName.value} ${lastName.value}`;
+      const message = `שם מלא: ${fullName}\nתאריך: ${currentDate}\nשעה: ${currentTime}\nציון: ${points.value}`;
 
-    // Convert canvas to Blob
-    canvas.toBlob(blob => {
-      const file = new File([blob], "screenshot.png", { type: "image/png" });
+      // Optionally, you can share text message using navigator.share
+      const shareData = {
+        title: "תוצאת השאלון שלי",
+        text: message
+      };
 
-      // Create URL for the screenshot image
-      const screenshotUrl = URL.createObjectURL(file);
-
-      // Prepare the content to share
-      const message = `נקודות שהרוויחת: ${points.value}
-תאריך: ${currentDate}
-שעה: ${captureTime}\n\nצילום מסך:\n${screenshotUrl} 
-שם:${firstName.value}' '${lastName.value}`;
-
-      // Share using navigator.share API
-      navigator.share({
-        text: message,
-      })
-      .then(() => console.log('הודעה שותפה בהצלחה'))
-      .catch((error) => console.error('שגיאה בשיתוף:', error));
+      // Check if navigator.share is supported
+      if (navigator.share) {
+        navigator.share(shareData)
+          .then(() => {
+            console.log("Successfully shared");
+          })
+          .catch((error) => {
+            console.error("Error sharing:", error);
+          });
+      } else {
+        throw new Error('Web Share API is not supported in this browser.');
+      }
     });
-  }).catch(error => {
-    console.error('Failed to capture screenshot: ', error);
-  });
+
+  } catch (error) {
+    console.error("Error capturing or sharing screenshot:", error);
+    // Handle errors as needed
+  }
 };
 const retryQuiz = () => {
   currentIndex.value = 0;
@@ -204,7 +210,6 @@ watch(currentIndex, () => {
 });
 
 </script>
-
 
 
 <style scoped>
