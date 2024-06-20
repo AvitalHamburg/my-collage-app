@@ -173,7 +173,7 @@ const captureAndShare = async () => {
         if (navigator.share) {
           navigator.share({
             title: "My Quiz Result",
-            text: message + "\nScreenshot: " + imageUrl,
+            text: message 
           }).then(() => {
             console.log('Successfully shared');
           }).catch((error) => {
@@ -198,7 +198,7 @@ function uploadToServer(blob) {
   return new Promise((resolve, reject) => {
     // Simulated server upload; replace with actual implementation
     setTimeout(() => {
-      const imageUrl = 'https://example.com/uploads/quiz_screenshot.png'; // Replace with actual URL
+      const imageUrl = 'https://example.com/uploads/quiz_screenshot.png'; // I dont have  URL
       resolve(imageUrl);
     }, 1000); // Simulating upload delay
   });
