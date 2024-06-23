@@ -1,6 +1,6 @@
 <template>
     <div id="page">
-      <img  class=game-board src="../assets/imgs/mapForCollage.png">
+      <img  class=game-board src="../assets/imgs/collageMap.png">
       <div class="container">
         <div
           v-for="index in 8"
