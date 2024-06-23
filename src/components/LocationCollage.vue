@@ -4,7 +4,6 @@
       <p class="titles-gray" ref="text1">מה נמצא איפה?</p>
       <p class="simple-text">רגע לפני סיום, קצת אוריינטציה בתוך בסיס הפיקוד, במשחק שצריך לתפוס ולגרור בו את שם המיקום לנקודות המתאימות במפה -</p>
       <img :src="nextBtn" id="next-btn" @click="backToMenu">
-      <MapGame class="map"></MapGame> <!-- Ensure MapGame component is rendered -->
       <p id="text">dfdgdg</p>
     </div>
   </div>
@@ -13,7 +12,6 @@
 <script setup>
 import { defineEmits } from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
-import MapGame from './MapGame.vue'
 
 const emit = defineEmits(['go-menu']);
 

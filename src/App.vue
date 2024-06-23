@@ -23,9 +23,9 @@
     <SocityCollage v-if="state.textNum === 3" @go-menu="nextSubj"></SocityCollage>
     <LibraryCollage v-if="state.textNum === 4" @go-menu="nextSubj"></LibraryCollage>
     <OutsideCollage v-if="state.textNum === 5" @go-menu="nextSubj"></OutsideCollage>
-    <!-- <LocationCollage v-if="state.textNum === 6"  @go-menu="nextSubj"></LocationCollage> -->
-    <MapGame v-if="state.textNum === 6"  @go-menu="nextSubj"></MapGame>
-    <Game v-if="state.textNum === 7"  @go-menu="backToMenu"></Game>
+    <LocationCollage v-if="state.textNum === 6"  @go-menu="nextSubj"></LocationCollage>
+    <MapGame v-if="state.textNum === 7"  ></MapGame>
+    <Game v-if="state.textNum === 8"  @go-menu="backToMenu"></Game>
 
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
     </div>

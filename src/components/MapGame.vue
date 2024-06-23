@@ -1,83 +1,155 @@
 <template>
-    <div>
-      <div class="drop-zone" 
-           @drop="onDrop($event, 1)"
-           @dragenter.prevent 
-           @dragover.prevent>
-        <div v-for="item in getList(1)" :key="item.id" class="drag-el" 
-             draggable="true" 
-             @dragstart="startDrag($event, item)">
-          {{ item.title }}
+    <div id="page">
+      <img  class=game-board src="../assets/imgs/mapForCollage.png">
+      <div class="container">
+        <div
+          v-for="index in 8"
+          :key="'item' + index"
+          :id="'item' + index"
+          class="draggable-item"
+          draggable="true"
+          @dragstart="dragStart"
+          @dragend="dragEnd"
+        >
+          Item {{ index }}
         </div>
       </div>
-      <div class="drop-zone" 
-           @drop="onDrop($event, 2)"
-           @dragenter.prevent 
-           @dragover.prevent>
-        <div v-for="item in getList(2)" :key="item.id" class="drag-el" 
-             draggable="true" 
-             @dragstart="startDrag($event, item)">
-          {{ item.title }}
-        </div>
+  
+      <div class="container1">
+        <div
+          v-for="index in 8"
+          :key="'container' + index"
+          :id="'container' + index"
+          class="dropzone"
+          @dragover.prevent
+          @drop="drop"
+          @dragenter="dragEnter"
+          @dragleave="dragLeave"
+        >
+      </div>
       </div>
     </div>
   </template>
   
   <script>
-  import { ref } from 'vue';
-  
   export default {
-    setup() {
-      const items = ref([
-        { id: 0, title: 'ItemA', list: 1 },
-        { id: 1, title: 'ItemB', list: 1 },
-        { id: 2, title: 'ItemC', list: 2 },
-      ]);
-  
-      const getList = (list) => {
-        return items.value.filter((item) => item.list === list);
-      };
-  
-      const startDrag = (event, item) => {
-        event.dataTransfer.setData('text/plain', item.id.toString());
-      };
-  
-      const onDrop = (event, list) => {
+    methods: {
+      dragStart(event) {
+        // Store the dragged element's ID in data transfer
+        event.dataTransfer.setData('text/plain', event.target.id);
+        event.target.classList.add('dragging');
+      },
+      dragEnd(event) {
+        event.target.classList.remove('dragging');
+      },
+      drop(event) {
         event.preventDefault();
         const itemId = event.dataTransfer.getData('text/plain');
-        const draggedItem = items.value.find(item => item.id.toString() === itemId);
-        if (draggedItem) {
-          draggedItem.list = list;
+        const draggedItem = document.getElementById(itemId);
+        const dropZoneId = event.target.id;
+        
+        // Check if the dragged item can be dropped into the target container
+        if (itemId === `item${dropZoneId.slice(-1)}`) {
+          // Remove the element from its original parent
+          draggedItem.parentNode.removeChild(draggedItem);
+          
+          // Append the element to the drop zone
+          event.target.appendChild(draggedItem);
         }
-      };
-  
-      return {
-        getList,
-        startDrag,
-        onDrop
-      };
-    }
+      },
+      dragEnter(event) {
+        event.target.classList.add('dragover');
+      },
+      dragLeave(event) {
+        event.target.classList.remove('dragover');
+      },
+    },
   };
   </script>
   
   <style scoped>
-  .drop-zone {
-    width: 80%;
-    margin: 50px auto;
-    background-color: rgba(92, 95, 97, 0.27);
-    padding: 10px;
-    min-height: 10px;
+  #page{
+    background-color: aliceblue;
+    height: 100vh;width: 100vw;
+    position: absolute;
+    top:0;
+    left: 0;
   }
+  .game-board{
+    width:100vw;
+    height:auto;
+    position: absolute;
+    z-index:0;
+    right:0;
+    top:30%;
   
-  .drag-el {
-    background-color: cadetblue;
-    color: white;
+  }
+  .draggable-item {
     padding: 5px;
+    background-color:rgb(89,89,89);
+    border: 1px solid #0d0d0d;
+    border-radius: 500px;
+    width: 15vw;
+    cursor: grab;
     margin-bottom: 10px;
+    color: white;
   }
   
-  .drag-el:last-of-type {
-    margin-bottom: 0;
+  .dropzone {
+    padding-bottom: 12px;
+    background-color: #e0e0e0;
+    border: 2px dashed black;
+    border-radius: 500px;
+    width: 20vw;
+    height:3vh;
+    cursor: pointer;
+    align-items:center;
+  
+    
+  }
+  
+  .dragging {
+    opacity: 0.5;
+  }
+  
+  .dragover {
+    background-color: #c0c0c0;
+  }
+  .container{
+    position:absolute;
+    left:6%;
+    top:57%;
+    display:flex;
+    flex-wrap:wrap;
+    gap: 5%;
+    z-index:10;
+    justify-content:center;
+  
+  }
+  .container1{
+    position: absolute;
+    left:30%;
+    top:20%;
+    z-index:10;
+  
+  
+  }
+  #container1{
+    position:absolute;
+    right:-140%;
+    top:-20%;
+    
+  }
+  #container2{
+    position:absolute;
+    right:210%;
+    top:45%;
+  }
+  #container3{
+    position:absolute;
+    right:-50%;
+    top:35%;
   }
   </style>
+  
   
