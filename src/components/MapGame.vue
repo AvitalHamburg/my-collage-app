@@ -1,6 +1,6 @@
 <template>
     <div id="page">
-      <img class="game-board" src="../assets/imgs/collageMap.jpeg">
+      <img class="game-board" src="../assets/imgs/mapForCollage.png">
       <div class="container">
         <div
           v-for="index in 8"
@@ -12,7 +12,6 @@
           @dragend="dragEnd"
           @touchstart="touchStart"
           @touchend="touchEnd"
-          @touchmove="touchMove"
         >
           Item {{ index }}
         </div>
@@ -28,6 +27,7 @@
           @drop="drop"
           @dragenter="dragEnter"
           @dragleave="dragLeave"
+          @touchmove.prevent="touchMove"
         >
           <!-- Adjust content as needed -->
         </div>
@@ -38,55 +38,67 @@
   <script>
   export default {
     methods: {
+      // Mouse drag events
       dragStart(event) {
-        event.dataTransfer.setData('text/plain', event.target.id);
-        event.target.classList.add('dragging');
+        this.handleDragStart(event);
       },
       dragEnd(event) {
-        event.target.classList.remove('dragging');
-      },
-      touchStart(event) {
-        // Store initial touch position
-        this.startX = event.touches[0].clientX - event.target.getBoundingClientRect().left;
-        this.startY = event.touches[0].clientY - event.target.getBoundingClientRect().top;
-        
-        // Store the dragged element's ID in data transfer
-        event.dataTransfer.setData('text/plain', event.target.id);
-        event.target.classList.add('dragging');
-      },
-      touchMove(event) {
-        // Calculate new position based on touch movement
-        const offsetX = event.touches[0].clientX - this.startX;
-        const offsetY = event.touches[0].clientY - this.startY;
-        
-        // Apply the new position to the dragged element
-        event.target.style.left = offsetX + 'px';
-        event.target.style.top = offsetY + 'px';
-      },
-      touchEnd(event) {
-        event.target.classList.remove('dragging');
+        this.handleDragEnd(event);
       },
       drop(event) {
         event.preventDefault();
+        this.handleDrop(event);
+      },
+      dragEnter(event) {
+        this.handleDragEnter(event);
+      },
+      dragLeave(event) {
+        this.handleDragLeave(event);
+      },
+      
+      // Touch events
+      touchStart(event) {
+        this.handleDragStart(event.changedTouches[0]);
+      },
+      touchEnd(event) {
+        this.handleDragEnd(event.changedTouches[0]);
+      },
+      touchMove(event) {
+        event.preventDefault(); // Prevent scrolling on touch devices
+        this.handleDragEnter(event.changedTouches[0]);
+      },
+  
+      // Common drag-and-drop logic
+      handleDragStart(event) {
+        const itemId = event.target.id;
+        event.dataTransfer.setData('text/plain', itemId);
+        event.target.classList.add('dragging');
+      },
+      handleDragEnd(event) {
+        event.target.classList.remove('dragging');
+      },
+      handleDrop(event) {
         const itemId = event.dataTransfer.getData('text/plain');
         const draggedItem = document.getElementById(itemId);
         const dropZoneId = event.target.id;
-        
+  
+        // Check if the dragged item can be dropped into the target container
         if (itemId === `item${dropZoneId.slice(-1)}`) {
+          // Remove the element from its original parent
           draggedItem.parentNode.removeChild(draggedItem);
+          // Append the element to the drop zone
           event.target.appendChild(draggedItem);
         }
       },
-      dragEnter(event) {
+      handleDragEnter(event) {
         event.target.classList.add('dragover');
       },
-      dragLeave(event) {
+      handleDragLeave(event) {
         event.target.classList.remove('dragover');
       },
     },
   };
   </script>
-  
   <style scoped>
   #page {
     background-color: aliceblue;
