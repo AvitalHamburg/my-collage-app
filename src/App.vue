@@ -24,8 +24,8 @@
     <LibraryCollage v-if="state.textNum === 4" @go-menu="nextSubj"></LibraryCollage>
     <OutsideCollage v-if="state.textNum === 5" @go-menu="nextSubj"></OutsideCollage>
     <LocationCollage v-if="state.textNum === 6"  @go-menu="nextSubj"></LocationCollage>
-    <MapGame v-if="state.textNum === 7"  ></MapGame>
-    <Game v-if="state.textNum === 8"  @go-menu="backToMenu"></Game>
+    <MapGame v-if="state.textNum === 7" @game-over="goToExam" ></MapGame>
+    <Game v-if="state.visetedNum === 7 && this.goExam"></Game>
 
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
     </div>
@@ -36,11 +36,10 @@
       @next-page="movePage"
     ></Hamburger>  </div>
 </template>
-
 <script setup>
 import { reactive } from 'vue';
 import Menu from './components/Menu.vue';
-import Game from './components/Game.vue';
+import Game from './components/Game.vue'; // Ensure Game component is imported
 import Hamburger from './components/Hamburger.vue';
 import HelloWorld from './components/HelloWorld.vue';
 import KnowCollage from './components/KnowCollage.vue';
@@ -50,18 +49,20 @@ import MapGame from './components/MapGame.vue';
 import LocationCollage from './components/LocationCollage.vue';
 import LibraryCollage from './components/LibraryCollage.vue';
 import SocityCollage from './components/SocityCollage.vue';
+
 import collegeLogo from "./assets/imgs/collegeLogo.png";
 import orange from "./assets/imgs/orange.png";
 import blue from "./assets/imgs/blue.png";
 import red from "./assets/imgs/red.png";
 
-
 const state = reactive({
   page: 0,
   showMenu: false,
   textNum: 0,
-  openHamburger:false,
-  visitedPages: []
+  openHamburger: false,
+  visitedPages: [],
+  visetedNum: 0,
+  goExam:false
 });
 
 function nextPage() {
@@ -72,23 +73,35 @@ function nextPage() {
 const movePage = (number) => {
   state.textNum = number;
   state.showMenu = false;
-  state.openHamburger=false;
-  state.visitedPages.push(number-1);
+  state.openHamburger = false;
+  state.visitedPages.push(number - 1);
+  updateVisitedNum(); // Call updateVisitedNum whenever moving to a new page
 }
 
 const nextSubj = () => {
   state.textNum++;
+  updateVisitedNum(); // Call updateVisitedNum whenever moving to a new subject
 }
 
-const backToMenu = () =>{
-      state.showMenu=true;
+const updateVisitedNum = () => {
+  state.visetedNum = Math.max(state.visitedPages.length, state.textNum); // Ensure visetedNum reflects the maximum visited pages or subjects
 }
 
-const showHamburger = () =>{
-      state.openHamburger = !state.openHamburger;
+const backToMenu = () => {
+  state.showMenu = true;
+  state.textNum = 0;
 }
+
+const showHamburger = () => {
+  state.openHamburger = !state.openHamburger;
+}
+const goToExam = () => {
+  state.goExam = true;
+
+}
+
+
 </script>
-
 <style scoped>
 body {
   height: 100vh;

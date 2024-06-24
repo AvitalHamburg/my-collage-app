@@ -6,11 +6,13 @@
     <p class="blue-text">אנחנו לגמרי בינלאומיים!</p>
     <p class="simple-text" ref="text2">מעת לעת אנחנו מארחים משלחות ובעלי תפקידים בממשלות וצבאות מרחבי העולם, הבאים ארצה ללמוד על חוסנה של מדינת ישראל וניהול העורף בשעת חירום.
     </p>
-    <p class="simple-text">כבר יצא לנו להיפגש עם שישה גנרלים מספרד, ראשת FEMA (רח"ל האמריקאית), נציגים בכירים ממשטרת שבדיה, קהילות יהודיות מרחבי העולם וגורמים נוספים, שבאים מכל היבשות לשמוע על קידום המוכנות ברשויות המקומיות, ההכשרות והאימונים - מכיתה י' ועד משרדי הממשלה. 
+    <img :src="spain" class="image-content" >
+
+    <p class="simple-text" ref="text3">כבר יצא לנו להיפגש עם שישה גנרלים מספרד, ראשת FEMA (רח"ל האמריקאית), נציגים בכירים ממשטרת שבדיה, קהילות יהודיות מרחבי העולם וגורמים נוספים, שבאים מכל היבשות לשמוע על קידום המוכנות ברשויות המקומיות, ההכשרות והאימונים - מכיתה י' ועד משרדי הממשלה. 
     </p>
-    <p class="blue-text"> עם איזה מדינות נפגשנו?</p>
-      <p class="simple-text">שימו לב לדגלים בתנועה, זהו את הדגלים וכמות המדינות ואולי אפילו תרשמו לכם בצד -</p>
-      <!-- להוסיף כאן סרטון דגלים -->
+    <p class="blue-text" ref="text4"> עם איזה מדינות נפגשנו?</p>
+      <p class="simple-text" ref="text5">שימו לב לדגלים בתנועה, זהו את הדגלים וכמות המדינות ואולי אפילו תרשמו לכם בצד -</p>
+      <img src="../assets/imgs/flags.gif" class="image-content">
       <p class="simple-text">בטוח ספרת טוב? (זאת לגמרי שאלה שנשאל בבוחן סיום)</p>
 
 
@@ -23,6 +25,7 @@
 <script setup>
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
+import spain from "../assets/imgs/spain.jpg";
 const emit = defineEmits(['go-menu']);
 
 
@@ -32,6 +35,9 @@ const backToMenu = () =>{
 
 const text1 = ref(null);
 const text2 = ref(null);
+const text3 = ref(null);
+const text4 = ref(null);
+const text5 = ref(null);
 
 const handleIntersect = (entries, observer) => {
 entries.forEach(entry => {
@@ -51,6 +57,9 @@ const options = {
 const observer = new IntersectionObserver(handleIntersect, options);
 observer.observe(text1.value);
 observer.observe(text2.value);
+observer.observe(text3.value);
+observer.observe(text4.value);
+observer.observe(text5.value);
 
 });
 </script>

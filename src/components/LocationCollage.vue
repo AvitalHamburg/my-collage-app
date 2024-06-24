@@ -3,7 +3,7 @@
     <div id="scroll-text">
       <p class="titles-gray" ref="text1">מה נמצא איפה?</p>
       <p class="simple-text">רגע לפני סיום, קצת אוריינטציה בתוך בסיס הפיקוד, במשחק שצריך לתפוס ולגרור בו את שם המיקום לנקודות המתאימות במפה -</p>
-      <img :src="nextBtn" id="next-btn" @click="backToMenu">
+      <button class="button" @click="backToMenu"> למשחק </button>
       <p id="text">dfdgdg</p>
     </div>
   </div>
@@ -79,5 +79,14 @@ const backToMenu = () => {
 #text {
   position: absolute;
   top: 400vh; /* Adjust as needed */
+}
+.button{
+  background-color: rgb(28, 180, 227);
+  border-radius: 50px;
+  width:50vw;
+  height:6vh;
+  font-size: 1.5em;
+  font-family: "Heebo-black";
+  color:white
 }
 </style>
