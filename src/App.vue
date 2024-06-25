@@ -3,18 +3,19 @@
     <HelloWorld v-if="state.page === 0" @move-next="nextPage"></HelloWorld>
     
     <div :class="{ 'open': state.openHamburger }" id="hamburger-icon" v-if="state.page > 0" @click="showHamburger">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-  </div>
-    <div class="trancperncy"></div>
-    <header id="header" v-if="state.page && !state.openHamburger">
-    <img v-if="!state.openHamburger" :src="collegeLogo" id="logo" @click="backToMenu">
-    <img v-if="!state.openHamburger && state.textNum !== 2 " id="shape" :src="orange">
-    <img v-if="!state.openHamburger && state.textNum !== 2 &&state.textNum !== 7 "  id="shape1" :src="blue">
-    <img v-if=" state.textNum === 2 " id="shape" :src="red">
-    <img v-if=" state.textNum === 2 " id="shape1" :src="red">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
 
+    <div class="trancperncy"></div>
+    
+    <header id="header" v-if="state.page && !state.openHamburger">
+      <img v-if="!state.openHamburger" :src="collegeLogo" id="logo" @click="backToMenu">
+      <img v-if="!state.openHamburger && state.textNum !== 2 " id="shape" :src="orange">
+      <img v-if="!state.openHamburger && state.textNum !== 2 && state.textNum !== 7 " id="shape1" :src="blue">
+      <img v-if="state.textNum === 2 " id="shape" :src="red">
+      <img v-if="state.textNum === 2 " id="shape1" :src="red">
    </header>
 
     <Menu v-if="state.showMenu" :visitedMenuPage="state.visitedPages" @go-next="movePage"></Menu>
@@ -23,19 +24,21 @@
     <SocityCollage v-if="state.textNum === 3" @go-menu="nextSubj"></SocityCollage>
     <LibraryCollage v-if="state.textNum === 4" @go-menu="nextSubj"></LibraryCollage>
     <OutsideCollage v-if="state.textNum === 5" @go-menu="nextSubj"></OutsideCollage>
-    <LocationCollage v-if="state.textNum === 6"  @go-menu="nextSubj"></LocationCollage>
+    <LocationCollage v-if="state.textNum === 6" @go-menu="nextSubj"></LocationCollage>
     <MapGame v-if="state.textNum === 7 && !state.showExam" @go-menu="nextSubj"></MapGame>
     <Game v-if="state.textNum === 8 || state.showExam"></Game>
 
-    <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
-    </div>
+    <div class="overlay" v-if="state.openHamburger" @click="showHamburger"></div>
+    
     <Hamburger 
       id="hamburger-page" 
       v-if="state.openHamburger" 
       :visitedMenuPage="state.visitedPages" 
       @next-page="movePage"
-    ></Hamburger>  </div>
+    ></Hamburger>
+  </div>
 </template>
+
 <script setup>
 import { reactive } from 'vue';
 import Menu from './components/Menu.vue';
@@ -60,9 +63,9 @@ const state = reactive({
   showMenu: false,
   textNum: 0,
   openHamburger: false,
-  visitedPages: [],
-  visetedNum: 0,
-  showExam:false
+  visitedPages: [], // Array to track visited pages
+  visetedNum: 0, // Initialize visited number
+  showExam: false
 });
 
 function nextPage() {
@@ -74,32 +77,30 @@ const movePage = (number) => {
   state.textNum = number;
   state.showMenu = false;
   state.openHamburger = false;
-  state.visitedPages.push(number - 1);
-  updateVisitedNum();
-
-  // Call updateVisitedNum whenever moving to a new page
+  state.visitedPages.push(number-1); // Push the current page number to visitedPages
+  updateVisitedNum(); // Update visited number
 }
 
 const nextSubj = () => {
+  state.visitedPages.push(state.textNum); // Push the current subject number
   if (state.textNum !== 7) {
     state.textNum++;
   } else {
-    if (state.visetedNum === 8) {
+    if (state.visitedPages.length === 8) {
       state.textNum++;
     } else {
       state.textNum = 0; // Go back to menu page
       state.showMenu = true; // Show the menu
-      state.visetedNum--;
     }
   }
-  updateVisitedNum(); // Call updateVisitedNum whenever moving to a new subject
+  updateVisitedNum(); // Update visited number
 }
 
 const updateVisitedNum = () => {
-  state.visetedNum ++; // Ensure visetedNum reflects the maximum visited pages or subjects
-  console.log( state.visetedNum);
-  if(state.visetedNum === 8){
-    state.showExam=true;
+  state.visetedNum = state.visitedPages.length; // Update visited number
+  console.log(`Visited number of pages: ${state.visetedNum}`);
+  if (state.visitedPages.length === 8) {
+    state.showExam = true; // Enable exam mode
   }
 }
 
@@ -111,9 +112,6 @@ const backToMenu = () => {
 const showHamburger = () => {
   state.openHamburger = !state.openHamburger;
 }
-
-
-
 </script>
 <style scoped>
 body {
