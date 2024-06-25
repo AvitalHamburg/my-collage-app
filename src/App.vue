@@ -24,8 +24,8 @@
     <LibraryCollage v-if="state.textNum === 4" @go-menu="nextSubj"></LibraryCollage>
     <OutsideCollage v-if="state.textNum === 5" @go-menu="nextSubj"></OutsideCollage>
     <LocationCollage v-if="state.textNum === 6"  @go-menu="nextSubj"></LocationCollage>
-    <MapGame v-if="state.textNum === 7" @game-over="handleGameOver"></MapGame>
-    <Game v-if="state.visetedNum === 7 && state.showExam"></Game>
+    <MapGame v-if="state.textNum === 7 && !state.showExam" @go-menu="nextSubj"></MapGame>
+    <Game v-if="state.textNum === 8 || state.showExam"></Game>
 
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
     </div>
@@ -75,16 +75,32 @@ const movePage = (number) => {
   state.showMenu = false;
   state.openHamburger = false;
   state.visitedPages.push(number - 1);
-  updateVisitedNum(); // Call updateVisitedNum whenever moving to a new page
+  updateVisitedNum();
+
+  // Call updateVisitedNum whenever moving to a new page
 }
 
 const nextSubj = () => {
-  state.textNum++;
+  if (state.textNum !== 7) {
+    state.textNum++;
+  } else {
+    if (state.visetedNum === 8) {
+      state.textNum++;
+    } else {
+      state.textNum = 0; // Go back to menu page
+      state.showMenu = true; // Show the menu
+      state.visetedNum--;
+    }
+  }
   updateVisitedNum(); // Call updateVisitedNum whenever moving to a new subject
 }
 
 const updateVisitedNum = () => {
-  state.visetedNum = Math.max(state.visitedPages.length, state.textNum); // Ensure visetedNum reflects the maximum visited pages or subjects
+  state.visetedNum ++; // Ensure visetedNum reflects the maximum visited pages or subjects
+  console.log( state.visetedNum);
+  if(state.visetedNum === 8){
+    state.showExam=true;
+  }
 }
 
 const backToMenu = () => {
@@ -96,11 +112,7 @@ const showHamburger = () => {
   state.openHamburger = !state.openHamburger;
 }
 
-const handleGameOver = () => {
-      // Handle game over logic here
-      console.log('Game over received from MapGame component');
-      state.showExam = true;
-  }
+
 
 </script>
 <style scoped>
