@@ -92,9 +92,9 @@
   
       // If all items have been dropped, alert "Awsam" and reset the game
       if (this.currentItemIndex === 8) {
-        this.$emit('game-over',true)
-        console.log('game-over')
-      }
+        this.$emit('game-over'); // Ensure this is emitted correctly
+        console.log('game-over');
+        }
     }
   },
       dragEnter(event) {
