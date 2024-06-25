@@ -103,28 +103,42 @@
     },
     methods: {
       dragStart(event) {
-        event.dataTransfer.setData('text/plain', event.target.id);
-      },
+      event.dataTransfer.setData('text/plain', event.target.id);
+  
+      // Remove the 'incorrect-drop' class from all drop zones
+      const dropzones = document.querySelectorAll('.dropzone');
+      dropzones.forEach(dropzone => {
+        dropzone.classList.remove('incorrect-drop');
+      });
+    },
       dragEnd(event) {
         event.target.classList.remove('dragging');
       },
       drop(event) {
-        event.preventDefault();
-        const itemId = event.dataTransfer.getData('text/plain');
-        const draggedItem = document.getElementById(itemId);
-        const dropZoneId = event.target.id;
+    event.preventDefault();
+    const itemId = event.dataTransfer.getData('text/plain');
+    const draggedItem = document.getElementById(itemId);
+    const dropZoneId = event.target.id;
   
-        // Check if the dragged item can be dropped into the target container
-        if (itemId === `item${dropZoneId.slice(-1)}`) {
-          // Remove the element from its original parent
-          draggedItem.parentNode.removeChild(draggedItem);
-          // Append the element to the drop zone
-          event.target.appendChild(draggedItem.cloneNode(true));
+    // Check if the dragged item can be dropped into the target container
+    if (itemId === `item${dropZoneId.slice(-1)}`) {
+      // Remove the element from its original parent
+      draggedItem.parentNode.removeChild(draggedItem);
+      // Append the element to the drop zone
+      event.target.appendChild(draggedItem.cloneNode(true));
   
-          // Set correctPlace to true
-          this.correctPlace = true;        
-        }
-      },
+      // Set correctPlace to true
+      this.correctPlace = true;
+  
+      // Remove the dragover event listener
+      event.target.removeEventListener('dragover', () => {
+        event.target.classList.remove('incorrect-drop');
+      });
+    } else {
+      // Add a class to the drop zone to indicate an incorrect drop
+      event.target.classList.add('incorrect-drop');
+    }
+  },
       dragEnter(event) {
         event.target.classList.add('dragover');
       },
@@ -211,7 +225,7 @@
   .container {
     position: absolute;
     left: 6%;
-    top: 25%;
+    top: 40%;
     gap: 2%;
     z-index: 10;
     justify-content: center;
@@ -242,16 +256,20 @@
     justify-content: center;
     align-items: center;
   }
+  .incorrect-drop {
+    background-color: rgba(240, 128, 128,0.6);
+  }
   @media screen and (max-width: 768px) {
     /* Additional adjustments for smaller screens */
     .container {
       position: absolute;
-      top: 8%;
+      top:18%;
       z-index: 10;
       display: flex;
-      flex-wrap: wrap;
       align-items: right;
+      justify-content:center;
       width: 100vw;
+      right:2vw;
     }
   
     .container1 {
@@ -341,6 +359,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10000;
+  }
+  .incorrect-drop {
+    background-color:rgba(240, 128, 128,0.6);
+   
   }
   }
   

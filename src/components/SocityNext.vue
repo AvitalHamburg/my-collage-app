@@ -22,7 +22,7 @@
 
 <script setup>
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
-import VideoPage from './VideoPage.vue';
+import VideoPage from './MapGame.vue';
 import knowInfo from './knowInfo.vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
 import carry from "../assets/imgs/carry.gif";
