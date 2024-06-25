@@ -95,7 +95,7 @@ const backToMenu = () => {
 const showHamburger = () => {
   state.openHamburger = !state.openHamburger;
 }
-handleGameOver() {
+const handleGameOver = () => {
       // Handle game over logic here
       console.log('Game over received from MapGame component');
     }
