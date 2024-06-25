@@ -24,8 +24,8 @@
     <LibraryCollage v-if="state.textNum === 4" @go-menu="nextSubj"></LibraryCollage>
     <OutsideCollage v-if="state.textNum === 5" @go-menu="nextSubj"></OutsideCollage>
     <LocationCollage v-if="state.textNum === 6"  @go-menu="nextSubj"></LocationCollage>
-    <MapGame v-if="state.textNum === 7" @game-over="goToExam" ></MapGame>
-    <Game v-if="state.visetedNum === 7 && this.goExam"></Game>
+    <MapGame v-if="state.textNum === 7"></MapGame>
+    <!-- <Game v-if="state.visetedNum === 7 && this.goExam"></Game> -->
 
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
     </div>
