@@ -361,8 +361,8 @@ export default {
   align-items: center;
 }
 .incorrect-drop {
-  background-color: red;
-  border: 2px dashed red;
+  background-color: rgba(248, 127, 127, 0.74);
+  border: 2px dashed rgba(248, 127, 127, 0.74);
 }
 }
 
