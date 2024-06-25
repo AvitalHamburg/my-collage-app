@@ -25,7 +25,7 @@
     <OutsideCollage v-if="state.textNum === 5" @go-menu="nextSubj"></OutsideCollage>
     <LocationCollage v-if="state.textNum === 6"  @go-menu="nextSubj"></LocationCollage>
     <MapGame v-if="state.textNum === 7" @game-over="handleGameOver"></MapGame>
-    <!-- <Game v-if="state.visetedNum === 7 && this.goExam"></Game> -->
+    <Game v-if="state.visetedNum === 7 && state.showExam"></Game>
 
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
     </div>
@@ -62,7 +62,7 @@ const state = reactive({
   openHamburger: false,
   visitedPages: [],
   visetedNum: 0,
-  goExam:false
+  showExam:false
 });
 
 function nextPage() {
@@ -95,10 +95,12 @@ const backToMenu = () => {
 const showHamburger = () => {
   state.openHamburger = !state.openHamburger;
 }
+
 const handleGameOver = () => {
       // Handle game over logic here
       console.log('Game over received from MapGame component');
-    }
+      state.showExam = true;
+  }
 
 </script>
 <style scoped>
