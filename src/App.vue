@@ -24,7 +24,7 @@
     <LibraryCollage v-if="state.textNum === 4" @go-menu="nextSubj"></LibraryCollage>
     <OutsideCollage v-if="state.textNum === 5" @go-menu="nextSubj"></OutsideCollage>
     <LocationCollage v-if="state.textNum === 6"  @go-menu="nextSubj"></LocationCollage>
-    <MapGame v-if="state.textNum === 7"></MapGame>
+    <MapGame v-if="state.textNum === 7" @game-over="handleGameOver"></MapGame>
     <!-- <Game v-if="state.visetedNum === 7 && this.goExam"></Game> -->
 
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
@@ -95,11 +95,10 @@ const backToMenu = () => {
 const showHamburger = () => {
   state.openHamburger = !state.openHamburger;
 }
-const goToExam = () => {
-  state.goExam = true;
-
-}
-
+handleGameOver() {
+      // Handle game over logic here
+      console.log('Game over received from MapGame component');
+    }
 
 </script>
 <style scoped>
