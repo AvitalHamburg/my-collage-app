@@ -39,82 +39,78 @@
       <!-- Success message -->
       <div v-if="showSuccessMessage" class="success-message">
         הצלחת ! כל הכבוד
-        <button @click=finishGame>המשך</button>
+        <button @click="finishGame">המשך</button>
       </div>
     </div>
   </template>
   
-  <script>
+  <script setup>
   import FlashCard from './FlashCard.vue';
+  import { ref } from 'vue';
   
-  export default {
-    data() {
-      return {
-        items: [
-          { id: 'item1', name: 'מכללה' },
-          { id: 'item2', name: 'לשכת אלוף' },
-          { id: 'item3', name: 'כוורת' },
-          { id: 'item4', name: 'מאמ"פ' },
-          { id: 'item5', name: 'אולם פיקודי' },
-          { id: 'item6', name: 'גן אירועים' },
-          { id: 'item7', name: 'חדר אוכל פיקודי' },
-          { id: 'item8', name: 'הוצל"א' }
-        ],
-        containers: [
-          { id: 'container1' },
-          { id: 'container2' },
-          { id: 'container3' },
-          { id: 'container4' },
-          { id: 'container5' },
-          { id: 'container6' },
-          { id: 'container7' },
-          { id: 'container8' }
-        ],
-        currentItemIndex: 0,
-        titles: [
-          'המכללה לאיתנות',
-          'אלופים אתם !',
-          'גם אנחנו חושבים עכשיו על האייסקפה',
-          'כל הכבוד!',
-          'יפה מאוד!',
-          'מצאת!',
-          'הצלחת!',
-          'אכן זו ההוצל"א'
-        ],
-        infos:[
-          'כאן נמצאת המכללה הלאומית לאיתנות ישראלית, צמודה לבסיס פיקוד העורף',
-          'במבנה זה, בקומה השנייה, נמצאת לשכת האלוף וגם לשכת רמ"ט (ראש מטה) הפיקוד',
-          ' ',
-          'מגמת אימוני מפקדות (מאמ"פ) ממוקמת במבנה מחוץ לבניין המכללה ובתוך הבסיס. מוזר, אנחנו יודעים, אבל לרוב כולם נפגשים בארוחת הצהריים',
-          'חשוב להכיר היטב את מיקומו של האולם הפיקודי, אירועים שונים מתקיימים בו',
-          ` 'ברחבי הבסיס ניתן לראות מבנים היסטוריים מהתקופה העות'מאנית, בני יותר ממאה שנה. עם התאורה הנכונה ועם מדשאה מטופחת, המבנים מספקים רקע ייחודי לטקסים, כנסים ואירועים יוצאי דופן בפיקוד'
-          ` ,
-         'כאן נמצא חדר האוכל הצבאי לחיילים וקצינים, אם רוצים לגוון מהאוכל במכללה',
-          'כאן נמצאת ההוצל"א (הוצאה לאור) בית הדפוס הפיקודי בניהולו של עמוס דוגמא'
-        ],
-        correctPlace: false,
-        showSuccessMessage: false // New state to control success message
-      };
-    },
-    computed: {
-      currentItem() {
-        return [this.items[this.currentItemIndex]];
-      }
-    },
-    methods: {
-      dragStart(event) {
-      event.dataTransfer.setData('text/plain', event.target.id);
+  const items = ref([
+    { id: 'item1', name: 'מכללה' },
+    { id: 'item2', name: 'לשכת אלוף' },
+    { id: 'item3', name: 'כוורת' },
+    { id: 'item4', name: 'מאמ"פ' },
+    { id: 'item5', name: 'אולם פיקודי' },
+    { id: 'item6', name: 'גן אירועים' },
+    { id: 'item7', name: 'חדר אוכל פיקודי' },
+    { id: 'item8', name: 'הוצל"א' }
+  ]);
   
-      // Remove the 'incorrect-drop' class from all drop zones
-      const dropzones = document.querySelectorAll('.dropzone');
-      dropzones.forEach(dropzone => {
-        dropzone.classList.remove('incorrect-drop');
-      });
-    },
-      dragEnd(event) {
-        event.target.classList.remove('dragging');
-      },
-      drop(event) {
+  const containers = ref([
+    { id: 'container1' },
+    { id: 'container2' },
+    { id: 'container3' },
+    { id: 'container4' },
+    { id: 'container5' },
+    { id: 'container6' },
+    { id: 'container7' },
+    { id: 'container8' }
+  ]);
+  
+  const currentItemIndex = ref(0);
+  const titles = ref([
+    'המכללה לאיתנות',
+    'אלופים אתם !',
+    'גם אנחנו חושבים עכשיו על האייסקפה',
+    'כל הכבוד!',
+    'יפה מאוד!',
+    'מצאת!',
+    'הצלחת!',
+    'אכן זו ההוצל"א'
+  ]);
+  
+  const infos = ref([
+    'כאן נמצאת המכללה הלאומית לאיתנות ישראלית, צמודה לבסיס פיקוד העורף',
+    'במבנה זה, בקומה השנייה, נמצאת לשכת האלוף וגם לשכת רמ"ט (ראש מטה) הפיקוד',
+    '',
+    'מגמת אימוני מפקדות (מאמ"פ) ממוקמת במבנה מחוץ לבניין המכללה ובתוך הבסיס. מוזר, אנחנו יודעים, אבל לרוב כולם נפגשים בארוחת הצהריים',
+    'חשוב להכיר היטב את מיקומו של האולם הפיקודי, אירועים שונים מתקיימים בו',
+    `'ברחבי הבסיס ניתן לראות מבנים היסטוריים מהתקופה העות'מאנית, בני יותר ממאה שנה. עם התאורה הנכונה ועם מדשאה מטופחת, המבנים מספקים רקע ייחודי לטקסים, כנסים ואירועים יוצאי דופן בפיקוד`,
+    'כאן נמצא חדר האוכל הצבאי לחיילים וקצינים, אם רוצים לגוון מהאוכל במכללה',
+    'כאן נמצאת ההוצל"א (הוצאה לאור) בית הדפוס הפיקודי בניהולו של עמוס דוגמא'
+  ]);
+  
+  const correctPlace = ref(false);
+  const showSuccessMessage = ref(false);
+  
+  const dragStart = event => {
+    event.dataTransfer.setData('text/plain', event.target.id);
+  
+    // Remove the 'incorrect-drop' class from all drop zones
+    const dropzones = document.querySelectorAll('.dropzone');
+    dropzones.forEach(dropzone => {
+      dropzone.classList.remove('incorrect-drop');
+    });
+  };
+  
+  const dragEnd = event => {
+    event.target.classList.remove('dragging');
+  };
+  
+  const drop = event => {
     event.preventDefault();
     const itemId = event.dataTransfer.getData('text/plain');
     const draggedItem = document.getElementById(itemId);
@@ -128,7 +124,7 @@
       event.target.appendChild(draggedItem.cloneNode(true));
   
       // Set correctPlace to true
-      this.correctPlace = true;
+      correctPlace.value = true;
   
       // Remove the dragover event listener
       event.target.removeEventListener('dragover', () => {
@@ -138,40 +134,42 @@
       // Add a class to the drop zone to indicate an incorrect drop
       event.target.classList.add('incorrect-drop');
     }
-  },
-      dragEnter(event) {
-        event.target.classList.add('dragover');
-      },
-      dragLeave(event) {
-        event.target.classList.remove('dragover');
-      },
-      touchStart(event) {
-        this.dragStart(event);
-      },
-      touchEnd(event) {
-        this.dragEnd(event);
-      },
-      touchMove(event) {
-        event.preventDefault();
-        this.dragEnter(event);
-      },
-          closeCard() {
-        if (this.currentItemIndex !== 7) {
-          this.correctPlace = false;
-          this.currentItemIndex++;
-        } else {
-          this.correctPlace = false;
-          this.showSuccessMessage = true;
-        }
-      },
-      finishGame(){
-        this.$emit('go-menu');
-      }
+  };
   
-    },
-    components: {
-      FlashCard
+  const dragEnter = event => {
+    event.target.classList.add('dragover');
+  };
+  
+  const dragLeave = event => {
+    event.target.classList.remove('dragover');
+  };
+  
+  const touchStart = event => {
+    dragStart(event);
+  };
+  
+  const touchEnd = event => {
+    dragEnd(event);
+  };
+  
+  const touchMove = event => {
+    event.preventDefault();
+    dragEnter(event);
+  };
+  
+  const closeCard = () => {
+    if (currentItemIndex.value !== 7) {
+      correctPlace.value = false;
+      currentItemIndex.value++;
+    } else {
+      correctPlace.value = false;
+      showSuccessMessage.value = true;
     }
+  };
+  
+  const finishGame = () => {
+    // Emit the 'go-menu' event to signal finishing the game
+    emit('go-menu');
   };
   </script>
   
