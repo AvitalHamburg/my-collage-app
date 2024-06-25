@@ -56,7 +56,7 @@
         <input type="text" v-model="firstName" placeholder="שם פרטי">
         <input type="text" v-model="lastName" placeholder="שם משפחה">
       </div>
-      <button @click="showScore()" v-if="firstName && lastName">הצג ציון</button>
+      <button @click="showScore()" :disabled="!firstName || !lastName">הצג ציון</button>
     </div>
   </div>
 </template>
@@ -83,13 +83,15 @@ const state = reactive({
 const currentIndex = ref(0);
 const points = ref(0);
 const maxPoints = props.questions.length * 10;
+
 const currentQuestion = ref(props.questions[currentIndex.value]);
 const currentAnswers = ref([
   props.answers1[currentIndex.value],
   props.answers2[currentIndex.value],
   props.answers3[currentIndex.value],
-  props.answers4[currentIndex.value]
+  props.answers4[currentIndex.value],
 ]);
+
 const selectedAnswerIndex = ref(null);
 const feedbackMessage = ref("");
 const firstName = ref("");
@@ -110,7 +112,7 @@ const updateQuestionData = () => {
     props.answers1[currentIndex.value],
     props.answers2[currentIndex.value],
     props.answers3[currentIndex.value],
-    props.answers4[currentIndex.value]
+    props.answers4[currentIndex.value],
   ];
   selectedAnswerIndex.value = null;
 };
@@ -145,53 +147,38 @@ const showScore = () => {
 };
 
 const captureAndShare = () => {
-  const targetElement = document.getElementById('page'); // Replace with the ID of the element you want to capture
+  const targetElement = document.getElementById('page');
   if (!targetElement) {
     console.error('Element not found');
     return;
   }
-  
   html2canvas(targetElement).then(canvas => {
-    const currentDate = new Date().toLocaleDateString('he-IL'); // Get current date in Israeli format
-    const captureTime = new Date().toLocaleTimeString('he-IL'); // Get current time in Israeli format
-    
-    // Convert canvas to Blob
+    const currentDate = new Date().toLocaleDateString('he-IL'); 
+    const captureTime = new Date().toLocaleTimeString('he-IL');
     canvas.toBlob(blob => {
       const file = new File([blob], "screenshot.png", { type: "image/png" });
-      
-      // Upload the image to Imgur
       const formData = new FormData();
       formData.append('image', file);
-      
       fetch('https://api.imgur.com/3/image', {
         method: 'POST',
         headers: {
-          Authorization: 'Client-ID your-imgur-client-id', // Replace with your Imgur client ID
+          Authorization: 'Client-ID your-imgur-client-id',
         },
         body: formData,
       })
       .then(response => response.json())
       .then(data => {
         const imageUrl = data.data.link;
-        
-        // Prepare the content to share
-        const message = `נקודות שהרוויחת: ${points.value}\nתאריך: ${currentDate}\nשעה: ${captureTime}\n\nצילום מסך:\n${imageUrl}`;
-        
-        // Share using navigator.share API
-        navigator.share({
-          text: message,
-        })
+        const screenshotUrl = URL.createObjectURL(file);
+        const message = `נקודות שהרוויחת: ${points.value}\nתאריך: ${currentDate} שעה: ${captureTime}\n\nצילום מסך:\n${imageUrl}\nשם: ${firstName.value} ${lastName.value}`;
+        navigator.share({ text: message })
         .then(() => console.log('הודעה שותפה בהצלחה'))
-        .catch((error) => console.error('שגיאה בשיתוף:', error));
+        .catch(error => console.error('שגיאה בשיתוף:', error));
       })
-      .catch(error => {
-        console.error('Failed to upload image:', error);
-      });
+      .catch(error => console.error('Failed to upload image:', error));
     });
   })
-  .catch(error => {
-    console.error('Failed to capture screenshot: ', error);
-  });
+  .catch(error => console.error('Failed to capture screenshot: ', error));
 };
 
 const retryQuiz = () => {
@@ -213,7 +200,6 @@ watch(currentIndex, () => {
 });
 
 </script>
-
 <style scoped>
 @font-face {
   font-family: "Heebo";
