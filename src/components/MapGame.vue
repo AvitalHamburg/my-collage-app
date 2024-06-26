@@ -144,16 +144,7 @@
       dragLeave(event) {
         event.target.classList.remove('dragover');
       },
-      touchStart(event) {
-        this.dragStart(event);
-      },
-      touchEnd(event) {
-        this.dragEnd(event);
-      },
-      touchMove(event) {
-        event.preventDefault();
-        this.dragEnter(event);
-      },
+     
           closeCard() {
         if (this.currentItemIndex !== 7) {
           this.correctPlace = false;
