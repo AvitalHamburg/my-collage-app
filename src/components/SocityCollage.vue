@@ -295,13 +295,13 @@ margin-bottom: 2vh;
 }
 @keyframes bounce2 {
     0% {
-        bottom: -90vh;
+        bottom: -40vh;
     }
     50%{
-      bottom: -95vh;
+      bottom: -45vh;
     }
     100%{
-      bottom: -90vh;
+      bottom: -40vh;
     }
 }
 

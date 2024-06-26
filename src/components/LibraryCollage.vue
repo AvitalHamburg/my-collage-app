@@ -181,7 +181,7 @@ color:rgb(28, 180, 227);
 width: 95vw;
 }
 .white-text {
-font-size: 3em;
+font-size: 4em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
@@ -269,13 +269,13 @@ height: auto;
 }
 @keyframes bounce2 {
     0% {
-        top: 275vh;
+        top: 236vh;
     }
     50%{
-      top: 280vh;
+      top: 242vh;
     }
     100%{
-      top: 275vh;
+      top: 236vh;
     }
 }
 </style>

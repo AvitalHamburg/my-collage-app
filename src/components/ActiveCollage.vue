@@ -233,10 +233,10 @@ animation: fadeIn 1s ease;
 
 @keyframes bounceUpDown {
   0%, 100% {
-    top: 395vh; /* Start and end position */
+    top: 310vh; /* Start and end position */
   }
   50% {
-    top: 405vh; /* Peak position */
+    top: 315vh; /* Peak position */
   }
 }
 
