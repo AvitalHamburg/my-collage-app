@@ -10,8 +10,8 @@
           draggable="true"
           @dragstart="dragStart"
           @dragend="dragEnd"
-          @touchstart="touchStart"
-          @touchend="touchEnd"
+          @touchstart="dragStart"
+          @touchend="dragEnd"
         >
           {{ item.name }}
         </div>
