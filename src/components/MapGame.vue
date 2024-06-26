@@ -10,8 +10,7 @@
           draggable="true"
           @dragstart="dragStart"
           @dragend="dragEnd"
-          @touchstart="dragStart"
-          @touchend="dragEnd"
+        
         >
           {{ item.name }}
         </div>
@@ -27,7 +26,7 @@
           @drop="drop"
           @dragenter="dragEnter"
           @dragleave="dragLeave"
-          @touchmove.prevent="touchMove"
+         
         >
           <!-- Adjust content as needed -->
         </div>
