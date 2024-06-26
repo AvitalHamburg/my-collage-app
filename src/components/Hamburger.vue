@@ -1,181 +1,102 @@
-
-
 <template>
-  <div id="intro">
-    <div id="shadow"></div>
-    <img :src="state.imagesrc" alt="White Logo" id="white-logo" :class="{ 'move-to-center': state.isLogoChanged }">
-    <div  v-if="state.showIntro">
-      <h1 id="welcome-text">ברוך הבא או הבאה למשפחת המכללה</h1>
-
-
-      <p id="introduction"> בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני.
-        וכן, בארור שיש בוחן בסוף :) 
-בהצלחה!</p>
-    <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="moveNextPage">
-
-
-    </div>
+  <div class="button-container">
+    <button
+      v-for="(subject, index) in subjects"
+      :key="index"
+      @click.once="moveToPage(index)"
+      :class="{ 
+        'btn-class': states[index] === 0, 
+        'active-btn': states[index] === 1, 
+        'selected-btn': visitedMenuPage.includes(index),
+      }"
+    >
+      <div class="button-content">
+        {{ subject }}
+      </div>
+      <div class="separator"></div>
+    </button>
   </div>
 </template>
 
 <script setup>
-import { reactive, onMounted, getCurrentInstance } from 'vue'
-import nextBtn from "../assets/imgs/nextBtn.png";
-import whiteLogoGif from "../assets/imgs/whiteLogo.gif";
-import inriLogoSvg from "../assets/imgs/inri-logo-white2.svg";
+import { reactive, defineProps, defineEmits } from 'vue';
 
-const { emit } = getCurrentInstance();
+const { visitedMenuPage } = defineProps(['visitedMenuPage']);
+const emit = defineEmits(['next-page']);
 
-// משתנה בוליאני המציין האם המשתמש כבר היה בעמוד זה
-let visitedThisPage = false;
+const subjects = [
+  'מי זאת המכללה',
+  'המכללה בחרבות ברזל',
+  'נכסים דיגיטליים',
+  'הספרייה הלאומית לחירום',
+  'קש"ח',
+  ' מה נמצא איפה?'
+];
+const states = reactive(subjects.map(() => 0));
 
-const state = reactive({
-  imagesrc: whiteLogoGif,
-  isLogoChanged: false,
-  showIntro: false,
-  visitedThisPage: visitedThisPage  // הוספת המשתנה בוליאני לסטייט
-});
-
-function changeImageSourceAfterTimeout() {
-  setTimeout(() => {
-    state.imagesrc = inriLogoSvg;
-    state.isLogoChanged = true;
-    state.showIntro = true;
-    state.visitedThisPage = true; // מסמנים שהמשתמש ביקר בעמוד זה
-  }, 4000);
-}
-
-function moveNextPage(){
-  emit("move-next", state.visitedThisPage); // שליחת הערך של visitedThisPage עם אירוע "move-next"
-}
-
-onMounted(() => {
-  changeImageSourceAfterTimeout();
-});
+const moveToPage = (index) => {
+  states[index] = 1;
+  emit('next-page',  index + 1);
+};
 </script>
 
-
 <style scoped>
-@font-face { 
+@font-face {
   font-family: "Heebo";
   font-weight: normal;
-  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
-       format("woff");
+  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"),
+    format("woff");
 }
 
-@font-face { 
-  font-family: "Karantina";
-  font-weight: normal;
-  src: url("../assets/fonts/Karantina-Regular.woff"), 
-  format("woff");
-} 
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 20px; /* Adjust the margin-top value as needed */
+}
 
+.btn-class {
+  position: relative; /* Ensure button content positioning */
+  font-size: 1.5em;
+  background-color: rgba(23, 90, 133, 0);
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  width: 100vw;
+  height: 10vh;
+  border-radius: 0; /* Adjust the button radius */
+  font-family: "Heebo";
+  border: none; /* Remove default button border */
+}
 
+.btn-class:hover {
+  color: #c9d2ddb4;
+}
 
-*{
-  overflow: hidden;
+.active-btn {
+  opacity: 0.6;
+}
+
+.selected-btn {
+  background-color: rgb(238, 238, 238);
+  color: rgb(89, 89, 89);
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content horizontally */
+  width: 100%;
+  height: 100%;
+  text-align: center; /* Center text inside button */
   direction: rtl;
 }
-#intro {
-  position:absolute;
-  top: 0%;
-  right: 50%;
-  transform: translateX(50%);
-  height: 100vh;
-  width: 100vw;
-  background-image: url("../assets/imgs/Bg1.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 0%;
-}
-#shadow {
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  background-color: rgb(59, 59, 59);
-  top: 0%;
-  right: 50%;
-  transform: translateX(50%);
-  opacity: 0.5;
-  z-index: 2;
-}
 
-#white-logo {
-  position: absolute;
-  width: 50vw;
-  height: auto;
-  z-index: 5;
-  right: 50%;
-  transform: translateX(50%);
-  top: 5%;
+.separator {
+  width: calc(100% - 40px); /* Adjust width to fit within button */
+  height: 0.5px; /* Separator height */
+  background-color: #ffffff; /* Separator color */
+  margin-left: 20px; /* Adjust margin to center the separator */
+  margin-top: 13px;
 }
-#welcome-text{
-    color: white;
-    position:absolute;
-    right: 50%;
-    transform: translateX(50%);
-    font-size: 4em;
-    text-align: center;
-    top:15vh;
-    z-index: 5;
-    width:90vw;
-    font-family: "karantina";
-
-}
-#introduction{
-  position:absolute;
-  color: white;
-  right:50%;
-  transform:translateX(50%);
-  width:80vw;
-  height:auto;
-  z-index: 5;
-  font-size: 1.4em;
-  top:45vh;
-
-  font-family: "Heebo"
-}
-@keyframes bounce2 {
-	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-	40% {transform: translateY(-30px);}
-	60% {transform: translateY(-15px);}
-}
-
-
-#next-wBtn{
-  position:absolute;
-  z-index: 5;
-  right:50%;
-  transform: translateX(50%);
-  bottom:20vh;   
-  animation: bounce2 2s ease infinite; 
-}
-@keyframes bounce2 {
-    0% {
-        bottom: 15vh;
-    }
-    50%{
-      bottom: 10vh;
-    }
-    100%{
-      bottom: 15vh;
-    }
-}
-.read-the-docs {
-  color: #888;
-}
-
-.move-to-center {
-  position: absolute;
-  width: 50vw;
-  height: auto;
-  z-index: 5;
-  right: 50%;
-  transform: translateX(50%);
-  top: 5%;
-}
-
-
-
-
 </style>

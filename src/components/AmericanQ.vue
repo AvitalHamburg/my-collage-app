@@ -29,6 +29,16 @@
       >
         {{ answer }}
       </button>
+      <button
+        v-if="currentIndex === 7"
+        @click="handleButtonClick(extraAnswer, currentAnswers.length)"
+        class="answer-button"
+        :class="{ 'selected-answer': currentAnswers.length === selectedAnswerIndex }"
+        :disabled="state.showResults"
+        :id="`answer-button-extra`"
+      >
+        {{ extraAnswer }}
+      </button>
     </div>
     <div id="navigation-buttons" v-if="!state.showFinalScreen">
       <button
@@ -105,6 +115,8 @@ const handleButtonClick = (answer, index) => {
     points.value += 10;
   }
 };
+const extraAnswer = ref("ה.כל התשובות נכונות");
+let isExtraAnswerAdded = false;
 
 const updateQuestionData = () => {
   currentQuestion.value = props.questions[currentIndex.value];
@@ -114,6 +126,16 @@ const updateQuestionData = () => {
     props.answers3[currentIndex.value],
     props.answers4[currentIndex.value],
   ];
+
+  if (currentIndex.value === 7 && !isExtraAnswerAdded) {
+    currentAnswers.value.push(extraAnswer.value);
+    isExtraAnswerAdded = true;
+  } else if (currentIndex.value !== 7 && isExtraAnswerAdded) {
+    // Remove extraAnswer if it was added previously
+    currentAnswers.value.pop();
+    isExtraAnswerAdded = false;
+  }
+
   selectedAnswerIndex.value = null;
 };
 
@@ -251,11 +273,11 @@ watch(currentIndex, () => {
 #navigation-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 10vh;
+  margin-top: 5vh;
   margin-top: 20vh;
   margin-bottom: 10px;
   position: absolute;
-  bottom: 0vh;
+
   width: 90%;
   left: 50%;
   transform: translateX(-50%);

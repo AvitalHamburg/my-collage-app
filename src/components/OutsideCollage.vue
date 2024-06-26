@@ -178,7 +178,24 @@ color: rgb(89,89,89);
 .animate {
 animation: fadeIn 1s ease;
 }
+#next-btn{
+  position: absolute;
+  right:50%;
+  transform: translateX(50%);
+  animation: bounce2 2s ease infinite; 
 
+}
+@keyframes bounce2 {
+    0% {
+        top: 175vh;
+    }
+    50%{
+      top: 180vh;
+    }
+    100%{
+      top: 175vh;
+    }
+}
 
 
 

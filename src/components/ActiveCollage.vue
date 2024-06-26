@@ -15,24 +15,25 @@
     <img class="image-content" ref="image1" :src="warImage1">
     <p class="red-bold" ref="text1">מרס"ל
     </p>
-    <p class="simple-text" ref="text2"> המרס"ל (מרכז סיוע לאזרח) מרכז במרחב משותף את מחוזות פקע"ר, ארגוני ההתנדבות ונציגים מהמגזר העסקי, המייצג כ-2,000,000 עובדים במשק. מנגנון הפעולה מאפשר למחוזות פיקוד העורף להעלות בקשות לסיוע ובמקרה ולא נמצא להן מענה אחר במרחבן, עולה הבקשה לרמה הפיקודית, לטיפול במשאבים לאומיים.
+    <p class="simple-text" ref="text6"> המרס"ל (מרכז סיוע לאזרח) מרכז במרחב משותף את מחוזות פקע"ר, ארגוני ההתנדבות ונציגים מהמגזר העסקי, המייצג כ-2,000,000 עובדים במשק. מנגנון הפעולה מאפשר למחוזות פיקוד העורף להעלות בקשות לסיוע ובמקרה ולא נמצא להן מענה אחר במרחבן, עולה הבקשה לרמה הפיקודית, לטיפול במשאבים לאומיים.
 </p>
-    <p class="simple-text" ref="text3">במהלך הפעלת המרס"ל מאוקטובר 2023 עד פברואר 2024, טיפלו במרס"ל בלמעלה מ-700 פניות שעלו מהמחוזות בתחומים שונים כמו אספקת מנות מזון, חיתולים, מטרנה, מתנדבים, שינוע תרופות ועוד משימות ייחודיות וערכיות, שלא ניתן להן כל מענה ממקורות אחרים.
+    <p class="simple-text" ref="text7">במהלך הפעלת המרס"ל מאוקטובר 2023 עד פברואר 2024, טיפלו במרס"ל בלמעלה מ-700 פניות שעלו מהמחוזות בתחומים שונים כמו אספקת מנות מזון, חיתולים, מטרנה, מתנדבים, שינוע תרופות ועוד משימות ייחודיות וערכיות, שלא ניתן להן כל מענה ממקורות אחרים.
     </p>
     <img class="image-content" ref="image2" :src="warImage2">
-    <p class="red-bold" ref="text1">משלט ינאי
+    <p class="red-bold" ref="text8">משלט ינאי
     </p>
-    <p class="simple-text" ref="text2">אפשר לומר שחוץ מראש הממשלה כולם הגיעו לבקר - מהנשיא ורעייתו, הרמטכ"ל, שרים, מנכ"לי משרדי ממשלה, אלופי המטכ"ל ועוד. 
+    <p class="simple-text" ref="text9">אפשר לומר שחוץ מראש הממשלה כולם הגיעו לבקר - מהנשיא ורעייתו, הרמטכ"ל, שרים, מנכ"לי משרדי ממשלה, אלופי המטכ"ל ועוד. 
 המשל"ט ניהל, ריכז ותכלל את תמונת המצב של המפונים בבתי המלון עם למעלה מרבע מיליון ישראלים שיצאו מביתם, 97 יישובים מתפנים ו-456 מלונות בשיא. 
 </p>
-<img class="image-content" ref="image1" :src="ImgCollage4">
-<p class="red-bold" ref="text3"> המכללה בחירום
+<img class="image-content" ref="image3" :src="ImgCollage4">
+<p class="red-bold" ref="text10"> המכללה בחירום
 </p>
     <p class="simple-text" ref="text4"> לצד שתי המשימות הלאומיות, המכללה המשיכה להכשיר בחירום קורסים לבעלי תפקידים שהיו נחוצים בשטח, הנגשנו תוכן מקצועי ומתוקף לבעלי התפקידים ברשויות, ביצענו 'זמן יקר' במפקדות, הפצנו תוכן דיגיטלי לצוותי הצח"י ומנהלי המכלולים, ערכנו אבחון לקריית שמונה לסיוע בהתמודדות הרשות עם אתגרי הפינוי ופיצול הרשות ועוד פעולות רבות כחלק מהמאמץ המלחמתי בעורף.
     </p>
-
+    <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToMenu">
+    <p class="white-bold">hytgtgtgtgtgttggrthrth4h</p>
   </div>
-  <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToMenu">
+
 
 </div>
   </div>
@@ -60,8 +61,14 @@ const text2 = ref(null);
 const text3 = ref(null);
 const text4 = ref(null);
 const text5 = ref(null);
+const text6 = ref(null);
+const text7 = ref(null);
+const text8 = ref(null);
+const text9 = ref(null);
+const text10 = ref(null);
 const image1 = ref(null);
 const image2 = ref(null);
+const image3 = ref(null);
 // const nextT = ref(null);
 const nextB = ref(null);
 
@@ -87,8 +94,14 @@ observer.observe(text2.value);
 observer.observe(text3.value);
 observer.observe(text4.value);
 observer.observe(text5.value);
+observer.observe(text6.value);
+observer.observe(text7.value);
+observer.observe(text8.value);
+observer.observe(text9.value);
+observer.observe(text10.value);
 observer.observe(image1.value);
 observer.observe(image2.value);
+observer.observe(image3.value);
 
 });
 
@@ -196,6 +209,15 @@ text-align: right;
 font-family: "Heebo-Black";
 color:#e06666;
 }
+.white-bold {
+font-size: 5em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:aliceblue;
+top:150vh;
+}
 .red-big {
 font-size: 2em;
 margin-bottom: 2vh;
@@ -211,10 +233,10 @@ animation: fadeIn 1s ease;
 
 @keyframes bounceUpDown {
   0%, 100% {
-    top: 320vh; /* Start and end position */
+    top: 395vh; /* Start and end position */
   }
   50% {
-    top: 325vh; /* Peak position */
+    top: 405vh; /* Peak position */
   }
 }
 

@@ -92,7 +92,7 @@ const moveToPage = (index) => {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 40vh;
+  top: 46vh;
   right: 50%;
   transform: translateX(50%);
   z-index: 10000;
@@ -148,7 +148,7 @@ const moveToPage = (index) => {
 }
 #intro{
   position: absolute;
-  top:27vh;
+  top:32vh;
   width:70vw;
   right:50%;
   transform: translateX(50%);

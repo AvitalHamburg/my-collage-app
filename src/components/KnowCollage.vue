@@ -18,15 +18,18 @@
     <p class="grey-bold" ref="text12">4. מגמת אימוני רשויות</p>
     <p class="simple-text" ref="text13">אחראית לממש את מה שנלמד בהכשרה - באימון לפי תרחיש ועל-פי תוכנית מותאמת. </p>
 
-    <!-- <img class="image-content" :src="ImgCollage1" alt="Collage Image" ref="image2"> -->
-    <p  class="grey-bold-text">כך נוצר מעגל ההכשרה השלם, המאפשר לנו לפגוש בבית אחד כמה שיותר בעלי תפקידים המנהלים מצבי חירום בתחומם</p>
-    <div id="gif" >מופיע כאן גיף</div>
-    <p class="simple-text"> אנחנו מייצרים פה שפה אחודה ומקדמים שיתופי פעולה עם מובילים מקצועיים ממשרדי הממשלה השונים, מרכז השלטון המקומי והאזורי, ארגוני חירום והצלה, מוסדות אקדמאים וארגונים מהחברה האזרחית.
+    <img class="image-content" :src="ImgCollage1" alt="Collage Image" ref="image2">
+    <p  class="grey-bold" ref="text14">כך נוצר מעגל ההכשרה השלם, המאפשר לנו לפגוש בבית אחד כמה שיותר בעלי תפקידים המנהלים מצבי חירום בתחומם</p>
+    <img class="gif-content" :src="collageGif"> 
+    <p class="simple-text" ref="text15"> אנחנו מייצרים פה שפה אחודה ומקדמים שיתופי פעולה עם מובילים מקצועיים ממשרדי הממשלה השונים, מרכז השלטון המקומי והאזורי, ארגוני חירום והצלה, מוסדות אקדמאים וארגונים מהחברה האזרחית.
     </p>
+    <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToInfo">
+    <p class="titles-white" >gergr5e664646464grejgiroegerghrthtrhrthrthrthrthtrhtrhtrhtrhtjgijgirjgirejgirjgirrgrge</p>
+
 
   </div>
-  <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToInfo">
 </div>
+
   <knowInfo v-if="state.showInfo" @go-menu="goToMenu"></knowInfo>
   </div>
 </template>
@@ -36,7 +39,8 @@ import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import knowInfo from './knowInfo.vue';
 import ImgCollage from '../assets/imgs/11ImgCollage.jpg';
 import nextBtn from "../assets/imgs/nextBtn.png";
-
+import ImgCollage1 from '../assets/imgs/22ImgCollage.jpg';
+import collageGif from '../assets/imgs/collageGif.gif';
 
 const emit = defineEmits(['go-menu']);
 
@@ -66,8 +70,10 @@ const text10 = ref(null);
 const text11= ref(null);
 const text12= ref(null);
 const text13= ref(null);
+const text14= ref(null);
+const text15= ref(null);
 const image1 = ref(null);
-// const image2 = ref(null);
+const image2 = ref(null);
 // const nextT = ref(null);
 const nextB = ref(null);
 
@@ -101,7 +107,10 @@ observer.observe(text10.value);
 observer.observe(text11.value);
 observer.observe(text12.value);
 observer.observe(text13.value);
+observer.observe(text14.value);
+observer.observe(text15.value);
 observer.observe(image1.value);
+observer.observe(image2.value);
 });
 
 </script>
@@ -178,6 +187,14 @@ text-align: right;
 font-family: "karantina";
 color: rgb(89,89,89);
 }
+.titles-white {
+font-size: 4em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "karantina";
+color:aliceblue;
+}
 
 .simple-text {
 width: 100%;
@@ -217,26 +234,24 @@ color: rgb(89,89,89);
 animation: fadeIn 1s ease;
 }
 
-
-@keyframes bounce2 {
-  0% {
-      top: 180vh; /* Adjusted initial position */
-  }
-  50%{
-    top: 185vh; /* Adjusted midpoint position */
-  }
-  100%{
-    top: 180vh; /* Adjusted final position */
-  }
-}
-
 #next-wBtn{
-position:absolute;
-z-index: 5;
-right:50%;
-transform: translateX(50%);
-top:150vh; /* Adjusted position */
-animation: bounce2 2s ease infinite; 
+  position:absolute;
+  z-index: 5;
+  right:50%;
+  transform: translateX(50%);
+  bottom:20vh;   
+  animation: bounce2 2s ease infinite; 
+}
+@keyframes bounce2 {
+    0% {
+        bottom: -84vh;
+    }
+    50%{
+      bottom: -89vh;
+    }
+    100%{
+      bottom: -84vh;
+    }
 }
 .animate {
 animation: fadeIn 1s ease;
@@ -257,5 +272,9 @@ to {
 width: 100%;
 height: auto;
 margin-bottom: 2vh;
+}
+.gif-content{
+  width:100%;
+  height:auto;
 }
 </style>

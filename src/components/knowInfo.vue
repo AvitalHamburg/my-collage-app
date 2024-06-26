@@ -3,18 +3,20 @@
       <div>
           <div id="scroll-text">
              
-              <p ref="text1"class="simple-text-big">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.
+              <p class="simple-text-big" ref="text1">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.
               </p>
               <img class="image-content" ref="image1" :src="infoCollage1">
-              <p ref="text2" class="simple-text">אנחנו גם מכשירים צוותי סע"ר (סיוע עצמי ראשוני) של הרשות המקומית ותלמידי כיתות י' לחילוץ קל - בכדי שיוכלו לסייע באירוע חילוץ בסביבה שלהם, כמו במקרה של רעידת אדמה. </p>
+              <p  class="simple-text" ref="text2">אנחנו גם מכשירים צוותי סע"ר (סיוע עצמי ראשוני) של הרשות המקומית ותלמידי כיתות י' לחילוץ קל - בכדי שיוכלו לסייע באירוע חילוץ בסביבה שלהם, כמו במקרה של רעידת אדמה. </p>
               <img class="image-content" :src="firefighters">
-              <p class="simple-text">כיתות נבחרות מכל בתי הספר עוברות הכשרה של יומיים, בעוד צוותי הסע"ר לאחר ההכשרה, עוברים אימונים באתרי הרס בשיתוף ארגוני החירום הנוספים של הרשות. </p> 
+              <p class="simple-text" ref="text3">כיתות נבחרות מכל בתי הספר עוברות הכשרה של יומיים, בעוד צוותי הסע"ר לאחר ההכשרה, עוברים אימונים באתרי הרס בשיתוף ארגוני החירום הנוספים של הרשות. </p> 
                 <p class="blue-text">מעניין, לא?</p>
-                <p class="simple-text">את כל זה יש לנו גם בסרטון קצר ומגניב, אז בואו נראה קצת מספרים.
+                <p class="simple-text" ref="text4">את כל זה יש לנו גם בסרטון קצר ומגניב, אז בואו נראה קצת מספרים.
                        כדאי לנסות לזכור כמה שיותר פרטים, כי באיזשהו שלב תגיע שאלה..</p>
               <video id="video" src="../assets/media/videoCollage.mp4" controls ></video>
-              <p class="grey-bold">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.</p>
-              <img  :src="nextBtn" id="next-wBtn2" @click="goToMenu">
+              <p class="grey-bold" ref="text5">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.</p>
+              <img  :src="nextBtn" id="next-wBtn2" ref="image2" @click="goToMenu">
+              <p class="white-big" >gergr5e664646464grejgiroegerghrthtrhrthrthrthrthtrhtrhtrhtrhtjgijgirjgirejgirjgirrgrge</p>
+
 
       </div>
       </div>
@@ -38,8 +40,11 @@ emit('go-menu');
 
 const text1 = ref(null);
 const text2 = ref(null);
+const text3 = ref(null);
+const text4 = ref(null);
+const text5 = ref(null);
 const image1 = ref(null);
-const nextB = ref(null);
+const image2 = ref(null);
 
 
 const handleIntersect = (entries, observer) => {
@@ -60,7 +65,11 @@ threshold: 0.5,
 const observer = new IntersectionObserver(handleIntersect, options);
 observer.observe(text1.value);
 observer.observe(text2.value);
+observer.observe(text3.value);
+observer.observe(text4.value);
+observer.observe(text5.value);
 observer.observe(image1.value);
+observer.observe(image2.value);
 });
 
 </script>
@@ -188,6 +197,15 @@ text-align: right;
 font-family: "Heebo-Black";
 color: rgb(89,89,89);
 }
+.white-big {
+font-size: 2em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:aliceblue;
+top:50%;
+}
 .animate {
 animation: fadeIn 1s ease;
 }
@@ -203,25 +221,24 @@ to {
 }
 }
 
-#next-btn{
-position: absolute;
-top:70vh;
-right: 50%;
-transform: translateX(50%);
-animation: bounce 2s ease infinite; 
-
+#next-wBtn2{
+  position:absolute;
+  z-index: 5;
+  right:50%;
+  transform: translateX(50%);
+  bottom:20vh;   
+  animation: bounce2 2s ease infinite; 
 }
-
-@keyframes bounce {
-  0% {
-      top: 70vh; /* Adjusted initial position */
-  }
-  50%{
-    top: 75vh; /* Adjusted midpoint position */
-  }
-  100%{
-    top: 70vh; /* Adjusted final position */
-  }
+@keyframes bounce2 {
+    0% {
+        bottom: 5vh;
+    }
+    50%{
+      bottom: 1vh;
+    }
+    100%{
+      bottom: 5vh;
+    }
 }
 
 
@@ -244,25 +261,5 @@ height: auto;
 margin-bottom: 2vh;
 }
 
-#next-wBtn2{
-position:absolute;
-z-index: 5;
-right:50%;
-transform: translateX(50%);
-top:40vh; /* Adjusted position */
-animation: bounce2 2s ease infinite; 
-}
-
-@keyframes bounce2 {
-  0% {
-      top: 225vh; /* Adjusted initial position */
-  }
-  50%{
-    top:220vh; /* Adjusted midpoint position */
-  }
-  100%{
-    top: 225vh; /* Adjusted final position */
-  }
-}
 
 </style>

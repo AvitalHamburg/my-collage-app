@@ -40,7 +40,7 @@
     right: 50%;
     transform: translateX(50%);
     width: 90vw;
-    height: 20vh;
+    height: 30vh;
     direction: rtl;
     background-color: rgb(28, 180, 227);
     border: none;
@@ -53,6 +53,11 @@
     font-size: 1.8em;
     color: white;
     font-family: 'Heebo-Black';
+  }
+  p{
+    font-size: 1.3em;
+    color: white;
+    font-family: "Heebo";
   }
   
   .close-button {

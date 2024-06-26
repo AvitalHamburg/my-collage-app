@@ -4,11 +4,11 @@
     <p class="titles-gray" ref="text1">נכסים דיגיטליים של המכללה    </p>
     <p class="grey-bold" ref="text2">המכללה עברה בשנתיים האחרונות טרנספורמציה דיגיטלית, עם הנגשה משמעותית של ידע בשעת חירום לצד שיפור תהליכים בשגרה, שהפכו קלים, קצרים ומהירים יותר.
     </p>
-    <img class="image-content" :src="comp">
+    <img class="image-content" ref="image1" :src="comp">
     <p class="blue-text">ידע ומידע - הכל באתר המכללה</p>
-    <p class="simple-text">באתר המכללה ניתן להירשם ולקבל מידע על כל ההכשרות שלנו לבעלי תפקידים במשרדי הממשלה, הרשויות המקומיות ובמפקדות צבאיות.</p>
+    <p class="simple-text" ref="text3">באתר המכללה ניתן להירשם ולקבל מידע על כל ההכשרות שלנו לבעלי תפקידים במשרדי הממשלה, הרשויות המקומיות ובמפקדות צבאיות.</p>
     <a id="site-link" href="https://inri.orc.org.il/">קישור</a>
-    <p class="simple-text">בואו לעשות לנו לייק ולעקוב אחרינו ברשתות החברתיות, אתם גם ככה שם :)     </p>
+    <p class="simple-text" ref="text4">בואו לעשות לנו לייק ולעקוב אחרינו ברשתות החברתיות, אתם גם ככה שם :)     </p>
 
 
     <span class="brands">
@@ -21,15 +21,17 @@
     <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="linkedin" >
     </a>
   </span>
-    <p class="green-text">מידע על הכשרות צבאיות, נתונים היסטוריים ותוכן מקצועי</p>
-    <p class="simple-text">עבור המידע הצבאי, מרחב המכללה מכיל XXX ויכול לעזור בכל מקרה שלZZZ. 
-ניתן להיכנס דרך XX באמצעות חיפוש בXX</p>
+    <p class="green-text" ref="text5">מידע על הכשרות צבאיות, נתונים היסטוריים ותוכן מקצועי</p>
+    <p class="simple-text" ref="text6">המידע הצבאי במרחב המכללה מכיל את ׳אתר שיתוף הידע׳ המסייע לשימור ידע של קורסים, מופעים ומצגות.
+האתר נגיש לכל מי שברשותו גישה למחשב צבאי, דרך צהלנ״ט כותבים בחיפוש: ׳אתר שיתוף הידע׳.
+</p>
 <img class="image-content" :src="neve">
-<p class="orange-text">יש לנו אפילו רשות מקומית דיגיטלית!</p>
-    <p  class="simple-text">הכירו את נווה איתנים - הרשות הכי מוכנה במדינה :) 
+<p class="orange-text" ref="text7">יש לנו אפילו רשות מקומית דיגיטלית!</p>
+    <p  class="simple-text" ref="text8">הכירו את נווה איתנים - הרשות הכי מוכנה במדינה :) 
 בתוך מערכות השליטה והבקרה הזמינות לבעלי תפקידים בשעת חירום, הקמנו רשות מקוונת שניתן להתאמן עליה במגוון תרחישים. 
 </p>
     <img :src="nextBtn" id="next-btn" @click="goToGif" >
+    <p class="white-text">btbhrthrthrthrthtrhrthtrhtrhtrhrthtrhtrhtrhtrh</p>
   </div>
   <SocityNext v-if="state.showGif" @go-menu="backToMenu"></SocityNext>
 
@@ -69,6 +71,14 @@ const backToMenu = () =>{
 
 const text1 = ref(null);
 const text2 = ref(null);
+const text3 = ref(null);
+const text4 = ref(null);
+const text5 = ref(null);
+const text6 = ref(null);
+const text7 = ref(null);
+const text8 = ref(null);
+const image1 = ref(null);
+
 
 const handleIntersect = (entries, observer) => {
 entries.forEach(entry => {
@@ -88,6 +98,13 @@ const options = {
 const observer = new IntersectionObserver(handleIntersect, options);
 observer.observe(text1.value);
 observer.observe(text2.value);
+observer.observe(text3.value);
+observer.observe(text4.value);
+observer.observe(text5.value);
+observer.observe(text6.value);
+observer.observe(text7.value);
+observer.observe(text8.value);
+observer.observe(image1.value);
 
 });
 </script>
@@ -204,6 +221,15 @@ font-family: "Heebo-Black";
 color:rgb(255,140,0);
 width: 95vw;
 }
+.white-text {
+font-size: 3em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:aliceblue;
+width: 95vw;
+}
 .grey-bold {
 font-size: 1.2em;
 margin-bottom: 2vh;
@@ -259,5 +285,24 @@ margin-bottom: 2vh;
   text-decoration: underline; /* Add underline */
 }
 
+#next-btn{
+  position:absolute;
+  z-index: 5;
+  right:50%;
+  transform: translateX(50%);
+  bottom:20vh;   
+  animation: bounce2 2s ease infinite; 
+}
+@keyframes bounce2 {
+    0% {
+        bottom: -90vh;
+    }
+    50%{
+      bottom: -95vh;
+    }
+    100%{
+      bottom: -90vh;
+    }
+}
 
 </style>

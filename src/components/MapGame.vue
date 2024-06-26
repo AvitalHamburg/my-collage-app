@@ -1,5 +1,6 @@
 <template>
     <div id="page">
+      <p class="simple-text">יש ללחוץ על הפריט ולאחר מכן לגרור אותו</p>
       <img class="game-board" src="../assets/imgs/collageMap.jpeg">
       <div class="container">
         <div
@@ -38,7 +39,7 @@
       <!-- Success message -->
       <div v-if="showSuccessMessage" class="success-message">
         הצלחת ! כל הכבוד
-        <button @click=finishGame>המשך</button>
+        <button class="button" @click=finishGame>המשך</button>
       </div>
     </div>
   </template>
@@ -166,6 +167,20 @@
   </script>
   
   <style scoped>
+  @font-face { 
+    font-family: "Heebo";
+    font-weight: normal;
+    src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
+         format("woff");
+  }
+  
+  @font-face { 
+    font-family: "Heebo-Black";
+    font-weight: normal;
+    src: url("../assets/fonts/Heebo-Black.woff"), 
+         format("woff");
+  }
+  
   #page {
     background-color: aliceblue;
     height: 100vh;
@@ -173,6 +188,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    overflow:hidden;
   }
   
   .game-board {
@@ -186,7 +202,7 @@
   
   .draggable-item {
     padding: 20px; /* Increased padding for larger touch target */
-    background-color: orange;
+    background-color:darkorange;
     border: 1px solid #0d0d0d;
     border-radius: 500px;
     width: 20vw; /* Increased width for larger touch target */
@@ -237,7 +253,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 24px;
+    font-size: 1.2em;
     font-weight: bold;
     background-color: rgba(0, 255, 0, 0.5);
     padding: 20px;
@@ -245,6 +261,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Heebo-Black";
+  
   }
   .incorrect-drop {
     background-color: rgba(240, 128, 128,0.6);
@@ -257,9 +275,9 @@
       z-index: 10;
       display: flex;
       align-items: right;
-      justify-content:center;
+      justify-content:start;
       width: 100vw;
-      right:2vw;
+      right:20vw;
     }
   
     .container1 {
@@ -341,19 +359,48 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 24px;
+    font-size:36px;
     font-weight: bold;
-    background-color: rgba(0, 255, 0, 0.5);
+    background-color: rgb(5, 194, 242);
     padding: 20px;
     border-radius: 10px;
+    width: 80vw;
+    height:20vh;
+    z-index:10000;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    color: aliceblue;
+    font-family: "Heebo-black";
   }
+  
   .incorrect-drop {
     background-color: red;
     border: 2px dashed red;
   }
+  .button{
+    width:40vw;
+    height: 7vh;
+    font-size: 24px;
+    padding: 2px;
+    color: aliceblue;
+    background-color: darkorange;
+    border: solid white 5px;
+  }
+  .simple-text {
+  position: absolute;
+  width: 80%;
+  height: auto;
+  margin-bottom: 2vh;
+  font-family: "Heebo-black";
+  font-size: 1.5em;
+  color: rgb(89,89,89);
+  top:7%;
+  right:5%;
+  text-align: right;
+  
+  
+  }
+  
   }
   
   </style>

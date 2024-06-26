@@ -3,30 +3,33 @@
    <div id="scroll-text">
     <p class="titles-gray" ref="text1"> הספרייה הלאומית לחירום
     </p>
-    <p class="blue-text">מאגר ידע לאומי לחירום
+    <p class="blue-text" ref="text2">מאגר ידע לאומי לחירום
 לחיזוק האיתנות של מדינת ישראל</p>
-    <p class="simple-text" ref="text2">אתר המכללה מרכז בתוכו גם את הספרייה הלאומית לחירום - מאגר ידע להיערכות, התערבות ושיקום.
+    <p class="simple-text" ref="text3">אתר המכללה מרכז בתוכו גם את הספרייה הלאומית לחירום - מאגר ידע להיערכות, התערבות ושיקום.
     </p>
     <img class="image-content" :src="libraryImage">
-    <p class="simple-text">הספרייה היא מאגר ידע דיגיטלי מעודכן וכולל כ-1,500 פרטי מידע, חוקים ותקנות, נהלים ותדריכים, תוכניות מענה, מאמרים ומחקרים, סרטים, קישורים ופודקאסטים.
+    <p class="simple-text" ref="text4">הספרייה היא מאגר ידע דיגיטלי מעודכן וכולל כ-1,500 פרטי מידע, חוקים ותקנות, נהלים ותדריכים, תוכניות מענה, מאמרים ומחקרים, סרטים, קישורים ופודקאסטים.
     </p>
-    <p class="blue-text">מובילי הידע
+    <p class="blue-text" ref="text5">מובילי הידע
     </p>
-    <p class="simple-text">הנגשת הידע ללא מגבלות מתגשם בזכות שיתוף פעולה פורה עם למעלה מ-75 ארגונים מהמגזר הציבורי כמו משרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות, ארגוני חירום והצלה, אקדמיה ומכוני מחקר ופעילות המגזר השלישי. 
+    <p class="simple-text" ref="text6">הנגשת הידע ללא מגבלות מתגשם בזכות שיתוף פעולה פורה עם למעלה מ-75 ארגונים מהמגזר הציבורי כמו משרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות, ארגוני חירום והצלה, אקדמיה ומכוני מחקר ופעילות המגזר השלישי. 
     </p>
     <img class="image-content" :src="libraryComp">
-    <p class="simple-text">בהתאם לצורך, ניתן לחפש קבצים בספרייה, לצפות, להוריד או לשתף
+    <p class="simple-text" ref="text7">בהתאם לצורך, ניתן לחפש קבצים בספרייה, לצפות, להוריד או לשתף
     צפו בסרטון הממש מגניב שלנו שמסביר בקצרה על הספרייה
     </p>
     <video id="video" src="../assets/media/library.mp4" controls ></video>
-    <p class="blue-text">כדאי לשמור את הקישור
+    <p class="blue-text" ref="text8">כדאי לשמור את הקישור
     </p>
-    <p class="simple-text">תמצאו בספרייה הרבה חומרים מקצועיים שבטוח תצטרכו בשגרה ובחירום. 
+    <p class="simple-text" ref="text9">תמצאו בספרייה הרבה חומרים מקצועיים שבטוח תצטרכו בשגרה ובחירום. 
     </p>
-    <button class="button"> <a id="link" href="https://inri.orc.org.il/%D7%94%D7%A1%D7%A4%D7%A8%D7%99%D7%99%D7%94-%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA-%D7%9C%D7%97%D7%99%D7%A8%D7%95%D7%9D/"> מעבר לספרייה</a></button> 
-
-
-    <img :src="nextBtn" id="next-btn" @click="backToMenu" >
+    <button class="button">
+      <a id="link" href="https://inri.orc.org.il/%D7%94%D7%A1%D7%A4%D7%A8%D7%99%D7%99%D7%94-%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA-%D7%9C%D7%97%D7%99%D7%A8%D7%95%D7%9D/" target="_blank">
+        מעבר לספרייה
+      </a>
+    </button>
+    <img :src="nextBtn" id="next-wBtn" @click="backToMenu" >
+    <p class="white-text"> hthtrhthththtrhththtrhrthhthtrhrthtrhtrhrrrrrhthtrhtrhtrhththrhtrhrhtrhhrt</p>
 
   </div>
   </div>
@@ -46,6 +49,13 @@ const backToMenu = () =>{
 
 const text1 = ref(null);
 const text2 = ref(null);
+const text3 = ref(null);
+const text4 = ref(null);
+const text5 = ref(null);
+const text6 = ref(null);
+const text7 = ref(null);
+const text8 = ref(null);
+const text9 = ref(null);
 
 const handleIntersect = (entries, observer) => {
 entries.forEach(entry => {
@@ -65,6 +75,13 @@ const options = {
 const observer = new IntersectionObserver(handleIntersect, options);
 observer.observe(text1.value);
 observer.observe(text2.value);
+observer.observe(text3.value);
+observer.observe(text4.value);
+observer.observe(text5.value);
+observer.observe(text6.value);
+observer.observe(text7.value);
+observer.observe(text8.value);
+observer.observe(text9.value);
 
 });
 </script>
@@ -163,6 +180,15 @@ font-family: "Heebo-Black";
 color:rgb(28, 180, 227);
 width: 95vw;
 }
+.white-text {
+font-size: 3em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: right;
+font-family: "Heebo-Black";
+color:aliceblue;
+width: 95vw;
+}
 
 .grey-bold {
 font-size: 1.2em;
@@ -234,5 +260,22 @@ height: auto;
 #link{
   color:white
 }
+#next-wBtn{
+  position: absolute;
+  right:50%;
+  transform: translateX(50%);
+  animation: bounce2 2s ease infinite; 
 
+}
+@keyframes bounce2 {
+    0% {
+        top: 275vh;
+    }
+    50%{
+      top: 280vh;
+    }
+    100%{
+      top: 275vh;
+    }
+}
 </style>

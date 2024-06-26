@@ -26,7 +26,10 @@ import VideoPage from './MapGame.vue';
 import knowInfo from './knowInfo.vue';
 import nextBtn from "../assets/imgs/nextBtn.png";
 import carry from "../assets/imgs/carry.gif";
-
+import faceBook from "../assets/imgs/facebook.png";
+import twitter from "../assets/imgs/twitter.png";
+import instagram from "../assets/imgs/instagram.png";
+import linkedin from "../assets/imgs/linkedin.png";
 const emit = defineEmits(['go-menu']);
 
 const goToMenu = () =>{
@@ -190,4 +193,27 @@ margin-bottom: 2vh;
 width:90vw;
 height: auto;
 }
+.brand{
+  height:auto;
+  width:15vw
+}
+#next-wBtn{
+  position: absolute;
+  right:50%;
+  transform: translateX(50%);
+  animation: bounce2 2s ease infinite; 
+
+}
+@keyframes bounce2 {
+    0% {
+        top: 75vh;
+    }
+    50%{
+      top: 80vh;
+    }
+    100%{
+      top: 75vh;
+    }
+}
+
 </style>
