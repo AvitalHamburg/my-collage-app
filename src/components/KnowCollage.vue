@@ -23,14 +23,22 @@
     <img class="gif-content" :src="collageGif"> 
     <p class="simple-text" ref="text15"> אנחנו מייצרים פה שפה אחודה ומקדמים שיתופי פעולה עם מובילים מקצועיים ממשרדי הממשלה השונים, מרכז השלטון המקומי והאזורי, ארגוני חירום והצלה, מוסדות אקדמאים וארגונים מהחברה האזרחית.
     </p>
-    <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToInfo">
-    <p class="titles-white" >gergr5e664646464grejgiroegerghrthtrhrthrthrthrthtrhtrhtrhtrhtjgijgirjgirejgirjgirrgrge</p>
+              <img class="image-content" ref="image3" :src="infoCollage1">
+              <p  class="simple-text" ref="text16">אנחנו גם מכשירים צוותי סע"ר (סיוע עצמי ראשוני) של הרשות המקומית ותלמידי כיתות י' לחילוץ קל - בכדי שיוכלו לסייע באירוע חילוץ בסביבה שלהם, כמו במקרה של רעידת אדמה. </p>
+              <img class="image-content" :src="firefighters">
+              <p class="simple-text" ref="text17">כיתות נבחרות מכל בתי הספר עוברות הכשרה של יומיים, בעוד צוותי הסע"ר לאחר ההכשרה, עוברים אימונים באתרי הרס בשיתוף ארגוני החירום הנוספים של הרשות. </p> 
+                <p class="blue-text">מעניין, לא?</p>
+                <p class="simple-text" ref="text18">את כל זה יש לנו גם בסרטון קצר ומגניב, אז בואו נראה קצת מספרים.
+                       כדאי לנסות לזכור כמה שיותר פרטים, כי באיזשהו שלב תגיע שאלה..</p>
+              <video id="video" src="../assets/media/videoCollage.mp4" controls ></video>
+              <p class="grey-bold" ref="text5">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.</p>
+             
+              <img  :src="nextBtn" id="next-wBtn" ref="image2" @click="goToMenu">
 
 
   </div>
 </div>
 
-  <knowInfo v-if="state.showInfo" @go-menu="goToMenu"></knowInfo>
   </div>
 </template>
 
@@ -48,14 +56,10 @@ const state = reactive({
 showInfo: false
 });
 
-const goToInfo = () => {
-console.log(state.showInfo);
-state.showInfo = true;
-};
-
 const goToMenu = () =>{
 emit('go-menu');
 }
+
 
 const text1 = ref(null);
 const text2 = ref(null);
@@ -72,8 +76,12 @@ const text12= ref(null);
 const text13= ref(null);
 const text14= ref(null);
 const text15= ref(null);
+const text16= ref(null);
+const text17= ref(null);
+const text18= ref(null);
 const image1 = ref(null);
 const image2 = ref(null);
+const image3 = ref(null);
 // const nextT = ref(null);
 const nextB = ref(null);
 
@@ -109,8 +117,12 @@ observer.observe(text12.value);
 observer.observe(text13.value);
 observer.observe(text14.value);
 observer.observe(text15.value);
+observer.observe(text16.value);
+observer.observe(text17.value);
+observer.observe(text18.value);
 observer.observe(image1.value);
 observer.observe(image2.value);
+observer.observe(image3.value);
 });
 
 </script>
@@ -277,4 +289,10 @@ margin-bottom: 2vh;
   width:100%;
   height:auto;
 }
+
+#video{
+width:90vw;
+height: auto;
+}
+
 </style>

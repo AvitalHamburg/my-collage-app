@@ -29,16 +29,7 @@
       >
         {{ answer }}
       </button>
-      <button
-        v-if="currentIndex === 7"
-        @click="handleButtonClick(extraAnswer, currentAnswers.length)"
-        class="answer-button"
-        :class="{ 'selected-answer': currentAnswers.length === selectedAnswerIndex }"
-        :disabled="state.showResults"
-        :id="`answer-button-extra`"
-      >
-        {{ extraAnswer }}
-      </button>
+      
     </div>
     <div id="navigation-buttons" v-if="!state.showFinalScreen">
       <button
@@ -130,11 +121,7 @@ const updateQuestionData = () => {
   if (currentIndex.value === 7 && !isExtraAnswerAdded) {
     currentAnswers.value.push(extraAnswer.value);
     isExtraAnswerAdded = true;
-  } else if (currentIndex.value !== 7 && isExtraAnswerAdded) {
-    // Remove extraAnswer if it was added previously
-    currentAnswers.value.pop();
-    isExtraAnswerAdded = false;
-  }
+  } 
 
   selectedAnswerIndex.value = null;
 };
