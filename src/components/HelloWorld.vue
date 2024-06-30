@@ -20,7 +20,7 @@
 
 <script setup>
 import { reactive, onMounted, getCurrentInstance } from 'vue'
-import nextBtn from "../assets/imgs/nextBtn.png";
+import nextBtn from "../assets/imgs/whiteNextBtn.png";
 import whiteLogoGif from "../assets/imgs/whiteLogo.gif";
 import inriLogoSvg from "../assets/imgs/inri-logo-white2.svg";
 
@@ -149,16 +149,18 @@ onMounted(() => {
   transform: translateX(50%);
   bottom:20vh;   
   animation: bounce2 2s ease infinite; 
+  height:10vh;
+  width: auto;
 }
 @keyframes bounce2 {
     0% {
-        bottom: 15vh;
+        bottom: 8vh;
     }
     50%{
-      bottom: 10vh;
+      bottom: 5vh;
     }
     100%{
-      bottom: 15vh;
+      bottom: 8vh;
     }
 }
 .read-the-docs {

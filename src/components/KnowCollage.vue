@@ -19,7 +19,7 @@
     <p class="simple-text" ref="text13">אחראית לממש את מה שנלמד בהכשרה - באימון לפי תרחיש ועל-פי תוכנית מותאמת. </p>
 
     <img class="image-content" :src="ImgCollage1" alt="Collage Image" ref="image2">
-    <p  class="grey-bold" ref="text14">כך נוצר מעגל ההכשרה השלם, המאפשר לנו לפגוש בבית אחד כמה שיותר בעלי תפקידים המנהלים מצבי חירום בתחומם</p>
+    <p  class="grey-bold" id="important-text" ref="text14">כך נוצר מעגל ההכשרה השלם, המאפשר לנו לפגוש בבית אחד כמה שיותר בעלי תפקידים המנהלים מצבי חירום בתחומם</p>
     <img class="gif-content" :src="collageGif"> 
     <p class="simple-text" ref="text15"> אנחנו מייצרים פה שפה אחודה ומקדמים שיתופי פעולה עם מובילים מקצועיים ממשרדי הממשלה השונים, מרכז השלטון המקומי והאזורי, ארגוני חירום והצלה, מוסדות אקדמאים וארגונים מהחברה האזרחית.
     </p>
@@ -46,7 +46,7 @@
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import knowInfo from './knowInfo.vue';
 import ImgCollage from '../assets/imgs/11ImgCollage.jpg';
-import nextBtn from "../assets/imgs/nextBtn.png";
+import nextBtn from "../assets/imgs/blueNextBtn.png";
 import ImgCollage1 from '../assets/imgs/22ImgCollage.jpg';
 import collageGif from '../assets/imgs/collageGif.gif';
 
@@ -251,8 +251,9 @@ animation: fadeIn 1s ease;
   z-index: 5;
   right:50%;
   transform: translateX(50%);
-  bottom:20vh;   
-  animation: bounce2 2s ease infinite; 
+  height:8vh;
+  width: auto;
+
 }
 @keyframes bounce2 {
     0% {
@@ -294,5 +295,7 @@ margin-bottom: 2vh;
 width:90vw;
 height: auto;
 }
-
+#important-text{
+  text-align: center;
+}
 </style>
