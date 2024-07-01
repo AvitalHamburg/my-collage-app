@@ -4,7 +4,7 @@
    <div id="scroll-text">
     <p class="titles-red" ref="text1">המכללה בחרבות ברזל </p>
     <p class="red-bold" ref="text2">7 באוקטובר</p>
-    <p class="red-text" ref="text3">המכללה מכשירה מנהלים ומנהלות שיש להם תפקיד בשעת חירום ממשרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות ובמפקדות צבאיות, לתפקוד מיטבי וניהול מצבי חירום כמו במצב מלחמה, טרור, אסון טבע, אסון אזרחי, מגיפה ועוד.
+    <p class="red-text" ref="text3">עם פרוץ המלחמה והכרזת 'מצב מיוחד בעורף', עברה המכללה להפעלה במצב חירום. 
     </p>
     <p class="simple-text" ref="text4">נתחיל עם סרטון שיעשה רעש ויעלה את הדופק, ומשם נפרט קצת מה עשינו כדי שתהיו בעניינים - </p>
     <video id="video" src="../assets/media/war.mp4" controls ></video>
@@ -13,6 +13,8 @@
     <p class='simple-text'  ref="text5"> במסגרת מאמצי הפיקוד, הובילה המכללה שני מוקדי סיוע לאומיים - המרס"ל (מרכז סיוע לאזרח) שמקדם תהליך של מיצוי יכולות בתוך פקע"ר בהתאם להכוונת הסיוע לרשויות המקומיות, והשני, משל"ט ינאי, שריכז את משימת המפונים והמתפנים בבתי המלון וסיפק תמונת מצב לאומית.
     </p>
     <img class="image-content" ref="image1" :src="warImage1">
+    <p class="image-discription">ביקור נשיא המדינה ורעייתו במרס"ל</p>
+    </img>
     <p class="red-bold" ref="text1">מרס"ל
     </p>
     <p class="simple-text" ref="text6"> המרס"ל (מרכז סיוע לאזרח) מרכז במרחב משותף את מחוזות פקע"ר, ארגוני ההתנדבות ונציגים מהמגזר העסקי, המייצג כ-2,000,000 עובדים במשק. מנגנון הפעולה מאפשר למחוזות פיקוד העורף להעלות בקשות לסיוע ובמקרה ולא נמצא להן מענה אחר במרחבן, עולה הבקשה לרמה הפיקודית, לטיפול במשאבים לאומיים.
@@ -25,7 +27,6 @@
     <p class="simple-text" ref="text9">אפשר לומר שחוץ מראש הממשלה כולם הגיעו לבקר - מהנשיא ורעייתו, הרמטכ"ל, שרים, מנכ"לי משרדי ממשלה, אלופי המטכ"ל ועוד. 
 המשל"ט ניהל, ריכז ותכלל את תמונת המצב של המפונים בבתי המלון עם למעלה מרבע מיליון ישראלים שיצאו מביתם, 97 יישובים מתפנים ו-456 מלונות בשיא. 
 </p>
-<img class="image-content" ref="image3" :src="ImgCollage4">
 <p class="red-bold" ref="text10"> המכללה בחירום
 </p>
     <p class="simple-text" ref="text4"> לצד שתי המשימות הלאומיות, המכללה המשיכה להכשיר בחירום קורסים לבעלי תפקידים שהיו נחוצים בשטח, הנגשנו תוכן מקצועי ומתוקף לבעלי התפקידים ברשויות, ביצענו 'זמן יקר' במפקדות, הפצנו תוכן דיגיטלי לצוותי הצח"י ומנהלי המכלולים, ערכנו אבחון לקריית שמונה לסיוע בהתמודדות הרשות עם אתגרי הפינוי ופיצול הרשות ועוד פעולות רבות כחלק מהמאמץ המלחמתי בעורף.
@@ -41,10 +42,9 @@
 
 <script setup>
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
-import nextBtn from "../assets/imgs/nextBtn.png";
+import nextBtn from "../assets/imgs/blueNextBtn.png";
 import warImage1 from "../assets/imgs/warImage1.jpg";
 import warImage2 from "../assets/imgs/warImage2.jpg";
-import ImgCollage4 from "../assets/imgs/4ImgCollage.jpg";
 
 const emit = defineEmits(['go-menu']);
 
@@ -68,7 +68,7 @@ const text9 = ref(null);
 const text10 = ref(null);
 const image1 = ref(null);
 const image2 = ref(null);
-const image3 = ref(null);
+
 // const nextT = ref(null);
 const nextB = ref(null);
 
@@ -101,7 +101,7 @@ observer.observe(text9.value);
 observer.observe(text10.value);
 observer.observe(image1.value);
 observer.observe(image2.value);
-observer.observe(image3.value);
+
 
 });
 
@@ -172,7 +172,7 @@ direction: rtl;
 
 
 .titles-red {
-font-size: 2.5em;
+font-size: 3.5em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
@@ -246,8 +246,8 @@ animation: fadeIn 1s ease;
   z-index: 5;
   right: 50%;
   transform: translateX(50%);
-  top: 320vh; /* Initial position */
-  animation: bounceUpDown 3s ease-in-out infinite; /* Adjust duration and timing */
+  height:10vh ;
+
 }
 
 .animate {
@@ -273,5 +273,16 @@ margin-bottom: 2vh;
 #video{
 width:90vw;
 height: auto;
+}
+.image-discription{
+  position: absolute;
+  text-align: center;
+  margin-top: -5%;
+  color: aliceblue;
+  background-color: rgb(89,89,89);
+  width:80vw;
+  right:50%;
+  transform: translateX(50%);
+  font-family: "Heebo";
 }
 </style>

@@ -17,7 +17,6 @@
     <p class="simple-text" ref="text11">הרגל הצבאית שלנו, מכשירה, מאמנת וחונכת את כל בעלי התפקידים במפקדה צבאית של פיקוד העורף. </p>
     <p class="grey-bold" ref="text12">4. מגמת אימוני רשויות</p>
     <p class="simple-text" ref="text13">אחראית לממש את מה שנלמד בהכשרה - באימון לפי תרחיש ועל-פי תוכנית מותאמת. </p>
-
     <img class="image-content" :src="ImgCollage1" alt="Collage Image" ref="image2">
     <p  class="grey-bold" id="important-text" ref="text14">כך נוצר מעגל ההכשרה השלם, המאפשר לנו לפגוש בבית אחד כמה שיותר בעלי תפקידים המנהלים מצבי חירום בתחומם</p>
     <img class="gif-content" :src="collageGif"> 
@@ -25,13 +24,13 @@
     </p>
               <img class="image-content" ref="image3" :src="infoCollage1">
               <p  class="simple-text" ref="text16">אנחנו גם מכשירים צוותי סע"ר (סיוע עצמי ראשוני) של הרשות המקומית ותלמידי כיתות י' לחילוץ קל - בכדי שיוכלו לסייע באירוע חילוץ בסביבה שלהם, כמו במקרה של רעידת אדמה. </p>
-              <img class="image-content" :src="firefighters">
+              <img class="image-content" ref="image4" :src="firefighters">
               <p class="simple-text" ref="text17">כיתות נבחרות מכל בתי הספר עוברות הכשרה של יומיים, בעוד צוותי הסע"ר לאחר ההכשרה, עוברים אימונים באתרי הרס בשיתוף ארגוני החירום הנוספים של הרשות. </p> 
                 <p class="blue-text">מעניין, לא?</p>
                 <p class="simple-text" ref="text18">את כל זה יש לנו גם בסרטון קצר ומגניב, אז בואו נראה קצת מספרים.
                        כדאי לנסות לזכור כמה שיותר פרטים, כי באיזשהו שלב תגיע שאלה..</p>
               <video id="video" src="../assets/media/videoCollage.mp4" controls ></video>
-              <p class="grey-bold" ref="text5">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.</p>
+              <p class="grey-bold" id="important-text" ref="text5">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.</p>
              
               <img  :src="nextBtn" id="next-wBtn" ref="image2" @click="goToMenu">
 
@@ -49,7 +48,9 @@ import ImgCollage from '../assets/imgs/11ImgCollage.jpg';
 import nextBtn from "../assets/imgs/blueNextBtn.png";
 import ImgCollage1 from '../assets/imgs/22ImgCollage.jpg';
 import collageGif from '../assets/imgs/collageGif.gif';
-
+import infoCollage1 from "../assets/imgs/infoCollage1.jpg";
+import firefighters from "../assets/imgs/firefighters.jpg";
+import greyNextBtn from '../assets/imgs/greyNextBtn.png';
 const emit = defineEmits(['go-menu']);
 
 const state = reactive({ 
@@ -82,6 +83,7 @@ const text18= ref(null);
 const image1 = ref(null);
 const image2 = ref(null);
 const image3 = ref(null);
+const image4 = ref(null);
 // const nextT = ref(null);
 const nextB = ref(null);
 
@@ -123,6 +125,7 @@ observer.observe(text18.value);
 observer.observe(image1.value);
 observer.observe(image2.value);
 observer.observe(image3.value);
+observer.observe(image4.value);
 });
 
 </script>
@@ -297,5 +300,10 @@ height: auto;
 }
 #important-text{
   text-align: center;
+}
+.next-btn{
+  height:8vh;
+  right: 50vw;
+  transform: translateX(-35vw);
 }
 </style>

@@ -8,7 +8,7 @@
     <p class="blue-text">ידע ומידע - הכל באתר המכללה</p>
     <p class="simple-text" ref="text3">באתר המכללה ניתן להירשם ולקבל מידע על כל ההכשרות שלנו לבעלי תפקידים במשרדי הממשלה, הרשויות המקומיות ובמפקדות צבאיות.</p>
     <a id="site-link" href="https://inri.orc.org.il/">קישור</a>
-    <p class="simple-text" ref="text4">בואו לעשות לנו לייק ולעקוב אחרינו ברשתות החברתיות, אתם גם ככה שם :)     </p>
+    <p class="simple-text" id="cute-text" ref="text4">בואו לעשות לנו לייק ולעקוב אחרינו ברשתות החברתיות, אתם גם ככה שם :)     </p>
 
 
     <span class="brands">
@@ -40,7 +40,7 @@
 
 <script setup>
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
-import nextBtn from "../assets/imgs/nextBtn.png";
+import nextBtn from "../assets/imgs/blueNextBtn.png";
 import faceBook from "../assets/imgs/facebook.png";
 import twitter from "../assets/imgs/twitter.png";
 import instagram from "../assets/imgs/instagram.png";
@@ -290,19 +290,12 @@ margin-bottom: 2vh;
   z-index: 5;
   right:50%;
   transform: translateX(50%);
-  bottom:20vh;   
-  animation: bounce2 2s ease infinite; 
-}
-@keyframes bounce2 {
-    0% {
-        bottom: -40vh;
-    }
-    50%{
-      bottom: -45vh;
-    }
-    100%{
-      bottom: -40vh;
-    }
+  height: 10vh;
+  width: auto;
+  
 }
 
+#cute-text{
+  text-align: center;
+}
 </style>

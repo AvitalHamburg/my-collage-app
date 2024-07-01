@@ -2,9 +2,11 @@
 <template>
   <div id="page">
     <h1 id="main-title">עמוד הבית</h1>
+    <div class="text">
     <p id="intro1">אנחנו ממליצים ללכת לפי הסדר, למרות שאפשר איך שרוצים.</p>
     <p id="intro"> כל נושא מכיל הסבר קצר, אולי יהיה שם וידאו, בטוח יהיו תמונות ואפילו יש איזה משחק.
 תבלו :)</p>
+</div>
     <div class="button-container">
       <button
         v-for="(subject, index) in subjects"
@@ -92,7 +94,7 @@ const moveToPage = (index) => {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 46vh;
+  top: 58vh;
   right: 50%;
   transform: translateX(50%);
   z-index: 10000;
@@ -146,32 +148,24 @@ const moveToPage = (index) => {
   font-family: "Karantina";
 
 }
-#intro{
+#intro, #intro1 {
   position: absolute;
-  top:32vh;
-  width:70vw;
-  right:50%;
-  transform: translateX(50%);
+  width: 70vw;
+  left: 50%;
+  top:30vh;
+  transform: translateX(-50%);
   font-family: "Heebo";
   font-size: 1.2em;
   direction: rtl;
-  font-weight:-700;
+  font-weight: 700;
   color: rgb(89, 89, 89);
-
-  
+  margin: 0;
 }
-#intro1{
-  position: absolute;
-  top:20vh;
-  width:70vw;
-  right:50%;
-  transform: translateX(50%);
-  font-family: "Heebo-Black";
-  font-size: 1.2em;
-  direction: rtl;
-  font-weight:700;
-  color: rgb(89, 89, 89);
 
+
+#intro {
+  font-family: "Heebo-Black";
+  margin-top: 20%;
 }
 .selected-btn {
     background-color: grey;

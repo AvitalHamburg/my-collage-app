@@ -28,7 +28,11 @@
     <MapGame v-if="state.textNum === 7 && !state.showExam" @go-menu="nextSubj"></MapGame>
     <Game v-if="state.textNum === 8 || state.showExam"></Game>
 
-    <div class="overlay" v-if="state.openHamburger" @click="showHamburger"></div>
+    <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
+      <img :src="whiteLogo" class="logo-hamburger">
+      <h1 class="hamburger-header">היכרות עם המכללה</h1>
+
+    </div>
     
     <Hamburger 
       id="hamburger-page" 
@@ -57,7 +61,7 @@ import collegeLogo from "./assets/imgs/collegeLogo.png";
 import orange from "./assets/imgs/orange.png";
 import blue from "./assets/imgs/blue.png";
 import red from "./assets/imgs/red.png";
-
+import whiteLogo from "./assets/imgs/whiteLogo.svg"
 const state = reactive({
   page: 0,
   showMenu: false,
@@ -176,7 +180,7 @@ header {
 }
 #hamburger-page {
   position: fixed;
-  top: 10vh;
+  top: 15vh;
   right: 0;
   width: 100vw; 
   height: 100vh; 
@@ -243,7 +247,17 @@ header {
 
 
 }
-
-
+.logo-hamburger{
+  width:40vw;
+  height: auto;
+  margin-top: 5%;
+}
+.hamburger-header{
+  font-family: "Heebo-black";
+  font-size: 1.8em;
+  margin-top: 0%;
+  color: white;
+  width: 100vw;
+}
 
 </style>

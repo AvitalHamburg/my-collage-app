@@ -19,17 +19,16 @@
     צפו בסרטון הממש מגניב שלנו שמסביר בקצרה על הספרייה
     </p>
     <video id="video" src="../assets/media/library.mp4" controls ></video>
-    <p class="blue-text" ref="text8">כדאי לשמור את הקישור
+    <p class="blue-text" id="text-center" ref="text8">כדאי לשמור את הקישור
     </p>
-    <p class="simple-text" ref="text9">תמצאו בספרייה הרבה חומרים מקצועיים שבטוח תצטרכו בשגרה ובחירום. 
+    <p class="simple-text" id="text-center" ref="text9">תמצאו בספרייה הרבה חומרים מקצועיים שבטוח תצטרכו בשגרה ובחירום. 
     </p>
     <button class="button">
       <a id="link" href="https://inri.orc.org.il/%D7%94%D7%A1%D7%A4%D7%A8%D7%99%D7%99%D7%94-%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA-%D7%9C%D7%97%D7%99%D7%A8%D7%95%D7%9D/" target="_blank">
         מעבר לספרייה
       </a>
     </button>
-    <img :src="nextBtn" id="next-wBtn" @click="backToMenu" >
-    <p class="white-text"> hthtrhthththtrhththtrhrthhthtrhrthtrhtrhrrrrrhthtrhtrhtrhththrhtrhrhtrhhrt</p>
+    <img :src="nextBtn" id="next-btn" @click="backToMenu" >
 
   </div>
   </div>
@@ -37,7 +36,7 @@
 
 <script setup>
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
-import nextBtn from "../assets/imgs/nextBtn.png";
+import nextBtn from "../assets/imgs/blueNextBtn.png";
 import libraryImage from "../assets/imgs/7ImgCollage.jpg";
 import libraryComp from "../assets/imgs/libraryComp.png";
 const emit = defineEmits(['go-menu']);
@@ -250,21 +249,31 @@ height: auto;
 }
 
 .button{
+  position: absolute;
   background-color: rgb(28, 180, 227);
   border-radius: 50px;
   width:60vw;
   height:7vh;
   font-size: 1.5em;
   font-family: "Heebo-black";
+  text-align: center;
+  display: flex;
+  right: 50%;
+  transform: translateX(50%);
+  justify-content: center;
+  align-items: center;
 }
 #link{
   color:white
 }
-#next-wBtn{
+#next-btn{
   position: absolute;
   right:50%;
   transform: translateX(50%);
-  animation: bounce2 2s ease infinite; 
+  height: 10vh;
+  width:auto;
+  margin-top: 12vh;
+  margin-bottom: 6vh;
 
 }
 @keyframes bounce2 {
@@ -277,5 +286,8 @@ height: auto;
     100%{
       top: 236vh;
     }
+}
+#text-center{
+  text-align: center;
 }
 </style>

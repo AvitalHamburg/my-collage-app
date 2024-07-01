@@ -13,7 +13,7 @@
     <p class="blue-text" ref="text4"> עם איזה מדינות נפגשנו?</p>
       <p class="simple-text" ref="text5">שימו לב לדגלים בתנועה, זהו את הדגלים וכמות המדינות ואולי אפילו תרשמו לכם בצד -</p>
       <img src="../assets/imgs/flags.gif" class="image-content">
-      <p class="simple-text">בטוח ספרת טוב? (זאת לגמרי שאלה שנשאל בבוחן סיום)</p>
+      <p class="grey-bold" id="center-text">בטוח ספרת טוב? (זאת לגמרי שאלה שנשאל בבוחן סיום)</p>
 
 
     <img :src="nextBtn" id="next-btn" @click="backToMenu" >
@@ -24,7 +24,7 @@
 
 <script setup>
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
-import nextBtn from "../assets/imgs/nextBtn.png";
+import nextBtn from "../assets/imgs/blueNextBtn.png";
 import spain from "../assets/imgs/spain.jpg";
 const emit = defineEmits(['go-menu']);
 
@@ -183,6 +183,8 @@ animation: fadeIn 1s ease;
   right:50%;
   transform: translateX(50%);
   animation: bounce2 2s ease infinite; 
+  height: 10vh;
+  width: auto;
 
 }
 @keyframes bounce2 {
@@ -246,5 +248,7 @@ height: auto;
 #link{
   color:white
 }
-
+#center-text{
+  text-align: center;
+}
 </style>

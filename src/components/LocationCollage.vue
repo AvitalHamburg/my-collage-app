@@ -49,7 +49,7 @@ const backToMenu = () => {
   font-size: 2.8em;
   margin-bottom: 2vh;
   direction: rtl;
-  text-align: right;
+  text-align: center;
   font-family: "karantina";
   color: rgb(89, 89, 89);
 }
@@ -60,7 +60,7 @@ const backToMenu = () => {
   margin-bottom: 2vh;
   font-family: "Heebo";
   font-size: 1.2em;
-  text-align: right;
+  text-align: center;
   color: rgb(89, 89, 89);
 }
 
@@ -87,6 +87,8 @@ const backToMenu = () => {
   height:6vh;
   font-size: 1.5em;
   font-family: "Heebo-black";
-  color:white
+  color:white;
+  text-align: center;
+  padding: 0%;
 }
 </style>

@@ -257,18 +257,18 @@ watch(currentIndex, () => {
   background-color: rgb(116, 142, 172);
   color: white;
 }
+
 #navigation-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 5vh;
-  margin-top: 20vh;
-  margin-bottom: 10px;
+  margin-top: 20vh; /* Adjusted top margin */
+  margin-bottom: 3vh; /* Add a bottom margin for spacing */
   position: absolute;
-
   width: 90%;
   left: 50%;
   transform: translateX(-50%);
 }
+
 #prev-button {
   background-color: rgb(255, 140, 0);
   color: white;
@@ -318,7 +318,7 @@ watch(currentIndex, () => {
 }
 .progress-bar {
   position: relative;
-  margin-top: 1.5rem;
+  margin-top: 20%;
   background-color: #c0c0c0;
   height: 0.5rem;
   width: 90%;
@@ -412,9 +412,14 @@ watch(currentIndex, () => {
   margin-bottom: 0%;
 }
 .question-number{
+  position: absolute;
   font-family: "karantina";
   color:rgb(89,89,89);
   font-size:4.5em;
-  margin-bottom:0%;
+  top:-45%;
+  right:50%;
+  transform: translateX(50%);
+
+  
 }
 </style>

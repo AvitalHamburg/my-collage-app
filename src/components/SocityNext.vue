@@ -15,7 +15,7 @@
     <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="linkedin" >
     </a>
   </span>
-  <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToMenu">
+  <img ref="nextB" :src="nextBtn" id="next-btn" @click="goToMenu">
 </div>
   </div>
 </template>
@@ -24,7 +24,7 @@
 import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import VideoPage from './MapGame.vue';
 import knowInfo from './knowInfo.vue';
-import nextBtn from "../assets/imgs/nextBtn.png";
+import nextBtn from "../assets/imgs/blueNextBtn.png";
 import carry from "../assets/imgs/carry.gif";
 import faceBook from "../assets/imgs/facebook.png";
 import twitter from "../assets/imgs/twitter.png";
@@ -152,7 +152,7 @@ font-weight: 200;
 font-size: 1.2em;
 margin-bottom: 2vh;
 direction: rtl;
-text-align: right;
+text-align: center;
 font-family: "Heebo-Black";
 color: rgb(89,89,89);
 }
@@ -197,11 +197,13 @@ height: auto;
   height:auto;
   width:15vw
 }
-#next-wBtn{
+#next-btn{
   position: absolute;
   right:50%;
   transform: translateX(50%);
   animation: bounce2 2s ease infinite; 
+  height: 10vh;
+  width: auto;
 
 }
 @keyframes bounce2 {
