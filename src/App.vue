@@ -103,7 +103,7 @@ const nextSubj = () => {
 const updateVisitedNum = () => {
   state.visetedNum = state.visitedPages.length; // Update visited number
   console.log(`Visited number of pages: ${state.visetedNum}`);
-  if (state.visitedPages.length === 9) {
+  if (state.visitedPages.length === 8) {
     state.showExam = true; // Enable exam mode
   }
 }
