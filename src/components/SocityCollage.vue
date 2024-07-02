@@ -290,9 +290,8 @@ margin-bottom: 2vh;
   z-index: 5;
   right:50%;
   transform: translateX(50%);
-  height: 10vh;
-  width: auto;
-  
+  height:8vh ;
+  width:auto;
 }
 
 #cute-text{

@@ -256,6 +256,7 @@ animation: fadeIn 1s ease;
   transform: translateX(50%);
   height:8vh;
   width: auto;
+  
 
 }
 @keyframes bounce2 {

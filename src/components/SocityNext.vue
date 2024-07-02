@@ -202,8 +202,8 @@ height: auto;
   right:50%;
   transform: translateX(50%);
   animation: bounce2 2s ease infinite; 
-  height: 10vh;
-  width: auto;
+  height:8vh ;
+  width:auto;
 
 }
 @keyframes bounce2 {

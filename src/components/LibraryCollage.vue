@@ -270,7 +270,7 @@ height: auto;
   position: absolute;
   right:50%;
   transform: translateX(50%);
-  height: 10vh;
+  height:8vh ;
   width:auto;
   margin-top: 12vh;
   margin-bottom: 6vh;

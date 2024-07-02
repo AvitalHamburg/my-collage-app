@@ -246,7 +246,8 @@ animation: fadeIn 1s ease;
   z-index: 5;
   right: 50%;
   transform: translateX(50%);
-  height:10vh ;
+  height:8vh ;
+  width:auto;
 
 }
 
