@@ -53,7 +53,7 @@ const moveToPage = (index) => {
   flex-direction: column;
   align-items: flex-end;
   margin-top: 20px; /* Adjust the margin-top value as needed */
-  margin-right: 5.8%;
+  
 }
 
 .btn-class {

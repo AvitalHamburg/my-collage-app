@@ -79,7 +79,7 @@ const moveToPage = (index) => {
   top: 0%;
   right: 50%;
   transform: translateX(50%);
-  height: 100vh;
+  height: 50vh;
   width: 100vw;
   /* background-image: url("../assets/imgs/Bg2.png"); */
   background-color: aliceblue;
