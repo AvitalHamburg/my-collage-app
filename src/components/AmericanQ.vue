@@ -5,6 +5,7 @@
       <p class="grey-big">{{ congratsMessage }}</p>
       <div class="share-buttons" v-if="points >= 70">
         <button id="next-button" @click="captureAndShare()">צילום מסך ושיתוף</button>
+        <button id="next-button" @click="goAgain()">חזור להתחלה</button>
       </div>
       <div class="retry-button" v-if="points < 70">
         <button id="next-button" @click="retryQuiz()">נסה שוב</button>
@@ -63,8 +64,10 @@
 </template>
 
 <script setup>
-import { defineProps, ref, reactive, onMounted, watch } from 'vue';
+import { defineProps, ref, reactive, onMounted, watch ,defineEmits } from 'vue';
 import html2canvas from 'html2canvas';
+
+const emit = defineEmits(['go-again']);
 
 const props = defineProps({
   pageHeader: String,
@@ -199,7 +202,10 @@ const retryQuiz = () => {
   state.showResults = false;
   state.showFinalScreen = false;
 };
+const goAgain = () =>{
+  emit('go-again')
 
+}
 onMounted(() => {
   updateProgressBar();
 });
@@ -286,6 +292,7 @@ watch(currentIndex, () => {
   padding: 10px 20px;
   font-size: 1.2em;
   font-family: "Heebo";
+  margin-top: 5%;
 }
 #prev-button:disabled,
 #next-button:disabled {
@@ -419,7 +426,8 @@ watch(currentIndex, () => {
   top:-45%;
   right:50%;
   transform: translateX(50%);
+}
+#again-button{
 
-  
 }
 </style>

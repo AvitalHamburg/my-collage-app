@@ -1,52 +1,41 @@
-
-
 <template>
   <div id="intro">
-    <div id="shadow"></div>
-    <img :src="state.imagesrc" alt="White Logo" id="white-logo" :class="{ 'move-to-center': state.isLogoChanged }">
-    <div  v-if="state.showIntro">
+    <video id="video" v-if="!state.isVideoEnded" src="../assets/media/introVid.mp4" autoplay muted></video>
+    <img :src="introImg" v-if="state.isVideoEnded && !state.showIntro" class="image-mask">
+    <div v-if="state.showIntro">
+      <div id="shadow"></div>
+      <img :src="inriLogoSvg" alt="White Logo" id="white-logo" class="move-to-center">
       <h1 id="welcome-text">ברוך הבא או הבאה למשפחת המכללה</h1>
-
-
-      <p id="introduction"> בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני.
-        וכן, בארור שיש בוחן בסוף :) 
-בהצלחה!</p>
-    <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="moveNextPage">
-
-
+      <p id="introduction">בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני. וכן, בארור שיש בוחן בסוף :) בהצלחה!</p>
+      <img ref="nextBtn" :src="nextButton" id="next-wBtn" @click="moveNextPage">
     </div>
   </div>
 </template>
 
 <script setup>
-import { reactive, onMounted, getCurrentInstance } from 'vue'
-import nextBtn from "../assets/imgs/whiteNextBtn.png";
-import whiteLogoGif from "../assets/imgs/whiteLogo.gif";
+import { reactive, onMounted, getCurrentInstance } from 'vue';
+import nextButton from "../assets/imgs/whiteNextBtn.png";
 import inriLogoSvg from "../assets/imgs/inri-logo-white2.svg";
+import introImg from "../assets/imgs/introImg1.png";
 
 const { emit } = getCurrentInstance();
 
-// משתנה בוליאני המציין האם המשתמש כבר היה בעמוד זה
-let visitedThisPage = false;
-
 const state = reactive({
-  imagesrc: whiteLogoGif,
-  isLogoChanged: false,
+  isVideoEnded: false,
   showIntro: false,
-  visitedThisPage: visitedThisPage  // הוספת המשתנה בוליאני לסטייט
 });
 
 function changeImageSourceAfterTimeout() {
   setTimeout(() => {
-    state.imagesrc = inriLogoSvg;
-    state.isLogoChanged = true;
+    state.isVideoEnded = true;
+  }, 5999);
+  setTimeout(() => {
     state.showIntro = true;
-    state.visitedThisPage = true; // מסמנים שהמשתמש ביקר בעמוד זה
-  }, 4000);
+  }, 8000);
 }
 
-function moveNextPage(){
-  emit("move-next", state.visitedThisPage); // שליחת הערך של visitedThisPage עם אירוע "move-next"
+function moveNextPage() {
+  emit("move-next");
 }
 
 onMounted(() => {
@@ -54,31 +43,27 @@ onMounted(() => {
 });
 </script>
 
-
 <style scoped>
-@font-face { 
+@font-face {
   font-family: "Heebo";
   font-weight: normal;
-  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), 
-       format("woff");
+  src: url("../assets/fonts/Heebo-VariableFont_wght.woff"), format("woff");
 }
 
-@font-face { 
+@font-face {
   font-family: "Karantina";
   font-weight: normal;
-  src: url("../assets/fonts/Karantina-Regular.woff"), 
-  format("woff");
-} 
+  src: url("../assets/fonts/Karantina-Regular.woff"), format("woff");
+}
 
-
-
-*{
+* {
   overflow: hidden;
   direction: rtl;
 }
+
 #intro {
-  position:absolute;
-  top: 0%;
+  position: absolute;
+  top: 0;
   right: 50%;
   transform: translateX(50%);
   height: 100vh;
@@ -86,17 +71,17 @@ onMounted(() => {
   background-image: url("../assets/imgs/Bg1.png");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 0%;
+  padding: 0;
 }
+
 #shadow {
   height: 100vh;
   width: 100vw;
   position: absolute;
-  background-color: rgb(59, 59, 59);
-  top: 0%;
+  background-color: rgba(59, 59, 59, 0.5); /* Adjust opacity */
+  top: 0;
   right: 50%;
   transform: translateX(50%);
-  opacity: 0.5;
   z-index: 2;
 }
 
@@ -109,62 +94,53 @@ onMounted(() => {
   transform: translateX(50%);
   top: 5%;
 }
-#welcome-text{
-    color: white;
-    position:absolute;
-    right: 50%;
-    transform: translateX(50%);
-    font-size: 4em;
-    text-align: center;
-    top:15vh;
-    z-index: 5;
-    width:90vw;
-    font-family: "karantina";
 
-}
-#introduction{
-  position:absolute;
+#welcome-text {
   color: white;
-  right:50%;
-  transform:translateX(50%);
-  width:80vw;
-  height:auto;
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  font-size: 4em;
+  text-align: center;
+  top: 15vh;
+  z-index: 5;
+  width: 90vw;
+  font-family: "karantina";
+}
+
+#introduction {
+  position: absolute;
+  color: white;
+  right: 50%;
+  transform: translateX(50%);
+  width: 80vw;
   z-index: 5;
   font-size: 1.4em;
-  top:45vh;
-
-  font-family: "Heebo"
-}
-@keyframes bounce2 {
-	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-	40% {transform: translateY(-30px);}
-	60% {transform: translateY(-15px);}
+  top: 45vh;
+  font-family: "Heebo";
 }
 
-
-#next-wBtn{
-  position:absolute;
+#next-wBtn {
+  position: absolute;
   z-index: 5;
-  right:50%;
+  right: 50%;
   transform: translateX(50%);
-  bottom:20vh;   
-  animation: bounce2 2s ease infinite; 
-  height:10vh;
+  bottom: 20vh;
+  animation: bounce2 2s ease infinite;
+  height: 10vh;
   width: auto;
 }
+
 @keyframes bounce2 {
-    0% {
-        bottom: 8vh;
-    }
-    50%{
-      bottom: 5vh;
-    }
-    100%{
-      bottom: 8vh;
-    }
-}
-.read-the-docs {
-  color: #888;
+  0% {
+    bottom: 8vh;
+  }
+  50% {
+    bottom: 5vh;
+  }
+  100% {
+    bottom: 8vh;
+  }
 }
 
 .move-to-center {
@@ -177,7 +153,35 @@ onMounted(() => {
   top: 5%;
 }
 
+#video {
+  position: absolute;
+  width: auto;
+  height: 100vh;
+  right: 50%;
+  transform: translateX(50%);
+  top: 0;
+}
 
+.image-mask {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
+  height: 100vh;
+  width: auto;
+  z-index: 1;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
+  mask-size: 100% 300%; /* Adjust mask-size to fit your image */
+  mask-position: center bottom; /* Start with fully visible and then hide */
+  animation: reveal-mask 5s ease forwards;
+}
 
-
+@keyframes reveal-mask {
+  0% {
+    mask-position: center bottom; /* Fully visible at start */
+  }
+  100% {
+    mask-position: center top; /* Gradually hides to top */
+  }
+}
 </style>

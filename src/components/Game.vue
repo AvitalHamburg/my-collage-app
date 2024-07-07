@@ -17,14 +17,17 @@
       :answers4="answers4"
       :correctAnswers="correctAnswers"
       @go-next="handleGoNext"
+      @go-again="restartApp"
     />
   </div>
 </template>
 
 <script setup>
 import AmericanQ from './AmericanQ.vue';
-import { reactive } from 'vue';
+import { reactive, defineEmits } from 'vue';
 
+
+const emit = defineEmits(['restart']);
 const state = reactive({
   showGame: false
 });
@@ -110,6 +113,10 @@ const correctAnswers = [
   "ג. 456",
   "ד. הכי מוכנים במדינה"
 ];
+const restartApp=()=>{
+  emit('restart');
+
+}
 
 </script>
 

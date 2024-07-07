@@ -26,7 +26,7 @@
     <OutsideCollage v-if="state.textNum === 5" @go-menu="nextSubj"></OutsideCollage>
     <LocationCollage v-if="state.textNum === 6" @go-menu="nextSubj"></LocationCollage>
     <MapGame v-if="state.textNum === 7 && !state.showExam" @go-menu="nextSubj"></MapGame>
-    <Game v-if="state.textNum === 8 || state.showExam"></Game>
+    <Game v-if="state.textNum === 8 || state.showExam" @restart="restartAll"></Game>
 
     <div class="overlay" v-if="state.openHamburger" @click="showHamburger">
       <img :src="whiteLogo" class="logo-hamburger">
@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive,onMounted, onBeforeUnmount } from 'vue';
 import Menu from './components/Menu.vue';
 import Game from './components/Game.vue'; // Ensure Game component is imported
 import Hamburger from './components/Hamburger.vue';
@@ -70,6 +70,25 @@ const state = reactive({
   visitedPages: [], // Array to track visited pages
   visetedNum: 0, // Initialize visited number
   showExam: false
+});
+
+const enterFullscreen = () => {
+  document.documentElement.requestFullscreen();
+}
+
+// Function to exit fullscreen
+const exitFullscreen = () => {
+  document.exitFullscreen();
+}
+
+// Example: Enter fullscreen on component mount
+onMounted(() => {
+  enterFullscreen();
+});
+
+// Example: Exit fullscreen on component unmount
+onBeforeUnmount(() => {
+  exitFullscreen();
 });
 
 function nextPage() {
@@ -116,6 +135,17 @@ const backToMenu = () => {
 const showHamburger = () => {
   state.openHamburger = !state.openHamburger;
 }
+
+const restartAll = () => {
+  state.page = 0;
+  state.showMenu = false;
+  state.textNum = 0;
+  state.openHamburger = false;
+  state.visitedPages = [];
+  state.visetedNum = 0;
+  state.showExam = false;
+}
+
 </script>
 <style scoped>
 body {
