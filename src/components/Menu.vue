@@ -79,7 +79,7 @@ const moveToPage = (index) => {
   top: 0%;
   right: 50%;
   transform: translateX(50%);
-  height: 50vh;
+  height: 100vh;
   width: 100vw;
   /* background-image: url("../assets/imgs/Bg2.png"); */
   background-color: aliceblue;
@@ -87,7 +87,7 @@ const moveToPage = (index) => {
   background-repeat: no-repeat;
   padding: 0%;
  overflow-y: scroll;
- 
+ direction: rtl;
 }
 
 
@@ -101,7 +101,6 @@ const moveToPage = (index) => {
   transform: translateX(50%);
   z-index: 10000;
   font-family: "Heebo";
-  direction: rtl;
 
 }
 
@@ -179,8 +178,8 @@ const moveToPage = (index) => {
 }
 .margin-class{
   position: absolute;
-  color: aliceblue;
-  font-size: 20px;
+  color:aliceblue;
+  font-size: 100px;
   bottom:-200%;
 }
 </style>
