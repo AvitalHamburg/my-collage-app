@@ -28,7 +28,7 @@ const state = reactive({
 function changeImageSourceAfterTimeout() {
   setTimeout(() => {
     state.isVideoEnded = true;
-  }, 5999);
+  }, 5999.9);
   setTimeout(() => {
     state.showIntro = true;
   }, 8000);
