@@ -87,7 +87,7 @@ const moveToPage = (index) => {
   background-repeat: no-repeat;
   padding: 0%;
  overflow-y: scroll;
- direction: rtl;
+ 
 }
 
 
@@ -101,6 +101,7 @@ const moveToPage = (index) => {
   transform: translateX(50%);
   z-index: 10000;
   font-family: "Heebo";
+  direction: rtl;
 
 }
 
@@ -179,7 +180,7 @@ const moveToPage = (index) => {
 .margin-class{
   position: absolute;
   color: aliceblue;
-  font-size: 100px;
+  font-size: 20px;
   bottom:-200%;
 }
 </style>
