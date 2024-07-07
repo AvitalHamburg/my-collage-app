@@ -178,7 +178,7 @@ const moveToPage = (index) => {
 }
 .margin-class{
   position: absolute;
-  color: rgb(36, 41, 46);
+  color: aliceblue;
   font-size: 100px;
   bottom:-200%;
 }
