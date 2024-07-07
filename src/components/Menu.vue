@@ -24,6 +24,7 @@
       </button>
 
     </div>
+    <h1 class="margin-class">thgrthrthrthrthtrhrth</h1>
   </div>
 </template>
 
@@ -86,6 +87,7 @@ const moveToPage = (index) => {
   background-repeat: no-repeat;
   padding: 0%;
  overflow-y: scroll;
+ direction: rtl;
 }
 
 
@@ -174,5 +176,10 @@ const moveToPage = (index) => {
   opacity: 0.6; /* קיבולת נמוכה - פיהוק רב */
   cursor: not-allowed; /* אסור לחיצה */
 }
-
+.margin-class{
+  position: absolute;
+  color: rgb(36, 41, 46);
+  font-size: 100px;
+  bottom:-200%;
+}
 </style>

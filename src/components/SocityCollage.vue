@@ -7,8 +7,12 @@
     <img class="image-content" ref="image1" :src="comp">
     <p class="blue-text">ידע ומידע - הכל באתר המכללה</p>
     <p class="simple-text" ref="text3">באתר המכללה ניתן להירשם ולקבל מידע על כל ההכשרות שלנו לבעלי תפקידים במשרדי הממשלה, הרשויות המקומיות ובמפקדות צבאיות.</p>
-    <a id="site-link" href="https://inri.orc.org.il/">קישור</a>
+      <a id="link" href="https://inri.orc.org.il/" target="_blank">
+        מעבר לאתר
+      </a>
+   
     <p class="simple-text" id="cute-text" ref="text4">בואו לעשות לנו לייק ולעקוב אחרינו ברשתות החברתיות, אתם גם ככה שם :)     </p>
+    <p class="grey-big-center">המכללה ברשתות</p>
 
 
     <span class="brands">
@@ -25,7 +29,7 @@
     <p class="simple-text" ref="text6">המידע הצבאי במרחב המכללה מכיל את ׳אתר שיתוף הידע׳ המסייע לשימור ידע של קורסים, מופעים ומצגות.
 האתר נגיש לכל מי שברשותו גישה למחשב צבאי, דרך צהלנ״ט כותבים בחיפוש: ׳אתר שיתוף הידע׳.
 </p>
-<img class="image-content" :src="neve">
+<img class="image-content-neve" :src="neve">
 <p class="orange-text" ref="text7">יש לנו אפילו רשות מקומית דיגיטלית!</p>
     <p  class="simple-text" ref="text8">הכירו את נווה איתנים - הרשות הכי מוכנה במדינה :) 
 בתוך מערכות השליטה והבקרה הזמינות לבעלי תפקידים בשעת חירום, הקמנו רשות מקוונת שניתן להתאמן עליה במגוון תרחישים. 
@@ -176,10 +180,9 @@ direction: rtl;
 font-size: 2.8em;
 margin-bottom: 2vh;
 direction: rtl;
-text-align: right;
+text-align: center;
 font-family: "karantina";
 color: rgb(89,89,89);
-text-align: right;
 }
 
 .simple-text {
@@ -188,8 +191,9 @@ height: auto;
 margin-bottom: 2vh;
 font-family: "Heebo";
 font-size: 1.2em;
-text-align: right;
+text-align: center;
 color: rgb(89,89,89);
+margin-bottom: 10%;
 
 
 }
@@ -198,7 +202,7 @@ color: rgb(89,89,89);
 font-size: 1.4em;
 margin-bottom: 2vh;
 direction: rtl;
-text-align: right;
+text-align: center;
 font-family: "Heebo-Black";
 color:rgb(28, 180, 227);
 width: 95vw;
@@ -207,16 +211,17 @@ width: 95vw;
 font-size: 1.4em;
 margin-bottom: 2vh;
 direction: rtl;
-text-align: right;
+text-align: center;
 font-family: "Heebo-Black";
 color:rgb(59, 180, 140);
 width: 95vw;
+margin-top: 20%;
 }
 .orange-text {
 font-size: 1.4em;
 margin-bottom: 2vh;
 direction: rtl;
-text-align: right;
+text-align: center;
 font-family: "Heebo-Black";
 color:rgb(255,140,0);
 width: 95vw;
@@ -234,7 +239,7 @@ width: 95vw;
 font-size: 1.2em;
 margin-bottom: 2vh;
 direction: rtl;
-text-align: right;
+text-align: center;
 font-family: "Heebo-Black";
 color: rgb(89,89,89);
 }
@@ -245,6 +250,15 @@ direction: rtl;
 text-align: right;
 font-family: "Heebo-Black";
 color: rgb(89,89,89);
+}
+.grey-big-center {
+font-size: 2em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: center;
+font-family: "Heebo-Black";
+color: rgb(89,89,89);
+margin-top: 20%;
 }
 .animate {
 animation: fadeIn 1s ease;
@@ -274,6 +288,12 @@ width: 100%;
 height: auto;
 margin-bottom: 2vh;
 }
+.image-content-neve {
+width: 100%;
+height: auto;
+margin-bottom: 2vh;
+margin-top: 20%;
+}
 .brand{
   height:auto;
   width:15vw
@@ -285,16 +305,41 @@ margin-bottom: 2vh;
   text-decoration: underline; /* Add underline */
 }
 
-#next-btn{
-  position:absolute;
+#next-btn {
+  position: absolute;
   z-index: 5;
-  right:50%;
-  transform: translateX(50%);
-  height:8vh ;
-  width:auto;
+  left: 40%; /* Adjusted to center horizontally */
+  height: 8vh;
+  width: auto;
+  animation: moveUpDown 2s infinite;
 }
+
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3vh);
+  }
+}
+
+
 
 #cute-text{
   text-align: center;
+  margin-top: 15%;
+}
+
+#link{
+  background-color: rgb(28, 180, 227);
+  border-radius: 50px;
+  font-size: 1.5em;
+  font-family: "Heebo-black";
+  text-align: center;
+  color:white;
+  padding-right:20%;
+  padding-left:20%;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 </style>

@@ -19,16 +19,16 @@
     צפו בסרטון הממש מגניב שלנו שמסביר בקצרה על הספרייה
     </p>
     <video id="video" src="../assets/media/library.mp4" controls ></video>
-    <p class="blue-text" id="text-center" ref="text8">כדאי לשמור את הקישור
+    <p class="blue-text-center" ref="text8">כדאי לשמור את הקישור
     </p>
     <p class="simple-text" id="text-center" ref="text9">תמצאו בספרייה הרבה חומרים מקצועיים שבטוח תצטרכו בשגרה ובחירום. 
     </p>
-    <button class="button">
       <a id="link" href="https://inri.orc.org.il/%D7%94%D7%A1%D7%A4%D7%A8%D7%99%D7%99%D7%94-%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA-%D7%9C%D7%97%D7%99%D7%A8%D7%95%D7%9D/" target="_blank">
         מעבר לספרייה
       </a>
-    </button>
+      <p class="hide">trgrgrregregrgrregre</p>
     <img :src="nextBtn" id="next-btn" @click="backToMenu" >
+    <p class="hide">trgrgrregregrgrregre</p>
 
   </div>
   </div>
@@ -179,6 +179,15 @@ font-family: "Heebo-Black";
 color:rgb(28, 180, 227);
 width: 95vw;
 }
+.blue-text-center {
+font-size: 1.4em;
+margin-bottom: 2vh;
+direction: rtl;
+text-align: center;
+font-family: "Heebo-Black";
+color:rgb(28, 180, 227);
+width: 95vw;
+}
 .white-text {
 font-size: 4em;
 margin-bottom: 2vh;
@@ -248,46 +257,44 @@ width:90vw;
 height: auto;
 }
 
-.button{
-  position: absolute;
+
+#link{
   background-color: rgb(28, 180, 227);
   border-radius: 50px;
-  width:60vw;
-  height:7vh;
   font-size: 1.5em;
   font-family: "Heebo-black";
   text-align: center;
-  display: flex;
-  right: 50%;
-  transform: translateX(50%);
-  justify-content: center;
-  align-items: center;
+  color:white;
+  padding-right:20%;
+  padding-left:20%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin-bottom: 20%;
 }
-#link{
-  color:white
-}
-#next-btn{
-  position: absolute;
-  right:50%;
-  transform: translateX(50%);
-  height:8vh ;
-  width:auto;
-  margin-top: 12vh;
-  margin-bottom: 6vh;
 
+#next-btn {
+  position: absolute;
+  z-index: 5;
+  left: 40%; /* Adjusted to center horizontally */
+  height: 8vh;
+  width: auto;
+  animation: moveUpDown 2s infinite;
 }
-@keyframes bounce2 {
-    0% {
-        top: 236vh;
-    }
-    50%{
-      top: 242vh;
-    }
-    100%{
-      top: 236vh;
-    }
+
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3vh);
+  }
 }
+
 #text-center{
   text-align: center;
+}
+.hide{
+  font-size: 20px;
+  color:aliceblue;
 }
 </style>

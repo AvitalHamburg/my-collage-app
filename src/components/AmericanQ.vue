@@ -5,7 +5,7 @@
       <p class="grey-big">{{ congratsMessage }}</p>
       <div class="share-buttons" v-if="points >= 70">
         <button id="next-button" @click="captureAndShare()">צילום מסך ושיתוף</button>
-        <button id="next-button" @click="goAgain()">חזור להתחלה</button>
+        <button id="next-button" @click="goAgain()">חזרה להתחלה</button>
       </div>
       <div class="retry-button" v-if="points < 70">
         <button id="next-button" @click="retryQuiz()">נסה שוב</button>

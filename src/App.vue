@@ -72,24 +72,6 @@ const state = reactive({
   showExam: false
 });
 
-const enterFullscreen = () => {
-  document.documentElement.requestFullscreen();
-}
-
-// Function to exit fullscreen
-const exitFullscreen = () => {
-  document.exitFullscreen();
-}
-
-// Example: Enter fullscreen on component mount
-onMounted(() => {
-  enterFullscreen();
-});
-
-// Example: Exit fullscreen on component unmount
-onBeforeUnmount(() => {
-  exitFullscreen();
-});
 
 function nextPage() {
   state.page++;

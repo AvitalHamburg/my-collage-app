@@ -11,6 +11,7 @@
 
 <script setup>
 import { defineEmits } from 'vue';
+import nextBtn from "../assets/imgs/nextBtn.png";
 
 const emit = defineEmits(['go-menu']);
 
@@ -64,9 +65,10 @@ const backToMenu = () => {
 }
 
 #next-btn {
+  width: auto;
+  height: auto;
   cursor: pointer;
-  height:8vh ;
-  width:auto;
+  /* Add any other styles you need */
 }
 
 .map {

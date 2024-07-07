@@ -22,6 +22,8 @@
     <p class="simple-text" ref="text7">במהלך הפעלת המרס"ל מאוקטובר 2023 עד פברואר 2024, טיפלו במרס"ל בלמעלה מ-700 פניות שעלו מהמחוזות בתחומים שונים כמו אספקת מנות מזון, חיתולים, מטרנה, מתנדבים, שינוע תרופות ועוד משימות ייחודיות וערכיות, שלא ניתן להן כל מענה ממקורות אחרים.
     </p>
     <img class="image-content" ref="image2" :src="warImage2">
+    <p class="image-discription">ביקור הרמטכ"ל במשל"ט</p>
+
     <p class="red-bold" ref="text8">משלט ינאי
     </p>
     <p class="simple-text" ref="text9">אפשר לומר שחוץ מראש הממשלה כולם הגיעו לבקר - מהנשיא ורעייתו, הרמטכ"ל, שרים, מנכ"לי משרדי ממשלה, אלופי המטכ"ל ועוד. 
@@ -31,7 +33,7 @@
 </p>
     <p class="simple-text" ref="text4"> לצד שתי המשימות הלאומיות, המכללה המשיכה להכשיר בחירום קורסים לבעלי תפקידים שהיו נחוצים בשטח, הנגשנו תוכן מקצועי ומתוקף לבעלי התפקידים ברשויות, ביצענו 'זמן יקר' במפקדות, הפצנו תוכן דיגיטלי לצוותי הצח"י ומנהלי המכלולים, ערכנו אבחון לקריית שמונה לסיוע בהתמודדות הרשות עם אתגרי הפינוי ופיצול הרשות ועוד פעולות רבות כחלק מהמאמץ המלחמתי בעורף.
     </p>
-    <img ref="nextB" :src="nextBtn" id="next-wBtn" @click="goToMenu">
+    <img ref="nextB" :src="nextBtn" id="next-btn" @click="goToMenu">
     <p class="white-bold">hytgtgtgtgtgttggrthrth4h</p>
   </div>
 
@@ -241,14 +243,22 @@ animation: fadeIn 1s ease;
 }
 
 
-#next-wBtn {
+#next-btn {
   position: absolute;
   z-index: 5;
-  right: 50%;
-  transform: translateX(50%);
-  height:8vh ;
-  width:auto;
+  left: 40%; /* Adjusted to center horizontally */
+  height: 8vh;
+  width: auto;
+  animation: moveUpDown 2s infinite;
+}
 
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3vh);
+  }
 }
 
 .animate {

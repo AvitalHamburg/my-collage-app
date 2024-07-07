@@ -1,7 +1,7 @@
 <template>
   <div id="intro">
     <video id="video" v-if="!state.isVideoEnded" src="../assets/media/introVid.mp4" autoplay muted></video>
-    <img :src="introImg" v-if="state.isVideoEnded && !state.showIntro" class="image-mask">
+    <img :src="introImg" v-show="state.isVideoEnded && !state.showIntro" class="image-mask">
     <div v-if="state.showIntro">
       <div id="shadow"></div>
       <img :src="inriLogoSvg" alt="White Logo" id="white-logo" class="move-to-center">
@@ -28,10 +28,10 @@ const state = reactive({
 function changeImageSourceAfterTimeout() {
   setTimeout(() => {
     state.isVideoEnded = true;
-  }, 5999.9);
+  },7000.1);
   setTimeout(() => {
     state.showIntro = true;
-  }, 8000);
+  }, 10000);
 }
 
 function moveNextPage() {
@@ -173,7 +173,7 @@ onMounted(() => {
   mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
   mask-size: 100% 300%; /* Adjust mask-size to fit your image */
   mask-position: center bottom; /* Start with fully visible and then hide */
-  animation: reveal-mask 5s ease forwards;
+  animation: reveal-mask 3s ease forwards;
 }
 
 @keyframes reveal-mask {

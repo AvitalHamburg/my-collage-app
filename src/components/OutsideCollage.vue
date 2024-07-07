@@ -178,27 +178,23 @@ color: rgb(89,89,89);
 .animate {
 animation: fadeIn 1s ease;
 }
-#next-btn{
+#next-btn {
   position: absolute;
-  right:50%;
-  transform: translateX(50%);
-  animation: bounce2 2s ease infinite; 
-  height:8vh ;
-  width:auto;
-
-}
-@keyframes bounce2 {
-    0% {
-        top: 175vh;
-    }
-    50%{
-      top: 180vh;
-    }
-    100%{
-      top: 175vh;
-    }
+  z-index: 5;
+  left: 40%; /* Adjusted to center horizontally */
+  height: 8vh;
+  width: auto;
+  animation: moveUpDown 2s infinite;
 }
 
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3vh);
+  }
+}
 
 
 

@@ -181,6 +181,14 @@ export default {
   src: url("../assets/fonts/Heebo-Black.woff"), 
        format("woff");
 }
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+  background-color: aliceblue;
+  padding: 0%;
+}
 
 #page {
   background-color: aliceblue;
@@ -189,7 +197,7 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  overflow:hidden;
+  overflow:none;
 }
 
 .game-board {
@@ -334,24 +342,26 @@ export default {
   }
   #container5 {
     position:relative;
-    left: -42vw;
+    left: -22vw;
     top: 25vh;
   
   }
   #container6 {
     position:relative;
     left: -2vw;
-    top:35vh;
+    top:40vh;
     
   }
   #container7 {
     position:relative;
-    left: -42vw;
+    left: -22vw;
     top: 20vh;
   }
   #container8 {
-    left: 0%;
-    top: 300%;
+    position:relative;
+
+    left: -60vw;
+    top: 5vh;
   }
   .flash-card{
     position:absolute;

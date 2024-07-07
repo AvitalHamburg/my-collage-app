@@ -32,7 +32,7 @@
               <video id="video" src="../assets/media/videoCollage.mp4" controls ></video>
               <p class="grey-bold" id="important-text" ref="text5">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.</p>
              
-              <img  :src="nextBtn" id="next-wBtn" ref="image2" @click="goToMenu">
+              <img  :src="nextBtn" id="next-btn"  @click="goToMenu">
 
 
   </div>
@@ -81,7 +81,6 @@ const text16= ref(null);
 const text17= ref(null);
 const text18= ref(null);
 const image1 = ref(null);
-const image2 = ref(null);
 const image3 = ref(null);
 const image4 = ref(null);
 // const nextT = ref(null);
@@ -123,7 +122,6 @@ observer.observe(text16.value);
 observer.observe(text17.value);
 observer.observe(text18.value);
 observer.observe(image1.value);
-observer.observe(image2.value);
 observer.observe(image3.value);
 observer.observe(image4.value);
 });
@@ -249,27 +247,24 @@ color: rgb(89,89,89);
 animation: fadeIn 1s ease;
 }
 
-#next-wBtn{
-  position:absolute;
+#next-btn {
+  position: absolute;
   z-index: 5;
-  right:50%;
-  transform: translateX(50%);
-  height:8vh;
+  left: 40%; /* Adjusted to center horizontally */
+  height: 8vh;
   width: auto;
-  
+  animation: moveUpDown 2s infinite;
+}
 
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
-@keyframes bounce2 {
-    0% {
-        bottom: -84vh;
-    }
-    50%{
-      bottom: -89vh;
-    }
-    100%{
-      bottom: -84vh;
-    }
-}
+
 .animate {
 animation: fadeIn 1s ease;
 }

@@ -15,15 +15,14 @@
     <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="linkedin" >
     </a>
   </span>
+  <h1></h1>
   <img ref="nextB" :src="nextBtn" id="next-btn" @click="goToMenu">
 </div>
   </div>
 </template>
 
 <script setup>
-import { reactive, onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
-import VideoPage from './MapGame.vue';
-import knowInfo from './knowInfo.vue';
+import { onMounted, getCurrentInstance ,defineEmits, ref} from 'vue';
 import nextBtn from "../assets/imgs/blueNextBtn.png";
 import carry from "../assets/imgs/carry.gif";
 import faceBook from "../assets/imgs/facebook.png";
@@ -196,26 +195,29 @@ height: auto;
 .brand{
   height:auto;
   width:15vw
+  
 }
-#next-btn{
+#next-btn {
   position: absolute;
-  right:50%;
-  transform: translateX(50%);
-  animation: bounce2 2s ease infinite; 
-  height:8vh ;
-  width:auto;
+  z-index: 5;
+  left: 40%; /* Adjusted to center horizontally */
+  height: 8vh;
+  width: auto;
+  animation: moveUpDown 2s infinite;
+}
+
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3vh);
+  }
+}
+
+.hide{
 
 }
-@keyframes bounce2 {
-    0% {
-        top: 75vh;
-    }
-    50%{
-      top: 80vh;
-    }
-    100%{
-      top: 75vh;
-    }
-}
+
 
 </style>

@@ -15,7 +15,6 @@
               <video id="video" src="../assets/media/videoCollage.mp4" controls ></video>
               <p class="grey-bold" ref="text5">בראשות המכללה ניצבת מפקדת בדרגת אל"ם ולרשותה מטה מקצועי המורכב ממשרתי קבע, מילואים ויועצים. סגל המרצים כולל מומחים מקצועיים מפיקוד העורף, רח"ל, משרדי הממשלה, המינהל הציבורי והאקדמיה.</p>
               <img  :src="nextBtn" id="next-wBtn2" ref="image2" @click="goToMenu">
-              <p class="white-big" >gergr5e664646464grejgiroegerghrthtrhrthrthrthrthtrhtrhtrhtrhtjgijgirjgirejgirjgirrgrge</p>
 
 
       </div>
