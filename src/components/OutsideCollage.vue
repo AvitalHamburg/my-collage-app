@@ -14,9 +14,8 @@
       <p class="simple-text" ref="text5">שימו לב לדגלים בתנועה, זהו את הדגלים וכמות המדינות ואולי אפילו תרשמו לכם בצד -</p>
       <img src="../assets/imgs/flags.gif" class="image-content">
       <p class="grey-bold" id="center-text">בטוח ספרת טוב? (זאת לגמרי שאלה שנשאל בבוחן סיום)</p>
-
-
     <img :src="nextBtn" id="next-btn" @click="backToMenu" >
+    <p class="hide"> rgegregregreg</p>
 
   </div>
   </div>
@@ -182,8 +181,9 @@ animation: fadeIn 1s ease;
   position: absolute;
   z-index: 5;
   left: 40%; /* Adjusted to center horizontally */
-  height: 8vh;
+  height: 9vh;
   width: auto;
+  margin-top: 5vh;
   animation: moveUpDown 2s infinite;
 }
 
@@ -246,5 +246,9 @@ height: auto;
 }
 #center-text{
   text-align: center;
+}
+.hide{
+  font-size: 3rem;
+  color:aliceblue
 }
 </style>

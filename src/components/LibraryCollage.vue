@@ -26,7 +26,6 @@
       <a id="link" href="https://inri.orc.org.il/%D7%94%D7%A1%D7%A4%D7%A8%D7%99%D7%99%D7%94-%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA-%D7%9C%D7%97%D7%99%D7%A8%D7%95%D7%9D/" target="_blank">
         מעבר לספרייה
       </a>
-      <p class="hide">trgrgrregregrgrregre</p>
     <img :src="nextBtn" id="next-btn" @click="backToMenu" >
     <p class="hide">trgrgrregregrgrregre</p>
 
@@ -269,15 +268,16 @@ height: auto;
   padding-left:20%;
   padding-top: 5%;
   padding-bottom: 5%;
-  margin-bottom: 20%;
 }
 
 #next-btn {
   position: absolute;
   z-index: 5;
   left: 40%; /* Adjusted to center horizontally */
-  height: 8vh;
+  height: 10vh;
   width: auto;
+  margin-top: 15vh;
+  margin-bottom: 4vh;
   animation: moveUpDown 2s infinite;
 }
 
@@ -290,11 +290,14 @@ height: auto;
   }
 }
 
+
+.hide{
+  font-size: 3rem;
+  color:aliceblue;
+  margin-bottom: 1vh;
+  margin-top: 13vh;
+}
 #text-center{
   text-align: center;
-}
-.hide{
-  font-size: 20px;
-  color:aliceblue;
 }
 </style>

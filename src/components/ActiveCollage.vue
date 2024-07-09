@@ -212,7 +212,7 @@ font-family: "Heebo-Black";
 color:#e06666;
 }
 .white-bold {
-font-size: 5em;
+font-size: 4em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
@@ -249,6 +249,7 @@ animation: fadeIn 1s ease;
   left: 40%; /* Adjusted to center horizontally */
   height: 8vh;
   width: auto;
+  margin-top: 7vh;
   animation: moveUpDown 2s infinite;
 }
 

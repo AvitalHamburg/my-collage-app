@@ -78,10 +78,7 @@ threshold: 0.5,
 position: fixed;
 top: 0;
 left: 0;
-/* Adjust the height dynamically based on content */
-height: 100vh;
 width: 100vw;
-/* background-image: url("../assets/imgs/Bg2.png"); */
 background-color: rgb(229, 232, 235);
 background-size: cover;
 background-repeat: no-repeat;
@@ -148,7 +145,7 @@ width: 95vw;
 font-weight: 200;
 }
 .grey-bold {
-font-size: 1.2em;
+font-size: 2em;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: center;
@@ -186,23 +183,25 @@ to {
 .image-content {
 width: 100%;
 height: auto;
-margin-bottom: 2vh;
+margin-bottom: 5vh;
 }
 #video{
 width:90vw;
 height: auto;
 }
 .brand{
+  margin-top: 5vh;
   height:auto;
-  width:15vw
+  width:20vw
   
 }
 #next-btn {
   position: absolute;
   z-index: 5;
   left: 40%; /* Adjusted to center horizontally */
-  height: 8vh;
+  height: 10vh;
   width: auto;
+  margin-top: 7vh;
   animation: moveUpDown 2s infinite;
 }
 
@@ -215,9 +214,6 @@ height: auto;
   }
 }
 
-.hide{
-
-}
 
 
 </style>
