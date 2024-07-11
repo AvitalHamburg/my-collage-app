@@ -48,6 +48,8 @@
         שאלה קודמת
       </button>
     </div>
+    <h1 class="hide" v-if="!state.showFinalScreen">vfbfdbdfbbf</h1>
+
     <div v-if="pointsVisible">
       <p>נקודות: {{ points }}</p>
     </div>
@@ -267,8 +269,8 @@ watch(currentIndex, () => {
 #navigation-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20vh; /* Adjusted top margin */
-  margin-bottom: 3vh; /* Add a bottom margin for spacing */
+  margin-top: 18vh; /* Adjusted top margin */
+  margin-bottom: 10vh; /* Add a bottom margin for spacing */
   position: absolute;
   width: 90%;
   left: 50%;
@@ -282,7 +284,9 @@ watch(currentIndex, () => {
   border-radius: 50px;
   padding: 10px 20px;
   font-size: 1.2em;
+  margin-top: 5%;
   font-family: "Heebo";
+  margin-right: 5vw;
 }
 #next-button {
   background-color: rgb(28, 180, 227);
@@ -293,6 +297,8 @@ watch(currentIndex, () => {
   font-size: 1.2em;
   font-family: "Heebo";
   margin-top: 5%;
+  margin-left: 5vw;
+
 }
 #prev-button:disabled,
 #next-button:disabled {
@@ -427,5 +433,16 @@ watch(currentIndex, () => {
   right:50%;
   transform: translateX(50%);
 }
+.hide{
+  position: absolute;
+  color: #000;
+  bottom: -3vh;
+  right: 7vw;
+  color: aliceblue;
+  font-size: 3em;
+}
+
+
+
 
 </style>
