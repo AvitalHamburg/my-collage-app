@@ -13,7 +13,7 @@
     <header id="header" v-if="state.page && !state.openHamburger">
       <img v-if="!state.openHamburger" :src="collegeLogo" id="logo" @click="backToMenu">
       <img v-if="!state.openHamburger && state.textNum !== 2 " id="shape" :src="orange">
-      <img v-if="!state.openHamburger && state.textNum !== 2 && state.textNum !== 8" id="shape1" :src="blue">
+      <img v-if="!state.openHamburger && state.textNum !== 2 && state.textNum !== 8 && state.textNum !== 7 " id="shape1" :src="blue">
       <img v-if="state.textNum === 2 " id="shape" :src="red">
       <img v-if="state.textNum === 2 " id="shape1" :src="red">
    </header>
