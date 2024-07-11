@@ -159,7 +159,7 @@ background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
 margin: 0;
-overflow: auto; /* Add overflow to enable scrolling */
+overflow: scroll;  /* Add overflow to enable scrolling */
 }
 
 #shape {
