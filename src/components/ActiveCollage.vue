@@ -245,7 +245,7 @@ animation: fadeIn 1s ease;
 
 #next-btn {
   position: absolute;
-  z-index: 7;
+  z-index: 9;
   left: 40%; /* Adjusted to center horizontally */
   height: 8vh;
   width: auto;
