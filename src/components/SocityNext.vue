@@ -17,6 +17,7 @@
   </span>
   <h1></h1>
   <img ref="nextB" :src="nextBtn" id="next-btn" @click="goToMenu">
+  <p class="hide">fhfdhdfhd</p>
 </div>
   </div>
 </template>
@@ -102,7 +103,6 @@ left: 50%;
 transform: translateX(-50%);
 width: 90vw;
 direction: rtl;
-height: 190vh;
 }
 
 #page-header {
@@ -213,7 +213,10 @@ height: auto;
     transform: translateY(-3vh);
   }
 }
-
+.hide{
+  font-size: 3em;
+  color: aliceblue;
+}
 
 
 </style>

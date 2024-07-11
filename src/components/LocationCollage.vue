@@ -3,7 +3,7 @@
     <div id="scroll-text">
       <p class="titles-gray" ref="text1">מה נמצא איפה?</p>
       <p class="simple-text">רגע לפני סיום, קצת אוריינטציה בתוך בסיס הפיקוד, במשחק שצריך לתפוס ולגרור בו את שם המיקום לנקודות המתאימות במפה -</p>
-      <button class="button" @click="backToMenu"> למשחק </button>
+      <button class="button" @click="backToMenu"> מוכנים? </button>
       <p id="text">dfdgdg</p>
     </div>
   </div>

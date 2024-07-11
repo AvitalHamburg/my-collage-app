@@ -331,7 +331,7 @@ body {
   #container3 {
     position:relative;
     left: -62vw;
-    top: 25vh;
+    top: 20vh;
 
   }
   #container4 {
@@ -342,26 +342,26 @@ body {
   }
   #container5 {
     position:relative;
-    left: -22vw;
-    top: 25vh;
+    left: -38vw;
+    top: 22vh;
   
   }
   #container6 {
     position:relative;
     left: -2vw;
-    top:40vh;
+    top:18vh;
     
   }
   #container7 {
     position:relative;
     left: -22vw;
-    top: 20vh;
+    top: 24vh;
   }
   #container8 {
     position:relative;
 
     left: -60vw;
-    top: 5vh;
+    top: 9vh;
   }
   .flash-card{
     position:absolute;

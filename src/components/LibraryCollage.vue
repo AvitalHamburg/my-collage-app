@@ -15,7 +15,7 @@
     <p class="simple-text" ref="text6">הנגשת הידע ללא מגבלות מתגשם בזכות שיתוף פעולה פורה עם למעלה מ-75 ארגונים מהמגזר הציבורי כמו משרדי הממשלה, רשויות ייעודיות, הרשויות המקומיות, ארגוני חירום והצלה, אקדמיה ומכוני מחקר ופעילות המגזר השלישי. 
     </p>
     <img class="image-content" :src="libraryComp">
-    <p class="simple-text" ref="text7">בהתאם לצורך, ניתן לחפש קבצים בספרייה, לצפות, להוריד או לשתף
+    <p class="simple-text" ref="text7">.בהתאם לצורך, ניתן לחפש קבצים בספרייה, לצפות, להוריד או לשתף
     צפו בסרטון הממש מגניב שלנו שמסביר בקצרה על הספרייה
     </p>
     <video id="video" src="../assets/media/library.mp4" controls ></video>
@@ -26,7 +26,6 @@
       <a id="link" href="https://inri.orc.org.il/%D7%94%D7%A1%D7%A4%D7%A8%D7%99%D7%99%D7%94-%D7%94%D7%9C%D7%90%D7%95%D7%9E%D7%99%D7%AA-%D7%9C%D7%97%D7%99%D7%A8%D7%95%D7%9D/" target="_blank">
         מעבר לספרייה
       </a>
-      <p class="hide-small">trgrgrregregrgrregre</p>
     <img :src="nextBtn" id="next-btn" @click="backToMenu" >
     <p class="hide">trgrgrregregrgrregre</p>
 
@@ -175,6 +174,7 @@ width: 95vw;
 }
 .blue-text-center {
 font-size: 1.4em;
+margin-top: 3vh;
 margin-bottom: 2vh;
 direction: rtl;
 text-align: center;
@@ -236,12 +236,7 @@ margin-bottom: 2vh;
   height:auto;
   width:15vw
 }
-#site-link{
-  font-size:1.3em; ;
-  font-family: "Heebo";
-  color:rgb(28, 180, 227);
-  text-decoration: underline; /* Add underline */
-}
+
 #video{
 width:90vw;
 height: auto;
@@ -259,6 +254,7 @@ height: auto;
   padding-left:20%;
   padding-top: 5%;
   padding-bottom: 5%;
+  margin-top: 5vh;
 }
 
 #next-btn {
@@ -283,20 +279,14 @@ height: auto;
 
 
 .hide{
-  font-size: 3rem;
+  font-size: 4em;
   color:aliceblue;
-  margin-bottom: 1vh;
-  margin-top: 13vh;
 }
 #text-center{
   text-align: center;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 }
-.hide-small{
-  font-size: 2em;
-  color: aliceblue;
-}
-.hide{
-  font-size: 3em;
-  color: aliceblue;
-}
+
+
 </style>

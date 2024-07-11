@@ -162,7 +162,14 @@ const captureAndShare = () => {
   const currentDate = new Date().toLocaleDateString('he-IL'); 
   const captureTime = new Date().toLocaleTimeString('he-IL');
 
-  const message = `נקודות שהרוויחת: ${points.value}\nתאריך: ${currentDate} שעה: ${captureTime}\nשם: ${firstName.value} ${lastName.value}`;
+  const message = `
+בוחן מסכם להיכרות המכללה
+${firstName.value} ${lastName.value}: ציון 100!
+תאריך: ${currentDate}
+שעה: ${captureTime}
+
+🧡 משפחת המכללה`;
+
 
   navigator.share({ text: message })
     .then(() => console.log('הודעה שותפה בהצלחה'))
