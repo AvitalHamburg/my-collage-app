@@ -1,14 +1,16 @@
 <template>
   <div id="intro">
     <video id="video" v-if="!state.isVideoEnded" src="../assets/media/introVid.mp4" autoplay muted></video>
-    <img :src="introImg" v-show="state.isVideoEnded && !state.showIntro" class="image-mask">
-    <div v-if="state.showIntro">
-      <div id="shadow"></div>
-      <img :src="inriLogoSvg" alt="White Logo" id="white-logo" class="move-to-center">
-      <h1 id="welcome-text">ברוך הבא או הבאה למשפחת המכללה</h1>
-      <p id="introduction">בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני. וכן, בארור שיש בוחן בסוף :) בהצלחה!</p>
-      <img ref="nextBtn" :src="nextButton" id="next-wBtn" @click="moveNextPage">
-    </div>
+    
+    <!-- Vue transition wrapper -->
+    <transition name="fade">
+      <div id="intro-text" v-if="state.showIntro">
+        <img :src="inriLogoSvg" alt="White Logo" id="white-logo" class="move-to-center">
+        <h1 id="welcome-text">ברוך הבא או הבאה למשפחת המכללה</h1>
+        <p id="introduction">בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני. וכן, בארור שיש בוחן בסוף :) בהצלחה!</p>
+        <img ref="nextBtn" :src="nextButton" id="next-wBtn" @click="moveNextPage">
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -16,7 +18,6 @@
 import { reactive, onMounted, getCurrentInstance } from 'vue';
 import nextButton from "../assets/imgs/whiteNextBtn.png";
 import inriLogoSvg from "../assets/imgs/inri-logo-white2.svg";
-import introImg from "../assets/imgs/introImg1.png";
 
 const { emit } = getCurrentInstance();
 
@@ -28,10 +29,10 @@ const state = reactive({
 function changeImageSourceAfterTimeout() {
   setTimeout(() => {
     state.isVideoEnded = true;
-  },7000.1);
+  }, 13000);
   setTimeout(() => {
     state.showIntro = true;
-  }, 10000);
+  }, 13500);
 }
 
 function moveNextPage() {
@@ -74,16 +75,7 @@ onMounted(() => {
   padding: 0;
 }
 
-#shadow {
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  background-color: rgba(59, 59, 59, 0.5); /* Adjust opacity */
-  top: 0;
-  right: 50%;
-  transform: translateX(50%);
-  z-index: 2;
-}
+
 
 #white-logo {
   position: absolute;
@@ -162,26 +154,11 @@ onMounted(() => {
   top: 0;
 }
 
-.image-mask {
-  position: absolute;
-  top: 0;
-  right: 50%;
-  transform: translateX(50%);
-  height: 100vh;
-  width: auto;
-  z-index: 1;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
-  mask-size: 100% 300%; /* Adjust mask-size to fit your image */
-  mask-position: center bottom; /* Start with fully visible and then hide */
-  animation: reveal-mask 3s ease forwards;
+/* Fade animation */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
 }
-
-@keyframes reveal-mask {
-  0% {
-    mask-position: center bottom; /* Fully visible at start */
-  }
-  100% {
-    mask-position: center top; /* Gradually hides to top */
-  }
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0;
 }
 </style>
