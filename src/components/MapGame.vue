@@ -11,8 +11,7 @@
         draggable="true"
         @dragstart="dragStart"
         @dragend="dragEnd"
-        @touchstart="dragStart"
-        @touchend="dragEnd"
+    
       >
         {{ item.name }}
       </div>
@@ -30,14 +29,11 @@
         @dragleave="dragLeave"
        
       >
-        <!-- Adjust content as needed -->
       </div>
     </div>
 
-    <!-- Pass the title prop to FlashCard based on currentItemIndex -->
     <FlashCard v-if="correctPlace" class="flash-card" :title="titles[currentItemIndex]" :info="infos[currentItemIndex]" @close="closeCard"></FlashCard>
 
-    <!-- Success message -->
     <div v-if="showSuccessMessage" class="success-message">
       הצלחת ! כל הכבוד
       <button class="button" @click=finishGame>המשך</button>
