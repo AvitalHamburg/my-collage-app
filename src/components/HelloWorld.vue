@@ -1,16 +1,12 @@
 <template>
   <div id="intro">
     <video id="video" v-if="!state.isVideoEnded" src="../assets/media/introVid.mp4" autoplay muted></video>
-    
-    <!-- Vue transition wrapper -->
-    <transition name="fade">
-      <div id="intro-text" v-if="state.showIntro">
-        <img :src="inriLogoSvg" alt="White Logo" id="white-logo" class="move-to-center">
-        <h1 id="welcome-text">ברוך הבא או הבאה למשפחת המכללה</h1>
-        <p id="introduction">בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני. וכן, בארור שיש בוחן בסוף :) בהצלחה!</p>
-        <img ref="nextBtn" :src="nextButton" id="next-wBtn" @click="moveNextPage">
-      </div>
-    </transition>
+    <div  v-show="state.showIntro" class="intro-text-slide-in">
+      <img :src="inriLogoSvg" alt="White Logo" id="white-logo" class="move-to-center">
+      <h1 id="welcome-text">ברוך הבא או הבאה למשפחת המכללה</h1>
+      <p id="introduction">בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני. וכן, בארור שיש בוחן בסוף :) בהצלחה!</p>
+      <img ref="nextBtn" :src="nextButton" id="next-wBtn" @click="moveNextPage">
+    </div>
   </div>
 </template>
 
@@ -29,10 +25,11 @@ const state = reactive({
 function changeImageSourceAfterTimeout() {
   setTimeout(() => {
     state.isVideoEnded = true;
-  }, 13000);
+  }, 13000); 
+
   setTimeout(() => {
     state.showIntro = true;
-  }, 13500);
+  }, 13100); 
 }
 
 function moveNextPage() {
@@ -57,24 +54,25 @@ onMounted(() => {
   src: url("../assets/fonts/Karantina-Regular.woff"), format("woff");
 }
 
+/* מראה*/
 * {
   overflow: hidden;
   direction: rtl;
 }
 
 #intro {
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: 50%;
-  transform: translateX(50%);
-  height: 100vh;
-  width: 100vw;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url("../assets/imgs/Bg1.png");
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
 
 
 #white-logo {
@@ -112,6 +110,7 @@ onMounted(() => {
   font-family: "Heebo";
 }
 
+
 #next-wBtn {
   position: absolute;
   z-index: 5;
@@ -121,6 +120,19 @@ onMounted(() => {
   animation: bounce2 2s ease infinite;
   height: 10vh;
   width: auto;
+}
+
+.intro-text-slide-in {
+  animation: slide-in-from-top 1.5s forwards;
+}
+
+@keyframes slide-in-from-top {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes bounce2 {
@@ -135,30 +147,4 @@ onMounted(() => {
   }
 }
 
-.move-to-center {
-  position: absolute;
-  width: 50vw;
-  height: auto;
-  z-index: 5;
-  right: 50%;
-  transform: translateX(50%);
-  top: 5%;
-}
-
-#video {
-  position: absolute;
-  width: auto;
-  height: 100vh;
-  right: 50%;
-  transform: translateX(50%);
-  top: 0;
-}
-
-/* Fade animation */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-  opacity: 0;
-}
 </style>
