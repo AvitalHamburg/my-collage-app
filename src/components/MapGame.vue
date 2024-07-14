@@ -1,6 +1,6 @@
 <template>
   <div id="page">
-    <p class="simple-text">יש ללחוץ על הפריט ולאחר מכן לגרור אותו</p>
+    <p class="simple-text">יש לתפוס את הפריט ולאחר מכן לגרור אותו</p>
     <img class="game-board" src="../assets/imgs/collageMap.jpeg">
     <div class="container">
       <div
