@@ -179,8 +179,11 @@ const moveToPage = (index) => {
 }
 .margin-class{
   position: absolute;
-  color:aliceblue;
+  color:transparent;
   bottom: -55%;
-  
+  -webkit-user-select: none;
+  -moz-user-select: none; 
+  -ms-user-select: none;
+  user-select: none; 
 }
 </style>

@@ -197,7 +197,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  overflow:none;
+  overflow:hidden;
 }
 
 .game-board {

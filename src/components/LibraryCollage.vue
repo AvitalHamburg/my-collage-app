@@ -113,9 +113,9 @@ background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
 margin: 0;
-overflow: auto; /* Add overflow to enable scrolling */
+overflow-y: scroll; 
+overflow-x: hidden; 
 }
-
 #shape {
 position: absolute;
 left: 0;
@@ -280,7 +280,11 @@ height: auto;
 
 .hide{
   font-size: 4em;
-  color:aliceblue;
+  color:transparent;
+  -webkit-user-select: none; /* Safari/Chrome */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard */
 }
 #text-center{
   text-align: center;

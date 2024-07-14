@@ -22,17 +22,20 @@ const backToMenu = () => {
 
 <style scoped>
 #page {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 200vh;
-  width: 100vw;
-  background-color: aliceblue;
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 0;
-  margin: 0;
-  overflow: auto;
+position: fixed;
+top: 0;
+left: 0;
+/* Adjust the height dynamically based on content */
+height: 100vh;
+width: 100vw;
+/* background-image: url("../assets/imgs/Bg2.png"); */
+background-color: aliceblue;
+background-size: cover;
+background-repeat: no-repeat;
+padding: 0;
+margin: 0;
+overflow-y: scroll; 
+overflow-x: hidden; 
 }
 
 #scroll-text {
@@ -78,7 +81,12 @@ const backToMenu = () => {
 
 #text {
   position: absolute;
-  top: 400vh; /* Adjust as needed */
+  top: 400vh;
+  color: transparent;
+  -webkit-user-select: none; /* Safari/Chrome */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard */
 }
 .button{
   background-color: rgb(28, 180, 227);

@@ -83,16 +83,15 @@ observer.observe(text5.value);
 position: fixed;
 top: 0;
 left: 0;
-/* Adjust the height dynamically based on content */
 height: 100vh;
 width: 100vw;
-/* background-image: url("../assets/imgs/Bg2.png"); */
 background-color: aliceblue;
 background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
 margin: 0;
-overflow: auto; /* Add overflow to enable scrolling */
+overflow-x: hidden; 
+overflow-y: scroll;
 }
 
 #shape {
@@ -249,6 +248,10 @@ height: auto;
 }
 .hide{
   font-size: 3rem;
-  color:aliceblue
+  color:transparent;
+  -webkit-user-select: none; 
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; 
 }
 </style>

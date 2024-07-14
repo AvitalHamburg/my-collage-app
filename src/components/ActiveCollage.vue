@@ -140,7 +140,8 @@ background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
 margin: 0;
-overflow: scroll; /* Add overflow to enable scrolling */
+overflow-y: scroll; 
+overflow-x: hidden; 
 }
 
 #shape {
@@ -217,7 +218,7 @@ margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
 font-family: "Heebo-Black";
-color:aliceblue;
+color:transparent;
 top:150vh;
 }
 .red-big {

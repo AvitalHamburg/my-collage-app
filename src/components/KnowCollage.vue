@@ -161,7 +161,8 @@ background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
 margin: 0;
-overflow: scroll;  /* Add overflow to enable scrolling */
+overflow-y: scroll; 
+overflow-x: hidden; 
 }
 
 #shape {
@@ -306,6 +307,7 @@ height: auto;
 }
 .hide{
   font-size: 3em;
-  color: aliceblue;
+  color:transparent;
+  
 }
 </style>

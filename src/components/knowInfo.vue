@@ -96,7 +96,7 @@ position: fixed;
 top: 0;
 left: 0;
 /* Adjust the height dynamically based on content */
-height: 250vh;
+height: 100vh;
 width: 100vw;
 /* background-image: url("../assets/imgs/Bg2.png"); */
 background-color: aliceblue;
@@ -104,7 +104,8 @@ background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
 margin: 0;
-overflow: auto; /* Add overflow to enable scrolling */
+overflow-y: scroll; 
+overflow-x: hidden; 
 }
 
 #shape {

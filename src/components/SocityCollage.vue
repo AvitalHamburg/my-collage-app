@@ -142,7 +142,8 @@ background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
 margin: 0;
-overflow: auto; /* Add overflow to enable scrolling */
+overflow-x: hidden; 
+overflow-y: scroll; 
 }
 
 #shape {
@@ -232,8 +233,12 @@ margin-bottom: 2vh;
 direction: rtl;
 text-align: right;
 font-family: "Heebo-Black";
-color:aliceblue;
+color: transparent;
 width: 95vw;
+-webkit-user-select: none; /* Safari/Chrome */
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* Internet Explorer/Edge */
+user-select: none; /* Standard */
 }
 .grey-bold {
 font-size: 1.2em;

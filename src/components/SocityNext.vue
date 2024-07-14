@@ -85,7 +85,8 @@ background-size: cover;
 background-repeat: no-repeat;
 padding: 0;
 margin: 0;
-overflow: auto; /* Add overflow to enable scrolling */
+overflow-x: hidden; /* Hide horizontal overflow */
+overflow-y: scroll; /* Allow vertical scrolling */
 }
 
 #shape {
@@ -213,10 +214,13 @@ height: auto;
     transform: translateY(-3vh);
   }
 }
-.hide{
+.hide {
   font-size: 3em;
-  color: aliceblue;
+  color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; 
 }
-
 
 </style>
