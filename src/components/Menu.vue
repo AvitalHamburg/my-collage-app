@@ -87,6 +87,7 @@ const moveToPage = (index) => {
   background-repeat: no-repeat;
   padding: 0%;
  overflow-y: scroll;
+ overflow-x: hidden;
  
 }
 
