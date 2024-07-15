@@ -171,13 +171,17 @@ onMounted(() => {
 }
 #skip{
   position: absolute;
-  bottom:2%;
+  top:2%;
   left:2%;
   background-color: transparent;
   font-family: 'Heebo-black';
-  font-size: 1.5em;
+  font-size: 1em;
   color: black;
   z-index: 9999999;
-
+  text-shadow:
+    -1px -1px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
 }
 </style>
