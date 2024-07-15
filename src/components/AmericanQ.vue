@@ -114,6 +114,8 @@ let isExtraAnswerAdded = false;
 
 const updateQuestionData = () => {
   currentQuestion.value = props.questions[currentIndex.value];
+
+  // Create a new array with the updated answers
   currentAnswers.value = [
     props.answers1[currentIndex.value],
     props.answers2[currentIndex.value],
@@ -122,13 +124,13 @@ const updateQuestionData = () => {
   ];
 
   if (currentIndex.value === 7 && !isExtraAnswerAdded) {
-    currentAnswers.value.push(extraAnswer.value);
+    // Using Vue.set to make Vue.js detect the change
+    Vue.set(currentAnswers.value, currentAnswers.value.length, extraAnswer.value);
     isExtraAnswerAdded = true;
-  } 
+  }
 
   selectedAnswerIndex.value = null;
 };
-
 const nextQuestion = () => {
   if (currentIndex.value < props.questions.length - 1) {
     currentIndex.value++;
@@ -251,8 +253,8 @@ watch(currentIndex, () => {
 #navigation-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20vh; /* Adjusted top margin */
-  margin-bottom: 3vh; /* Add a bottom margin for spacing */
+  margin-top: 18vh; /* Adjusted top margin */
+  margin-bottom: 10vh; /* Add a bottom margin for spacing */
   position: absolute;
   width: 90%;
   left: 50%;
@@ -266,7 +268,9 @@ watch(currentIndex, () => {
   border-radius: 50px;
   padding: 10px 20px;
   font-size: 1.2em;
+  margin-top: 5%;
   font-family: "Heebo";
+  margin-right: 5vw;
 }
 #next-button {
   background-color: rgb(28, 180, 227);
@@ -277,6 +281,8 @@ watch(currentIndex, () => {
   font-size: 1.2em;
   font-family: "Heebo";
   margin-top: 5%;
+  margin-left: 5vw;
+
 }
 #prev-button:disabled,
 #next-button:disabled {
