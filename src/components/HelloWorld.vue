@@ -32,7 +32,7 @@ function changeImageSourceAfterTimeout() {
 
   setTimeout(() => {
     state.showIntro = true;
-  }, 13100); 
+  }, 13050); 
 }
 
 function moveNextPage() {

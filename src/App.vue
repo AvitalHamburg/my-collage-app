@@ -13,9 +13,9 @@
     <header id="header" v-if="state.page && !state.openHamburger">
       <img v-if="!state.openHamburger" :src="collegeLogo" id="logo" @click="backToMenu">
       <img v-if="!state.openHamburger && state.textNum !== 2 " id="shape" :src="orange">
-      <img v-if="!state.openHamburger && state.textNum !== 2 && state.textNum !== 8 && state.textNum !== 7 " id="shape1" :src="blue">
+      <!-- <img v-if="!state.openHamburger && state.textNum !== 2 && state.textNum !== 8 && state.textNum !== 7 " id="shape1" :src="blue"> -->
       <img v-if="state.textNum === 2 " id="shape" :src="red">
-      <img v-if="state.textNum === 2 " id="shape1" :src="red">
+      <!-- <img v-if="state.textNum === 2 " id="shape1" :src="red"> -->
    </header>
 
     <Menu v-if="state.showMenu" :visitedMenuPage="state.visitedPages" @go-next="movePage"></Menu>
@@ -185,8 +185,8 @@ header {
   width: 100vw;
   height: 100vh;
   background-color: #175a85; 
-  box-shadow: 0 0 20px rgba(23, 90, 133, 0.2);  /* Adjust the transparency as needed */
-  z-index: 8998; /* Make sure the overlay is below the hamburger menu but above other content */
+  box-shadow: 0 0 20px rgba(23, 90, 133, 0.2); 
+  z-index: 8998;
   transition: transform 0.5s; 
   animation: slideIn 0.5s forwards; 
 }
@@ -198,7 +198,7 @@ header {
   height: 100vh; 
   transition: transform 0.5s; 
   animation: slideIn 0.5s forwards; 
-  margin-top: 10vh; /* Adjust the margin-top value as needed */
+  margin-top: 10vh; 
   z-index: 9999;
 }
 
@@ -248,6 +248,11 @@ header {
   top:0%;
   height: 20vh;
   z-index: 9997; 
+  -webkit-user-select: none;
+  -moz-user-select: none; 
+  -ms-user-select: none;
+  user-select: none; 
+
 
 }
 #shape1{
