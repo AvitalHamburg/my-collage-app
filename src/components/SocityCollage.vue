@@ -22,7 +22,7 @@
     </a>
     <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="instagram" >
     </a>
-    <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="linkedin" >
+    <a href="https://il.linkedin.com/company/ilresilience?trk=similar-pages" target="_blank"><img class="brand" :src="linkedin" >
     </a>
   </span>
     <p class="green-text" ref="text5">מידע על הכשרות צבאיות, נתונים היסטוריים ותוכן מקצועי</p>

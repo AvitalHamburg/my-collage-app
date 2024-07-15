@@ -12,7 +12,7 @@
     </a>
     <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="instagram" >
     </a>
-    <a href="https://www.instagram.com/ilresilience/" target="_blank"><img class="brand" :src="linkedin" >
+    <a href="https://il.linkedin.com/company/ilresilience?trk=similar-pages" target="_blank"><img class="brand" :src="linkedin" >
     </a>
   </span>
   <h1></h1>
