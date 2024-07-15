@@ -1,5 +1,6 @@
 <template>
   <div id="intro">
+    <button id="skip" v-if="!state.isVideoEnded" @click="skipVideo">דלג>></button>
     <video id="video" v-if="!state.isVideoEnded" autoplay muted playsinline>
   <source src="../assets/media/introVid.mp4" type="video/mp4">
   Your browser does not support the video tag.
@@ -33,10 +34,16 @@ function changeImageSourceAfterTimeout() {
   setTimeout(() => {
     state.showIntro = true;
   }, 13050); 
+  
 }
 
 function moveNextPage() {
   emit("move-next");
+}
+function skipVideo(){
+  state.isVideoEnded = true;
+  state.showIntro = true;
+
 }
 
 onMounted(() => {
@@ -56,6 +63,14 @@ onMounted(() => {
   font-weight: normal;
   src: url("../assets/fonts/Karantina-Regular.woff") format("woff");
 }
+
+@font-face { 
+  font-family: "Heebo-Black";
+  font-weight: normal;
+  src: url("../assets/fonts/Heebo-Black.woff"), 
+       format("woff");
+}
+
 
 /* מראה*/
 * {
@@ -153,5 +168,16 @@ onMounted(() => {
   position: absolute;
   height:100vh;
   
+}
+#skip{
+  position: absolute;
+  bottom:2%;
+  left:2%;
+  background-color: transparent;
+  font-family: 'Heebo-black';
+  font-size: 1.5em;
+  color: black;
+  z-index: 9999999;
+
 }
 </style>
