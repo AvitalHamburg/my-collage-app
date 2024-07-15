@@ -1,7 +1,10 @@
 <template>
   <div id="intro">
-    <video id="video" v-if="!state.isVideoEnded" src="../assets/media/introVid.mp4" autoplay muted></video>
-    <div  v-show="state.showIntro" class="intro-text-slide-in">
+    <video id="video" v-if="!state.isVideoEnded" autoplay muted playsinline>
+  <source src="../assets/media/introVid.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>    
+<div  v-show="state.showIntro" class="intro-text-slide-in">
       <img :src="inriLogoSvg" alt="White Logo" id="white-logo" class="move-to-center">
       <h1 id="welcome-text">ברוך הבא או הבאה למשפחת המכללה</h1>
       <p id="introduction">בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני. וכן, בארור שיש בוחן בסוף :) בהצלחה!</p>
@@ -51,7 +54,7 @@ onMounted(() => {
 @font-face {
   font-family: "Karantina";
   font-weight: normal;
-  src: url("../assets/fonts/Karantina-Regular.woff"), format("woff");
+  src: url("../assets/fonts/Karantina-Regular.woff") format("woff");
 }
 
 /* מראה*/
