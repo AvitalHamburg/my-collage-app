@@ -4,11 +4,11 @@
       <p class="blue-title">{{ points }}</p>
       <p class="grey-big">{{ congratsMessage }}</p>
       <div class="share-buttons" v-if="points >= 70">
-        <button id="next-button" @click="captureAndShare()">צילום מסך ושיתוף</button>
+        <button id="next-button" @click="captureAndShare()">שיתוף</button>
         <button id="next-button" @click="goAgain()">חזרה להתחלה</button>
       </div>
       <div class="retry-button" v-if="points < 70">
-        <button id="next-button" @click="retryQuiz()">נסה שוב</button>
+        <button id="next-button" @click="retryQuiz()">נסו שוב</button>
       </div>
     </div>
     <div v-if="!state.showFinalScreen" class="container">
@@ -114,8 +114,6 @@ let isExtraAnswerAdded = false;
 
 const updateQuestionData = () => {
   currentQuestion.value = props.questions[currentIndex.value];
-
-  // Create a new array with the updated answers
   currentAnswers.value = [
     props.answers1[currentIndex.value],
     props.answers2[currentIndex.value],
@@ -124,13 +122,18 @@ const updateQuestionData = () => {
   ];
 
   if (currentIndex.value === 7 && !isExtraAnswerAdded) {
-    // Using Vue.set to make Vue.js detect the change
-    Vue.set(currentAnswers.value, currentAnswers.value.length, extraAnswer.value);
-    isExtraAnswerAdded = true;
+    currentAnswers.value.push(extraAnswer.value);
+    console.log(currentIndex.value === 7)
+    isExtraAnswerAdded = true; 
+  } 
+  else{
+    isExtraAnswerAdded = false; 
+
   }
 
   selectedAnswerIndex.value = null;
 };
+
 const nextQuestion = () => {
   if (currentIndex.value < props.questions.length - 1) {
     currentIndex.value++;
@@ -166,11 +169,11 @@ const captureAndShare = () => {
 
   const message = `
 בוחן מסכם להיכרות המכללה
-${firstName.value} ${lastName.value}: ציון 100!
+${firstName.value} ${lastName.value}: ציון ${points}!
 תאריך: ${currentDate}
 שעה: ${captureTime}
-
-🧡 משפחת המכללה`;
+ 
+🧡משפחת המכללה`;
 
 
   navigator.share({ text: message })
