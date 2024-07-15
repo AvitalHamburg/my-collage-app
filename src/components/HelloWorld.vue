@@ -64,8 +64,8 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-image: url("../assets/imgs/Bg1.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -146,5 +146,9 @@ onMounted(() => {
     bottom: 8vh;
   }
 }
-
+#video{
+  position: absolute;
+  height:100vh;
+  
+}
 </style>
