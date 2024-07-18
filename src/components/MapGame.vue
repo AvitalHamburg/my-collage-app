@@ -2,6 +2,8 @@
   <div id="page">
     <p class="simple-text">יש לתפוס את הפריט ולאחר מכן לגרור אותו</p>
     <img class="game-board" src="../assets/imgs/collageMap.jpeg">
+
+    <!-- Draggable items -->
     <div class="container">
       <div
         v-for="item in currentItem"
@@ -11,12 +13,14 @@
         draggable="true"
         @dragstart="dragStart"
         @dragend="dragEnd"
-    
+        @touchstart="touchStart"
+        @touchend="touchEnd"
       >
         {{ item.name }}
       </div>
     </div>
 
+    <!-- Drop zones -->
     <div class="container1">
       <div
         v-for="(container, index) in containers"
@@ -27,24 +31,34 @@
         @drop="drop"
         @dragenter="dragEnter"
         @dragleave="dragLeave"
-       
+        @touchstart.prevent="touchStart"
+        @touchend.prevent="touchEnd"
       >
+        <!-- Drop zone content -->
       </div>
     </div>
 
+    <!-- FlashCard component for feedback -->
     <FlashCard v-if="correctPlace" class="flash-card" :title="titles[currentItemIndex]" :info="infos[currentItemIndex]" @close="closeCard"></FlashCard>
 
+    <!-- Success message section -->
     <div v-if="showSuccessMessage" class="success-message">
       הצלחת ! כל הכבוד
-      <button class="button" @click=finishGame>המשך</button>
+      <button class="button" @click="finishGame">המשך</button>
     </div>
   </div>
 </template>
 
 <script>
+import MobileDragDrop from 'mobile-drag-drop'; // Import MobileDragDrop library
+import 'mobile-drag-drop/default.css'; // Optional: Import default styles
+
 import FlashCard from './FlashCard.vue';
 
 export default {
+  components: {
+    FlashCard
+  },
   data() {
     return {
       items: [
@@ -81,7 +95,7 @@ export default {
       infos:[
         'כאן נמצאת המכללה הלאומית לאיתנות ישראלית, צמודה לבסיס פיקוד העורף',
         'במבנה זה, בקומה השנייה, נמצאת לשכת האלוף וגם לשכת רמ"ט (ראש מטה) הפיקוד',
-        ' ',
+        '',
         'מגמת אימוני מפקדות (מאמ"פ) ממוקמת במבנה מחוץ לבניין המכללה ובתוך הבסיס. מוזר, אנחנו יודעים, אבל לרוב כולם נפגשים בארוחת הצהריים',
         'חשוב להכיר היטב את מיקומו של האולם הפיקודי, אירועים שונים מתקיימים בו',
         ` 'ברחבי הבסיס ניתן לראות מבנים היסטוריים מהתקופה העות'מאנית, בני יותר ממאה שנה. עם התאורה הנכונה ועם מדשאה מטופחת, המבנים מספקים רקע ייחודי לטקסים, כנסים ואירועים יוצאי דופן בפיקוד'
@@ -90,8 +104,14 @@ export default {
         'כאן נמצאת ההוצל"א (הוצאה לאור) בית הדפוס הפיקודי בניהולו של עמוס דוגמא'
       ],
       correctPlace: false,
-      showSuccessMessage: false // New state to control success message
+      showSuccessMessage: false
     };
+  },
+  mounted() {
+    MobileDragDrop.polyfill({
+      // Specify any options you need, such as scroll behavior
+      dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
+    });
   },
   computed: {
     currentItem() {
@@ -100,50 +120,49 @@ export default {
   },
   methods: {
     dragStart(event) {
-    event.dataTransfer.setData('text/plain', event.target.id);
+      event.dataTransfer.setData('text/plain', event.target.id);
 
-    // Remove the 'incorrect-drop' class from all drop zones
-    const dropzones = document.querySelectorAll('.dropzone');
-    dropzones.forEach(dropzone => {
-      dropzone.classList.remove('incorrect-drop');
-    });
-  },
+      // Remove the 'incorrect-drop' class from all drop zones
+      const dropzones = document.querySelectorAll('.dropzone');
+      dropzones.forEach(dropzone => {
+        dropzone.classList.remove('incorrect-drop');
+      });
+    },
     dragEnd(event) {
       event.target.classList.remove('dragging');
     },
+    touchStart(event) {
+      // Implement touch start behavior (if needed)
+    },
+    touchEnd(event) {
+      // Implement touch end behavior (if needed)
+    },
     drop(event) {
-  event.preventDefault();
-  const itemId = event.dataTransfer.getData('text/plain');
-  const draggedItem = document.getElementById(itemId);
-  const dropZoneId = event.target.id;
+      event.preventDefault();
+      const itemId = event.dataTransfer.getData('text/plain');
+      const draggedItem = document.getElementById(itemId);
+      const dropZoneId = event.target.id;
 
-  // Check if the dragged item can be dropped into the target container
-  if (itemId === `item${dropZoneId.slice(-1)}`) {
-    // Remove the element from its original parent
-    draggedItem.parentNode.removeChild(draggedItem);
-    // Append the element to the drop zone
-    event.target.appendChild(draggedItem.cloneNode(true));
+      if (itemId === `item${dropZoneId.slice(-1)}`) {
+        // Remove the element from its original parent
+        draggedItem.parentNode.removeChild(draggedItem);
+        // Append the element to the drop zone
+        event.target.appendChild(draggedItem.cloneNode(true));
 
-    // Set correctPlace to true
-    this.correctPlace = true;
-
-    // Remove the dragover event listener
-    event.target.removeEventListener('dragover', () => {
-      event.target.classList.remove('incorrect-drop');
-    });
-  } else {
-    // Add a class to the drop zone to indicate an incorrect drop
-    event.target.classList.add('incorrect-drop');
-  }
-},
+        // Set correctPlace to true
+        this.correctPlace = true;
+      } else {
+        // Add a class to the drop zone to indicate an incorrect drop
+        event.target.classList.add('incorrect-drop');
+      }
+    },
     dragEnter(event) {
       event.target.classList.add('dragover');
     },
     dragLeave(event) {
       event.target.classList.remove('dragover');
     },
-   
-        closeCard() {
+    closeCard() {
       if (this.currentItemIndex !== 7) {
         this.correctPlace = false;
         this.currentItemIndex++;
@@ -152,13 +171,9 @@ export default {
         this.showSuccessMessage = true;
       }
     },
-    finishGame(){
+    finishGame() {
       this.$emit('go-menu');
     }
-
-  },
-  components: {
-    FlashCard
   }
 };
 </script>
