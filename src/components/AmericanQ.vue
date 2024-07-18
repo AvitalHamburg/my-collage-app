@@ -17,26 +17,25 @@
         <div class="progress-bar-inner" :style="{ width: progressBarWidth }"></div>
       </div>
       <p class="grey-big" id="question">{{ currentQuestion }}</p>
-      <button
-        v-for="(answer, index) in currentAnswers"
-        :key="index"
-        @click="handleButtonClick(answer, index)"
-        :class="[
-          'answer-button',
-          { 'selected-answer': index === selectedAnswerIndex }
-        ]"
-        :disabled="state.showResults"
-        :id="`answer-button-${index}`"
-      >
-        {{ answer }}
-      </button>
-      
+          <button
+            v-for="(answer, index) in currentAnswers"
+            :key="index"
+            @click="handleButtonClick(answer, index)"
+            :class="[
+              'answer-button',
+              { 'selected-answer': selectedAnswerIndexes[currentIndex] === index }
+            ]"
+            :disabled="state.showResults"
+            :id="`answer-button-${index}`"
+          >
+      {{ answer }}
+    </button>
     </div>
     <div id="navigation-buttons" v-if="!state.showFinalScreen">
       <button
         id="next-button"
         @click="nextQuestion"
-        :disabled="selectedAnswerIndex === null"
+        :disabled="selectedAnswerIndexes[currentIndex] === null"
       >
         שאלה הבאה
       </button>
@@ -48,6 +47,7 @@
         שאלה קודמת
       </button>
     </div>
+    <p id="hide-text" v-if="!state.showFinalScreen"> העולם כולו גשר צר מאוד</p>
     <div v-if="pointsVisible">
       <p>נקודות: {{ points }}</p>
     </div>
@@ -64,8 +64,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref, reactive, onMounted, watch ,defineEmits } from 'vue';
-import html2canvas from 'html2canvas';
+import { defineProps, ref, reactive, onMounted, watch, defineEmits } from 'vue';
 
 const emit = defineEmits(['go-again']);
 
@@ -87,6 +86,8 @@ const state = reactive({
 const currentIndex = ref(0);
 const points = ref(0);
 const maxPoints = props.questions.length * 10;
+const extraAnswer = ref("ה.כל התשובות נכונות");
+let isExtraAnswerAdded = false;
 
 const currentQuestion = ref(props.questions[currentIndex.value]);
 const currentAnswers = ref([
@@ -96,21 +97,11 @@ const currentAnswers = ref([
   props.answers4[currentIndex.value],
 ]);
 
-const selectedAnswerIndex = ref(null);
-const feedbackMessage = ref("");
+const selectedAnswerIndexes = ref(Array.from({ length: props.questions.length }, () => null));
 const firstName = ref("");
 const lastName = ref("");
 const congratsMessage = ref("");
-
-const handleButtonClick = (answer, index) => {
-  selectedAnswerIndex.value = index;
-  const correctAnswer = props.correctAnswers[currentIndex.value];
-  if (answer === correctAnswer) {
-    points.value += 10;
-  }
-};
-const extraAnswer = ref("ה.כל התשובות נכונות");
-let isExtraAnswerAdded = false;
+const userAnswers = ref(Array.from({ length: props.questions.length }, () => [null, false]));
 
 const updateQuestionData = () => {
   currentQuestion.value = props.questions[currentIndex.value];
@@ -123,19 +114,34 @@ const updateQuestionData = () => {
 
   if (currentIndex.value === 7 && !isExtraAnswerAdded) {
     currentAnswers.value.push(extraAnswer.value);
-    console.log(currentIndex.value === 7)
-    isExtraAnswerAdded = true; 
-  } 
-  else{
-    isExtraAnswerAdded = false; 
-
+    isExtraAnswerAdded = true;
+  } else {
+    isExtraAnswerAdded = false;
   }
 
-  selectedAnswerIndex.value = null;
+  selectedAnswerIndexes.value[currentIndex.value] = null; // Reset selected answer for the new question
+};
+
+const handleButtonClick = (answer, index) => {
+  if (!userAnswers.value[currentIndex.value][1]) {
+    userAnswers.value[currentIndex.value] = [answer, true];
+    const correctAnswer = props.correctAnswers[currentIndex.value];
+    if (answer === correctAnswer) {
+      points.value = Math.min(points.value + 10, maxPoints);
+    }
+  }
+  selectedAnswerIndexes.value[currentIndex.value] = index;
 };
 
 const nextQuestion = () => {
   if (currentIndex.value < props.questions.length - 1) {
+    // Save current answer before moving to the next question
+    if (selectedAnswerIndexes.value[currentIndex.value] !== null) {
+      userAnswers.value[currentIndex.value] = [
+        currentAnswers.value[selectedAnswerIndexes.value[currentIndex.value]],
+        true,
+      ];
+    }
     currentIndex.value++;
     updateQuestionData();
   } else if (currentIndex.value === props.questions.length - 1) {
@@ -145,10 +151,26 @@ const nextQuestion = () => {
 
 const prevQuestion = () => {
   if (currentIndex.value > 0) {
+    // Save current answer before moving to the previous question
+    if (selectedAnswerIndexes.value[currentIndex.value] !== null) {
+      userAnswers.value[currentIndex.value] = [
+        currentAnswers.value[selectedAnswerIndexes.value[currentIndex.value]],
+        true,
+      ];
+    }
     currentIndex.value--;
     updateQuestionData();
+
+    // Update selected answer highlight for the previous question
+    selectedAnswerIndexes.value[currentIndex.value] =
+      userAnswers.value[currentIndex.value][0]
+        ? currentAnswers.value.findIndex(
+            answer => answer === userAnswers.value[currentIndex.value][0]
+          )
+        : null;
   }
 };
+
 
 const pointsVisible = ref(false);
 const progressBarWidth = ref('0%');
@@ -175,26 +197,26 @@ ${firstName.value} ${lastName.value}: ציון ${points}!
  
 🧡משפחת המכללה`;
 
-
   navigator.share({ text: message })
     .then(() => console.log('הודעה שותפה בהצלחה'))
     .catch(error => console.error('שגיאה בשיתוף:', error));
 };
 
-
 const retryQuiz = () => {
   currentIndex.value = 0;
   points.value = 0;
+  userAnswers.value = userAnswers.value.map(() => [null, false]);
   firstName.value = "";
   lastName.value = "";
   congratsMessage.value = "";
   state.showResults = false;
   state.showFinalScreen = false;
 };
-const goAgain = () =>{
-  emit('go-again')
 
-}
+const goAgain = () => {
+  emit('go-again');
+};
+
 onMounted(() => {
   updateProgressBar();
 });
@@ -223,11 +245,13 @@ watch(currentIndex, () => {
   src: url("../assets/fonts/Karantina-Regular.woff"),
   format("woff");
 }
+
 .container {
   position: relative;
   top: 15vh;
   z-index: 0;
 }
+
 .results-container {
   position: relative;
   top: 15vh;
@@ -236,6 +260,7 @@ watch(currentIndex, () => {
   color: rgb(31, 56, 100);
   font-family: "Heebo";
 }
+
 .answer-button {
   width: 80%;
   padding: 10px;
@@ -247,21 +272,21 @@ watch(currentIndex, () => {
   font-size: 1.2em;
   font-family: "Heebo";
   z-index: 0;
+  text-align: center;
+  word-wrap: break-word;
 }
+
 .selected-answer {
   background-color: rgb(116, 142, 172);
   color: white;
 }
-
 #navigation-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 18vh; /* Adjusted top margin */
-  margin-bottom: 10vh; /* Add a bottom margin for spacing */
   position: absolute;
-  width: 90%;
-  left: 50%;
-  transform: translateX(-50%);
+  z-index: 9999;
+  margin-top: 18vmax;
+  margin-bottom: 5vh; /* הוספת margin-bottom לניווט */
 }
 
 #prev-button {
@@ -271,10 +296,10 @@ watch(currentIndex, () => {
   border-radius: 50px;
   padding: 10px 20px;
   font-size: 1.2em;
-  margin-top: 5%;
+  margin-right: 4vw; /* עדכון טיפה יותר קטן מהמרחק הקודם */
   font-family: "Heebo";
-  margin-right: 5vw;
 }
+
 #next-button {
   background-color: rgb(28, 180, 227);
   color: white;
@@ -282,23 +307,25 @@ watch(currentIndex, () => {
   border-radius: 50px;
   padding: 10px 20px;
   font-size: 1.2em;
+  margin-left: 4vw; /* עדכון טיפה יותר קטן מהמרחק הקודם */
+  margin-right: 16vw;
   font-family: "Heebo";
-  margin-top: 5%;
-  margin-left: 5vw;
-
 }
+
+
 #prev-button:disabled,
 #next-button:disabled {
   background-color: grey;
 }
+
 #question {
   font-size: 1.4em;
   font-family: "Heebo";
   color: rgb(31, 56, 100);
   font-weight: bold;
-  top: 35vh;
   direction: rtl;
 }
+
 #page-header {
   position: absolute;
   top: 8vh;
@@ -309,6 +336,7 @@ watch(currentIndex, () => {
   text-overflow: none;
   color: rgb(31, 56, 100);
 }
+
 .grey-big {
   font-size: 1.5em;
   margin-bottom: 2vh;
@@ -316,6 +344,7 @@ watch(currentIndex, () => {
   font-family: "Heebo";
   color: rgb(89, 89, 89);
 }
+
 .progress-bar {
   position: relative;
   margin-top: 20%;
@@ -326,6 +355,7 @@ watch(currentIndex, () => {
   border-radius: 1.5rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+
 .progress-bar-inner {
   position: absolute;
   z-index: 1;
@@ -335,11 +365,7 @@ watch(currentIndex, () => {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   transition: width 0.3s ease;
 }
-.quetion-number {
-  font-family: "Karantina";
-  font-size: 3.5em;
-  margin-bottom: 0%;
-}
+
 .final-screen {
   position: fixed;
   top: 0;
@@ -352,6 +378,7 @@ watch(currentIndex, () => {
   align-items: center;
   z-index: 9999;
 }
+
 .name-input {
   display: flex;
   flex-direction: column;
@@ -359,24 +386,26 @@ watch(currentIndex, () => {
   align-items: center;
   margin-bottom: 20px;
 }
+
 .name-input input {
   padding: 10px;
   margin: 5px 0;
-  font-size: 1em;
   font-size: 1.5em;
   border-radius: 50px;
   width: 60vw;
   height: 6vh;
   border: 1px solid #ccc;
   background-color: rgb(71, 71, 71);
-  color:white;
-  font-family: "heebo";
+  color: white;
+  font-family: "Heebo";
   text-align: center;
 }
+
 .name-input input:focus {
   outline: none;
   background-color: rgb(28, 180, 227);
 }
+
 .final-screen button {
   padding: 10px 20px;
   background-color: rgb(28, 180, 227);
@@ -386,16 +415,20 @@ watch(currentIndex, () => {
   cursor: pointer;
   font-size: 1em;
   margin-top: 10px;
+  font-family: "Heebo";
 }
+
 .name-input input::placeholder {
   text-align: center;
   font-size: 1.3em;
   color: rgba(255, 255, 255, 0.5);
-  font-family: "heebo";
+  font-family: "Heebo";
 }
+
 .final-screen button:hover {
   background-color: rgb(20, 140, 180);
 }
+
 .grey-bold {
   font-size: 1.5em;
   margin-bottom: 2vh;
@@ -405,20 +438,28 @@ watch(currentIndex, () => {
   font-family: "Heebo-Black";
   color: rgb(89, 89, 89);
 }
+
 .blue-title {
-  font-family: "karantina";
+  font-family: "Karantina";
   color: rgb(20, 140, 180);
   font-size: 3.7em;
   margin-bottom: 0%;
 }
-.question-number{
+
+.question-number {
   position: absolute;
-  font-family: "karantina";
-  color:rgb(89,89,89);
-  font-size:4.5em;
-  top:-45%;
-  right:50%;
+  font-family: "Karantina";
+  color: rgb(89, 89, 89);
+  font-size: 4.5em;
+  top: -45vmin;
+  right: 50%;
   transform: translateX(50%);
+}
+#hide-text{
+  position: absolute;
+  margin-top:25vmax;
+  color: transparent;
+
 }
 
 </style>

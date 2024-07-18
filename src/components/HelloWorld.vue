@@ -171,7 +171,7 @@ onMounted(() => {
 }
 #skip{
   position: absolute;
-  top:4%;
+  top:6%;
   left:2%;
   background-color: transparent;
   font-family: 'Heebo-black';
