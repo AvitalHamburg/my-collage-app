@@ -1,6 +1,6 @@
 <template>
   <div id="intro">
-    <button id="skip" v-if="!state.isVideoEnded" @click="skipVideo">דלג>></button>
+    <button id="skip" v-if="!state.isVideoEnded" @click="skipVideo">דלג/י>></button>
     <video id="video" v-if="!state.isVideoEnded" autoplay muted playsinline>
   <source src="../assets/media/introVid.mp4" type="video/mp4">
   Your browser does not support the video tag.
