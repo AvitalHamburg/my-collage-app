@@ -91,6 +91,8 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 
@@ -111,7 +113,7 @@ onMounted(() => {
   transform: translateX(50%);
   font-size: 4em;
   text-align: center;
-  top: 15vh;
+  margin-top: -32vh;
   z-index: 5;
   width: 90vw;
   font-family: "karantina";
@@ -124,8 +126,8 @@ onMounted(() => {
   transform: translateX(50%);
   width: 80vw;
   z-index: 5;
+  margin-top: -10vh;
   font-size: 1.4em;
-  top: 45vh;
   font-family: "Heebo";
 }
 
@@ -156,13 +158,13 @@ onMounted(() => {
 
 @keyframes bounce2 {
   0% {
-    bottom: 8vh;
+    bottom: 16vh;
   }
   50% {
-    bottom: 5vh;
+    bottom: 15vh;
   }
   100% {
-    bottom: 8vh;
+    bottom: 16vh;
   }
 }
 #video{
@@ -184,8 +186,8 @@ onMounted(() => {
 .white-small{
   position: absolute;
   color: white;
-  bottom:0.05%;
-  font-family: "Heebo";
+  bottom:5%;
+  font-family: "Heebo-black";
   text-align: right;
   width: 60vw;
   font-size: 14px;

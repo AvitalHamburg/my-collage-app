@@ -4,11 +4,13 @@
       <p class="blue-title">{{ points }}</p>
       <p class="grey-big">{{ congratsMessage }}</p>
       <div class="share-buttons" v-if="points >= 70">
-        <button id="next-button" @click="captureAndShare()">שיתוף</button>
-        <button id="next-button" @click="goAgain()">חזרה להתחלה</button>
+        <button id="share-button" @click="captureAndShare()">שיתוף</button>
+        <button id="share-button" @click="goAgain()">חזרה להתחלה</button>
       </div>
+      <p class='black-small'> פותח ע"י אביטל גמבורג 2024</p>
+
       <div class="retry-button" v-if="points < 70">
-        <button id="next-button" @click="retryQuiz()">נסו שוב</button>
+        <button id="share-button" @click="retryQuiz()">נסו שוב</button>
       </div>
     </div>
     <div v-if="!state.showFinalScreen" class="container">
@@ -254,7 +256,6 @@ watch(currentIndex, () => {
 
 .results-container {
   position: relative;
-  top: 15vh;
   text-align: center;
   font-size: 1.5em;
   color: rgb(31, 56, 100);
@@ -461,5 +462,32 @@ watch(currentIndex, () => {
   color: transparent;
 
 }
+.black-small{
+  position: absolute;
+  color: rgb(7, 7, 7);
+  font-family: "Heebo-black";
+  text-align: right;
+  width: 60vw;
+  font-size: 14px;
+  margin-top: 30vh;
+  left: -10%;
+}
 
+.share-buttons{
+  position: absolute;
+  right: 1%;
+  width: 90vw;
+}
+#share-button {
+  background-color: rgb(28, 180, 227);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  margin-left: 4vw; /* עדכון טיפה יותר קטן מהמרחק הקודם */
+  margin-right: 16vw;
+  margin-bottom: 2vh;
+  font-family: "Heebo";
+}
 </style>
