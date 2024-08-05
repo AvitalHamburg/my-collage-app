@@ -306,7 +306,7 @@ height: auto;
   transform: translateX(-35vw);
 }
 .hide{
-  font-size: 3em;
+  font-size: 5em;  
   color:transparent;
   
 }

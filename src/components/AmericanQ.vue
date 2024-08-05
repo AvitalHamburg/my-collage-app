@@ -21,7 +21,8 @@
       <div class="progress-bar">
         <div class="progress-bar-inner" :style="{ width: progressBarWidth }"></div>
       </div>
-      <p class="grey-big" id="question">{{ currentQuestion }}</p>
+      <p  id="question">{{ currentQuestion }}</p>
+      <div class="answers">
           <button
             v-for="(answer, index) in currentAnswers"
             :key="index"
@@ -35,8 +36,8 @@
           >
       {{ answer }}
     </button>
-    </div>
-    <div id="navigation-buttons" v-if="!state.showFinalScreen">
+  </div>
+  <div id="navigation-buttons" v-if="!state.showFinalScreen">
       <button
         id="next-button"
         @click="nextQuestion"
@@ -52,6 +53,8 @@
         שאלה קודמת
       </button>
     </div>
+    </div>
+  
     <p id="hide-text" v-if="!state.showFinalScreen"> העולם כולו גשר צר מאוד</p>
     <div v-if="pointsVisible">
       <p>נקודות: {{ points }}</p>
@@ -256,9 +259,9 @@ watch(currentIndex, () => {
 }
 
 .container {
-  position: relative;
-  top: 15vh;
-  z-index: 0;
+  position: absolute;
+    margin-top: 21vh;
+    z-index: 0;
 }
 
 .results-container {
@@ -293,8 +296,8 @@ watch(currentIndex, () => {
   justify-content: space-between;
   position: absolute;
   z-index: 9999;
-  margin-top: 18vmax;
-  margin-bottom: 5vh; /* הוספת margin-bottom לניווט */
+  margin-top: 5vmax;
+  margin-bottom: 11vmax;
 }
 
 #prev-button {
@@ -328,10 +331,14 @@ watch(currentIndex, () => {
 
 #question {
   font-size: 1.4em;
-  font-family: "Heebo";
-  color: rgb(31, 56, 100);
-  font-weight: bold;
-  direction: rtl;
+    font-family: "Heebo";
+    color: rgb(0 0 0);
+    font-weight: bold;
+    direction: rtl;
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100vw;
 }
 
 #page-header {
@@ -356,7 +363,7 @@ watch(currentIndex, () => {
 
 .progress-bar {
   position: relative;
-  margin-top: 20%;
+  margin-top: 9%;
   background-color: #c0c0c0;
   height: 0.5rem;
   width: 90%;
@@ -469,7 +476,7 @@ watch(currentIndex, () => {
 }
 #hide-text{
   position: absolute;
-  margin-top:25vmax;
+  margin-top: 118vmax;
   color: transparent;
 
 }
@@ -538,5 +545,19 @@ watch(currentIndex, () => {
     right: 0.25vw;
     width: 98vw;
     margin-top: 63vh;
+}
+
+.grey-big-q{
+  position: absolute;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100vw;
+    font-family: 'HEEBO';
+    color: black;
+}
+.answers{
+  margin-top: 11vh;
 }
 </style>
