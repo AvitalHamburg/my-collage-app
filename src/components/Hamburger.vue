@@ -3,25 +3,31 @@
     <button
       v-for="(subject, index) in subjects"
       :key="index"
-      @click.once="handleButtonClick(subject, index)"
+      @click.once="moveToPage(index)"
       :class="{ 
-        'btn-class': (subject !== 'משוב' && states[index] === 0) || (subject === 'משוב' && allOtherButtonsVisited),
+        'btn-class': states[index] === 0, 
         'active-btn': states[index] === 1, 
         'selected-btn': visitedMenuPage.includes(index),
-        'disabled-btn': (subject === 'משוב' && !allOtherButtonsVisited) 
       }"
-      :disabled="subject === 'משוב' && !allOtherButtonsVisited"
     >
       <div class="button-content">
         {{ subject }}
       </div>
       <div class="separator"></div>
     </button>
+    <p class="survey">יש הערות על הממשק?
+יש מחמאות? מלאו את השאלון וצרו איתנו קשר
+<a id="link" href="https://docs.google.com/forms/d/e/1FAIpQLSflGabIbTG0fNDp_MGmI64a9xzg4AHkJNyH7DovtxicCIuIhw/viewform" target="_blank">
+      בקישור הבא
+      </a>
+</p>
+
+
   </div>
 </template>
 
 <script setup>
-import { reactive, computed, defineProps, defineEmits } from 'vue';
+import { reactive, defineProps, defineEmits } from 'vue';
 
 const { visitedMenuPage } = defineProps(['visitedMenuPage']);
 const emit = defineEmits(['next-page']);
@@ -32,26 +38,14 @@ const subjects = [
   'נכסים דיגיטליים',
   'הספרייה הלאומית לחירום',
   'קש"ח',
-  'מה נמצא איפה?',
-  'משוב'
-];
+  ' מה נמצא איפה?',
 
+];
 const states = reactive(subjects.map(() => 0));
 
-// מחשב אם כל הכפתורים מלבד "משוב" בוקרו
-const allOtherButtonsVisited = computed(() => {
-  return visitedMenuPage.length === 8;
-});
-
-const handleButtonClick = (subject, index) => {
-  if (subject === 'משוב') {
-    if (allOtherButtonsVisited.value) {
-      window.open('https://docs.google.com/forms/d/e/1FAIpQLSflGabIbTG0fNDp_MGmI64a9xzg4AHkJNyH7DovtxicCIuIhw/viewform?usp=sf_link', '_blank');
-    }
-  } else {
-    states[index] = 1;
-    emit('next-page', index + 1);
-  }
+const moveToPage = (index) => {
+  states[index] = 1;
+  emit('next-page',  index + 1);
 };
 </script>
 
@@ -68,6 +62,7 @@ const handleButtonClick = (subject, index) => {
   flex-direction: column;
   align-items: flex-end;
   margin-top: 20px; /* Adjust the margin-top value as needed */
+  
 }
 
 .btn-class {
@@ -97,21 +92,6 @@ const handleButtonClick = (subject, index) => {
   color: rgb(89, 89, 89);
 }
 
-.disabled-btn {
-  opacity: 0.6;
-  font-size: 1.5em;
-  background-color: rgba(23, 90, 133, 0);
-  color: #ffffff;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  width: 100vw;
-  height: 10vh;
-  border-radius: 0; /* Adjust the button radius */
-  font-family: "Heebo";
-  border: none; /* Remove default button border */
-  cursor: not-allowed; /* Not-allowed cursor for disabled state */
-}
-
 .button-content {
   display: flex;
   align-items: center;
@@ -129,4 +109,18 @@ const handleButtonClick = (subject, index) => {
   margin-left: 20px; /* Adjust margin to center the separator */
   margin-top: 13px;
 }
+.survey{
+  width: 64vw;
+  position: absolute;
+  margin-top: 62vmax;
+  right: 50%;
+  transform: translateX(50%);
+  font-family: 'Heebo';
+  font-size: 1.1em;
+}
+#link{
+  color: white;
+  text-decoration: underline;
+}
+
 </style>
