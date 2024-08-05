@@ -117,6 +117,7 @@ const moveToPage = (index) => {
   transform: translateX(50%);
   font-family: 'Heebo';
   font-size: 1.1em;
+  color:white
 }
 #link{
   color: white;
