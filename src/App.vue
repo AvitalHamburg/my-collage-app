@@ -101,6 +101,7 @@ const nextSubj = () => {
   updateVisitedNum(); // Update visited number
 }
 
+
 const updateVisitedNum = () => {
   state.visetedNum = state.visitedPages.length; // Update visited number
   console.log(`Visited number of pages: ${state.visetedNum}`);
@@ -112,6 +113,7 @@ const updateVisitedNum = () => {
 const backToMenu = () => {
   state.showMenu = true;
   state.textNum = 0;
+  state.showExam = false;
 }
 
 const showHamburger = () => {

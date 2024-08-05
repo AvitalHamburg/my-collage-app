@@ -5,7 +5,10 @@
       <p class="grey-big">{{ congratsMessage }}</p>
       <div class="share-buttons" v-if="points >= 70">
         <button id="share-button" @click="captureAndShare()">שיתוף</button>
-        <button id="share-button" @click="goAgain()">חזרה להתחלה</button>
+        <button id="restart-button" @click="goAgain()">חזרה להתחלה</button>
+        <p class="survey-text">נשמח למשוב ממך על החוויה. דעתך חשובה ותעזור לנו להשתפר ולפתח מוצרים נוספים.
+השאלון קצר וביום טוב לוקח פחות מדקה למילוי</p>
+        <button class="survey-button" @click="answerSurvuy()">משוב</button>
       </div>
       <p class='black-small'> פותח ע"י אביטל גמבורג 2024</p>
 
@@ -135,6 +138,10 @@ const handleButtonClick = (answer, index) => {
   selectedAnswerIndexes.value[currentIndex.value] = index;
 };
 
+const answerSurvuy =() =>{
+  window.open('https://docs.google.com/forms/d/e/1FAIpQLSflGabIbTG0fNDp_MGmI64a9xzg4AHkJNyH7DovtxicCIuIhw/viewform?usp=sf_link', '_blank');
+
+}
 const nextQuestion = () => {
   if (currentIndex.value < props.questions.length - 1) {
     // Save current answer before moving to the next question
@@ -340,10 +347,11 @@ watch(currentIndex, () => {
 
 .grey-big {
   font-size: 1.5em;
-  margin-bottom: 2vh;
-  direction: rtl;
-  font-family: "Heebo";
-  color: rgb(89, 89, 89);
+    direction: rtl;
+    font-family: "Heebo";
+    color: rgb(89, 89, 89);
+    position: absolute;
+    margin-top: 25vh;
 }
 
 .progress-bar {
@@ -440,13 +448,16 @@ watch(currentIndex, () => {
   color: rgb(89, 89, 89);
 }
 
-.blue-title {
-  font-family: "Karantina";
-  color: rgb(20, 140, 180);
-  font-size: 3.7em;
-  margin-bottom: 0%;
+.blue-title{
+    font-family: "Karantina";
+    color: rgb(20, 140, 180);
+    font-size: 3.7em;
+    margin-bottom: 5vh;
+    position: absolute;
+    margin-top: 10vh;
+    right: 50%;
+    transform: translateX(50%);
 }
-
 .question-number {
   position: absolute;
   font-family: "Karantina";
@@ -469,7 +480,7 @@ watch(currentIndex, () => {
   text-align: right;
   width: 60vw;
   font-size: 14px;
-  margin-top: 30vh;
+  margin-top: 91vh;
   left: -10%;
 }
 
@@ -480,14 +491,52 @@ watch(currentIndex, () => {
 }
 #share-button {
   background-color: rgb(28, 180, 227);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  margin-left: 4vw; /* עדכון טיפה יותר קטן מהמרחק הקודם */
-  margin-right: 16vw;
-  margin-bottom: 2vh;
-  font-family: "Heebo";
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-family: "Heebo";
+    position: absolute;
+    right: 55%;
+    transform: translateX(50%);
+    margin-top: 42vh;
+
+}
+#restart-button {
+  background-color: rgb(28, 180, 227);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    margin-top: 53vh;
+    font-family: "Heebo";
+    position: absolute;
+    right: 55%;
+    transform: translateX(50%);
+    width: 60vw;
+}
+.survey-button {
+  background-color: rgb(28, 180, 227);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    position: absolute;
+    margin-top: 80vh;
+    right: 55%;
+    transform: translateX(50%);
+    font-family: "Heebo";
+}
+.survey-text {
+  position: absolute;
+    font-family: 'Heebo-black';
+    text-align: center;
+    font-size: 0.75em;
+    right: 0.25vw;
+    width: 98vw;
+    margin-top: 63vh;
 }
 </style>
