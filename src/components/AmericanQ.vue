@@ -10,7 +10,7 @@
 השאלון קצר וביום טוב לוקח פחות מדקה למילוי</p>
         <button class="survey-button" @click="answerSurvuy()">משוב</button>
       </div>
-      <p class='black-small'> פותח ע"י אביטל גמבורג 2024</p>
+      <p class='black-small'>@2024 developed by Avital Hamburg</p>
 
       <div class="retry-button" v-if="points < 70">
         <button id="share-button" @click="retryQuiz()">נסו שוב</button>

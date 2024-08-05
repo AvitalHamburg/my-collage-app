@@ -10,7 +10,6 @@
       <h1 id="welcome-text">ברוך הבא או הבאה למשפחת המכללה</h1>
       <p id="introduction">בחצי שעה הקרובה תכירו ותלמדו על המכללה הלאומית לאיתנות ישראלית, במה אנחנו מתמחים, את מי אנחנו מכשירים, מאמנים ואיך כל זה קשור לשלטון העות'מאני. וכן, בארור שיש בוחן בסוף :) בהצלחה!</p>
       <img ref="nextBtn" :src="nextButton" id="next-wBtn" @click="moveNextPage">
-      <p class='white-small'> פותח ע"י אביטל גמבורג 2024</p>
     </div>
   </div>
 </template>
